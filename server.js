@@ -175,7 +175,10 @@ const server = http.createServer(async (req, res) => {
         cognitiveOptions: { useCoT: true, useSocratic: true, useFewShot: true, useActiveRecall: true },
         bookObject: bookRef,
         verifiedContent: domainResult.formattedText,
-        subject: subject
+        subject: subject,
+        competencyTier: payload.competencyTier || 'vd',
+        usageContext: payload.usageContext || 'giai-de',
+        exportMode: payload.exportMode || 'standard'
       });
 
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -215,7 +218,10 @@ const server = http.createServer(async (req, res) => {
         cognitiveOptions = {},
         bookObject,
         verifiedContent = '',
-        subject = 'toan-thpt'
+        subject = 'toan-thpt',
+        competencyTier = 'vd',
+        usageContext = 'giai-de',
+        exportMode = 'standard'
       } = payload;
 
       const prompt = generateIntentDrivenPrompt({
@@ -228,7 +234,10 @@ const server = http.createServer(async (req, res) => {
         cognitiveOptions,
         bookObject: bookObject || lookupBookReference(subject, gradeLevel),
         verifiedContent,
-        subject
+        subject,
+        competencyTier,
+        usageContext,
+        exportMode
       });
 
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });

@@ -312,12 +312,88 @@ function processTextBySubject(rawText, subject) {
   }
 }
 
+const COMPETENCY_TIERS = {
+  'nb-th': {
+    id: 'nb-th',
+    name: 'Nhận Biết & Thông Hiểu',
+    scoreTarget: 'Điểm 5.0 - 7.0 (Nền Tảng)',
+    badge: 'Cấp độ 1 • Cơ bản',
+    color: '#2E7D32',
+    bg: '#E8F5E9',
+    description: 'Nắm chắc định nghĩa, công thức SGK chuẩn, giải thích hiện tượng và chống điểm liệt.'
+  },
+  'vd': {
+    id: 'vd',
+    name: 'Vận Dụng Tiêu Chuẩn',
+    scoreTarget: 'Điểm 7.0 - 8.5 (Chuẩn BGD)',
+    badge: 'Cấp độ 2 • Vận dụng',
+    color: '#1565C0',
+    bg: '#E3F2FD',
+    description: 'Vận dụng định luật, giải bài toán phối hợp, xử lý câu Đúng/Sai và Trả lời ngắn.'
+  },
+  'vdc': {
+    id: 'vdc',
+    name: 'Vận Dụng Cao - Phân Hóa',
+    scoreTarget: 'Điểm 8.5 - 9.5+ (Phân Loại)',
+    badge: 'Cấp độ 3 • Phân hóa',
+    color: '#E65100',
+    bg: '#FFF3E0',
+    description: 'Bài toán thực tế, liên môn, đồ thị phức hợp, cực trị Oxyz và bài phân loại thí sinh giỏi.'
+  },
+  'hsg': {
+    id: 'hsg',
+    name: 'Bồi Dưỡng HSG & ĐGNL',
+    scoreTarget: 'Olympic & ĐHQG/ĐHBK (Đỉnh Cao)',
+    badge: 'Cấp độ 4 • Đỉnh cao',
+    color: '#6A1B9A',
+    bg: '#F3E5F5',
+    description: 'Tư duy logic mô hình hóa bậc cao, đề thi ĐGNL ĐHQG/ĐHBK và thi Học sinh giỏi các cấp.'
+  }
+};
+
+const USAGE_CONTEXTS = {
+  'giai-de': {
+    id: 'giai-de',
+    title: 'Giải Đề Chuẩn BGD 2026',
+    icon: 'fa-solid fa-bullseye',
+    tagline: '3 Phần Chuẩn QĐ 764/QĐ-BGDĐT',
+    description: 'Giải chi tiết theo cấu trúc 3 phần: Trắc nghiệm 4 lựa chọn, Đúng/Sai 4 ý lũy tiến và Trả lời ngắn điền số.'
+  },
+  'socrates': {
+    id: 'socrates',
+    title: 'Gia Sư Sư Phạm Socrates',
+    icon: 'fa-solid fa-lightbulb',
+    tagline: 'Khơi Mở Tư Duy, Không Lộ Đáp Số',
+    description: 'Dẫn dắt bằng chuỗi 3-4 câu hỏi phản xạ gợi mở, buộc người học tự tư duy tìm ra lời giải.'
+  },
+  'chua-bay': {
+    id: 'chua-bay',
+    title: 'Giải Mã Bẫy Phòng Thi',
+    icon: 'fa-solid fa-triangle-exclamation',
+    tagline: '3 Sai Lầm Kinh Điển & Mẹo Né Bẫy',
+    description: 'Mổ xẻ cạm bẫy tâm lý, sai thứ nguyên, quên điều kiện xác định và lỗi suy luận thường gặp.'
+  },
+  'soan-de': {
+    id: 'soan-de',
+    title: 'Soạn Ma Trận & Đề Tương Tự',
+    icon: 'fa-solid fa-pen-ruler',
+    tagline: 'Khảo Thí & Đề Kiểm Tra Tương Đương',
+    description: 'Thiết kế 1 đề kiểm tra tương đương cùng cấp độ nhận thức kèm ma trận và hướng dẫn chấm chi tiết.'
+  },
+  'on-cap-toc': {
+    id: 'on-cap-toc',
+    title: 'Ôn Cấp Tốc 60s & Mindmap',
+    icon: 'fa-solid fa-bolt-lightning',
+    tagline: 'Mermaid Mindmap & 5 Khóa Cốt Lõi',
+    description: 'Tóm lược siêu tốc toàn bộ kiến thức trọng tâm bằng sơ đồ tư duy Mermaid Cornell và bảng công thức 60 giây.'
+  }
+};
+
 /**
- * Bộ tạo Prompt Thông Minh Phân Chia Rõ Ràng:
- * 1. Mục tiêu (What it does)
- * 2. Nhận thức (What it understands)
- * 3. Dẫn chứng có chủ đích (Intentional citations)
- * 4. Ràng buộc & Định dạng (Output constraints)
+ * Bộ tạo Prompt Thông Minh Phân Chia Rõ Ràng & Đa Chế Độ:
+ * - standard: 5 khung chuẩn Tieuchuanprompt.md cho Chat Web
+ * - system-prompt: Chuẩn XML / Markdown cho AI Agent (Claude / Gemini / GPT-4o)
+ * - agent-cli: Lệnh nạp CLI / Terminal Loader cho Antigravity SDK & Claude Code
  */
 function generateIntentDrivenPrompt({
   role,
@@ -329,21 +405,121 @@ function generateIntentDrivenPrompt({
   cognitiveOptions = {},
   bookObject = null,
   verifiedContent = '',
-  subject = 'toan-thpt'
+  subject = 'toan-thpt',
+  competencyTier = 'vd',
+  usageContext = 'giai-de',
+  exportMode = 'standard'
 }) {
   const grade = gradeLevel || 12;
+  const tierObj = COMPETENCY_TIERS[competencyTier] || COMPETENCY_TIERS['vd'];
+  const contextObj = USAGE_CONTEXTS[usageContext] || USAGE_CONTEXTS['giai-de'];
+
   const bookTitle = bookObject ? bookObject.title : `Sách Giáo Khoa Lớp ${grade}`;
   const bookFile = bookObject ? bookObject.file : 'Tài liệu SGK chuẩn';
   const bookDrive = bookObject ? bookObject.drive : 'https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link';
 
+  // --- CHẾ ĐỘ 2: SYSTEM PROMPT CHO AI AGENT (XML / STRUCTURED FORMAT) ---
+  if (exportMode === 'system-prompt') {
+    let xml = `<system_instruction version="0.1.3-beta" framework="EduSkills-VN" standard="GDPT-2018">\n`;
+    xml += `  <identity>\n`;
+    xml += `    <role>${role || 'Chuyên gia Sư phạm THPT chuẩn Bộ Giáo dục & Đào tạo Việt Nam'}</role>\n`;
+    xml += `    <subject_skill>@${subject}</subject_skill>\n`;
+    xml += `    <grade_level>Lớp ${grade}</grade_level>\n`;
+    xml += `    <author_attribution>Dự án EduSkills-VN | Chủ nhiệm: Nguyễn Duy Quang (0795277227)</author_attribution>\n`;
+    xml += `  </identity>\n\n`;
+
+    xml += `  <pedagogical_competency_tier level="${tierObj.id}">\n`;
+    xml += `    <tier_name>${tierObj.name}</tier_name>\n`;
+    xml += `    <target_score>${tierObj.scoreTarget}</target_score>\n`;
+    xml += `    <pedagogical_mandate>${tierObj.description}</pedagogical_mandate>\n`;
+    xml += `  </pedagogical_competency_tier>\n\n`;
+
+    xml += `  <operational_context scenario="${contextObj.id}">\n`;
+    xml += `    <scenario_title>${contextObj.title}</scenario_title>\n`;
+    xml += `    <methodology_tagline>${contextObj.tagline}</methodology_tagline>\n`;
+    xml += `    <instruction_mandate>${contextObj.description}</instruction_mandate>\n`;
+    xml += `    <scaffolding_rule>Tuân thủ cấu trúc phân tích 4 tầng Socrates và barem Quyết định 764/QĐ-BGDĐT.</scaffolding_rule>\n`;
+    xml += `  </operational_context>\n\n`;
+
+    xml += `  <grounding_knowledge_base>\n`;
+    xml += `    <mandate>TUYỆT ĐỐI CẤM BỊA ĐẶT CÔNG THỨC NGOÀI CHƯƠNG TRÌNH HOẶC DÙNG MẸO PHẢN SƯ PHẠM</mandate>\n`;
+    xml += `    <target_textbook>${bookTitle}</target_textbook>\n`;
+    xml += `    <pdf_reference_code>${bookFile}</pdf_reference_code>\n`;
+    xml += `    <cloud_drive_repository>${bookDrive}</cloud_drive_repository>\n`;
+    xml += `    <citation_rule>Mọi công thức, định lý, tên bài học phải được đối chiếu trực tiếp từ cuốn SGK trên.</citation_rule>\n`;
+    xml += `  </grounding_knowledge_base>\n\n`;
+
+    xml += `  <execution_constraints>\n`;
+    xml += `    <constraints>${constraintsPrompt || '100% công thức viết bằng LaTeX đặt trong cặp dấu $...$'}</constraints>\n`;
+    xml += `    <latex_rule>Mọi biểu thức toán/lý phải bọc trong LaTeX chuẩn: $...$ hoặc $$...$$</latex_rule>\n`;
+    xml += `    <chemistry_rule>Nếu là môn Hóa: bắt buộc danh pháp IUPAC 100% tiếng Anh</chemistry_rule>\n`;
+    xml += `    <methodology>Chain-of-Thought từng bước, gợi mở Socratic khơi dậy phản biện, chống ảo giác 100%</methodology>\n`;
+    xml += `  </execution_constraints>\n\n`;
+
+    xml += `  <task_instruction>\n`;
+    xml += `    <task>${taskPrompt || 'Phân tích bản chất, giải chi tiết từng bước và chỉ ra các bẫy phòng thi'}</task>\n`;
+    if (verifiedContent && verifiedContent.trim()) {
+      xml += `    <verified_problem_input>\n${verifiedContent.trim()}\n    </verified_problem_input>\n`;
+    } else {
+      xml += `    <mode>Pure System Directive: Hãy tự động khởi tạo 01 đề bài mẫu chuẩn ở cấp độ "${tierObj.name}" theo SGK "${bookTitle}" và triển khai giảng dạy theo ngữ cảnh "${contextObj.title}".</mode>\n`;
+    }
+    xml += `  </task_instruction>\n`;
+    xml += `</system_instruction>`;
+    return xml;
+  }
+
+  // --- CHẾ ĐỘ 3: LỆNH NẠP CLI / TERMINAL CHO AI AGENT ---
+  if (exportMode === 'agent-cli') {
+    let cli = `# ==============================================================================\n`;
+    cli += `# 💻 BỘ NẠP KỸ NĂNG CHO AI AGENT (CLI / TERMINAL / ANTIGRAVITY SDK / CLAUDE CODE)\n`;
+    cli += `# Phiên bản: v0.1.3-beta • Dự án EduSkills-VN (Chủ nhiệm: Nguyễn Duy Quang)\n`;
+    cli += `# ==============================================================================\n\n`;
+
+    cli += `# 1. Nạp kỹ năng vào Google Antigravity SDK & Gemini CLI:\n`;
+    cli += `gemini run --system-skill "skills/${subject}/SKILL.md" \\\n`;
+    cli += `  --grade ${grade} \\\n`;
+    cli += `  --tier "${tierObj.id}" \\\n`;
+    cli += `  --context "${contextObj.id}" \\\n`;
+    cli += `  --book "${bookFile}"`;
+    if (verifiedContent && verifiedContent.trim()) {
+      const cleanSnippet = verifiedContent.trim().replace(/\r?\n/g, ' ').slice(0, 100);
+      cli += ` \\\n  --input "${cleanSnippet}..."\n\n`;
+    } else {
+      cli += `\n\n`;
+    }
+
+    cli += `# 2. Nạp kỹ năng vào Claude Code CLI:\n`;
+    cli += `/skill load skills/${subject}/SKILL.md\n\n`;
+
+    cli += `# 3. Nạp kỹ năng qua EduSkills-VN Package Manager (Node.js / NPX):\n`;
+    cli += `npx eduskills-vn load ${subject} --grade ${grade} --tier ${tierObj.id} --context ${contextObj.id}\n\n`;
+
+    cli += `# 4. Gọi API Backend EduSkills-VN trực tiếp từ Terminal (Port 3000):\n`;
+    cli += `curl -X POST http://localhost:3000/api/generate-prompt \\\n`;
+    cli += `  -H "Content-Type: application/json" \\\n`;
+    cli += `  -d '{\n`;
+    cli += `    "subject": "${subject}",\n`;
+    cli += `    "gradeLevel": ${grade},\n`;
+    cli += `    "competencyTier": "${tierObj.id}",\n`;
+    cli += `    "usageContext": "${contextObj.id}",\n`;
+    cli += `    "exportMode": "system-prompt",\n`;
+    cli += `    "verifiedContent": ${JSON.stringify(verifiedContent.trim())}\n`;
+    cli += `  }'\n`;
+    return cli;
+  }
+
+  // --- CHẾ ĐỘ 1 (MẶC ĐỊNH): 5 KHUNG CHUẨN TIEUCHUANPROMPT.MD CHO CHAT WEB ---
   let p = `# ==============================================================================\n`;
   p += `# 🍵 EDUSKILLS-VN INTENT-DRIVEN PROMPT (CHUẨN TIEUCHUANPROMPT.MD & BGD 2026)\n`;
+  p += `# Phiên bản: v0.1.3-beta • Khối Lớp: ${grade} • Môn: ${subject}\n`;
   p += `# ==============================================================================\n\n`;
 
   // PHÂN KHU 1: MỤC TIÊU & NHIỆM VỤ THỰC THI
   p += `## 🎯 1. MỤC TIÊU & NHIỆM VỤ THỰC THI (WHAT THIS PROMPT DOES)\n`;
   p += `- **Vai trò sư phạm:** ${role || 'Chuyên gia Sư phạm THPT chuẩn Bộ Giáo dục & Đào tạo Việt Nam'}.\n`;
   p += `- **Nhiệm vụ cụ thể:** ${taskPrompt || 'Phân tích bản chất, giải chi tiết từng bước và chỉ ra các bẫy phòng thi'}.\n`;
+  p += `- **Ngữ cảnh sử dụng sư phạm:** ${contextObj.title} (${contextObj.tagline}).\n`;
+  p += `  * *Định hướng sư phạm:* ${contextObj.description}\n`;
   p += `- **Hành động sư phạm bắt buộc:**\n`;
   if (cognitiveOptions.useCoT) {
     p += `  * [Chain-of-Thought]: Giải thích bản chất từng bước (step-by-step), chứng minh tường minh mọi phép suy luận trước khi đưa ra kết luận.\n`;
@@ -362,8 +538,11 @@ function generateIntentDrivenPrompt({
   // PHÂN KHU 2: CƠ SỞ NHẬN THỨC & BỐI CẢNH HỌC TẬP
   p += `## 🧠 2. CƠ SỞ NHẬN THỨC & BỐI CẢNH (WHAT THE AI MUST UNDERSTAND)\n`;
   p += `- **Đối tượng người học:** Học sinh Lớp ${grade}, theo học Chương trình Giáo dục Phổ thông mới (GDPT 2018).\n`;
-  p += `- **Trình độ & Năng lực hiện tại:** "${studentLevel || 'Khá - Giỏi (Mục tiêu 8.5+ THPT Quốc Gia)'}".\n`;
-  p += `- **Tình trạng nhận thức:** ${currentStatus || 'Nắm được lý thuyết nền tảng nhưng hay bị lừa bởi các bẫy trắc nghiệm phân hóa'}.\n`;
+  p += `- **Phân cấp bậc năng lực nhận thức:** ${tierObj.name} [${tierObj.badge}].\n`;
+  p += `  * *Mục tiêu đánh giá:* ${tierObj.scoreTarget}\n`;
+  p += `  * *Yêu cầu năng lực:* ${tierObj.description}\n`;
+  p += `- **Trình độ người học thiết lập:** "${studentLevel || tierObj.scoreTarget}".\n`;
+  p += `- **Tình trạng nhận thức hiện thời:** ${currentStatus || 'Nắm được lý thuyết nền tảng nhưng hay bị lừa bởi các bẫy trắc nghiệm phân hóa'}.\n`;
   p += `- **Bản chất khoa học & Bẫy tư duy cần cảnh báo:**\n`;
   if (subject === 'toan-thpt') {
     p += `  * Quên điều kiện xác định của hàm số/phương trình trước khi biến đổi.\n`;
@@ -401,11 +580,18 @@ function generateIntentDrivenPrompt({
   p += `  * **Tầng 3:** Lời Giải Chi Tiết Từng Bước (Full Step-by-Step, có lập luận cho từng phép biến đổi).\n`;
   p += `  * **Tầng 4:** Giải Mã Bẫy Phòng Thi & 1 Bài Tập Tự Luyện Tương Tự.\n\n`;
 
-  // PHÂN KHU 5: NỘI DUNG ĐỀ BÀI ĐÃ ĐƯỢC KIỂM CHỨNG
+  // PHÂN KHU 5: NỘI DUNG ĐỀ BÀI ĐÃ ĐƯỢC KIỂM CHỨNG HOẶC CHẾ ĐỘ SƯ PHẠM THUẦN
   if (verifiedContent && verifiedContent.trim()) {
     p += `## 📝 5. NỘI DUNG ĐỀ BÀI / NGỮ LIỆU ĐÃ XÁC NHẬN KIỂM CHỨNG\n`;
     p += `\`\`\`text\n${verifiedContent.trim()}\n\`\`\`\n\n`;
     p += `👉 Bắt đầu phân tích và giải quyết bài toán theo đầy đủ 4 tầng sư phạm trên:`;
+  } else {
+    p += `## 📝 5. CHẾ ĐỘ PROMPT SƯ PHẠM THUẦN (CHƯA ĐÍNH KÈM BÀI TẬP CỤ THỂ)\n`;
+    p += `- **Tình trạng đính kèm:** Không có bài tập cụ thể trong ngữ cảnh này (người dùng đã gỡ bài tập hoặc muốn dùng Prompt Hệ Thống).\n`;
+    p += `- **YÊU CẦU ĐỐI VỚI AI:**\n`;
+    p += `  1. Tự động sinh ra 01 bài toán / câu hỏi mẫu điển hình trong chương trình SGK "${bookTitle}" ở Cấp độ nhận thức: "${tierObj.name}" (${tierObj.scoreTarget}).\n`;
+    p += `  2. Đóng vai trò "${role || 'Chuyên gia Sư phạm'}" và triển khai giảng dạy bài toán mẫu đó theo đúng ngữ cảnh "${contextObj.title}" (${contextObj.tagline}).\n`;
+    p += `  3. Hướng dẫn từng bước và đặt câu hỏi phản xạ để người học cùng tương tác.\n`;
   }
 
   return p;
@@ -419,6 +605,8 @@ module.exports = {
   formatLiteratureReading,
   processTextBySubject,
   generateIntentDrivenPrompt,
+  COMPETENCY_TIERS,
+  USAGE_CONTEXTS,
   IUPAC_DICTIONARY,
   SI_UNITS
 };

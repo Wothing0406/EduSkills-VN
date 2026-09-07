@@ -691,6 +691,160 @@
       transform: translateY(-2px);
     }
 
+    .btn-clear-exercise {
+      background: #FFEBEE;
+      color: #C62828;
+      border: 1.5px solid #FFCDD2;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-clear-exercise:hover {
+      background: #FFCDD2;
+      color: #B71C1C;
+      transform: translateY(-1px);
+    }
+
+    /* Competency Tiers & Usage Context Styles */
+    .tier-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .tier-pill-card {
+      background: white;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+    }
+
+    .tier-pill-card:hover {
+      border-color: var(--matcha-primary);
+      background: var(--bg-matcha-subtle);
+    }
+
+    .tier-pill-card.active {
+      border-color: var(--matcha-primary);
+      background: #E8F5E9;
+      box-shadow: 0 4px 12px rgba(56, 142, 60, 0.15);
+    }
+
+    .tier-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .tier-name {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .tier-badge-pill {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: var(--bg-matcha-light);
+      color: var(--matcha-dark);
+    }
+
+    .tier-desc {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .context-selector-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .btn-context-pill {
+      background: white;
+      border: 1.5px solid var(--border-color);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-context-pill:hover {
+      border-color: var(--matcha-primary);
+      background: var(--bg-cream);
+    }
+
+    .btn-context-pill.active {
+      background: var(--matcha-primary);
+      color: white;
+      border-color: var(--matcha-primary);
+      box-shadow: 0 2px 8px rgba(56, 94, 71, 0.2);
+    }
+
+    /* Prompt Export Modes Switcher */
+    .prompt-mode-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      background: rgba(0,0,0,0.3);
+      padding: 4px;
+      border-radius: 10px;
+      width: fit-content;
+      flex-wrap: wrap;
+    }
+
+    .btn-prompt-mode {
+      background: transparent;
+      border: none;
+      color: #C8E6C9;
+      padding: 6px 14px;
+      border-radius: 7px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-prompt-mode.active {
+      background: var(--matcha-primary);
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .btn-prompt-mode:hover:not(.active) {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
     /* 5-Part Modern Prompt Builder Card */
     .prompt-builder-card {
       background: #FAFCF9;
@@ -1350,6 +1504,83 @@
       }
     }
 
+    const COMPETENCY_TIERS = {
+      'nb-th': {
+        id: 'nb-th',
+        name: 'Nhận Biết & Thông Hiểu',
+        scoreTarget: 'Điểm 5.0 - 7.0 (Nền Tảng)',
+        badge: 'Cấp độ 1 • Cơ bản',
+        color: '#2E7D32',
+        bg: '#E8F5E9',
+        description: 'Nắm chắc định nghĩa, công thức SGK chuẩn, giải thích hiện tượng và chống điểm liệt.'
+      },
+      'vd': {
+        id: 'vd',
+        name: 'Vận Dụng Tiêu Chuẩn',
+        scoreTarget: 'Điểm 7.0 - 8.5 (Chuẩn BGD)',
+        badge: 'Cấp độ 2 • Vận dụng',
+        color: '#1565C0',
+        bg: '#E3F2FD',
+        description: 'Vận dụng định luật, giải bài toán phối hợp, xử lý câu Đúng/Sai và Trả lời ngắn.'
+      },
+      'vdc': {
+        id: 'vdc',
+        name: 'Vận Dụng Cao - Phân Hóa',
+        scoreTarget: 'Điểm 8.5 - 9.5+ (Phân Loại)',
+        badge: 'Cấp độ 3 • Phân hóa',
+        color: '#E65100',
+        bg: '#FFF3E0',
+        description: 'Bài toán thực tế, liên môn, đồ thị phức hợp, cực trị Oxyz và bài phân loại thí sinh giỏi.'
+      },
+      'hsg': {
+        id: 'hsg',
+        name: 'Bồi Dưỡng HSG & ĐGNL',
+        scoreTarget: 'Olympic & ĐHQG/ĐHBK (Đỉnh Cao)',
+        badge: 'Cấp độ 4 • Đỉnh cao',
+        color: '#6A1B9A',
+        bg: '#F3E5F5',
+        description: 'Tư duy logic mô hình hóa bậc cao, đề thi ĐGNL ĐHQG/ĐHBK và thi Học sinh giỏi các cấp.'
+      }
+    };
+
+    const USAGE_CONTEXTS = {
+      'giai-de': {
+        id: 'giai-de',
+        title: 'Giải Đề Chuẩn BGD 2026',
+        icon: 'fa-solid fa-bullseye',
+        tagline: '3 Phần Chuẩn QĐ 764/QĐ-BGDĐT',
+        description: 'Giải chi tiết theo cấu trúc 3 phần: Trắc nghiệm 4 lựa chọn, Đúng/Sai 4 ý lũy tiến và Trả lời ngắn điền số.'
+      },
+      'socrates': {
+        id: 'socrates',
+        title: 'Gia Sư Sư Phạm Socrates',
+        icon: 'fa-solid fa-lightbulb',
+        tagline: 'Khơi Mở Tư Duy, Không Lộ Đáp Số',
+        description: 'Dẫn dắt bằng chuỗi 3-4 câu hỏi phản xạ gợi mở, buộc người học tự tư duy tìm ra lời giải.'
+      },
+      'chua-bay': {
+        id: 'chua-bay',
+        title: 'Giải Mã Bẫy Phòng Thi',
+        icon: 'fa-solid fa-triangle-exclamation',
+        tagline: '3 Sai Lầm Kinh Điển & Mẹo Né Bẫy',
+        description: 'Mổ xẻ cạm bẫy tâm lý, sai thứ nguyên, quên điều kiện xác định và lỗi suy luận thường gặp.'
+      },
+      'soan-de': {
+        id: 'soan-de',
+        title: 'Soạn Ma Trận & Đề Tương Tự',
+        icon: 'fa-solid fa-pen-ruler',
+        tagline: 'Khảo Thí & Đề Kiểm Tra Tương Đương',
+        description: 'Thiết kế 1 đề kiểm tra tương đương cùng cấp độ nhận thức kèm ma trận và hướng dẫn chấm chi tiết.'
+      },
+      'on-cap-toc': {
+        id: 'on-cap-toc',
+        title: 'Ôn Cấp Tốc 60s & Mindmap',
+        icon: 'fa-solid fa-bolt-lightning',
+        tagline: 'Mermaid Mindmap & 5 Khóa Cốt Lõi',
+        description: 'Tóm lược siêu tốc toàn bộ kiến thức trọng tâm bằng sơ đồ tư duy Mermaid Cornell và bảng công thức 60 giây.'
+      }
+    };
+
     function App() {
       const [skills, setSkills] = useState(DEFAULT_CATALOG);
       const [selectedSkillId, setSelectedSkillId] = useState('toan-thpt');
@@ -1369,11 +1600,16 @@
       // --- 5-Part Modern Prompt Builder State (docs/Tieuchuanprompt.md) ---
       const [rolePrompt, setRolePrompt] = useState('Chuyên gia Sư phạm Toán THPT chuẩn GDPT 2018 & Đề thi BGD 2026');
       const [gradeLevel, setGradeLevel] = useState(12);
-      const [studentLevel, setStudentLevel] = useState('Khá - Giỏi (Mục tiêu 8.5+ THPT Quốc Gia)');
+      const [studentLevel, setStudentLevel] = useState('Điểm 7.0 - 8.5 (Chuẩn BGD)');
       const [currentStatus, setCurrentStatus] = useState('Đã nắm được phần lý thuyết cơ bản nhưng chưa vững phần bẫy trắc nghiệm');
       const [taskPrompt, setTaskPrompt] = useState('Phân tích bản chất, giải bài từng bước và chỉ ra 3 bẫy sai lầm kinh điển');
       const [constraintsPrompt, setConstraintsPrompt] = useState('Trình bày bằng LaTeX chuẩn ($...$), chia bảng so sánh, kiểm tra nghiệm');
       
+      // Competency Tiers, Usage Contexts & Universal Agent Export Modes
+      const [competencyTier, setCompetencyTier] = useState('vd'); // 'nb-th' | 'vd' | 'vdc' | 'hsg'
+      const [usageContext, setUsageContext] = useState('giai-de'); // 'giai-de' | 'socrates' | 'chua-bay' | 'soan-de' | 'on-cap-toc'
+      const [promptExportMode, setPromptExportMode] = useState('standard'); // 'standard' | 'system-prompt' | 'agent-cli'
+
       // Cognitive Toggles
       const [useCoT, setUseCoT] = useState(true);
       const [useSocratic, setUseSocratic] = useState(true);
@@ -1390,6 +1626,27 @@
       const [extractedMathText, setExtractedMathText] = useState('');
       const [isDragOver, setIsDragOver] = useState(false);
       const fileInputRef = useRef(null);
+
+      // Helper to completely clear/detach attached exercise from prompt
+      const clearExerciseFromPrompt = () => {
+        setDocAttachment('');
+        setExtractedMathText('');
+        setImagePreview('');
+        setUploadedFile(null);
+        setOcrInfo(null);
+        triggerToast('Đã xóa & gỡ bỏ hoàn toàn bài tập khỏi Prompt! 🧹✨');
+      };
+
+      // Helper to quickly load math demo
+      const loadDemoMath = () => {
+        setSelectedSkillId('toan-thpt');
+        setGradeLevel(12);
+        const sample = SKILL_PRESET_CONFIGS['toan-thpt'].samples[0];
+        setExtractedMathText(sample.content);
+        setDocAttachment(sample.content);
+        setDetectedBadge(SKILL_PRESET_CONFIGS['toan-thpt'].domainBadge);
+        triggerToast('Đã nạp đề toán mẫu chuẩn GDPT 2018! 📐✨');
+      };
 
       const triggerToast = (msg) => {
         setToastMsg(msg);
@@ -1514,22 +1771,119 @@
         };
         window.addEventListener('paste', handlePaste);
         return () => window.removeEventListener('paste', handlePaste);
-      }, [activeDomain, gradeLevel]);
+      }, [selectedSkillId, gradeLevel]);
 
-      // --- INTENT-DRIVEN PROMPT GENERATOR (4 CLEAR PILLARS) ---
+      // --- UNIVERSAL AI AGENT PROMPT GENERATOR (3 MODES: WEB CHAT, SYSTEM PROMPT, AGENT CLI) ---
       const generatedPromptPayload = useMemo(() => {
         const driveInfo = DRIVE_LINKS_MAP[gradeLevel] || DRIVE_LINKS_MAP[12];
         const bookTitle = currentBookObject ? currentBookObject.title : `Sách Giáo Khoa Lớp ${gradeLevel}`;
         const bookFile = currentBookObject ? currentBookObject.file : 'Tài liệu SGK chuẩn';
         const bookDrive = currentBookObject ? currentBookObject.drive : driveInfo.url;
         
+        const tierObj = COMPETENCY_TIERS[competencyTier] || COMPETENCY_TIERS['vd'];
+        const contextObj = USAGE_CONTEXTS[usageContext] || USAGE_CONTEXTS['giai-de'];
+
+        // MODE 2: SYSTEM PROMPT CHO AI AGENT (XML / STRUCTURED FORMAT CHO CLAUDE / GEMINI / GPT-4O)
+        if (promptExportMode === 'system-prompt') {
+          let xml = `<system_instruction version="0.1.3-beta" framework="EduSkills-VN" standard="GDPT-2018">\n`;
+          xml += `  <identity>\n`;
+          xml += `    <role>${rolePrompt}</role>\n`;
+          xml += `    <subject_skill>@${selectedSkillId} (${selectedSkill.name || ''})</subject_skill>\n`;
+          xml += `    <grade_level>Lớp ${gradeLevel}</grade_level>\n`;
+          xml += `    <author_attribution>Dự án EduSkills-VN | Chủ nhiệm: Nguyễn Duy Quang (0795277227)</author_attribution>\n`;
+          xml += `  </identity>\n\n`;
+
+          xml += `  <pedagogical_competency_tier level="${tierObj.id}">\n`;
+          xml += `    <tier_name>${tierObj.name}</tier_name>\n`;
+          xml += `    <target_score>${tierObj.scoreTarget}</target_score>\n`;
+          xml += `    <pedagogical_mandate>${tierObj.description}</pedagogical_mandate>\n`;
+          xml += `  </pedagogical_competency_tier>\n\n`;
+
+          xml += `  <operational_context scenario="${contextObj.id}">\n`;
+          xml += `    <scenario_title>${contextObj.title}</scenario_title>\n`;
+          xml += `    <methodology_tagline>${contextObj.tagline}</methodology_tagline>\n`;
+          xml += `    <instruction_mandate>${contextObj.description}</instruction_mandate>\n`;
+          xml += `    <scaffolding_rule>Tuân thủ cấu trúc phân tích 4 tầng Socrates và barem Quyết định 764/QĐ-BGDĐT.</scaffolding_rule>\n`;
+          xml += `  </operational_context>\n\n`;
+
+          xml += `  <grounding_knowledge_base>\n`;
+          xml += `    <mandate>TUYỆT ĐỐI CẤM BỊA ĐẶT CÔNG THỨC NGOÀI CHƯƠNG TRÌNH HOẶC DÙNG MẸO PHẢN SƯ PHẠM</mandate>\n`;
+          xml += `    <target_textbook>${bookTitle}</target_textbook>\n`;
+          xml += `    <pdf_reference_code>${bookFile}</pdf_reference_code>\n`;
+          xml += `    <cloud_drive_repository>${bookDrive}</cloud_drive_repository>\n`;
+          xml += `    <citation_rule>Mọi công thức, định lý, tên bài học phải được đối chiếu trực tiếp từ cuốn SGK trên.</citation_rule>\n`;
+          xml += `  </grounding_knowledge_base>\n\n`;
+
+          xml += `  <execution_constraints>\n`;
+          xml += `    <constraints>${constraintsPrompt}</constraints>\n`;
+          xml += `    <latex_rule>Mọi biểu thức toán/lý phải bọc trong LaTeX chuẩn: $...$ hoặc $$...$$</latex_rule>\n`;
+          xml += `    <chemistry_rule>Nếu là môn Hóa: bắt buộc danh pháp IUPAC 100% tiếng Anh</chemistry_rule>\n`;
+          xml += `    <methodology>Chain-of-Thought từng bước, gợi mở Socratic khơi dậy phản biện, chống ảo giác 100%</methodology>\n`;
+          xml += `  </execution_constraints>\n\n`;
+
+          xml += `  <task_instruction>\n`;
+          xml += `    <task>${taskPrompt}</task>\n`;
+          if (docAttachment.trim()) {
+            xml += `    <verified_problem_input>\n${docAttachment.trim()}\n    </verified_problem_input>\n`;
+          } else {
+            xml += `    <mode>Pure System Directive: Hãy tự động khởi tạo 01 đề bài mẫu chuẩn ở cấp độ "${tierObj.name}" theo SGK "${bookTitle}" và triển khai giảng dạy theo ngữ cảnh "${contextObj.title}".</mode>\n`;
+          }
+          xml += `  </task_instruction>\n`;
+          xml += `</system_instruction>`;
+          return xml;
+        }
+
+        // MODE 3: LỆNH NẠP CLI / TERMINAL CHO AI AGENT (ANTIGRAVITY SDK / CLAUDE CODE / NPX)
+        if (promptExportMode === 'agent-cli') {
+          let cli = `# ==============================================================================\n`;
+          cli += `# 💻 BỘ NẠP KỸ NĂNG CHO AI AGENT (CLI / TERMINAL / ANTIGRAVITY SDK / CLAUDE CODE)\n`;
+          cli += `# Phiên bản: v0.1.3-beta • Dự án EduSkills-VN (Chủ nhiệm: Nguyễn Duy Quang)\n`;
+          cli += `# ==============================================================================\n\n`;
+
+          cli += `# 1. Nạp kỹ năng vào Google Antigravity SDK & Gemini CLI:\n`;
+          cli += `gemini run --system-skill "skills/${selectedSkill.category || 'khoa-hoc-tu-nhien'}/${selectedSkillId}/SKILL.md" \\\n`;
+          cli += `  --grade ${gradeLevel} \\\n`;
+          cli += `  --tier "${tierObj.id}" \\\n`;
+          cli += `  --context "${contextObj.id}" \\\n`;
+          cli += `  --book "${bookFile}"`;
+          if (docAttachment.trim()) {
+            const cleanSnippet = docAttachment.trim().replace(/\r?\n/g, ' ').slice(0, 100);
+            cli += ` \\\n  --input "${cleanSnippet}..."\n\n`;
+          } else {
+            cli += `\n\n`;
+          }
+
+          cli += `# 2. Nạp kỹ năng vào Claude Code CLI:\n`;
+          cli += `/skill load skills/${selectedSkill.category || 'khoa-hoc-tu-nhien'}/${selectedSkillId}/SKILL.md\n\n`;
+
+          cli += `# 3. Nạp kỹ năng qua EduSkills-VN Package Manager (Node.js / NPX):\n`;
+          cli += `npx eduskills-vn load ${selectedSkillId} --grade ${gradeLevel} --tier ${tierObj.id} --context ${contextObj.id}\n\n`;
+
+          cli += `# 4. Gọi API Backend EduSkills-VN trực tiếp từ Terminal (Port 3000):\n`;
+          cli += `curl -X POST http://localhost:3000/api/generate-prompt \\\n`;
+          cli += `  -H "Content-Type: application/json" \\\n`;
+          cli += `  -d '{\n`;
+          cli += `    "subject": "${selectedSkillId}",\n`;
+          cli += `    "gradeLevel": ${gradeLevel},\n`;
+          cli += `    "competencyTier": "${tierObj.id}",\n`;
+          cli += `    "usageContext": "${contextObj.id}",\n`;
+          cli += `    "exportMode": "system-prompt",\n`;
+          cli += `    "verifiedContent": ${JSON.stringify(docAttachment.trim())}\n`;
+          cli += `  }'\n`;
+          return cli;
+        }
+
+        // MODE 1 (MẶC ĐỊNH): 5 KHUNG CHUẨN TIEUCHUANPROMPT.MD CHO CHAT WEB
         let p = `# ==============================================================================\n`;
         p += `# 🍵 EDUSKILLS-VN INTENT-DRIVEN PROMPT (CHUẨN TIEUCHUANPROMPT.MD & BGD 2026)\n`;
+        p += `# Phiên bản: v0.1.3-beta • Khối Lớp: ${gradeLevel} • Môn: ${selectedSkillId}\n`;
         p += `# ==============================================================================\n\n`;
 
         p += `## 🎯 1. MỤC TIÊU & NHIỆM VỤ THỰC THI (WHAT THIS PROMPT DOES)\n`;
         p += `- **Vai trò sư phạm:** ${rolePrompt}.\n`;
         p += `- **Nhiệm vụ cụ thể:** ${taskPrompt}.\n`;
+        p += `- **Ngữ cảnh sử dụng sư phạm:** ${contextObj.title} (${contextObj.tagline}).\n`;
+        p += `  * *Định hướng sư phạm:* ${contextObj.description}\n`;
         p += `- **Hành động sư phạm bắt buộc:**\n`;
         if (useCoT) p += `  * [Chain-of-Thought]: Giải thích bản chất từng bước (step-by-step) trước khi kết luận.\n`;
         if (useSocratic) p += `  * [Socratic Method]: Đặt câu hỏi gợi mở để người học tự động não, không đưa ngay đáp số thô.\n`;
@@ -1538,8 +1892,11 @@
 
         p += `\n## 🧠 2. CƠ SỞ NHẬN THỨC & BỐI CẢNH (WHAT THE AI MUST UNDERSTAND)\n`;
         p += `- **Đối tượng người học:** Học sinh Lớp ${gradeLevel}, theo học Chương trình GDPT 2018.\n`;
-        p += `- **Trình độ & Năng lực:** "${studentLevel}".\n`;
-        p += `- **Tình trạng nhận thức:** ${currentStatus}.\n`;
+        p += `- **Phân cấp bậc năng lực nhận thức:** ${tierObj.name} [${tierObj.badge}].\n`;
+        p += `  * *Mục tiêu đánh giá:* ${tierObj.scoreTarget}\n`;
+        p += `  * *Yêu cầu năng lực:* ${tierObj.description}\n`;
+        p += `- **Trình độ người học thiết lập:** "${studentLevel}".\n`;
+        p += `- **Tình trạng nhận thức hiện thời:** ${currentStatus}.\n`;
         p += `- **Bẫy phòng thi cần cảnh báo:** Quên điều kiện xác định, nhầm đơn vị chuẩn SI, sai danh pháp IUPAC hoặc lỗi suy luận trắc nghiệm.\n`;
 
         p += `\n## 📖 3. DẪN CHỨNG & CHỈ DẪN CÓ CHỦ ĐÍCH (INTENTIONAL GROUNDING & CITATIONS)\n`;
@@ -1564,10 +1921,17 @@
           p += `\n## 📝 5. NỘI DUNG ĐỀ BÀI / NGỮ LIỆU ĐÃ XÁC NHẬN KIỂM CHỨNG\n`;
           p += `\`\`\`text\n${docAttachment.trim()}\n\`\`\`\n\n`;
           p += `👉 Bắt đầu phân tích và giải quyết bài toán theo đầy đủ 4 tầng sư phạm trên:`;
+        } else {
+          p += `\n## 📝 5. CHẾ ĐỘ PROMPT SƯ PHẠM THUẦN (CHƯA ĐÍNH KÈM BÀI TẬP CỤ THỂ)\n`;
+          p += `- **Tình trạng đính kèm:** Không có bài tập cụ thể trong prompt này (người dùng đã gỡ bài tập hoặc muốn dùng Prompt Hệ Thống).\n`;
+          p += `- **YÊU CẦU ĐỐI VỚI AI:**\n`;
+          p += `  1. Tự động khởi tạo 01 bài toán / câu hỏi mẫu điển hình trong chương trình SGK "${bookTitle}" ở Cấp độ nhận thức: "${tierObj.name}" (${tierObj.scoreTarget}).\n`;
+          p += `  2. Đóng vai trò "${rolePrompt}" và triển khai giảng dạy bài toán mẫu đó theo đúng ngữ cảnh "${contextObj.title}" (${contextObj.tagline}).\n`;
+          p += `  3. Hướng dẫn từng bước và đặt câu hỏi phản xạ để người học cùng tương tác.\n`;
         }
 
         return p;
-      }, [rolePrompt, gradeLevel, studentLevel, currentStatus, taskPrompt, constraintsPrompt, useCoT, useSocratic, useFewShot, useActiveRecall, currentBookObject, docAttachment]);
+      }, [rolePrompt, gradeLevel, studentLevel, currentStatus, taskPrompt, constraintsPrompt, useCoT, useSocratic, useFewShot, useActiveRecall, currentBookObject, docAttachment, competencyTier, usageContext, promptExportMode, selectedSkillId, selectedSkill]);
 
       // --- Handle File & Image Upload with OCR Backend ---
       const processFile = (file, customName) => {
@@ -1765,7 +2129,7 @@
               <div className="brand-title-group">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <h1>EduSkills-VN</h1>
-                  <span className="version-tag">v0.1.2-beta</span>
+                  <span className="version-tag">v0.1.3-beta</span>
                 </div>
                 <p>🍵 Matcha Mèo Ú • Nhận Diện Đề Toán & Dẫn Chứng SGK Chuẩn</p>
               </div>
@@ -2003,7 +2367,7 @@
                               {detectedBadge}
                             </span>
                           </div>
-                          <div style={{ display: 'flex', gap: '8px' }}>
+                          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                             {imagePreview && (
                               <button 
                                 className="btn-aas btn-outline-aas"
@@ -2019,6 +2383,13 @@
                             )}
                             <button className="btn-verify-math" onClick={applyVerifiedMathToPrompt}>
                               <i className="fa-solid fa-arrow-down"></i> Đưa Vào Prompt Sư Phạm
+                            </button>
+                            <button 
+                              className="btn-clear-exercise" 
+                              onClick={clearExerciseFromPrompt}
+                              title="Xóa toàn bộ đề bài và gỡ khỏi Prompt"
+                            >
+                              <i className="fa-solid fa-broom"></i> Gỡ Khỏi Prompt
                             </button>
                           </div>
                         </div>
@@ -2071,6 +2442,66 @@
                         Bộ Tạo Prompt Sư Phạm 5 Khung (Chuẩn Tieuchuanprompt.md)
                       </div>
                       <span className="badge-tag-aas badge-science">Chống Ảo Giác 100%</span>
+                    </div>
+
+                    {/* Phân Cấp Bậc Năng Lực Nhận Thức (Competency Tiers) */}
+                    <div style={{ marginBottom: '16px' }}>
+                      <div className="builder-label" style={{ marginBottom: '8px' }}>
+                        <i className="fa-solid fa-layer-group"></i> Phân Cấp Bậc Năng Lực Nhận Thức (Competency Tiers)
+                      </div>
+                      <div className="tier-selector-grid">
+                        {Object.values(COMPETENCY_TIERS).map(tier => (
+                          <div 
+                            key={tier.id}
+                            className={`tier-pill-card ${competencyTier === tier.id ? 'active' : ''}`}
+                            onClick={() => {
+                              setCompetencyTier(tier.id);
+                              setStudentLevel(tier.scoreTarget);
+                              triggerToast(`Đã chuyển sang cấp bậc: ${tier.name}! 🎯`);
+                            }}
+                          >
+                            <div className="tier-header-row">
+                              <span className="tier-name">{tier.name}</span>
+                              <span className="tier-badge-pill" style={{ background: tier.bg, color: tier.color }}>
+                                {tier.badge}
+                              </span>
+                            </div>
+                            <div style={{ fontSize: '0.78rem', fontWeight: 800, color: tier.color, marginTop: '2px' }}>
+                              {tier.scoreTarget}
+                            </div>
+                            <div className="tier-desc">
+                              {tier.description}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Phân Định Ngữ Cảnh Sư Phạm Khi Sử Dụng (Pedagogical Scenarios) */}
+                    <div style={{ marginBottom: '16px' }}>
+                      <div className="builder-label" style={{ marginBottom: '8px' }}>
+                        <i className="fa-solid fa-chalkboard-user"></i> Ngữ Cảnh Sư Phạm Khi Sử Dụng (Pedagogical Scenarios)
+                      </div>
+                      <div className="context-selector-bar">
+                        {Object.values(USAGE_CONTEXTS).map(ctx => (
+                          <button 
+                            key={ctx.id}
+                            type="button"
+                            className={`btn-context-pill ${usageContext === ctx.id ? 'active' : ''}`}
+                            onClick={() => {
+                              setUsageContext(ctx.id);
+                              triggerToast(`Đã chọn ngữ cảnh: ${ctx.title}! 💡`);
+                            }}
+                          >
+                            <i className={ctx.icon}></i>
+                            <span>{ctx.title}</span>
+                          </button>
+                        ))}
+                      </div>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', background: 'var(--bg-matcha-subtle)', padding: '7px 12px', borderRadius: '6px', border: '1px solid #C8E6C9' }}>
+                        <i className="fa-solid fa-circle-info" style={{ color: 'var(--matcha-primary)' }}></i>
+                        <strong> {USAGE_CONTEXTS[usageContext].tagline}:</strong> {USAGE_CONTEXTS[usageContext].description}
+                      </div>
                     </div>
 
                     <div className="builder-grid">
@@ -2242,28 +2673,65 @@
 
                     {/* Document-First Attachment (Đề bài hoặc Văn bản) */}
                     <div className="builder-field" style={{ marginBottom: '18px' }}>
-                      <label className="builder-label">
-                        <i className="fa-solid fa-file-lines"></i> Đề Bài / Bài Học Đã Bóc Tách (Document-First)
-                      </label>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px', flexWrap: 'wrap', gap: '6px' }}>
+                        <label className="builder-label" style={{ marginBottom: 0 }}>
+                          <i className="fa-solid fa-file-lines"></i> 5. Đề Bài / Bài Học Đã Bóc Tách (Document-First)
+                        </label>
+                        {docAttachment.trim() && (
+                          <button 
+                            type="button"
+                            className="btn-clear-exercise" 
+                            style={{ padding: '4px 10px', fontSize: '0.74rem' }}
+                            onClick={clearExerciseFromPrompt}
+                            title="Gỡ đề bài ra khỏi prompt để chỉ dùng Prompt Sư Phạm Thuần"
+                          >
+                            <i className="fa-solid fa-broom"></i> Gỡ bài tập khỏi Prompt
+                          </button>
+                        )}
+                      </div>
                       <textarea 
                         className="builder-textarea" 
                         value={docAttachment}
                         onChange={(e) => setDocAttachment(e.target.value)}
-                        placeholder="Dán nội dung đề bài hoặc bấm 'Đưa Vào Prompt Sư Phạm' từ khu vực tải ảnh ở trên..."
+                        placeholder="Dán nội dung đề bài hoặc bấm 'Đưa Vào Prompt Sư Phạm' từ khu vực tải ảnh ở trên... (Nếu xóa trống, hệ thống tự động sinh ví dụ chuẩn theo SGK và cấp độ nhận thức đã chọn)"
                       />
                     </div>
 
-                    {/* Live Output Preview */}
+                    {/* Live Output Preview with Universal AI Agent Mode Switcher */}
                     <div className="live-payload-section">
-                      <div className="payload-header-bar">
-                        <span className="payload-badge">LIVE PROMPT PREVIEW (TIÊU CHUẨN 5 KHUNG)</span>
-                        <button 
-                          className="btn-aas btn-primary-aas" 
-                          style={{ padding: '4px 10px', fontSize: '0.78rem' }}
-                          onClick={handleCopyPromptPayload}
-                        >
-                          <i className="fa-solid fa-copy"></i> Sao chép Prompt
-                        </button>
+                      <div className="payload-header-bar" style={{ flexWrap: 'wrap', gap: '10px' }}>
+                        <div className="prompt-mode-bar">
+                          <button 
+                            type="button"
+                            className={`btn-prompt-mode ${promptExportMode === 'standard' ? 'active' : ''}`}
+                            onClick={() => setPromptExportMode('standard')}
+                          >
+                            <i className="fa-solid fa-comments"></i> 💬 Web Chat (5 Khung)
+                          </button>
+                          <button 
+                            type="button"
+                            className={`btn-prompt-mode ${promptExportMode === 'system-prompt' ? 'active' : ''}`}
+                            onClick={() => setPromptExportMode('system-prompt')}
+                          >
+                            <i className="fa-solid fa-robot"></i> 🤖 Agent System Prompt (XML)
+                          </button>
+                          <button 
+                            type="button"
+                            className={`btn-prompt-mode ${promptExportMode === 'agent-cli' ? 'active' : ''}`}
+                            onClick={() => setPromptExportMode('agent-cli')}
+                          >
+                            <i className="fa-solid fa-terminal"></i> 💻 Bộ Nạp CLI / Terminal
+                          </button>
+                        </div>
+                        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                          <button 
+                            className="btn-aas btn-primary-aas" 
+                            style={{ padding: '6px 14px', fontSize: '0.78rem' }}
+                            onClick={handleCopyPromptPayload}
+                          >
+                            <i className="fa-solid fa-copy"></i> Sao chép {promptExportMode === 'agent-cli' ? 'Lệnh CLI' : promptExportMode === 'system-prompt' ? 'System Prompt' : 'Prompt'}
+                          </button>
+                        </div>
                       </div>
                       <pre className="live-code-area">{generatedPromptPayload}</pre>
                     </div>
@@ -2482,7 +2950,7 @@
 
           {/* Footer */}
           <footer className="footer-cute">
-            <p>🐾 EduSkills-VN v0.1.2-beta • Chủ nhiệm dự án: <strong>Nguyễn Duy Quang</strong> (📞 0795277227 | ✉️ poiairo4628@gmail.com)</p>
+            <p>🐾 EduSkills-VN v0.1.3-beta • Chủ nhiệm dự án: <strong>Nguyễn Duy Quang</strong> (📞 0795277227 | ✉️ poiairo4628@gmail.com)</p>
             <p style={{ marginTop: '4px', fontSize: '0.76rem', color: 'var(--text-light)' }}>
               Hệ thống Kỹ Nghệ Prompt Sư Phạm chuẩn GDPT 2018 & Định dạng Đề thi BGD 2026-2027.
             </p>
