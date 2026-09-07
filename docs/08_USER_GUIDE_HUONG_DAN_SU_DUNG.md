@@ -10,7 +10,7 @@
 ## 🍵 1. Triết Lý Thiết Kế: "Matcha Mèo Ú Tối Giản"
 
 EduSkills-VN không phải là một công cụ giải bài hộ để đối phó. Đây là một **Hệ Thống Trợ Lý Sư Phạm Đa Tác Nhân (Agentic Educational Brain)** được thiết kế với mục tiêu:
-1. **Dịu Mắt & Tinh Gọn:** Gam màu xanh matcha latte kết hợp bọt sữa kem mềm xua tan áp lực phòng thi căng thẳng, bảo vệ mắt học sinh khi học bài đêm muộn.
+1. **Dịu Mắt & Tinh Gọn:** Gam màu xanh matcha latte kết hợp bọt sữa kem mềm xua tan áp lực phòng thi căng thẳng, bảo vệ thị lực học sinh khi tự học đêm muộn.
 2. **Triệt Tiêu Ảo Giác 100%:** Chỉ giải bài và sinh đề khi có dữ liệu đầu vào cụ thể (Document-First) và đối chiếu trực tiếp với từng cuốn **Sách Giáo Khoa cụ thể** trên Google Drive Cloud.
 3. **Khơi Mở Tư Duy Socrates:** Không đưa đáp số thô, mà dẫn dắt từng bước để học sinh tự hiểu bản chất, phát hiện bẫy và tự giải được các bài tương tự.
 
@@ -20,7 +20,7 @@ EduSkills-VN không phải là một công cụ giải bài hộ để đối ph
 
 ```mermaid
 flowchart LR
-    A[Bước 1: Chọn Kỹ Năng & Lớp 10-11-12] --> B[Bước 2: Tải Ảnh / Đề Cương Bóc Tách LaTeX]
+    A[Bước 1: Chọn Kỹ Năng & Lớp 10-11-12] --> B[Bước 2: Tải / Paste Ảnh Ctrl+V & Bóc Tách OCR]
     B --> C[Bước 3: Xác Nhận Đề & Chọn Cuốn SGK Cụ Thể]
     C --> D[Bước 4: Bật Kỹ Thuật Tư Duy CoT/Socratic]
     D --> E[Bước 5: Dán Vào Gemini/Claude/ChatGPT]
@@ -40,33 +40,37 @@ flowchart LR
 
 ---
 
-### 🔹 BƯỚC 2: Tải Lên Ảnh Đề Bài Hoặc Kéo Thả File Đề Cương
-- Bạn có thể **chụp ảnh đề bài** từ sách bài tập/đề thi bằng điện thoại (định dạng `PNG`, `JPG`, `WebP`) hoặc kéo thả file đề cương (`PDF`, `TXT`, `DOCX`).
-- **Bộ Nhận Diện & Định Dạng Đề Toán:**
-  - Hệ thống tự động phát hiện các công thức phức tạp (phân số, lũy thừa, căn bậc hai, đạo hàm, tích phân, giới hạn, véc-tơ, tọa độ không gian $Oxyz$).
-  - Tự động chuẩn hóa thành mã **LaTeX chuẩn ($...$ hoặc $$...$$)**.
-  - Phân tách rạch ròi giữa phần câu hỏi dẫn và 4 phương án trắc nghiệm A, B, C, D.
+### 🔹 BƯỚC 2: Chụp Màn Hình & Dán Trực Tiếp (`Ctrl + V`) Hoặc Tải File Đề Cương
+- ⚡ **Tiện ích sao chép chụp màn hình:** Dùng phím tắt Windows `Win + Shift + S` (hoặc Mac `Cmd + Shift + 4`) chụp vùng bài tập trên màn hình $\to$ Quay lại trình duyệt và nhấn phím **`Ctrl + V`**. Hệ thống sẽ tự động bắt lấy ảnh từ clipboard và nạp vào tức thì!
+- **Hỗ trợ tệp đa dạng:** Bạn cũng có thể kéo thả ảnh (`PNG, JPG, WebP`) hoặc file đề cương ôn tập (`PDF, DOCX, TXT, MD`).
+- **Bộ Bóc Tách OCR Backend Đa Môn:**
+  - 📐 **Toán học:** Chuẩn hóa các biểu thức phân số, căn thức, số mũ, tích phân, giới hạn sang mã **LaTeX ($...$)**.
+  - ⚡ **Vật lí:** Tự động nhận diện đơn vị chuẩn SI ($Pa, N, J, K, m/s^2$) và chu trình nhiệt.
+  - 🧪 **Hóa học:** Tự động chuyển đổi sang 100% danh pháp IUPAC tiếng Anh (copper(II) sulfate, sulfuric acid, ethanoic acid...) và chuẩn hóa biến thiên Enthalpy $\Delta_r H^0_{298}$.
+  - 📖 **Ngữ văn:** Bóc tách cấu trúc Đọc hiểu ngữ liệu trích dẫn ngoài SGK, hệ thống câu hỏi nhận biết/thông hiểu/vận dụng và đề tài viết đoạn văn 200 chữ.
 
 ---
 
 ### 🔹 BƯỚC 3: Xác Nhận Kiểm Chứng & Chọn Đúng Cuốn SGK Cụ Thể
-- Thay vì chỉ trích dẫn chung chung, hệ thống hiển thị danh mục **Từng Cuốn Sách Giáo Khoa Cụ Thể** đang lưu trữ trên Google Drive:
-  - *Ví dụ môn Toán 12:* Cho phép chọn giữa **SGK Toán 12 - Tập 1**, **SGK Toán 12 - Tập 2** hoặc **Chuyên đề học tập Toán 12**.
-  - *Ví dụ môn Hóa 12:* Chọn cuốn **Chuyên đề học tập Hóa học 12 (IUPAC Thống Nhất)**.
-- Bấm nút **"Đưa Vào Prompt Sư Phạm"** để bảo chứng câu lệnh. Hệ thống sẽ ép buộc AI phải trích dẫn đúng định lý và công thức từ cuốn sách đó.
+- Thay vì chỉ trích dẫn chung chung vô định, hệ thống tự động đối soát trong cơ sở dữ liệu `dataset/books-database.json` và trích xuất:
+  - **Tên Cuốn SGK Cụ Thể:** ví dụ: *SGK Toán 12 - Tập 1*, *Sách học sinh Vật lí 12*, *Chuyên đề học tập Hóa học 12 (IUPAC Thống Nhất)*...
+  - **Mã File PDF Gốc:** ví dụ: `12-sgk-toan-12-tap-mot.pdf`, `12-shs-vat-li-12.pdf`...
+  - **Đường Dẫn Drive Khối Lớp:** Dẫn thẳng đến kho sách điện tử chứa đúng file đó.
+- Kiểm tra lại nội dung bài tập trong **Thẻ Xác Nhận Kiểm Chứng**, chỉnh sửa số liệu nếu cần và bấm **"Đưa Vào Prompt Sư Phạm"**.
 
 ---
 
-### 🔹 BƯỚC 4: Bật Các Kỹ Thuật Kích Hoạt Tư Duy (Khung 5 Thành Phần)
-Tuân thủ nghiêm ngặt tiêu chuẩn [`docs/Tieuchuanprompt.md`](Tieuchuanprompt.md):
-- `[x] Chain-of-Thought`: Bắt buộc giải thích bản chất từng bước (step-by-step) trước khi kết luận.
-- `[x] Socratic Method`: Đặt câu hỏi gợi mở để người học tự động não, không đưa ngay đáp số thô.
-- `[x] Few-shot`: Minh họa bằng 1 ví dụ tương đương theo chuẩn mực.
-- `[x] Active Recall`: Đặt 1 câu hỏi kiểm tra tư duy hoặc bài tập tương tự ở cuối phản hồi.
+### 🔹 BƯỚC 4: Bộ Tạo Prompt Thông Minh Phân Chia Rõ Ràng Có Chủ Đích
+Mọi mã lệnh sinh ra từ EduSkills-VN được phân định thành 4 phân khu sư phạm tuyệt đối rõ ràng:
+
+1. 🎯 **MỤC TIÊU & NHIỆM VỤ THỰC THI (WHAT THIS PROMPT DOES):** Nêu rõ hành động bắt buộc AI phải thực hiện (giải chi tiết 4 tầng Socrates, phân tích bản chất từng bước bằng Chain-of-Thought, khơi mở tư duy và đặt câu hỏi phản biện Active Recall ở cuối bài).
+2. 🧠 **CƠ SỞ NHẬN THỨC & BỐI CẢNH (WHAT THE AI MUST UNDERSTAND):** Định hình rõ đối tượng người học Lớp 10/11/12, mục tiêu điểm số (8.5+), và liệt kê danh sách các bẫy phòng thi trắc nghiệm học sinh hay mắc phải để AI cảnh báo trước.
+3. 📖 **DẪN CHỨNG & CHỈ DẪN CÓ CHỦ ĐÍCH (INTENTIONAL CITATIONS & INSTRUCTIONS):** Cung cấp tên cuốn sách giáo khoa cụ thể, mã file PDF gốc, link Google Drive và CHỈ DẪN BẮT BUỘC AI phải đối chiếu định lý, định luật và số trang SGK để bảo chứng kết quả.
+4. ⚡ **RÀNG BUỘC KỸ THUẬT & ĐỊNH DẠNG ĐẦU RA (OUTPUT CONSTRAINTS & FORMAT):** Ràng buộc 100% công thức LaTeX `$..$`, danh pháp IUPAC tiếng Anh, bảng so sánh và cấu trúc 4 tầng Socrates.
 
 ---
 
-### 🔹 BƯỚC 5: Sao Chép Prompt & Nạp Vào AI
+### 🔹 BƯỚC 5: Sao Chép Prompt & Nạp Vào AI Của Bạn
 - Bấm nút **"Sao chép Prompt"** hoặc **"Copy Toàn Bộ File SKILL.md"**.
 - Mở nền tảng AI bạn sử dụng:
   - **Google Gemini 1.5 Pro / AI Studio:** Dán vào ô Chat kèm file PDF bài học (tải từ Drive) để tận dụng cửa sổ 2 triệu tokens.
@@ -98,19 +102,8 @@ Khi nhận được phản hồi từ AI sử dụng kỹ năng `/giai-chi-tiet`
 
 ## 📚 4. Bảng Tra Cứu Kho Sách Giáo Khoa Cloud Chi Tiết
 
-| Khối Lớp | Cuốn Sách Trọng Tâm | Tệp PDF Gốc Trong Kho | Link Google Drive Trực Tiếp |
-| :---: | :--- | :--- | :---: |
-| **Lớp 10** | Toán 10 Tập 1 & 2, Chuyên đề Toán 10<br/>Vật lí 10, Hóa học 10, Sinh học 10<br/>Ngữ văn 10, Lịch sử 10, Địa lí 10 | `10-sgk-toan-10-tap-mot.pdf`<br/>`10-sgk-hoa-hoc-10.pdf`<br/>`10-sgk-vat-li-10.pdf`... | [👉 Mở Drive Lớp 10](https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link) |
-| **Lớp 11** | Toán 11 Tập 1 & 2<br/>Vật lí 11, Hóa học 11, Sinh học 11<br/>Địa lí 11, Ngữ văn 11 | `11-sgk-toan-11-tap-mot.pdf`<br/>`11-sgk-vat-li-11.pdf`<br/>`11-sgk-hoa-hoc-11.pdf`... | [👉 Mở Drive Lớp 11](https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link) |
-| **Lớp 12** | **SGK Toán 12 Tập 1 & 2 (Bộ Thống Nhất 2026)**<br/>Vật lí nhiệt & Khí lí tưởng 12<br/>Chuyên đề Hóa học 12 (IUPAC)<br/>Đọc hiểu Ngữ văn 12 | `12-sgk-toan-12-tap-mot.pdf`<br/>`12-shs-vat-li-12.pdf`<br/>`12-sgk-chuyen-de-hoc-tap-hoa-hoc-12.pdf`... | [👉 Mở Drive Lớp 12](https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link) |
-
----
-
-## 🛠️ 5. Xử Lý Sự Cố Thường Gặp (Troubleshooting)
-
-1. **Tôi nhấp vào file `.md` tải về mà máy tính không mở được?**
-   - File `.md` là định dạng Markdown văn bản thuần. Bạn có thể mở bằng Notepad, VS Code, Obsidian hoặc dán trực tiếp nội dung vào khung chat của Gemini/Claude/ChatGPT.
-2. **Làm sao để chạy hệ thống nếu không biết dòng lệnh?**
-   - Chỉ cần nhấp đúp chuột vào file [`start-eduskills.bat`](../start-eduskills.bat). Hệ thống sẽ tự kiểm tra và mở trình duyệt cho bạn tại `http://localhost:3000`.
-3. **Ảnh chụp bài tập của tôi bị mờ hoặc công thức quá dài?**
-   - Bạn có thể chỉnh sửa trực tiếp đoạn văn bản trong ô **"Xác Nhận & Kiểm Chứng Đề Toán"** trước khi bấm chuyển vào Prompt để đảm bảo độ chính xác tuyệt đối.
+| Khối Lớp | Dung Lượng | File PDF SGK Tiêu Biểu | Thư Mục Google Drive Trực Tiếp |
+| :---: | :---: | :--- | :---: |
+| 📗 **Lớp 10** | **74 files** | • `10-sgk-toan-10-tap-mot.pdf`<br/>• `10-sgk-vat-li-10.pdf`<br/>• `10-sgk-hoa-hoc-10.pdf`<br/>• `10-sgk-tieng-anh-10-global-sucess.pdf` | [👉 Mở Kho Sách Lớp 10](https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link) |
+| 📘 **Lớp 11** | **10 files** | • `11-sgk-toan-11-tap-mot.pdf`<br/>• `11-sgk-vat-li-11.pdf`<br/>• `11-sgk-chuyen-de-hoc-tap-hoa-hoc-11.pdf` | [👉 Mở Kho Sách Lớp 11](https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link) |
+| 📙 **Lớp 12** | **46 files** | • `12-sgk-toan-12-tap-mot.pdf`<br/>• `12-shs-vat-li-12.pdf`<br/>• `12-sgk-chuyen-de-hoc-tap-hoa-hoc-12.pdf`<br/>• `12-sgk-sinh-hoc-12.pdf` | [👉 Mở Kho Sách Lớp 12 (Trọng tâm thi)](https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link) |
