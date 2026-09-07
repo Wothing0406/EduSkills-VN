@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduSkills-VN 3D Experience — Bộ Não AI Skills THPT Chuẩn BGD 2026</title>
+  <title>EduSkills-VN Hub | Cổng Tra Cứu & Nạp Kỹ Năng AI THPT Chuẩn Bộ GD&ĐT 2026</title>
+  
   <!-- Google Fonts: Inter & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Three.js & OrbitControls via CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -15,13 +19,16 @@
   
   <style>
     :root {
-      --bg-dark: #070913;
-      --panel-bg: rgba(15, 23, 42, 0.75);
+      --bg-dark: #070a14;
+      --bg-card: rgba(15, 23, 42, 0.85);
+      --bg-card-hover: rgba(30, 41, 59, 0.95);
       --panel-border: rgba(56, 189, 248, 0.25);
       --accent-cyan: #38bdf8;
+      --accent-indigo: #6366f1;
       --accent-purple: #a855f7;
       --accent-amber: #f59e0b;
       --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
     }
@@ -30,629 +37,1166 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      user-select: none;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-main);
-      overflow: hidden;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Background 3D Canvas */
+    #webgl-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
+      z-index: 0;
+      pointer-events: auto;
     }
 
-    #webgl-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    /* UI Overlay Layer */
-    .ui-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    /* Main Container */
+    .app-container {
+      position: relative;
       z-index: 10;
       pointer-events: none;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 20px;
+      min-height: 100vh;
     }
 
     .interactive {
       pointer-events: auto;
     }
 
-    /* Header Bar */
+    /* Top Navigation */
     header {
+      background: rgba(7, 10, 20, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--panel-border);
+      padding: 14px 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--panel-bg);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--panel-border);
-      border-radius: 16px;
-      padding: 12px 24px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .logo-box {
+    .brand-box {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .logo-title {
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #0284c7, #6366f1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    }
+
+    .brand-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8, #f43f5e);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 0.5px;
     }
 
-    .badge-beta {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid var(--accent-amber);
-      color: var(--accent-amber);
+    .brand-subtitle {
       font-size: 0.75rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 9999px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 500;
     }
 
-    .header-hint {
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
       font-size: 0.85rem;
-      color: var(--text-muted);
+      font-weight: 600;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
     }
 
-    /* Left Sidebar: Skill Navigator */
-    .sidebar {
-      position: absolute;
-      top: 90px;
-      left: 20px;
-      width: 320px;
-      max-height: calc(100vh - 120px);
-      background: var(--panel-bg);
-      backdrop-filter: blur(16px);
+    .btn-nav:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--accent-cyan);
+      color: white;
+    }
+
+    .badge-vn {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid var(--accent-rose);
+      color: #fda4af;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Author Contact Strip */
+    .author-strip {
+      background: linear-gradient(90deg, rgba(2, 132, 199, 0.25), rgba(99, 102, 241, 0.25));
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 8px 32px;
+      font-size: 0.82rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #cbd5e1;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-info strong {
+      color: #38bdf8;
+    }
+
+    .author-links a {
+      color: #f8fafc;
+      text-decoration: none;
+      margin-left: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .author-links a:hover {
+      color: var(--accent-amber);
+    }
+
+    /* Main Content Layout */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+      padding: 24px 32px;
+      flex: 1;
+      height: calc(100vh - 120px);
+    }
+
+    /* Left Column: Catalog Browser */
+    .catalog-panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
       border: 1px solid var(--panel-border);
-      border-radius: 16px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-box {
       padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input-wrapper i {
+      position: absolute;
+      left: 14px;
+      color: var(--text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 10px 14px 10px 40px;
+      color: white;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .filter-tabs {
+      display: flex;
+      padding: 8px 16px;
+      gap: 6px;
+      overflow-x: auto;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .filter-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-tab.active, .filter-tab:hover {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+    }
+
+    .skill-list {
+      flex: 1;
       overflow-y: auto;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      padding: 12px 16px;
     }
 
-    .sidebar::-webkit-scrollbar {
-      width: 4px;
+    .skill-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
-    .sidebar::-webkit-scrollbar-thumb {
-      background: var(--panel-border);
+
+    .skill-card:hover, .skill-card.active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--accent-cyan);
+      transform: translateX(4px);
+    }
+
+    .skill-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .skill-card-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .skill-card-badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
       border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
-    .category-group {
+    .badge-stem { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-social { background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-tech { background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .badge-meta { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    .skill-card-cmd {
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: var(--accent-amber);
+    }
+
+    /* Right Column: Workstation & Guide Hub */
+    .workstation-panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--panel-border);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+    }
+
+    .workstation-nav {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .workstation-tab {
+      flex: 1;
+      padding: 14px;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .workstation-tab.active {
+      color: var(--accent-cyan);
+      border-bottom-color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .workstation-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    /* Tab Content: Skill Detail */
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .detail-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+    }
+
+    .detail-cmd {
+      font-family: monospace;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--accent-amber);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      display: inline-block;
+      margin-top: 6px;
+    }
+
+    .info-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
       margin-bottom: 16px;
     }
 
-    .category-title {
-      font-size: 0.75rem;
+    .info-card h4 {
+      font-size: 0.82rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      color: var(--accent-cyan);
       margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .cat-stem { color: var(--accent-cyan); }
-    .cat-social { color: var(--accent-amber); }
-    .cat-tech { color: var(--accent-purple); }
-    .cat-meta { color: var(--accent-emerald); }
-
-    .skill-item {
+    .rule-pill {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      border-radius: 8px;
-      margin-bottom: 4px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      gap: 6px;
     }
 
-    .skill-item:hover, .skill-item.active {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent-cyan);
-      transform: translateX(4px);
-    }
-
-    .skill-name {
-      font-size: 0.88rem;
-      font-weight: 500;
-    }
-
-    .skill-tag {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.3);
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-
-    /* Right Panel: Skill Inspector & Prompt Playground */
-    .inspector {
-      position: absolute;
-      top: 90px;
-      right: 20px;
-      width: 440px;
-      max-height: calc(100vh - 120px);
-      background: var(--panel-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--panel-border);
-      border-radius: 16px;
-      padding: 24px;
-      overflow-y: auto;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .inspector-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 12px;
-    }
-
-    .inspector-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--accent-cyan);
-    }
-
-    .inspector-command {
-      font-family: monospace;
-      background: rgba(0, 0, 0, 0.4);
-      color: var(--accent-amber);
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      display: inline-block;
-      margin-top: 4px;
-    }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--text-muted);
-      margin: 16px 0 6px 0;
-    }
-
-    .doc-dropzone {
-      border: 2px dashed rgba(56, 189, 248, 0.3);
-      border-radius: 12px;
+    .code-box {
+      background: #04060d;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
       padding: 16px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-
-    .doc-dropzone:hover {
-      border-color: var(--accent-cyan);
-    }
-
-    .prompt-box {
-      background: #090d16;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 12px;
       font-family: monospace;
-      font-size: 0.8rem;
-      color: #cbd5e1;
+      font-size: 0.85rem;
+      color: #e2e8f0;
       white-space: pre-wrap;
       word-break: break-word;
-      max-height: 180px;
-      overflow-y: auto;
       user-select: text;
+      position: relative;
     }
 
-    .btn-group {
+    .btn-action-row {
       display: flex;
-      gap: 8px;
-      margin-top: 16px;
+      gap: 12px;
+      margin-top: 20px;
     }
 
-    .btn-primary {
+    .btn-action-primary {
       flex: 1;
       background: linear-gradient(135deg, #0284c7, #0369a1);
       border: none;
       color: white;
       font-weight: 600;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      font-size: 0.85rem;
-      transition: opacity 0.2s, transform 0.1s;
+      gap: 8px;
+      font-size: 0.92rem;
+      transition: all 0.2s;
     }
 
-    .btn-primary:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
+    .btn-action-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
     }
 
-    .btn-primary:active {
-      transform: translateY(1px);
+    /* Tab Content: Quick Injection Guides */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
 
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: var(--text-main);
-      padding: 10px 16px;
+    .guide-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px;
+      transition: all 0.2s;
+    }
+
+    .guide-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .guide-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .guide-icon {
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
     }
 
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
+    .guide-gemini { background: rgba(56, 189, 248, 0.2); color: var(--accent-cyan); }
+    .guide-claude { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
+    .guide-gpt { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); }
+    .guide-notebook { background: rgba(168, 85, 247, 0.2); color: var(--accent-purple); }
 
-    /* 3D Scene Tooltip */
-    #tooltip-3d {
-      position: absolute;
-      display: none;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid var(--accent-cyan);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
+    .guide-title {
+      font-weight: 700;
+      font-size: 1rem;
       color: white;
-      pointer-events: none;
-      z-index: 20;
-      transform: translate(-50%, -130%);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     }
 
-    @media (max-width: 900px) {
-      .sidebar { display: none; }
-      .inspector { width: calc(100vw - 40px); right: 20px; left: 20px; }
+    .guide-steps {
+      list-style-position: inside;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .guide-steps li {
+      margin-bottom: 6px;
+    }
+
+    .guide-steps strong {
+      color: #e2e8f0;
+    }
+
+    /* Quiz Document Dropzone */
+    .quiz-drop-area {
+      border: 2px dashed rgba(56, 189, 248, 0.4);
+      background: rgba(2, 132, 199, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .quiz-textarea {
+      width: 100%;
+      height: 90px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 10px;
+      color: white;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      resize: vertical;
+      outline: none;
+    }
+
+    .quiz-textarea:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* 3D Scene Controls Hint */
+    .scene-hint {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 1024px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .guide-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- 3D Canvas -->
+  <!-- Three.js Canvas -->
   <canvas id="webgl-canvas"></canvas>
 
-  <div id="tooltip-3d">Skill Info</div>
-
-  <!-- UI Overlay -->
-  <div class="ui-overlay">
+  <div class="app-container">
     <!-- Header -->
     <header class="interactive">
-      <div class="logo-box">
-        <div class="logo-title">EduSkills-VN 3D Navigator</div>
-        <span class="badge-beta">Beta v0.1-beta</span>
+      <div class="brand-box">
+        <div class="brand-logo">🎓</div>
+        <div>
+          <div class="brand-title">EduSkills-VN Hub</div>
+          <div class="brand-subtitle">Bộ Não AI Skills THPT Chuẩn Bộ GD&ĐT 2026</div>
+        </div>
+        <span class="badge-vn"><i class="fa-solid fa-graduation-cap"></i> GDPT 2018 Thống Nhất</span>
       </div>
-      <div class="header-hint">
-        <span>✨ Kéo xoay 3D • Click quả cầu kỹ năng để nạp Prompt</span>
+
+      <div class="header-actions">
+        <a href="https://github.com/Wothing0406/EduSkills-VN" target="_blank" class="btn-nav">
+          <i class="fa-brands fa-github"></i> GitHub Repo
+        </a>
+        <button class="btn-nav" onclick="switchTab('guide')">
+          <i class="fa-solid fa-book-open"></i> Hướng Dẫn Nạp Vào AI
+        </button>
       </div>
     </header>
 
-    <!-- Left Sidebar -->
-    <div class="sidebar interactive">
-      <!-- Group 1: Khoa học Tự nhiên -->
-      <div class="category-group">
-        <div class="category-title cat-stem">🔬 Khoa Học Tự Nhiên</div>
-        <div class="skill-item" onclick="selectSkill('toan-thpt')">
-          <span class="skill-name">Toán Học THPT (10-12)</span>
-          <span class="skill-tag">/toan10-12</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('vat-li-thpt')">
-          <span class="skill-name">Vật Lí THPT</span>
-          <span class="skill-tag">/vatli10-12</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('hoa-hoc-thpt')">
-          <span class="skill-name">Hóa Học IUPAC</span>
-          <span class="skill-tag">/hoahoc10-12</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('sinh-hoc-thpt')">
-          <span class="skill-name">Sinh Học Phân Tử</span>
-          <span class="skill-tag">/sinhhoc-thpt</span>
-        </div>
+    <!-- Author & Contact Strip -->
+    <div class="author-strip interactive">
+      <div class="author-info">
+        <span>👨‍🏫 Sáng lập & Bản quyền: <strong>Nguyễn Duy Quang</strong></span>
+        <span>📞 Hotline / Zalo: <strong>0795277227</strong></span>
+        <span>✉️ Email hỗ trợ: <strong>poiairo4628@gmail.com</strong></span>
       </div>
-
-      <!-- Group 2: Khoa học Xã hội -->
-      <div class="category-group">
-        <div class="category-title cat-social">📚 Khoa Học Xã Hội</div>
-        <div class="skill-item" onclick="selectSkill('ngu-van-thpt')">
-          <span class="skill-name">Ngữ Văn (Tự luận 100%)</span>
-          <span class="skill-tag">/nguvan10-12</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('lich-su-thpt')">
-          <span class="skill-name">Lịch Sử Tiến Trình</span>
-          <span class="skill-tag">/lichsu-thpt</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('dia-li-thpt')">
-          <span class="skill-name">Địa Lí & Atlat VN</span>
-          <span class="skill-tag">/diali-thpt</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('ktpl-thpt')">
-          <span class="skill-name">Kinh Tế & Pháp Luật</span>
-          <span class="skill-tag">/ktpl-thpt</span>
-        </div>
-      </div>
-
-      <!-- Group 3: Ngôn ngữ & Công nghệ -->
-      <div class="category-group">
-        <div class="category-title cat-tech">💻 Ngôn Ngữ & Kỹ Thuật</div>
-        <div class="skill-item" onclick="selectSkill('tieng-anh-thpt')">
-          <span class="skill-name">Tiếng Anh BGD/IELTS</span>
-          <span class="skill-tag">/tienganh-thpt</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('tin-hoc-thpt')">
-          <span class="skill-name">Tin Học & Python</span>
-          <span class="skill-tag">/tinhoc-thpt</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('cong-nghe-thpt')">
-          <span class="skill-name">Công Nghệ & Điện Tử</span>
-          <span class="skill-tag">/congnghe-thpt</span>
-        </div>
-      </div>
-
-      <!-- Group 4: Meta-Tools -->
-      <div class="category-group">
-        <div class="category-title cat-meta">🛠️ Meta-Skills Thông Minh</div>
-        <div class="skill-item active" onclick="selectSkill('tao-quiz-bgd')">
-          <span class="skill-name">Tạo Quiz 3 Phần (BGD)</span>
-          <span class="skill-tag">/taoquiz-bgd</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('slide-thuyet-trinh')">
-          <span class="skill-name">Slide Marp Visual 16:9</span>
-          <span class="skill-tag">/slide-thuyettrinh</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('tomtat-mindmap')">
-          <span class="skill-name">Sơ Đồ Tư Duy Mermaid</span>
-          <span class="skill-tag">/tomtat-mindmap</span>
-        </div>
-        <div class="skill-item" onclick="selectSkill('giai-chi-tiet')">
-          <span class="skill-name">Gia Sư Socrates</span>
-          <span class="skill-tag">/giai-chi-tiet</span>
-        </div>
+      <div class="author-links">
+        <span>🇻🇳 Dành trọn tâm huyết cho học sinh & giáo viên THPT Việt Nam</span>
       </div>
     </div>
 
-    <!-- Right Inspector Panel -->
-    <div id="inspector-panel" class="inspector interactive">
-      <div class="inspector-header">
-        <div>
-          <h3 id="ins-title" class="inspector-title">Tạo Đề Thi Chuẩn BGD 2025-2027</h3>
-          <span id="ins-command" class="inspector-command">/taoquiz-bgd</span>
+    <!-- Main Content Workspace -->
+    <div class="content-grid interactive">
+      
+      <!-- Left Column: Catalog Browser -->
+      <div class="catalog-panel">
+        <div class="search-box">
+          <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm skill (/toan, /hoa, /quiz...)" oninput="filterSkills()" />
+          </div>
         </div>
-        <span id="ins-badge" class="badge-beta">Độ Khó Cao</span>
-      </div>
 
-      <div class="section-label">Mô tả nhiệm vụ sư phạm:</div>
-      <p id="ins-desc" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-        Tạo đề kiểm tra chuẩn 3 phần (Phần I trắc nghiệm 4 lựa chọn, Phần II Đúng/Sai tính điểm lũy tiến 0.1-0.25-0.5-1.0, Phần III Trả lời ngắn).
-      </p>
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="setCategoryFilter('all', this)">Tất cả (16)</button>
+          <button class="filter-tab" onclick="setCategoryFilter('stem', this)">Tự Nhiên</button>
+          <button class="filter-tab" onclick="setCategoryFilter('social', this)">Xã Hội</button>
+          <button class="filter-tab" onclick="setCategoryFilter('tech', this)">Công Nghệ</button>
+          <button class="filter-tab" onclick="setCategoryFilter('meta', this)">Meta-Tools</button>
+        </div>
 
-      <div id="doc-section">
-        <div class="section-label">Tài liệu đính kèm (Document-First Workflow):</div>
-        <div class="doc-dropzone" onclick="alert('Tính năng: Dán hoặc tải lên tài liệu học tập SGK để AI phân tích trước khi sinh đề!')">
-          <p style="font-size: 0.85rem; color: var(--accent-cyan);">📄 Dán hoặc thả tài liệu bài học vào đây</p>
-          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">AI chỉ sinh đề khi đã nhận được tài liệu chuẩn SGK!</p>
+        <div class="skill-list" id="skillListContainer">
+          <!-- Dynamically Rendered Skills -->
         </div>
       </div>
 
-      <div class="section-label">Mẫu Prompt Nạp Vào LLM (Prompt Payload):</div>
-      <div id="ins-prompt" class="prompt-box">
-Load skill: skills/meta-tools/tao-quiz-bgd/SKILL.md
-Tài liệu cung cấp: [Đoạn trích bài học SGK 2026-2027]
-Yêu cầu: Thiết kế đề thi 50 phút độ khó cao phân hóa học sinh khá giỏi.
+      <!-- Right Column: Workstation -->
+      <div class="workstation-panel">
+        <div class="workstation-nav">
+          <div id="tab-inspector-btn" class="workstation-tab active" onclick="switchTab('inspector')">
+            <i class="fa-solid fa-terminal"></i> Chi Tiết Skill & Prompt Chuẩn Hóa
+          </div>
+          <div id="tab-guide-btn" class="workstation-tab" onclick="switchTab('guide')">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Hướng Dẫn Nạp Bộ Não (Gemini / Claude / GPT / NotebookLM)
+          </div>
+        </div>
+
+        <div class="workstation-body">
+          
+          <!-- View 1: Skill Inspector & Prompt Generator -->
+          <div id="view-inspector">
+            <div class="detail-header">
+              <div>
+                <h2 id="ins-title" class="detail-title">Tạo Đề Thi Chuẩn BGD 2025–2027</h2>
+                <span id="ins-cmd" class="detail-cmd">/taoquiz-bgd</span>
+              </div>
+              <span id="ins-badge" class="skill-card-badge badge-meta">Document-First</span>
+            </div>
+
+            <!-- Quiz Document Drop Area -->
+            <div id="quiz-drop-container" style="display: none;">
+              <div class="quiz-drop-area">
+                <p style="font-weight: 600; color: var(--accent-cyan);"><i class="fa-solid fa-file-arrow-up"></i> Bước 1: Dán Tài Liệu Hoặc Bài Học SGK 2026 Vào Đây</p>
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">AI chỉ sinh đề khi đã nhận được tài liệu để đảm bảo ĐỘ KHÓ CAO và chống ảo giác!</p>
+                <textarea id="quizDocInput" class="quiz-textarea" placeholder="Ví dụ: Dán đoạn trích bài 'Ứng dụng đạo hàm khảo sát hàm số' hoặc bài 'Khí lí tưởng Vật lí 12'..." oninput="updatePromptPayload()"></textarea>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <h4><i class="fa-solid fa-bullseye"></i> Mục Tiêu Sư Phạm & Đặc Quyền GDPT 2018:</h4>
+              <p id="ins-desc" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
+                Tạo đề kiểm tra đủ 3 phần: Phần I trắc nghiệm 4 lựa chọn, Phần II Đúng/Sai lũy tiến điểm (0.1đ - 0.25đ - 0.5đ - 1.0đ) và Phần III Trả lời ngắn.
+              </p>
+            </div>
+
+            <div class="info-card">
+              <h4><i class="fa-solid fa-shield-halved"></i> Quy Tắc Chống Ảo Giác (Anti-Hallucination Guardrails):</h4>
+              <div id="ins-rules">
+                <!-- Dynamically Rendered Rules -->
+              </div>
+            </div>
+
+            <div class="info-card">
+              <h4><i class="fa-solid fa-code"></i> Chuẩn Hóa Prompt Payload (Dán Trực Tiếp Vào Mọi AI):</h4>
+              <div id="ins-prompt" class="code-box"></div>
+            </div>
+
+            <div class="btn-action-row">
+              <button class="btn-action-primary" onclick="copyPrompt()">
+                <i class="fa-solid fa-copy"></i> Sao Chép Prompt Vào Bộ Nhớ Tạm
+              </button>
+              <button class="btn-nav" onclick="copySkillPath()">
+                <i class="fa-solid fa-folder-open"></i> Copy Đường Dẫn File SKILL.md
+              </button>
+            </div>
+          </div>
+
+          <!-- View 2: Quick Easy Injection Guide -->
+          <div id="view-guide" style="display: none;">
+            <h3 style="font-family: 'Outfit'; font-size: 1.4rem; color: var(--accent-cyan); margin-bottom: 8px;">
+              Cách Nạp "Bộ Não" EduSkills-VN Vào Các Nền Tảng AI Phổ Biến
+            </h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+              Bạn không cần lập trình phức tạp. Chỉ cần làm theo 3 bước cực kỳ đơn giản cho từng công cụ bạn đang dùng:
+            </p>
+
+            <div class="guide-grid">
+              
+              <!-- Gemini -->
+              <div class="guide-card">
+                <div class="guide-card-header">
+                  <div class="guide-icon guide-gemini"><i class="fa-solid fa-bolt"></i></div>
+                  <div class="guide-title">1. Google Gemini (Web / AI Studio)</div>
+                </div>
+                <ol class="guide-steps">
+                  <li>Mở <strong>Google AI Studio</strong> hoặc Gemini Web.</li>
+                  <li>Trong ô <strong>System Instructions</strong>, dán toàn bộ nội dung file <code>SKILL.md</code> bạn cần dùng.</li>
+                  <li>Đính kèm file PDF SGK từ thư mục <code>sgk/</code> vào khung chat. Nhờ Context 2M tokens, Gemini sẽ hiểu trọn vẹn cuốn sách!</li>
+                </ol>
+              </div>
+
+              <!-- Claude -->
+              <div class="guide-card">
+                <div class="guide-card-header">
+                  <div class="guide-icon guide-claude"><i class="fa-solid fa-brain"></i></div>
+                  <div class="guide-title">2. Anthropic Claude (Projects / Code)</div>
+                </div>
+                <ol class="guide-steps">
+                  <li>Tạo một <strong>Project</strong> mới trên Claude.ai đặt tên là <em>"EduSkills-VN THPT"</em>.</li>
+                  <li>Tải các file <code>SKILL.md</code> từ thư mục <code>skills/</code> vào mục <strong>Project Knowledge</strong>.</li>
+                  <li>Đặt System Prompt: <em>"Bạn là Chuyên gia EduSkills-VN, luôn tuân thủ cấu trúc đề thi BGD 2026"</em>.</li>
+                </ol>
+              </div>
+
+              <!-- ChatGPT -->
+              <div class="guide-card">
+                <div class="guide-card-header">
+                  <div class="guide-icon guide-gpt"><i class="fa-solid fa-robot"></i></div>
+                  <div class="guide-title">3. OpenAI ChatGPT (Custom GPTs)</div>
+                </div>
+                <ol class="guide-steps">
+                  <li>Vào <strong>Explore GPTs $\to$ Create a GPT</strong>.</li>
+                  <li>Trong tab <strong>Configure</strong>, dán nội dung file <code>SKILL.md</code> vào ô <strong>Instructions</strong>.</li>
+                  <li>Bật tính năng <em>Code Interpreter</em> để hỗ trợ vẽ đồ thị hàm số và tính toán số học chuẩn xác.</li>
+                </ol>
+              </div>
+
+              <!-- NotebookLM -->
+              <div class="guide-card">
+                <div class="guide-card-header">
+                  <div class="guide-icon guide-notebook"><i class="fa-solid fa-headphones"></i></div>
+                  <div class="guide-title">4. Google NotebookLM (Học Tập Đa Phương Tiện)</div>
+                </div>
+                <ol class="guide-steps">
+                  <li>Truy cập <strong>notebooklm.google.com</strong> và tạo Notebook mới.</li>
+                  <li>Tải các file SGK PDF trong thư mục <code>sgk/</code> lên làm nguồn (Source).</li>
+                  <li>Nhấp nút <strong>Audio Overview</strong> để AI tự động biến cuốn SGK thành một buổi Podcast radio thảo luận bài học cực cuốn hút!</li>
+                </ol>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      <div class="btn-group">
-        <button class="btn-primary" onclick="copyPrompt()">
-          📋 Sao Chép Prompt
-        </button>
-        <button class="btn-secondary" onclick="alert('Đang mở file SKILL.md trong IDE của bạn...')">
-          📂 Mở SKILL.md
-        </button>
-      </div>
+    </div>
+
+    <!-- 3D Hint -->
+    <div class="scene-hint">
+      <i class="fa-solid fa-arrows-spin"></i> Giữ chuột trái kéo để xoay vũ trụ 3D • Lăn chuột để phóng to/thu nhỏ
     </div>
   </div>
 
-  <!-- Three.js Interactive Scene Logic -->
   <script>
-    // --- Skill Data Registry ---
-    const SKILLS_DATABASE = {
-      'tao-quiz-bgd': {
-        title: 'Tạo Quiz Chuẩn BGD 2025–2027',
+    // --- Master Skill Database ---
+    const SKILLS = [
+      {
+        id: 'tao-quiz-bgd',
+        name: 'Tạo Đề Thi Chuẩn BGD 2025–2027',
         command: '/taoquiz-bgd',
-        badge: 'Độ Khó Cao',
         category: 'meta',
+        badge: 'Document-First',
+        badgeClass: 'badge-meta',
+        path: 'skills/meta-tools/tao-quiz-bgd/SKILL.md',
         color: 0x10b981,
-        desc: 'Bắt buộc học sinh cung cấp tài liệu trước khi sinh đề. Tạo đề thi gồm đủ 3 phần: Trắc nghiệm 4 lựa chọn, Trắc nghiệm Đúng/Sai lũy tiến (0.1đ - 0.25đ - 0.5đ - 1.0đ), và Trả lời ngắn.',
-        prompt: `Load skill: skills/meta-tools/tao-quiz-bgd/SKILL.md\n[USER_ATTACHMENT]: [Dán nội dung bài học SGK 2026 vào đây]\nYêu cầu: Hãy phân tích tài liệu trên và tạo đề thi thử tốt nghiệp THPT chuẩn 3 phần với các câu hỏi Vận dụng cao và bẫy tư duy tinh vi.`,
-        hasDocDrop: true
+        desc: 'Bắt buộc học sinh cung cấp tài liệu bài học trước khi sinh đề. Tạo đề thi gồm đủ 3 phần: Trắc nghiệm 4 lựa chọn, Trắc nghiệm Đúng/Sai tính điểm lũy tiến (0.1đ - 0.25đ - 0.5đ - 1.0đ), và Trắc nghiệm Trả lời ngắn.',
+        rules: [
+          'Chỉ sinh đề khi học sinh đã dán hoặc gửi tài liệu đính kèm.',
+          'Phần II Đúng/Sai có đủ 4 ý a, b, c, d liên hoàn logic.',
+          'Áp dụng công thức tính điểm lũy tiến chuẩn của Bộ GD&ĐT.',
+          'Phần III đáp số số học tối đa 4 ký tự.'
+        ],
+        hasDoc: true
       },
-      'toan-thpt': {
-        title: 'Toán Học THPT (Lớp 10, 11, 12)',
+      {
+        id: 'toan-thpt',
+        name: 'Toán Học THPT (Lớp 10, 11, 12)',
         command: '/toan10-12',
+        category: 'stem',
         badge: 'GDPT 2018',
-        category: 'stem',
+        badgeClass: 'badge-stem',
+        path: 'skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md',
         color: 0x38bdf8,
-        desc: 'Giải tích, Hình học không gian Oxyz, Tích phân và Xác suất Bayes theo Bộ SGK Thống Nhất Toàn Quốc 2026. Công thức 100% LaTeX chuẩn, giải từng bước.',
-        prompt: `Load skill: skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md\nĐề bài: Cho hàm số y = (2x - 1)/(x + 1). Khảo sát sự biến thiên và tìm tiệm cận đứng, tiệm cận ngang của đồ thị hàm số theo chuẩn BGD 2026.`,
-        hasDocDrop: false
+        desc: 'Giải tích, Khảo sát hàm số, Hình học không gian Oxyz, Tích phân và Xác suất Bayes theo Bộ SGK Thống Nhất 2026. Công thức 100% LaTeX chuẩn.',
+        rules: [
+          'Luôn tìm tập xác định D trước khi giải hoặc lấy đạo hàm.',
+          'Phân biệt rõ điểm cực trị (x), giá trị cực trị (y), điểm đồ thị ((x; y)).',
+          'Phương trình Oxyz phải chỉ rõ vector chỉ phương hoặc pháp tuyến.'
+        ],
+        hasDoc: false
       },
-      'vat-li-thpt': {
-        title: 'Vật Lí THPT Chuyên Sâu',
+      {
+        id: 'vat-li-thpt',
+        name: 'Vật Lí THPT Chuyên Sâu',
         command: '/vatli10-12',
+        category: 'stem',
         badge: 'Chuẩn Hệ SI',
-        category: 'stem',
+        badgeClass: 'badge-stem',
+        path: 'skills/khoa-hoc-tu-nhien/vat-li-thpt/SKILL.md',
         color: 0x38bdf8,
-        desc: 'Động học, Dao động cơ, Sóng cơ, Vật lí nhiệt (Kelvin) và Khí lí tưởng. Phân tích hiện tượng thực tế trước khi thế số.',
-        prompt: `Load skill: skills/khoa-hoc-tu-nhien/vat-li-thpt/SKILL.md\nĐề bài: Một khối khí lí tưởng có thể tích 4L ở nhiệt độ 27°C. Tính áp suất theo định luật Clapeyron-Mendeleev khi nhiệt độ tăng lên 127°C.`,
-        hasDocDrop: false
+        desc: 'Động học, Dao động cơ, Sóng cơ, Vật lí nhiệt (nội năng, nhiệt dung) và Khí lí tưởng. Phân tích hiện tượng trước khi tính toán.',
+        rules: [
+          'Đơn vị đo lường bắt buộc theo hệ chuẩn SI.',
+          'Khí lí tưởng bắt buộc đổi nhiệt độ Celsius sang Kelvin (T = t + 273).',
+          'Không nhảy cóc bước phân tích vector lực.'
+        ],
+        hasDoc: false
       },
-      'hoa-hoc-thpt': {
-        title: 'Hóa Học THPT Chuẩn IUPAC',
+      {
+        id: 'hoa-hoc-thpt',
+        name: 'Hóa Học THPT Chuẩn IUPAC',
         command: '/hoahoc10-12',
+        category: 'stem',
         badge: '100% IUPAC',
-        category: 'stem',
+        badgeClass: 'badge-stem',
+        path: 'skills/khoa-hoc-tu-nhien/hoa-hoc-thpt/SKILL.md',
         color: 0x38bdf8,
-        desc: '100% danh pháp quốc tế IUPAC SGK mới (Sodium, Sulfuric acid, Ethanoic acid, Glucose). Cấm dùng tên cũ.',
-        prompt: `Load skill: skills/khoa-hoc-tu-nhien/hoa-hoc-thpt/SKILL.md\nĐề bài: Viết phương trình este hóa giữa Ethanoic acid và Ethanol với xúc tác Sulfuric acid đặc. Gọi tên sản phẩm theo IUPAC và nêu ứng dụng.`,
-        hasDocDrop: false
+        desc: '100% danh pháp quốc tế IUPAC tiếng Anh theo SGK Thống Nhất 2026 (Sodium, Copper, Sulfuric acid, Ethanoic acid, Glucose). Cấm dùng tên cũ.',
+        rules: [
+          'Tuyệt đối không dùng tên tiếng Việt cũ (axit axetic, etilen...).',
+          'Cân bằng phương trình ion thu gọn và bảo toàn electron.',
+          'Ghi rõ điều kiện phản ứng (nhiệt độ, xúc tác).'
+        ],
+        hasDoc: false
       },
-      'sinh-hoc-thpt': {
-        title: 'Sinh Học THPT Phân Tử',
+      {
+        id: 'sinh-hoc-thpt',
+        name: 'Sinh Học THPT Phân Tử',
         command: '/sinhhoc-thpt',
-        badge: 'Di Truyền Học',
         category: 'stem',
+        badge: 'Di Truyền Học',
+        badgeClass: 'badge-stem',
+        path: 'skills/khoa-hoc-tu-nhien/sinh-hoc-thpt/SKILL.md',
         color: 0x38bdf8,
-        desc: 'Sinh học tế bào, Di truyền Men-đen, Sơ đồ phả hệ gia đình và bài toán xác suất di truyền quần thể.',
-        prompt: `Load skill: skills/khoa-hoc-tu-nhien/sinh-hoc-thpt/SKILL.md\nĐề bài: Phân tích sơ đồ phả hệ bệnh mù màu ở người (gen lặn trên NST X) và tính xác suất sinh con bình thường của cặp vợ chồng thế hệ III.`,
-        hasDocDrop: false
+        desc: 'Sinh học tế bào, Di truyền Men-đen, Phân tích sơ đồ phả hệ gia đình và bài toán xác suất di truyền người.',
+        rules: [
+          'Giải mã phả hệ theo từng thế hệ I, II, III.',
+          'Kiểm tra tính trạng trội/lặn và gen liên kết giới tính.'
+        ],
+        hasDoc: false
       },
-      'ngu-van-thpt': {
-        title: 'Ngữ Văn 100% Tự Luận',
+      {
+        id: 'ngu-van-thpt',
+        name: 'Ngữ Văn 100% Tự Luận',
         command: '/nguvan10-12',
-        badge: 'Đọc Hiểu Ngoài SGK',
         category: 'social',
+        badge: 'Ngữ Liệu Mới',
+        badgeClass: 'badge-social',
+        path: 'skills/khoa-hoc-xa-hoi/ngu-van-thpt/SKILL.md',
         color: 0xf59e0b,
-        desc: 'Đọc hiểu ngữ liệu mới hoàn toàn ngoài SGK (4đ), Nghị luận xã hội 200 chữ (2đ) và Nghị luận văn học 600 chữ (4đ).',
-        prompt: `Load skill: skills/khoa-hoc-xa-hoi/ngu-van-thpt/SKILL.md\nNgữ liệu: [Dán bài thơ hoặc đoạn trích mới ngoài SGK]\nYêu cầu: Lập dàn ý 3 phần phân tích nét đặc sắc nghệ thuật và thông điệp nhân sinh.`,
-        hasDocDrop: true
+        desc: 'Đọc hiểu ngữ liệu ngoài SGK (4đ), Nghị luận xã hội 200 chữ (2đ) và Nghị luận văn học 600 chữ (4đ) chuẩn barem BGD.',
+        rules: [
+          'Ngữ liệu đọc hiểu bắt buộc nằm ngoài SGK.',
+          'Đoạn văn 200 chữ là 1 khối duy nhất, không ngắt dòng.',
+          'Bài văn 600 chữ có đủ 3 phần Mở - Thân - Kết.'
+        ],
+        hasDoc: true
       },
-      'lich-su-thpt': {
-        title: 'Lịch Sử THPT Tiến Trình',
+      {
+        id: 'lich-su-thpt',
+        name: 'Lịch Sử THPT Tiến Trình',
         command: '/lichsu-thpt',
-        badge: 'Trục Thời Gian',
         category: 'social',
+        badge: 'Timeline',
+        badgeClass: 'badge-social',
+        path: 'skills/khoa-hoc-xa-hoi/lich-su-thpt/SKILL.md',
         color: 0xf59e0b,
-        desc: 'Tiến trình lịch sử Việt Nam và thế giới, phân tích nguyên nhân - ý nghĩa và bài học lịch sử.',
-        prompt: `Load skill: skills/khoa-hoc-xa-hoi/lich-su-thpt/SKILL.md\nYêu cầu: Vẽ trục thời gian các chiến dịch lớn trong cuộc kháng chiến chống Mỹ (1954-1975) và rút ra bài học về nghệ thuật quân sự.`,
-        hasDocDrop: false
+        desc: 'Trục thời gian tiến trình lịch sử Việt Nam và thế giới, phân tích nguyên nhân - ý nghĩa và bài học lịch sử.',
+        rules: [
+          'Vẽ trục thời gian rõ ràng, liên kết các sự kiện cốt lõi.',
+          'Tập trung tư duy lịch sử, không học vẹt mốc số khô khan.'
+        ],
+        hasDoc: false
       },
-      'dia-li-thpt': {
-        title: 'Địa Lí & Atlat Việt Nam',
+      {
+        id: 'dia-li-thpt',
+        name: 'Địa Lí & Atlat Việt Nam',
         command: '/diali-thpt',
-        badge: 'Atlat & Số Liệu',
         category: 'social',
+        badge: 'Atlat & Charts',
+        badgeClass: 'badge-social',
+        path: 'skills/khoa-hoc-xa-hoi/dia-li-thpt/SKILL.md',
         color: 0xf59e0b,
-        desc: 'Phân tích bảng số liệu, biểu đồ kinh tế - xã hội và khai thác Atlat Địa lí Việt Nam.',
-        prompt: `Load skill: skills/khoa-hoc-xa-hoi/dia-li-thpt/SKILL.md\nBảng số liệu: [Dán bảng GDP các vùng kinh tế]\nYêu cầu: Nhận xét sự chuyển dịch cơ cấu và giải thích nguyên nhân.`,
-        hasDocDrop: false
+        desc: 'Phân tích bảng số liệu, chuyển dịch cơ cấu kinh tế và khai thác Atlat Địa lí Việt Nam.',
+        rules: [
+          'Chỉ rõ trang Atlat tương ứng khi dẫn chứng.',
+          'Tính toán tốc độ tăng trưởng và cơ cấu phần trăm chính xác.'
+        ],
+        hasDoc: false
       },
-      'ktpl-thpt': {
-        title: 'Kinh Tế & Pháp Luật',
+      {
+        id: 'ktpl-thpt',
+        name: 'Kinh Tế & Pháp Luật THPT',
         command: '/ktpl-thpt',
-        badge: 'Tình Huống Luật',
         category: 'social',
+        badge: 'Tình Huống',
+        badgeClass: 'badge-social',
+        path: 'skills/khoa-hoc-xa-hoi/ktpl-thpt/SKILL.md',
         color: 0xf59e0b,
-        desc: 'Cơ chế thị trường, Lạm phát, Hiến pháp và giải quyết các tình huống pháp lý dân sự, lao động.',
-        prompt: `Load skill: skills/khoa-hoc-xa-hoi/ktpl-thpt/SKILL.md\nTình huống: Anh A tự ý đơn phương chấm dứt hợp đồng lao động không báo trước 30 ngày. Hãy phân tích tính hợp pháp theo Bộ luật Lao động.`,
-        hasDocDrop: false
+        desc: 'Cơ chế thị trường, Lạm phát, Thất nghiệp, Hiến pháp và giải quyết các tình huống pháp lý dân sự, lao động.',
+        rules: [
+          'Trích dẫn đúng điều, khoản trong luật hiện hành.',
+          'Phân tích hành vi đa chiều: Chủ quan và khách quan.'
+        ],
+        hasDoc: false
       },
-      'tieng-anh-thpt': {
-        title: 'Tiếng Anh THPT BGD & IELTS',
+      {
+        id: 'tieng-anh-thpt',
+        name: 'Tiếng Anh BGD & IELTS',
         command: '/tienganh-thpt',
-        badge: 'Ngữ Pháp & IPA',
         category: 'tech',
+        badge: 'IPA & Grammar',
+        badgeClass: 'badge-tech',
+        path: 'skills/ngon-ngu-cong-nghe/tieng-anh-thpt/SKILL.md',
         color: 0xa855f7,
-        desc: 'Ngữ pháp trọng điểm, bảng phiên âm IPA, kỹ thuật Skimming/Scanning đọc hiểu phân hóa cao.',
-        prompt: `Load skill: skills/ngon-ngu-cong-nghe/tieng-anh-thpt/SKILL.md\nĐoạn văn đọc hiểu: [Dán bài đọc]\nYêu cầu: Giải thích 3 câu hỏi suy luận khó và các cụm Collocations bẫy thí sinh.`,
-        hasDocDrop: true
+        desc: 'Ngữ pháp trọng điểm, phiên âm IPA chuẩn, kỹ thuật Skimming/Scanning đọc hiểu phân hóa cao.',
+        rules: [
+          'Cung cấp phiên âm IPA chuẩn Oxford/Cambridge.',
+          'Giải thích ngữ cảnh bẫy trong câu hỏi trắc nghiệm.'
+        ],
+        hasDoc: true
       },
-      'tin-hoc-thpt': {
-        title: 'Tin Học & Thuật Toán Python',
+      {
+        id: 'tin-hoc-thpt',
+        name: 'Tin Học & Python THPT',
         command: '/tinhoc-thpt',
+        category: 'tech',
         badge: 'Python & SQL',
-        category: 'tech',
+        badgeClass: 'badge-tech',
+        path: 'skills/ngon-ngu-cong-nghe/tin-hoc-thpt/SKILL.md',
         color: 0xa855f7,
-        desc: 'Lập trình Python, Giải thuật tìm kiếm/sắp xếp, Cơ sở dữ liệu quan hệ SQL và mạng máy tính.',
-        prompt: `Load skill: skills/ngon-ngu-cong-nghe/tin-hoc-thpt/SKILL.md\nBài toán: Viết chương trình Python đếm số lượng số nguyên tố trong mảng và tối ưu độ phức tạp thời gian bằng Sàng Eratosthenes.`,
-        hasDocDrop: false
+        desc: 'Lập trình Python, Cấu trúc dữ liệu và giải thuật, Hệ CSDL quan hệ SQL và mạng máy tính.',
+        rules: [
+          'Code Python theo chuẩn PEP8 có chú thích rõ ràng.',
+          'Phân tích độ phức tạp thời gian O(n).'
+        ],
+        hasDoc: false
       },
-      'cong-nghe-thpt': {
-        title: 'Công Nghệ Điện & Cơ Khí',
+      {
+        id: 'cong-nghe-thpt',
+        name: 'Công Nghệ Điện & Cơ Khí',
         command: '/congnghe-thpt',
-        badge: 'Điện & Cơ Khí',
         category: 'tech',
+        badge: 'Điện 3 Pha',
+        badgeClass: 'badge-tech',
+        path: 'skills/ngon-ngu-cong-nghe/cong-nghe-thpt/SKILL.md',
         color: 0xa855f7,
         desc: 'Bản vẽ kỹ thuật, Mạch điện xoay chiều 3 pha, Điện tử vi điều khiển và Nông nghiệp công nghệ cao.',
-        prompt: `Load skill: skills/ngon-ngu-cong-nghe/cong-nghe-thpt/SKILL.md\nYêu cầu: Giải thích nguyên lý hoạt động của động cơ điện xoay chiều 3 pha và vẽ sơ đồ đấu nối hình sao / hình tam giác.`,
-        hasDocDrop: false
+        rules: [
+          'Giải thích nguyên lý đấu dây hình sao và tam giác.',
+          'Tuân thủ quy chuẩn an toàn điện áp cao.'
+        ],
+        hasDoc: false
       },
-      'slide-thuyet-trinh': {
-        title: 'Slide Marp Visual Sang Trọng',
+      {
+        id: 'slide-thuyet-trinh',
+        name: 'Slide Marp Visual 16:9',
         command: '/slide-thuyettrinh',
-        badge: 'Tỷ Lệ 16:9',
         category: 'meta',
+        badge: 'Visual Design',
+        badgeClass: 'badge-meta',
+        path: 'skills/meta-tools/slide-thuyet-trinh/SKILL.md',
         color: 0x10b981,
-        desc: 'Quy tắc 6 dòng (Rule of Six), bảng màu Slate Dark / Cyber Teal hiện đại, tích hợp sơ đồ Mermaid, sẵn sàng xuất trình chiếu.',
-        prompt: `Load skill: skills/meta-tools/slide-thuyet-trinh/SKILL.md\nChủ đề: "Bản đồ tư duy Ứng dụng đạo hàm Lớp 12"\nYêu cầu: Tạo 6 slide theo cú pháp Marp Markdown tỷ lệ 16:9 phong cách Dark Mode sang trọng.`,
-        hasDocDrop: false
+        desc: 'Quy tắc 6 dòng (Rule of Six), bảng màu Slate Dark / Cyber Teal hiện đại, tích hợp sơ đồ Mermaid.',
+        rules: [
+          'Không quá 6 gạch đầu dòng trên 1 slide.',
+          'Không dùng màu nguyên bản chói mắt (Pure Red/Green).'
+        ],
+        hasDoc: false
       },
-      'tomtat-mindmap': {
-        title: 'Sơ Đồ Tư Duy Mermaid.js',
+      {
+        id: 'tomtat-mindmap',
+        name: 'Sơ Đồ Tư Duy Mermaid',
         command: '/tomtat-mindmap',
+        category: 'meta',
         badge: '60s Cheatsheet',
-        category: 'meta',
+        badgeClass: 'badge-meta',
+        path: 'skills/meta-tools/tomtat-mindmap/SKILL.md',
         color: 0x10b981,
-        desc: 'Tóm tắt bài học ra Mermaid Mindmap trực quan kèm bảng công thức "nhớ nhanh trong 60 giây", dán ngay vào Notion/Obsidian.',
-        prompt: `Load skill: skills/meta-tools/tomtat-mindmap/SKILL.md\nNội dung: "Toàn bộ công thức Nguyên hàm và Tích phân Toán 12"\nYêu cầu: Xuất khối mã Mermaid.js và bảng cheatsheet các bẫy hay gặp.`,
-        hasDocDrop: false
+        desc: 'Tóm tắt bài học ra Mermaid Mindmap trực quan kèm bảng công thức "nhớ nhanh trong 60 giây".',
+        rules: [
+          'Cú pháp Mermaid hợp lệ 100%.',
+          'Có bảng cheatsheet 3 cột: Khái niệm | Công thức | Bẫy cần tránh.'
+        ],
+        hasDoc: false
       },
-      'giai-chi-tiet': {
-        title: 'Gia Sư Khơi Mở Socrates',
+      {
+        id: 'giai-chi-tiet',
+        name: 'Gia Sư Khơi Mở Socrates',
         command: '/giai-chi-tiet',
-        badge: 'Phương Pháp Socrates',
         category: 'meta',
+        badge: 'Socratic Tutor',
+        badgeClass: 'badge-meta',
+        path: 'skills/meta-tools/giai-chi-tiet/SKILL.md',
         color: 0x10b981,
-        desc: 'Không đưa ngay đáp số khiến học sinh ỷ lại; gợi mở từng bước, giải thích "tại sao", chỉ ra bẫy sai lầm.',
-        prompt: `Load skill: skills/meta-tools/giai-chi-tiet/SKILL.md\nBài toán: Giải phương trình 2^(2x) - 3 * 2^x + 2 = 0\nYêu cầu: Hãy đặt câu hỏi gợi ý bước đặt ẩn phụ cho em thay vì giải luôn.`,
-        hasDocDrop: false
+        desc: 'Không đưa ngay đáp số; gợi mở từng bước, giải thích "tại sao", chỉ ra bẫy sai lầm.',
+        rules: [
+          'Nghiêm cấm làm tắt hoặc giải hộ bài tập ngay lập tức.',
+          'Đặt câu hỏi định hướng để học sinh tự suy luận.'
+        ],
+        hasDoc: false
+      },
+      {
+        id: 'luan-an-nghiencuu',
+        name: 'Nghiên Cứu KHKT THPT (ViSEF)',
+        command: '/luan-an-nghiencuu',
+        category: 'meta',
+        badge: 'ViSEF Research',
+        badgeClass: 'badge-meta',
+        path: 'skills/meta-tools/luan-an-nghiencuu/SKILL.md',
+        color: 0x10b981,
+        desc: 'Hướng dẫn xây dựng đề tài, phương pháp thực nghiệm, khảo sát định lượng và viết bài báo cáo chuẩn hội đồng.',
+        rules: [
+          'Đề tài phải phù hợp lứa tuổi và đảm bảo an toàn.',
+          'Cấu trúc báo cáo chuẩn học thuật 5 chương.'
+        ],
+        hasDoc: false
       }
-    };
+    ];
 
-    // --- Three.js Scene Setup ---
+    let currentCategory = 'all';
+    let currentSelectedSkill = SKILLS[0];
+
+    // --- Render Skill List ---
+    function renderSkillList() {
+      const container = document.getElementById('skillListContainer');
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      container.innerHTML = '';
+
+      const filtered = SKILLS.filter(s => {
+        const matchesCategory = currentCategory === 'all' || s.category === currentCategory;
+        const matchesSearch = s.name.toLowerCase().includes(searchQuery) || s.command.toLowerCase().includes(searchQuery);
+        return matchesCategory && matchesSearch;
+      });
+
+      filtered.forEach(skill => {
+        const card = document.createElement('div');
+        card.className = `skill-card ${currentSelectedSkill.id === skill.id ? 'active' : ''}`;
+        card.onclick = () => selectSkill(skill.id);
+
+        card.innerHTML = `
+          <div class="skill-card-top">
+            <span class="skill-card-title">${skill.name}</span>
+            <span class="skill-card-badge ${skill.badgeClass}">${skill.badge}</span>
+          </div>
+          <span class="skill-card-cmd">${skill.command}</span>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function selectSkill(skillId) {
+      const skill = SKILLS.find(s => s.id === skillId);
+      if (!skill) return;
+
+      currentSelectedSkill = skill;
+      renderSkillList();
+
+      // Update Inspector
+      document.getElementById('ins-title').innerText = skill.name;
+      document.getElementById('ins-cmd').innerText = skill.command;
+      document.getElementById('ins-badge').innerText = skill.badge;
+      document.getElementById('ins-badge').className = `skill-card-badge ${skill.badgeClass}`;
+      document.getElementById('ins-desc').innerText = skill.desc;
+
+      // Rules
+      const rulesContainer = document.getElementById('ins-rules');
+      rulesContainer.innerHTML = skill.rules.map(r => `<div class="rule-pill"><i class="fa-solid fa-check"></i> ${r}</div>`).join('');
+
+      // Dropzone Visibility
+      const dropzone = document.getElementById('quiz-drop-container');
+      dropzone.style.display = skill.hasDoc ? 'block' : 'none';
+
+      updatePromptPayload();
+
+      // Switch to inspector view if in guide
+      switchTab('inspector');
+    }
+
+    function updatePromptPayload() {
+      const skill = currentSelectedSkill;
+      const docInput = document.getElementById('quizDocInput').value.trim();
+      let prompt = `[EduSkills-VN Standardized Prompt Plugin]\nLoad Skill Playbook: ${skill.path}\nLệnh kích hoạt: ${skill.command}\n`;
+
+      if (skill.hasDoc) {
+        prompt += `\n[TÀI LIỆU / NGỮ LIỆU ĐÍNH KÈM]:\n${docInput ? docInput : '[Dán tài liệu học tập hoặc đoạn trích bài học SGK 2026 vào đây]'}\n\nYêu cầu: Hãy phân tích kỹ tài liệu trên và thực hiện nhiệm vụ với độ khó cao theo đúng barem Bộ GD&ĐT.`;
+      } else {
+        prompt += `\nYêu cầu: Hãy giải quyết bài toán / nhiệm vụ sau đây theo đúng quy chuẩn sư phạm GDPT 2018:\n[Nhập câu hỏi hoặc bài tập của bạn tại đây]`;
+      }
+
+      document.getElementById('ins-prompt').innerText = prompt;
+    }
+
+    function filterSkills() {
+      renderSkillList();
+    }
+
+    function setCategoryFilter(category, btn) {
+      currentCategory = category;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderSkillList();
+    }
+
+    function switchTab(tab) {
+      const viewInspector = document.getElementById('view-inspector');
+      const viewGuide = document.getElementById('view-guide');
+      const tabInspectorBtn = document.getElementById('tab-inspector-btn');
+      const tabGuideBtn = document.getElementById('tab-guide-btn');
+
+      if (tab === 'inspector') {
+        viewInspector.style.display = 'block';
+        viewGuide.style.display = 'none';
+        tabInspectorBtn.classList.add('active');
+        tabGuideBtn.classList.remove('active');
+      } else {
+        viewInspector.style.display = 'none';
+        viewGuide.style.display = 'block';
+        tabInspectorBtn.classList.remove('active');
+        tabGuideBtn.classList.add('active');
+      }
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById('ins-prompt').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Đã sao chép Prompt chuẩn hóa! Bạn có thể dán ngay vào Claude, Gemini, ChatGPT hoặc Antigravity IDE.');
+      });
+    }
+
+    function copySkillPath() {
+      navigator.clipboard.writeText(currentSelectedSkill.path).then(() => {
+        alert('✅ Đã sao chép đường dẫn file: ' + currentSelectedSkill.path);
+      });
+    }
+
+    // --- Three.js Background Galaxy Setup ---
     const canvas = document.getElementById('webgl-canvas');
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x070913, 0.02);
+    scene.fog = new THREE.FogExp2(0x070a14, 0.015);
 
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 18, 38);
+    camera.position.set(0, 20, 45);
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -661,196 +1205,70 @@ Yêu cầu: Thiết kế đề thi 50 phút độ khó cao phân hóa học sinh
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.maxDistance = 80;
-    controls.minDistance = 10;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.6;
+    controls.autoRotateSpeed = 0.5;
 
-    // --- Lighting ---
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
+    // Lights
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const pLight = new THREE.PointLight(0x38bdf8, 2, 90);
+    scene.add(pLight);
 
-    const pointLight = new THREE.PointLight(0x38bdf8, 2.5, 80);
-    pointLight.position.set(0, 0, 0);
-    scene.add(pointLight);
-
-    // --- Background Starfield ---
-    const starsGeo = new THREE.BufferGeometry();
-    const starsCount = 1200;
-    const starPos = new Float32Array(starsCount * 3);
-    for (let i = 0; i < starsCount * 3; i += 3) {
-      starPos[i] = (Math.random() - 0.5) * 200;
-      starPos[i + 1] = (Math.random() - 0.5) * 200;
-      starPos[i + 2] = (Math.random() - 0.5) * 200;
+    // Starfield
+    const starCount = 1500;
+    const starGeo = new THREE.BufferGeometry();
+    const starPos = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i += 3) {
+      starPos[i] = (Math.random() - 0.5) * 220;
+      starPos[i + 1] = (Math.random() - 0.5) * 220;
+      starPos[i + 2] = (Math.random() - 0.5) * 220;
     }
-    starsGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-    const starsMat = new THREE.PointsMaterial({ color: 0x94a3b8, size: 0.6, transparent: true, opacity: 0.8 });
-    const starField = new THREE.Points(starsGeo, starsMat);
-    scene.add(starField);
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0x94a3b8, size: 0.7, transparent: true, opacity: 0.7 });
+    scene.add(new THREE.Points(starGeo, starMat));
 
-    // --- Central Core: "EduSkills Brain" ---
-    const coreGeo = new THREE.SphereGeometry(3.5, 32, 32);
-    const coreMat = new THREE.MeshStandardMaterial({
-      color: 0x0284c7,
-      emissive: 0x0369a1,
-      roughness: 0.2,
-      metalness: 0.8,
-      wireframe: true
-    });
-    const coreSphere = new THREE.Mesh(coreGeo, coreMat);
-    scene.add(coreSphere);
+    // Central Sphere
+    const coreMesh = new THREE.Mesh(
+      new THREE.SphereGeometry(4, 32, 32),
+      new THREE.MeshStandardMaterial({ color: 0x0284c7, wireframe: true, emissive: 0x0369a1, emissiveIntensity: 0.8 })
+    );
+    scene.add(coreMesh);
 
-    // Core Aura
-    const auraGeo = new THREE.SphereGeometry(4.2, 32, 32);
-    const auraMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
-      transparent: true,
-      opacity: 0.15,
-      wireframe: true
-    });
-    const coreAura = new THREE.Mesh(auraGeo, auraMat);
-    scene.add(coreAura);
-
-    // --- Orbiting Skill Nodes ---
-    const skillNodes = [];
-    const raycastMeshes = [];
-
-    const keys = Object.keys(SKILLS_DATABASE);
-    const totalSkills = keys.length;
-
-    keys.forEach((key, idx) => {
-      const data = SKILLS_DATABASE[key];
-      const orbitRadius = 12 + (idx % 3) * 5.5;
-      const angle = (idx / totalSkills) * Math.PI * 2;
-      const yOffset = Math.sin(idx * 1.5) * 4;
-
-      // Sphere Node
-      const nodeGeo = new THREE.SphereGeometry(1.2, 24, 24);
-      const nodeMat = new THREE.MeshStandardMaterial({
-        color: data.color,
-        emissive: data.color,
-        emissiveIntensity: 0.5,
-        roughness: 0.3,
-        metalness: 0.5
-      });
-      const mesh = new THREE.Mesh(nodeGeo, nodeMat);
-      mesh.userData = { id: key, name: data.title, command: data.command };
-
-      // Glow Ring
-      const ringGeo = new THREE.RingGeometry(1.5, 1.8, 32);
-      const ringMat = new THREE.MeshBasicMaterial({ color: data.color, side: THREE.DoubleSide, transparent: true, opacity: 0.4 });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI / 2;
-      mesh.add(ring);
-
+    // Orbiting Nodes
+    const nodes = [];
+    SKILLS.forEach((s, idx) => {
+      const radius = 14 + (idx % 4) * 6;
+      const angle = (idx / SKILLS.length) * Math.PI * 2;
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(1.2, 24, 24),
+        new THREE.MeshStandardMaterial({ color: s.color, emissive: s.color, emissiveIntensity: 0.6, roughness: 0.2 })
+      );
       scene.add(mesh);
-      skillNodes.push({ mesh, radius: orbitRadius, angle, speed: 0.002 + (idx % 4) * 0.001, yOffset });
-      raycastMeshes.push(mesh);
+      nodes.push({ mesh, radius, angle, speed: 0.002 + (idx % 3) * 0.001, y: (idx % 5 - 2) * 3 });
     });
 
-    // --- Raycasting for Interaction ---
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-    const tooltip = document.getElementById('tooltip-3d');
-
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(raycastMeshes);
-
-      if (intersects.length > 0) {
-        document.body.style.cursor = 'pointer';
-        const hit = intersects[0].object;
-        tooltip.style.display = 'block';
-        tooltip.style.left = e.clientX + 'px';
-        tooltip.style.top = e.clientY + 'px';
-        tooltip.innerText = `${hit.userData.name} (${hit.userData.command})`;
-      } else {
-        document.body.style.cursor = 'default';
-        tooltip.style.display = 'none';
-      }
-    });
-
-    window.addEventListener('click', () => {
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(raycastMeshes);
-      if (intersects.length > 0) {
-        const hit = intersects[0].object;
-        selectSkill(hit.userData.id);
-      }
-    });
-
-    // --- Animation Loop ---
     function animate() {
       requestAnimationFrame(animate);
-
-      // Rotate Brain
-      coreSphere.rotation.y += 0.005;
-      coreAura.rotation.y -= 0.003;
-      starField.rotation.y += 0.0003;
-
-      // Orbit Skill Nodes
-      skillNodes.forEach((node) => {
-        node.angle += node.speed;
-        node.mesh.position.x = Math.cos(node.angle) * node.radius;
-        node.mesh.position.z = Math.sin(node.angle) * node.radius;
-        node.mesh.position.y = node.yOffset + Math.sin(node.angle * 2) * 1.2;
-        node.mesh.rotation.y += 0.01;
+      coreMesh.rotation.y += 0.004;
+      nodes.forEach(n => {
+        n.angle += n.speed;
+        n.mesh.position.x = Math.cos(n.angle) * n.radius;
+        n.mesh.position.z = Math.sin(n.angle) * n.radius;
+        n.mesh.position.y = n.y + Math.sin(n.angle * 2) * 1.5;
+        n.mesh.rotation.y += 0.01;
       });
-
       controls.update();
       renderer.render(scene, camera);
     }
     animate();
 
-    // Resize Handler
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // --- UI State Management ---
-    function selectSkill(skillId) {
-      const data = SKILLS_DATABASE[skillId];
-      if (!data) return;
-
-      document.getElementById('ins-title').innerText = data.title;
-      document.getElementById('ins-command').innerText = data.command;
-      document.getElementById('ins-badge').innerText = data.badge;
-      document.getElementById('ins-desc').innerText = data.desc;
-      document.getElementById('ins-prompt').innerText = data.prompt;
-
-      const docSection = document.getElementById('doc-section');
-      if (data.hasDocDrop) {
-        docSection.style.display = 'block';
-      } else {
-        docSection.style.display = 'none';
-      }
-
-      // Update Active State in Sidebar
-      document.querySelectorAll('.skill-item').forEach(el => el.classList.remove('active'));
-      const activeEl = Array.from(document.querySelectorAll('.skill-item')).find(el => el.innerText.includes(data.command));
-      if (activeEl) activeEl.classList.add('active');
-
-      // Camera Fly-to Target Node
-      const targetNode = skillNodes.find(n => n.mesh.userData.id === skillId);
-      if (targetNode) {
-        controls.autoRotate = false;
-        setTimeout(() => { controls.autoRotate = true; }, 4000);
-      }
-    }
-
-    function copyPrompt() {
-      const promptText = document.getElementById('ins-prompt').innerText;
-      navigator.clipboard.writeText(promptText).then(() => {
-        alert('✅ Đã sao chép Prompt vào bộ nhớ tạm! Bạn có thể dán ngay vào Claude Code, Cursor hoặc Antigravity IDE.');
-      });
-    }
-
-    // Default Selection
+    // Init
+    renderSkillList();
     selectSkill('tao-quiz-bgd');
   </script>
 </body>
