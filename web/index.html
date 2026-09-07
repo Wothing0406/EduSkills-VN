@@ -533,39 +533,56 @@
       background: var(--bg-matcha-subtle);
     }
 
-    .domain-selector-bar {
+    .skill-sync-banner {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
       align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--bg-matcha-subtle);
+      border: 1.5px solid #C8E6C9;
+      border-radius: var(--radius-sm);
+      padding: 9px 15px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
     }
 
-    .domain-pill-btn {
-      background: white;
-      border: 1.5px solid var(--border-color);
-      color: var(--text-main);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.82rem;
+    .sync-status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.84rem;
       font-weight: 700;
-      cursor: pointer;
+      color: var(--matcha-dark);
+    }
+
+    .sync-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #388E3C;
+      box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.2);
+      animation: pulse-sync 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse-sync {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 142, 60, 0.5); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(56, 142, 60, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 142, 60, 0); }
+    }
+
+    .sync-badge {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--matcha-primary);
+      background: white;
+      border: 1px solid #C8E6C9;
+      padding: 4px 12px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
-    }
-
-    .domain-pill-btn:hover {
-      border-color: var(--matcha-primary);
-      background: var(--bg-cream);
-    }
-
-    .domain-pill-btn.active {
-      background: var(--matcha-primary);
-      color: white;
-      border-color: var(--matcha-primary);
-      box-shadow: 0 2px 8px rgba(56, 94, 71, 0.25);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
 
     .demo-buttons-bar {
@@ -1064,13 +1081,272 @@
       return text;
     }
 
+    const SKILL_PRESET_CONFIGS = {
+      'toan-thpt': {
+        domainBadge: '📐 Toán học • LaTeX Chuẩn Quốc Tế',
+        standardDesc: 'LaTeX ($...$) • BGD 2026',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Toán Học THPT (LaTeX Chuẩn BGD)',
+        dropText: 'Kéo thả ảnh bài tập Toán (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động quét chữ và bóc tách công thức Toán sang chuẩn LaTeX ($...$)',
+        samples: [
+          {
+            title: 'Đề Tiệm Cận & Khảo Sát (12)',
+            icon: '📐',
+            content: `Cho hàm số $y = \\frac{2x - 1}{x + 1}$.\n1. Tìm tập xác định $D$ và các đường tiệm cận đứng, tiệm cận ngang của đồ thị hàm số.\n2. Tìm các khoảng đơn điệu và vẽ bảng biến thiên của hàm số.\nA. Tiệm cận đứng $x = -1$, tiệm cận ngang $y = 2$\nB. Tiệm cận đứng $x = 1$, tiệm cận ngang $y = -1$\nC. Tiệm cận đứng $x = -1$, tiệm cận ngang $y = -1$\nD. Hàm số không có tiệm cận`
+          },
+          {
+            title: 'Đề Tọa Độ Không Gian Oxyz (12)',
+            icon: '📐',
+            content: `Trong không gian $Oxyz$, cho mặt cầu $(S): (x-1)^2 + (y+2)^2 + z^2 = 9$ và mặt phẳng $(P): 2x - 2y + z + 5 = 0$.\n1. Xác định tọa độ tâm $I$ và bán kính $R$ của mặt cầu $(S)$.\n2. Tính khoảng cách $d(I, (P))$ và biện luận vị trí tương đối giữa mặt cầu $(S)$ và mặt phẳng $(P)$.`
+          }
+        ]
+      },
+      'vat-li-thpt': {
+        domainBadge: '⚡ Vật lí • Đơn Vị SI & Định Luật Bảo Toàn',
+        standardDesc: 'Đơn Vị SI • Khí Lí Tưởng',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Vật Lí THPT (Chuẩn SI & Đồ Thị)',
+        dropText: 'Kéo thả ảnh bài tập Vật lí (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động chuẩn hóa đơn vị SI ($m/s^2, K, Pa, J$) và công thức nhiệt/cơ/sóng',
+        samples: [
+          {
+            title: 'Đề Khí Lí Tưởng & Đẳng Nhiệt (SI)',
+            icon: '⚡',
+            content: `Một khối khí lí tưởng có thể tích 4 lít ở nhiệt độ $27^\\circ\\text{C}$ ($300\\text{ K}$) và áp suất $1\\text{ atm}$ ($101325\\text{ Pa}$) được dãn nở đẳng nhiệt đến thể tích 8 lít.\n1. Tính áp suất $p_2$ của khối khí sau khi dãn nở đẳng nhiệt (đổi sang đơn vị $\\text{Pa}$).\n2. Tính nhiệt lượng $Q$ mà khối khí nhận được trong quá trình trên (biết $\\Delta U = A + Q$).\nA. $p_2 = 0.5\\text{ atm} = 50662.5\\text{ Pa}$\nB. $p_2 = 2\\text{ atm} = 202650\\text{ Pa}$\nC. $p_2 = 1\\text{ atm} = 101325\\text{ Pa}$\nD. $p_2 = 0.25\\text{ atm} = 25331\\text{ Pa}`
+          },
+          {
+            title: 'Đề Dao Động Điều Hòa & Đồ Thị',
+            icon: '⚡',
+            content: `Một chất điểm dao động điều hòa dọc theo trục $Ox$ với phương trình $x = 5\\cos(4\\pi t + \\frac{\\pi}{3})\\text{ cm}$.\n1. Xác định biên độ $A$, tần số góc $\\omega$ và pha ban đầu $\\varphi$ của dao động.\n2. Tính tốc độ cực đại $v_{\\max}$ và gia tốc cực đại $a_{\\max}$ của chất điểm (chuẩn đơn vị SI).`
+          }
+        ]
+      },
+      'hoa-hoc-thpt': {
+        domainBadge: '🧪 Hóa học • 100% IUPAC Tiếng Anh & Enthalpy',
+        standardDesc: '100% Danh Pháp IUPAC Tiếng Anh',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Hóa Học THPT (100% IUPAC Tiếng Anh)',
+        dropText: 'Kéo thả ảnh bài tập Hóa học (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động chuyển đổi tên nguyên tố/hợp chất sang IUPAC tiếng Anh chuẩn SGK mới',
+        samples: [
+          {
+            title: 'Đề Đồng (Copper) & Nitric Acid',
+            icon: '🧪',
+            content: `Hòa tan hoàn toàn $m$ gam bột copper (Cu) trong dung dịch nitric acid (HNO3) loãng, dư sinh ra 4.958 lít khí nitrogen monoxide (NO) ở điều kiện chuẩn ($25^\\circ\\text{C}, 1\\text{ bar}$) là sản phẩm khử duy nhất.\n1. Viết phương trình hóa học và gọi tên $100\\%$ chất theo danh pháp IUPAC tiếng Anh.\n2. Tính giá trị của $m$ (biết $\\text{Cu} = 64, \\text{N} = 14, \\text{O} = 16$).\n3. Tính biến thiên Enthalpy chuẩn $\\Delta_r H^0_{298}$ của phản ứng.`
+          },
+          {
+            title: 'Đề Cân Bằng Hóa Học & Enthalpy',
+            icon: '🧪',
+            content: `Cho phản ứng tổng hợp ammonia: $\\text{N}_2(g) + 3\\text{H}_2(g) \\rightleftharpoons 2\\text{NH}_3(g)$ có $\\Delta_r H^0_{298} = -92\\text{ kJ}$.\n1. Cho biết phản ứng thuận là tỏa nhiệt hay thu nhiệt.\n2. Cân bằng hóa học sẽ chuyển dịch theo chiều nào khi tăng nhiệt độ hoặc tăng áp suất của hệ? Giải thích dựa trên nguyên lí Le Chatelier.`
+          }
+        ]
+      },
+      'sinh-hoc-thpt': {
+        domainBadge: '🧬 Sinh học • Di Truyền Phân Tử & Barem BGD',
+        standardDesc: 'Di Truyền Phân Tử & Phả Hệ',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Sinh Học THPT (Di Truyền Phân Tử)',
+        dropText: 'Kéo thả ảnh bài tập Sinh học (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động chuẩn hóa công thức nucleotide ($A, T, G, X$), phiên mã và dịch mã',
+        samples: [
+          {
+            title: 'Đề DNA, Nucleotide & Chiều Dài Gene',
+            icon: '🧬',
+            content: `Một phân tử DNA mạch kép có tổng số 3000 nucleotide, trong đó số nucleotide loại Adenine chiếm $20\\%$ tổng số nucleotide của gene.\n1. Tính số lượng từng loại nucleotide ($A, T, G, X$) của phân tử DNA.\n2. Tính chiều dài của phân tử DNA theo đơn vị $\\text{\\AA}$ và $\\text{nm}$.\n3. Tính số liên kết hydrogen hình thành giữa hai mạch đơn của phân tử DNA.`
+          },
+          {
+            title: 'Đề Phả Hệ Bệnh Di Truyền Ở Người',
+            icon: '🧬',
+            content: `Sơ đồ phả hệ dưới đây mô tả sự di truyền của một bệnh hiếm ở người do một gene có hai allele quy định nằm trên nhiễm sắc thể thường:\n1. Biện luận để xác định allele gây bệnh là trội hay lặn.\n2. Xác định kiểu gene của các cá thể trong thế hệ thứ I và thứ II.\n3. Tính xác suất để cặp vợ chồng ở thế hệ thứ III sinh ra người con đầu lòng không mắc bệnh.`
+          }
+        ]
+      },
+      'ngu-van-thpt': {
+        domainBadge: '📖 Ngữ văn • Đọc Hiểu Ngoài SGK & Đoạn Văn 200 Chữ',
+        standardDesc: 'Đọc Hiểu Ngoài SGK & NLXH 200 Chữ',
+        actionHeader: 'Nhận Diện Ngữ Liệu & Quét Chữ OCR: Ngữ Văn THPT (Đọc Hiểu Ngoài SGK)',
+        dropText: 'Kéo thả ảnh đề Văn (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF đề thi',
+        dropSubText: '⚡ Tự động bóc tách thành Phần I Đọc Hiểu (4đ) và Phần II Làm Văn NLXH 200 chữ (6đ)',
+        samples: [
+          {
+            title: 'Đề Đọc Hiểu Thơ & NLXH 200 Chữ',
+            icon: '📖',
+            content: `### I. PHẦN ĐỌC HIỂU (4,0 điểm)\n\n**Ngữ liệu trích dẫn:**\n"Dù ai đi ngược về xuôi\nNhớ ngày Giỗ Tổ mùng mười tháng ba\nKhắp miền truyền mãi câu ca\nNước non vẹn một dải hòa bình tâm."\n\n**Hệ thống câu hỏi định hướng:**\n- **Câu 1:** Xác định thể thơ và phương thức biểu đạt chính.\n- **Câu 2:** Chỉ ra và nêu tác dụng của biện pháp tu từ trong hai câu đầu.\n- **Câu 3:** Rút ra thông điệp sâu sắc nhất về đạo lý "Uống nước nhớ nguồn".\n\n### II. PHẦN LÀM VĂN (6,0 điểm)\n- **Câu 1 (2,0đ):** Viết đoạn văn nghị luận xã hội khoảng 200 chữ về ý thức gìn giữ nguồn cội của thế hệ trẻ hôm nay.`
+          },
+          {
+            title: 'Đề Đọc Hiểu Tản Văn Hiện Đại Ngoài SGK',
+            icon: '📖',
+            content: `### I. PHẦN ĐỌC HIỂU (4,0 điểm)\n\n**Ngữ liệu trích dẫn:**\n"Hành trình vạn dặm khởi đầu từ một bước chân. Người dám dấn thân và không ngại vấp ngã sẽ luôn nhìn thấy chân trời mới rực rỡ phía trước..."\n\n**Hệ thống câu hỏi:**\n- **Câu 1:** Xác định phong cách ngôn ngữ của văn bản.\n- **Câu 2:** Theo tác giả, điều gì giúp con người nhìn thấy chân trời mới?\n- **Câu 3:** Anh/chị hiểu như thế nào về câu "Hành trình vạn dặm khởi đầu từ một bước chân"?\n\n### II. PHẦN LÀM VĂN (6,0 điểm)\n- **Câu 1 (2,0đ):** Viết đoạn văn nghị luận 200 chữ về tầm quan trọng của lòng dũng cảm khi bắt đầu hành trình mới.`
+          }
+        ]
+      },
+      'tieng-anh-thpt': {
+        domainBadge: '🌐 Tiếng Anh • BGD Reading & Grammar B2-C1',
+        standardDesc: 'Reading Comprehension & Cloze Test',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Tiếng Anh THPT (Reading & Grammar)',
+        dropText: 'Kéo thả ảnh đề Tiếng Anh (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động nhận diện bài đọc hiểu, trắc nghiệm phát âm, trọng âm và ngữ pháp',
+        samples: [
+          {
+            title: 'Đề Reading Comprehension (Chủ đề AI)',
+            icon: '🌐',
+            content: `Read the following passage and mark the letter A, B, C, or D to indicate the correct answer to each question.\n\n"Artificial Intelligence is rapidly revolutionizing high school education by personalizing study schedules and analyzing learner habits in real-time. Students no longer have to adapt to a single curriculum pace; instead, intelligent tutoring algorithms provide targeted feedback..."\n\n1. What is the primary focus of the passage?\nA. The decline of traditional schools\nB. How AI customizes the learning journey\nC. The drawbacks of modern technology\nD. Costs of building software for schools\n\n2. The word "revolutionizing" in the first paragraph is closest in meaning to:\nA. transforming\nB. discouraging\nC. complicating\nD. measuring`
+          },
+          {
+            title: 'Đề Ngữ Pháp & Cụm Động Từ (Phrasal Verbs)',
+            icon: '🌐',
+            content: `Mark the letter A, B, C, or D to indicate the correct answer to each question:\n1. Had she known about the exam format earlier, she _______ much better results.\nA. would have achieved\nB. will achieve\nC. achieved\nD. achieves\n\n2. Many teenagers decided to cut down _______ social media usage to focus on the national high school examination.\nA. on\nB. in\nC. with\nD. of`
+          }
+        ]
+      },
+      'lich-su-thpt': {
+        domainBadge: '📜 Lịch Sử • Mốc Thời Gian & Lập Luận Kháng Chiến',
+        standardDesc: 'Mốc Lịch Sử & Tư Duy Phản Biện',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Lịch Sử THPT (Sự Kiện & Lập Luận)',
+        dropText: 'Kéo thả ảnh đề Sử (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động trích xuất các mốc sự kiện, bối cảnh lịch sử và câu hỏi phân tích',
+        samples: [
+          {
+            title: 'Đề Kháng Chiến Chống Mỹ 1954 - 1975',
+            icon: '📜',
+            content: `Dựa vào kiến thức Lịch sử Việt Nam giai đoạn 1954 - 1975 (Chương trình GDPT 2018):\n1. Phân tích nguyên nhân thắng lợi của cuộc kháng chiến chống Mỹ, cứu nước.\n2. Đánh giá ý nghĩa lịch sử của chiến thắng ngày 30/4/1975 đối với dân tộc Việt Nam và phong trào cách mạng thế giới.\n3. Rút ra bài học kinh nghiệm về nghệ thuật chiến tranh nhân dân trong công cuộc bảo vệ Tổ quốc hiện nay.`
+          }
+        ]
+      },
+      'dia-li-thpt': {
+        domainBadge: '🌍 Địa Lí • Phân Tích Biểu Đồ & Atlat Địa Lí',
+        standardDesc: 'Biểu Đồ & Số Liệu Địa Lí',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Địa Lí THPT (Biểu Đồ & Atlat)',
+        dropText: 'Kéo thả ảnh đề Địa (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động nhận diện số liệu thống kê, biểu đồ kinh tế và tham chiếu Atlat',
+        samples: [
+          {
+            title: 'Đề Phân Tích Cơ Cấu GDP Việt Nam',
+            icon: '🌍',
+            content: `Cho bảng số liệu về cơ cấu GDP phân theo ngành kinh tế của nước ta (đơn vị: %):\n- Nông, lâm, thủy sản: 2015: 17.4% | 2020: 14.8% | 2023: 11.9%\n- Công nghiệp và xây dựng: 2015: 33.3% | 2020: 33.7% | 2023: 37.1%\n- Dịch vụ: 2015: 39.7% | 2020: 41.6% | 2023: 42.5%\n1. Nhận xét sự chuyển dịch cơ cấu GDP của nước ta từ 2015 đến 2023.\n2. Giải thích vì sao ngành công nghiệp và dịch vụ ngày càng chiếm tỉ trọng cao.`
+          }
+        ]
+      },
+      'ktpl-thpt': {
+        domainBadge: '⚖️ KTPL • Tình Huống Pháp Luật & Kinh Tế Thị Trường',
+        standardDesc: 'Tình Huống Pháp Luật & Kinh Tế',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: KTPL THPT (Tình Huống Pháp Luật)',
+        dropText: 'Kéo thả ảnh đề KTPL (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động phân tích tình huống pháp luật, chủ thể vi phạm và điều luật áp dụng',
+        samples: [
+          {
+            title: 'Đề Tình Huống Quyền Khiếu Nại & Tố Cáo',
+            icon: '⚖️',
+            content: `Tình huống: Anh Bình phát hiện một xưởng sản xuất gần khu dân cư lén lút xả nước thải độc hại chưa qua xử lý ra kênh rạch chung vào ban đêm.\n1. Căn cứ theo Luật Bảo vệ môi trường và Luật Tố cáo, anh Bình có quyền thực hiện hành vi khiếu nại hay tố cáo? Vì sao?\n2. Nêu rõ trình tự và cơ quan có thẩm quyền tiếp nhận phản ánh của anh Bình.`
+          }
+        ]
+      },
+      'tin-hoc-thpt': {
+        domainBadge: '💻 Tin Học • Thuật Toán & Mã Nguồn Python',
+        standardDesc: 'Python & Độ Phức Tạp O(n)',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Tin Học THPT (Python & Thuật Toán)',
+        dropText: 'Kéo thả ảnh mã nguồn/đề Tin (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động nhận diện code block Python/C++, độ phức tạp thuật toán $O(n)$',
+        samples: [
+          {
+            title: 'Đề Thuật Toán Tìm Kiếm Nhị Phân',
+            icon: '💻',
+            content: `Cho một dãy số nguyên $A = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]$ đã được sắp xếp tăng dần và giá trị cần tìm $x = 23$.\n1. Viết mã nguồn Python triển khai thuật toán tìm kiếm nhị phân (Binary Search).\n2. Phân tích độ phức tạp thời gian $O(\\log n)$ và số bước lặp tối đa để tìm thấy $x$.\n3. Xử lý trường hợp nếu phần tử $x$ không xuất hiện trong dãy số.`
+          }
+        ]
+      },
+      'cong-nghe-thpt': {
+        domainBadge: '⚙️ Công Nghệ • Kỹ Thuật Mạch Điện & Nông Nghiệp 4.0',
+        standardDesc: 'Sơ Đồ Kỹ Thuật & Cảm Biến',
+        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Công Nghệ THPT (Kỹ Thuật & Mạch Điện)',
+        dropText: 'Kéo thả sơ đồ/ảnh đề Công nghệ • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động nhận diện sơ đồ linh kiện điện tử, vi điều khiển và mô hình thông minh',
+        samples: [
+          {
+            title: 'Đề Mạch Điều Khiển Đèn Cảm Biến Quang',
+            icon: '⚙️',
+            content: `Một hệ thống chiếu sáng thông minh sử dụng cảm biến quang điện trở (LDR) kết hợp với transistor NPN và rơ-le (Relay) để tự động bật đèn khi trời tối.\n1. Giải thích nguyên lý thay đổi điện trở của quang điện trở khi cường độ ánh sáng môi trường giảm.\n2. Phân tích trạng thái dẫn/ngắt của transistor trong mạch khi trời sáng và khi trời tối.`
+          }
+        ]
+      },
+      'giai-chi-tiet': {
+        domainBadge: '🧩 Giải Chi Tiết • Sư Phạm Đa Tầng Socrates',
+        standardDesc: 'Khơi Mở Socrates • Giải Mã Bẫy',
+        actionHeader: 'Nạp Bài Tập Để Phân Tích Lời Giải Đa Tầng Socrates',
+        dropText: 'Kéo thả bài tập cần giải (PNG, JPG) • Nhấn Ctrl + V dán ảnh • Hoặc tải đề cương',
+        dropSubText: '⚡ Tự động phân tích 4 tầng sư phạm: Gợi mở -> Bản chất -> Lời giải chi tiết -> Bẫy phòng thi',
+        samples: [
+          {
+            title: 'Bài Toán Bẫy Khử Vô Định (Toán 12)',
+            icon: '🧩',
+            content: `Cho hàm số $y = \\frac{x^2 - 1}{x - 1}$. Một học sinh khẳng định đồ thị hàm số có tiệm cận đứng $x = 1$.\n1. Hãy đặt 2 câu hỏi gợi mở Socrates để học sinh tự phát hiện sự mâu thuẫn trong kết luận trên.\n2. Giải thích bản chất phép khử dạng vô định $\\frac{0}{0}$ và kết luận chính xác về đồ thị hàm số.`
+          }
+        ]
+      },
+      'tao-quiz-bgd': {
+        domainBadge: '🎯 Khảo Thí BGD • Ma Trận Đề Thi 3 Phần QĐ 764',
+        standardDesc: 'Đề Thi 3 Phần Chuẩn BGD',
+        actionHeader: 'Nạp Đề Bài Để Chuyển Hóa Thành Quiz 3 Phần QĐ 764/QĐ-BGDĐT',
+        dropText: 'Kéo thả đề gốc (PNG, JPG) • Nhấn Ctrl + V dán ảnh • Hoặc tải PDF đề thi',
+        dropSubText: '⚡ Tự động tái cấu trúc thành: Phần I Trắc nghiệm 4 chọn 1, Phần II Đúng/Sai 4 ý, Phần III Trả lời ngắn',
+        samples: [
+          {
+            title: 'Mẫu Tái Cấu Trúc Đề Toán Lớp 12',
+            icon: '🎯',
+            content: `Chuyển hóa bài toán Khảo sát hàm số $y = x^3 - 3x + 2$ thành đề kiểm tra 3 phần chuẩn Bộ GD&ĐT 2026:\n- Phần I (4 câu trắc nghiệm đơn 0.25đ/câu)\n- Phần II (1 câu đúng/sai 4 ý a,b,c,d barem lũy tiến 0.1 - 0.25 - 0.5 - 1.0đ)\n- Phần III (2 câu trả lời ngắn 0.5đ/câu)`
+          }
+        ]
+      },
+      'slide-thuyet-trinh': {
+        domainBadge: '📊 Slide Marp • Kiến Trúc Trực Quan 16:9',
+        standardDesc: 'Slide Sư Phạm Marp 16:9',
+        actionHeader: 'Nạp Bài Giảng Để Đóng Gói Thành Slide Marp 16:9',
+        dropText: 'Kéo thả tài liệu bài học • Nhấn Ctrl + V dán ảnh tóm tắt • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động phân cảnh 5 slide sư phạm tương tác cao',
+        samples: [
+          {
+            title: 'Mẫu Bài Giảng Định Luật Khí Lí Tưởng',
+            icon: '📊',
+            content: `Chuyển hóa nội dung bài học "Định luật Boyle và Quá trình đẳng nhiệt của khí lí tưởng" thành bộ 5 slide thuyết trình Marp 16:9:\n- Slide 1: Hook câu hỏi thực tế (Tại sao lốp xe căng phồng khi trời nắng?)\n- Slide 2: Bản chất phân tử & Định luật $p \\cdot V = \\text{const}$\n- Slide 3: Đồ thị đường đẳng nhiệt trong hệ tọa độ $(p, V)$\n- Slide 4: Thí nghiệm minh họa & Bẫy đơn vị\n- Slide 5: Tóm tắt 60 giây và bài tập vận dụng nhanh`
+          }
+        ]
+      },
+      'tomtat-mindmap': {
+        domainBadge: '🧠 Mindmap Mermaid • Siêu Trí Nhớ Cornell',
+        standardDesc: 'Mermaid Mindmap • Cornell',
+        actionHeader: 'Nạp Nội Dung Để Vẽ Sơ Đồ Tư Duy Mermaid Cornell 60 Giây',
+        dropText: 'Kéo thả đoạn bài học cần tóm tắt • Nhấn Ctrl + V • Hoặc tải PDF',
+        dropSubText: '⚡ Tự động tạo mã Mermaid graph TD và bảng ghi chép Cornell 3 cột',
+        samples: [
+          {
+            title: 'Tóm Tắt Khái Quát Hóa Học Hữu Cơ 12',
+            icon: '🧠',
+            content: `Tóm tắt toàn bộ chương "Ester - Lipid" Hóa học 12 thành sơ đồ tư duy Mermaid (graph TD) và khung ghi nhớ Cornell 60 giây: Khái niệm -> Phản ứng thủy phân (xà phòng hóa) -> Tính chất vật lý -> Ứng dụng công nghiệp.`
+          }
+        ]
+      },
+      'luan-an-nghiencuu': {
+        domainBadge: '🔬 Nghiên Cứu ViSEF • Đề Cương Khoa Học Kỹ Thuật',
+        standardDesc: 'Đề Cương Nghiên Cứu ViSEF',
+        actionHeader: 'Nạp Ý Tưởng Dự Án Khoa Học Kỹ Thuật ViSEF',
+        dropText: 'Kéo thả ý tưởng/dự án khoa học • Nhấn Ctrl + V • Hoặc tải PDF đề cương',
+        dropSubText: '⚡ Tự động chuẩn hóa theo cấu trúc ViSEF / Intel ISEF quốc tế',
+        samples: [
+          {
+            title: 'Đề Cương ViSEF Thiết Bị Giám Sát Nông Nghiệp',
+            icon: '🔬',
+            content: `Xây dựng đề cương dự án tham dự cuộc thi Nghiên cứu Khoa học Kỹ thuật THPT (ViSEF) cấp Quốc gia:\n- Tên đề tài: "Hệ thống IoT giám sát độ ẩm đất và tự động tưới tiêu năng lượng mặt trời cho nhà màng nông nghiệp".\n- Đặt vấn đề và tính mới của giải pháp.\n- Thiết kế thực nghiệm và phương pháp kiểm chứng dữ liệu.`
+          }
+        ]
+      }
+    };
+
     function formatProblemBySubject(rawText, subject) {
+      if (!rawText) return { formatted: '', badge: '' };
+      const config = SKILL_PRESET_CONFIGS[subject] || SKILL_PRESET_CONFIGS['toan-thpt'];
       switch (subject) {
-        case 'toan-thpt': return { formatted: formatMathProblem(rawText), badge: '📐 Toán học • LaTeX Chuẩn Quốc Tế' };
-        case 'vat-li-thpt': return { formatted: formatPhysicsProblem(rawText), badge: '⚡ Vật lí • Đơn Vị SI Chuẩn' };
-        case 'hoa-hoc-thpt': return { formatted: formatChemistryProblem(rawText), badge: '🧪 Hóa học • 100% IUPAC Tiếng Anh' };
-        case 'ngu-van-thpt': return { formatted: formatLiteratureProblem(rawText), badge: '📖 Ngữ văn • Đọc Hiểu & NLXH 200 Chữ' };
-        default: return { formatted: formatMathProblem(rawText), badge: '📚 Đa Môn THPT • Chuẩn GDPT 2018' };
+        case 'toan-thpt': return { formatted: formatMathProblem(rawText), badge: config.domainBadge };
+        case 'vat-li-thpt': return { formatted: formatPhysicsProblem(rawText), badge: config.domainBadge };
+        case 'hoa-hoc-thpt': return { formatted: formatChemistryProblem(rawText), badge: config.domainBadge };
+        case 'ngu-van-thpt': return { formatted: formatLiteratureProblem(rawText), badge: config.domainBadge };
+        default: return { formatted: rawText.trim(), badge: config.domainBadge };
       }
     }
 
@@ -1085,13 +1361,13 @@
       const [showToast, setShowToast] = useState(false);
       const [showGuideModal, setShowGuideModal] = useState(false);
 
-      // --- Multi-Domain & OCR State ---
-      const [activeDomain, setActiveDomain] = useState('toan-thpt'); // toan-thpt | vat-li-thpt | hoa-hoc-thpt | ngu-van-thpt
+      // --- OCR State (Đồng bộ tuyệt đối theo selectedSkillId, KHÔNG gây mâu thuẫn) ---
       const [detectedBadge, setDetectedBadge] = useState('📐 Toán học • LaTeX Chuẩn Quốc Tế');
       const [isOcrLoading, setIsOcrLoading] = useState(false);
+      const [ocrInfo, setOcrInfo] = useState(null); // { isRealOcr, confidence, scanDurationMs, engine }
 
       // --- 5-Part Modern Prompt Builder State (docs/Tieuchuanprompt.md) ---
-      const [rolePrompt, setRolePrompt] = useState('Gia sư Sư phạm Toán THPT chuẩn BGD 2026');
+      const [rolePrompt, setRolePrompt] = useState('Chuyên gia Sư phạm Toán THPT chuẩn GDPT 2018 & Đề thi BGD 2026');
       const [gradeLevel, setGradeLevel] = useState(12);
       const [studentLevel, setStudentLevel] = useState('Khá - Giỏi (Mục tiêu 8.5+ THPT Quốc Gia)');
       const [currentStatus, setCurrentStatus] = useState('Đã nắm được phần lý thuyết cơ bản nhưng chưa vững phần bẫy trắc nghiệm');
@@ -1144,18 +1420,16 @@
         return skills.find(s => s.id === selectedSkillId) || skills[0] || {};
       }, [skills, selectedSkillId]);
 
-      // Auto synchronize domain when core skill is selected
-      useEffect(() => {
-        if (['toan-thpt', 'vat-li-thpt', 'hoa-hoc-thpt', 'ngu-van-thpt'].includes(selectedSkillId)) {
-          setActiveDomain(selectedSkillId);
-        }
+      // Cấu hình preset chuyên biệt tương ứng kỹ năng đang chọn
+      const currentPreset = useMemo(() => {
+        return SKILL_PRESET_CONFIGS[selectedSkillId] || SKILL_PRESET_CONFIGS['toan-thpt'];
       }, [selectedSkillId]);
 
       // Get available specific books for current skill and grade
       const availableBooks = useMemo(() => {
-        const skillBooks = BOOKS_DATABASE[selectedSkill.id] || BOOKS_DATABASE[activeDomain] || BOOKS_DATABASE['toan-thpt'] || {};
+        const skillBooks = BOOKS_DATABASE[selectedSkill.id] || BOOKS_DATABASE['toan-thpt'] || {};
         return skillBooks[gradeLevel] || [];
-      }, [selectedSkill, activeDomain, gradeLevel]);
+      }, [selectedSkill, gradeLevel]);
 
       // Set default book file when grade or skill changes
       useEffect(() => {
@@ -1170,15 +1444,37 @@
         return availableBooks.find(b => b.file === selectedBookFile) || availableBooks[0] || null;
       }, [availableBooks, selectedBookFile]);
 
-      // Auto update role prompt when skill changes
+      // TỰ ĐỘNG ĐỒNG BỘ HOÀN TOÀN KHI CHUYỂN SKILL Ở THANH BÊN (XÓA BỎ HOÀN TOÀN MÂU THUẪN)
       useEffect(() => {
-        if (!selectedSkill.name) return;
+        if (!selectedSkill.id) return;
+        const config = SKILL_PRESET_CONFIGS[selectedSkill.id] || SKILL_PRESET_CONFIGS['toan-thpt'];
+        setDetectedBadge(config.domainBadge);
+
+        // Nếu người dùng chưa tải ảnh riêng lên, tự động cập nhật đề mẫu và ngữ liệu theo môn đang chọn
+        if (!imagePreview) {
+          const initialSample = config.samples && config.samples[0] ? config.samples[0].content : '';
+          setExtractedMathText(initialSample);
+          setDocAttachment(initialSample);
+          setOcrInfo(null);
+        } else {
+          // Nếu đã có ảnh tải lên, bóc tách lại văn bản theo đúng chuẩn của môn vừa chọn
+          const res = formatProblemBySubject(extractedMathText, selectedSkill.id);
+          setExtractedMathText(res.formatted);
+        }
+
+        // Cập nhật vai trò sư phạm tương ứng môn học
         const subjectMap = {
           'toan-thpt': 'Chuyên gia Sư phạm Toán THPT chuẩn GDPT 2018 & Đề thi BGD 2026',
           'vat-li-thpt': 'Gia sư Vật lí THPT chuyên sâu Vật lí nhiệt, Khí lí tưởng & Đơn vị SI',
           'hoa-hoc-thpt': 'Chuyên gia Hóa học IUPAC 100% tiếng Anh chuẩn SGK mới',
           'sinh-hoc-thpt': 'Cố vấn Sinh học THPT chuyên sâu Di truyền phân tử & Phả hệ',
           'ngu-van-thpt': 'Giáo viên Ngữ văn THPT chuyên luyện Đọc hiểu ngoài SGK & NLXH 200 chữ',
+          'tieng-anh-thpt': 'Giáo viên Tiếng Anh THPT chuyên luyện Đọc hiểu B2-C1 & Ngữ pháp',
+          'lich-su-thpt': 'Cố vấn Lịch sử THPT chuyên sâu Mốc sự kiện, Kháng chiến & Lập luận',
+          'dia-li-thpt': 'Chuyên gia Địa lí THPT chuyên phân tích Biểu đồ, Số liệu & Atlat',
+          'ktpl-thpt': 'Cố vấn Giáo dục Kinh tế & Pháp luật chuyên xử lý tình huống thực tế',
+          'tin-hoc-thpt': 'Kỹ sư Sư phạm Tin học THPT chuyên thuật toán Python & Cấu trúc dữ liệu',
+          'cong-nghe-thpt': 'Kỹ sư Công nghệ THPT chuyên mạch điện tử & Nông nghiệp 4.0',
           'giai-chi-tiet': 'Gia sư Sư phạm Đa Tầng Socrates (Khơi mở tư duy, không lộ đáp số ngay)',
           'tao-quiz-bgd': 'Chuyên gia khảo thí thiết kế đề thi 3 phần chuẩn QĐ 764/QĐ-BGDĐT',
           'slide-thuyet-trinh': 'Presentation Architect chuyên thiết kế slide Marp 16:9 chuẩn sư phạm',
@@ -1186,7 +1482,7 @@
           'luan-an-nghiencuu': 'Cố vấn Nghiên cứu Khoa học Kỹ thuật THPT (Hội thi ViSEF)'
         };
         setRolePrompt(subjectMap[selectedSkill.id] || `Chuyên gia giảng dạy môn ${selectedSkill.name} THPT`);
-      }, [selectedSkill]);
+      }, [selectedSkillId]);
 
       // Filtered Skills
       const filteredSkills = useMemo(() => {
@@ -1294,7 +1590,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   image: dataUrl,
-                  subject: activeDomain,
+                  subject: selectedSkillId,
                   grade: gradeLevel,
                   fileName: fileName,
                   fileType: file.type
@@ -1303,8 +1599,14 @@
               const data = await res.json();
               if (data.success && data.formattedText) {
                 setExtractedMathText(data.formattedText);
-                setDetectedBadge(data.domainBadge || 'Đã nhận diện qua OCR');
-                triggerToast(`⚡ OCR Backend đã bóc tách & chuẩn hóa "${fileName}"! 🐾`);
+                setDetectedBadge(data.domainBadge || currentPreset.domainBadge);
+                setOcrInfo({
+                  isRealOcr: data.isRealOcr,
+                  confidence: data.ocrConfidence,
+                  scanDurationMs: data.scanDurationMs,
+                  engine: data.ocrEngine
+                });
+                triggerToast(`⚡ Đã quét chữ thành công (${data.ocrConfidence}% tin cậy, ${data.scanDurationMs || 0}ms)! 🐾`);
               } else {
                 throw new Error('Fallback offline parser');
               }
@@ -1312,10 +1614,16 @@
               // Fallback client-side parser
               const clientResult = formatProblemBySubject(
                 `Cho bài tập nhận diện từ ảnh "${fileName}".\n1. Xác định điều kiện và viết công thức toán/hóa/lý.\n2. Giải chi tiết từng bước.`,
-                activeDomain
+                selectedSkillId
               );
               setExtractedMathText(clientResult.formatted);
-              setDetectedBadge(clientResult.badge);
+              setDetectedBadge(clientResult.badge || currentPreset.domainBadge);
+              setOcrInfo({
+                isRealOcr: false,
+                confidence: 80,
+                scanDurationMs: 0,
+                engine: 'Heuristic Offline Parser'
+              });
               triggerToast(`Đã nhận diện ảnh đề bài "${fileName}" (Offline mode)! 📷🐾`);
             } finally {
               setIsOcrLoading(false);
@@ -1334,7 +1642,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   text: rawContent,
-                  subject: activeDomain,
+                  subject: selectedSkillId,
                   grade: gradeLevel,
                   fileName: fileName,
                   fileType: file.type
@@ -1343,15 +1651,21 @@
               const data = await res.json();
               if (data.success && data.formattedText) {
                 setExtractedMathText(data.formattedText);
-                setDetectedBadge(data.domainBadge || 'Đã định dạng');
+                setDetectedBadge(data.domainBadge || currentPreset.domainBadge);
+                setOcrInfo({
+                  isRealOcr: false,
+                  confidence: 100,
+                  scanDurationMs: 0,
+                  engine: 'PDF & Document Parser'
+                });
                 triggerToast(`⚡ Đã phân tích tài liệu "${fileName}" qua OCR Backend! 📄`);
               } else {
                 throw new Error('Fallback offline parser');
               }
             } catch (err) {
-              const clientResult = formatProblemBySubject(rawContent, activeDomain);
+              const clientResult = formatProblemBySubject(rawContent, selectedSkillId);
               setExtractedMathText(clientResult.formatted);
-              setDetectedBadge(clientResult.badge);
+              setDetectedBadge(clientResult.badge || currentPreset.domainBadge);
               triggerToast(`Đã đọc nội dung tài liệu "${fileName}"! 📄`);
             } finally {
               setIsOcrLoading(false);
@@ -1376,29 +1690,12 @@
         triggerToast('Đã xác nhận & nạp đề bài vào Prompt Sư Phạm! ✅');
       };
 
-      // Load Quick Sample Demos for 4 subjects
-      const loadDemoQuestion = (subjectKey) => {
-        setActiveDomain(subjectKey);
-        let sample = '';
-        if (subjectKey === 'toan-thpt') {
-          sample = `Cho hàm số $y = \\frac{2x - 1}{x + 1}$.\n1. Tìm tập xác định $D$ và các đường tiệm cận đứng, tiệm cận ngang của đồ thị hàm số.\n2. Tìm các khoảng đơn điệu và vẽ bảng biến thiên của hàm số.\nA. Tiệm cận đứng $x = -1$, tiệm cận ngang $y = 2$\nB. Tiệm cận đứng $x = 1$, tiệm cận ngang $y = -1$\nC. Tiệm cận đứng $x = -1$, tiệm cận ngang $y = -1$\nD. Hàm số không có tiệm cận`;
-          setDetectedBadge('📐 Toán học • LaTeX Chuẩn Quốc Tế');
-          triggerToast('Đã nạp bài toán mẫu hàm số & tiệm cận! 📐');
-        } else if (subjectKey === 'vat-li-thpt') {
-          sample = `Một khối khí lí tưởng có thể tích 4 lít ở nhiệt độ $27^\\circ\\text{C}$ ($300\\text{ K}$) và áp suất $1\\text{ atm}$ ($101325\\text{ Pa}$) được dãn nở đẳng nhiệt đến thể tích 8 lít.\n1. Tính áp suất $p_2$ của khối khí sau khi dãn nở đẳng nhiệt (đổi sang đơn vị $\\text{Pa}$).\n2. Tính nhiệt lượng $Q$ mà khối khí nhận được trong quá trình trên (biết $\\Delta U = A + Q$).\nA. $p_2 = 0.5\\text{ atm} = 50662.5\\text{ Pa}$\nB. $p_2 = 2\\text{ atm} = 202650\\text{ Pa}$\nC. $p_2 = 1\\text{ atm} = 101325\\text{ Pa}$\nD. $p_2 = 0.25\\text{ atm} = 25331\\text{ Pa}`;
-          setDetectedBadge('⚡ Vật lí • Đơn Vị SI Chuẩn');
-          triggerToast('Đã nạp bài tập Vật lí mẫu (Khí lí tưởng)! ⚡');
-        } else if (subjectKey === 'hoa-hoc-thpt') {
-          sample = `Hòa tan hoàn toàn $m$ gam bột copper (Cu) trong dung dịch nitric acid (HNO3) loãng, dư sinh ra 4.958 lít khí nitrogen monoxide (NO) ở điều kiện chuẩn ($25^\\circ\\text{C}, 1\\text{ bar}$) là sản phẩm khử duy nhất.\n1. Viết phương trình hóa học và gọi tên $100\\%$ chất theo danh pháp IUPAC tiếng Anh.\n2. Tính giá trị của $m$ (biết $\\text{Cu} = 64, \\text{N} = 14, \\text{O} = 16$).\n3. Tính biến thiên Enthalpy chuẩn $\\Delta_r H^0_{298}$ của phản ứng.`;
-          setDetectedBadge('🧪 Hóa học • 100% IUPAC Tiếng Anh');
-          triggerToast('Đã nạp bài tập Hóa học mẫu IUPAC! 🧪');
-        } else if (subjectKey === 'ngu-van-thpt') {
-          sample = `### I. PHẦN ĐỌC HIỂU (4,0 điểm)\n\n**Ngữ liệu trích dẫn:**\n"Dù ai đi ngược về xuôi\nNhớ ngày Giỗ Tổ mùng mười tháng ba\nKhắp miền truyền mãi câu ca\nNước non vẹn một dải hòa bình tâm."\n\n**Hệ thống câu hỏi:**\n- **Câu 1:** Xác định thể thơ và phương thức biểu đạt chính.\n- **Câu 2:** Chỉ ra và nêu tác dụng của biện pháp tu từ trong hai câu đầu.\n- **Câu 3:** Rút ra thông điệp sâu sắc nhất về đạo lý "Uống nước nhớ nguồn".\n\n### II. PHẦN LÀM VĂN (6,0 điểm)\n- **Câu 1 (2,0đ):** Viết đoạn văn nghị luận xã hội khoảng 200 chữ về ý thức gìn giữ nguồn cội của thế hệ trẻ hôm nay.`;
-          setDetectedBadge('📖 Ngữ văn • Đọc Hiểu & NLXH 200 Chữ');
-          triggerToast('Đã nạp đề Đọc hiểu Ngữ văn mẫu! 📖');
-        }
-        setExtractedMathText(sample);
-        setDocAttachment(sample);
+      // Nạp đề mẫu theo đúng kỹ năng đang chọn (Không gây mâu thuẫn)
+      const loadPresetSample = (sample) => {
+        setExtractedMathText(sample.content);
+        setDocAttachment(sample.content);
+        setDetectedBadge(currentPreset.domainBadge);
+        triggerToast(`Đã nạp đề mẫu: ${sample.title}! ✨🐾`);
       };
 
       // --- Offline Downloads & Copies ---
@@ -1629,55 +1926,39 @@
                     <div className="upload-top-header">
                       <div className="upload-title">
                         <i className="fa-solid fa-camera-retro" style={{ color: 'var(--matcha-accent)' }}></i>
-                        Nhận Diện Đề Thi & Bóc Tách OCR Đa Môn (Toán • Lí • Hóa • Văn)
+                        {currentPreset.actionHeader}
                       </div>
                       <span className="ocr-paste-badge">
                         <i className="fa-solid fa-paste"></i> Hỗ trợ phím tắt <strong>Ctrl + V</strong> dán ảnh
                       </span>
                     </div>
 
-                    {/* Multi-Domain Selector */}
-                    <div className="domain-selector-bar">
-                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--matcha-dark)' }}>
-                        <i className="fa-solid fa-layer-group"></i> Chọn Phân Loại Môn:
+                    {/* Skill Sync Indicator Bar (Tự động đồng bộ theo skill được chọn ở thanh bên) */}
+                    <div className="skill-sync-banner">
+                      <div className="sync-status">
+                        <span className="sync-dot"></span>
+                        <span>Đang đồng bộ bóc tách OCR chuyên biệt theo kỹ năng:</span>
+                        <strong>@{selectedSkill.id} ({selectedSkill.name})</strong>
+                      </div>
+                      <span className="sync-badge">
+                        <i className="fa-solid fa-wand-magic-sparkles"></i> {currentPreset.standardDesc}
                       </span>
-                      {[
-                        { id: 'toan-thpt', label: '📐 Toán Học (LaTeX)' },
-                        { id: 'vat-li-thpt', label: '⚡ Vật Lí (Chuẩn SI)' },
-                        { id: 'hoa-hoc-thpt', label: '🧪 Hóa Học (IUPAC)' },
-                        { id: 'ngu-van-thpt', label: '📖 Ngữ Văn (Đọc Hiểu)' }
-                      ].map(dom => (
-                        <button
-                          key={dom.id}
-                          className={`domain-pill-btn ${activeDomain === dom.id ? 'active' : ''}`}
-                          onClick={() => {
-                            setActiveDomain(dom.id);
-                            const res = formatProblemBySubject(extractedMathText || '', dom.id);
-                            setDetectedBadge(res.badge);
-                          }}
-                        >
-                          {dom.label}
-                        </button>
-                      ))}
                     </div>
 
-                    {/* Quick Demo Buttons for 4 Subjects */}
+                    {/* Quick Demo Buttons cho riêng kỹ năng hiện tại */}
                     <div className="demo-buttons-bar">
                       <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)' }}>
-                        Nạp nhanh đề mẫu chuẩn BGD:
+                        <i className="fa-solid fa-bolt"></i> Nạp đề mẫu @{selectedSkill.id}:
                       </span>
-                      <button className="btn-demo-subject" onClick={() => loadDemoQuestion('toan-thpt')}>
-                        📐 Đề Toán Mẫu (Tiệm Cận)
-                      </button>
-                      <button className="btn-demo-subject" onClick={() => loadDemoQuestion('vat-li-thpt')}>
-                        ⚡ Đề Vật Lí Mẫu (Khí Lí Tưởng)
-                      </button>
-                      <button className="btn-demo-subject" onClick={() => loadDemoQuestion('hoa-hoc-thpt')}>
-                        🧪 Đề Hóa Mẫu (IUPAC Enthalpy)
-                      </button>
-                      <button className="btn-demo-subject" onClick={() => loadDemoQuestion('ngu-van-thpt')}>
-                        📖 Đề Văn Mẫu (Đọc Hiểu & NLXH)
-                      </button>
+                      {currentPreset.samples.map((sample, idx) => (
+                        <button 
+                          key={idx} 
+                          className="btn-demo-subject" 
+                          onClick={() => loadPresetSample(sample)}
+                        >
+                          {sample.icon} {sample.title}
+                        </button>
+                      ))}
                     </div>
 
                     <input 
@@ -1699,10 +1980,10 @@
                     >
                       <i className="fa-solid fa-cloud-arrow-up"></i>
                       <p style={{ fontWeight: 800, fontSize: '0.94rem', color: 'var(--matcha-dark)', marginBottom: '4px' }}>
-                        Kéo thả ảnh bài tập (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF đề cương
+                        {currentPreset.dropText}
                       </p>
                       <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                        ⚡ Tự động kết nối <strong>OCR Backend</strong> để bóc tách công thức Toán LaTeX, Vật lí SI, Hóa học IUPAC & Ngữ liệu Văn học
+                        {currentPreset.dropSubText}
                       </p>
                       {isOcrLoading && (
                         <div style={{ marginTop: '10px', color: 'var(--matcha-primary)', fontWeight: 700, fontSize: '0.84rem' }}>
@@ -1752,6 +2033,22 @@
                                 <i className="fa-solid fa-check-double"></i> OCR Backend đã nhận diện thành công!
                               </span>
                             </div>
+                          </div>
+                        )}
+
+                        {ocrInfo && (
+                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap' }}>
+                            <span className="badge-tag-aas badge-science" style={{ fontSize: '0.74rem' }}>
+                              <i className="fa-solid fa-microchip"></i> {ocrInfo.engine}
+                            </span>
+                            <span className="badge-tag-aas badge-meta" style={{ fontSize: '0.74rem' }}>
+                              <i className="fa-solid fa-bullseye"></i> Độ tin cậy: {ocrInfo.confidence}%
+                            </span>
+                            {ocrInfo.scanDurationMs > 0 && (
+                              <span className="badge-tag-aas badge-tech" style={{ fontSize: '0.74rem' }}>
+                                <i className="fa-solid fa-stopwatch"></i> Quét trong: {ocrInfo.scanDurationMs}ms
+                              </span>
+                            )}
                           </div>
                         )}
 

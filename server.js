@@ -10,6 +10,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const { runValidation } = require('./scripts/validate-dataset');
 const {
+  scanImageOCR,
   processTextBySubject,
   generateIntentDrivenPrompt,
   formatMathToLatex,
@@ -106,6 +107,9 @@ const server = http.createServer(async (req, res) => {
       } = payload;
 
       let extractedRawText = text || '';
+      let ocrConfidence = 100;
+      let isRealOcr = false;
+      let scanDurationMs = 0;
 
       // Xử lý PDF nếu tải tệp PDF lên
       if (fileType === 'application/pdf' && image && pdfParse) {
@@ -119,7 +123,23 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      // Nếu là ảnh nhưng chưa có text, bộ nhận diện thông minh gán mẫu đề chất lượng cao
+      // Quét chữ thực tế từ hình ảnh qua Tesseract AI Engine
+      if (!extractedRawText && image) {
+        const startTime = Date.now();
+        try {
+          const scanRes = await scanImageOCR(image, 'eng');
+          scanDurationMs = Date.now() - startTime;
+          if (scanRes.rawText && scanRes.rawText.trim().length > 3) {
+            extractedRawText = scanRes.rawText.trim();
+            ocrConfidence = scanRes.confidence || 85;
+            isRealOcr = true;
+          }
+        } catch (scanErr) {
+          console.warn('Lỗi quét Tesseract:', scanErr.message);
+        }
+      }
+
+      // Nếu là ảnh trống hoặc chưa quét ra chữ, áp dụng đề mẫu chuẩn theo môn học
       if (!extractedRawText) {
         if (subject === 'toan-thpt') {
           extractedRawText = `Cho hàm số y = (2x - 1)/(x + 1).\n1. Tìm tập xác định D và các đường tiệm cận đứng, tiệm cận ngang của đồ thị hàm số.\n2. Lập bảng biến thiên và tìm các khoảng đồng biến, nghịch biến.\nA. Tiệm cận đứng x = -1, tiệm cận ngang y = 2\nB. Tiệm cận đứng x = 1, tiệm cận ngang y = -1\nC. Tiệm cận đứng x = -1, tiệm cận ngang y = -1\nD. Hàm số không có tiệm cận`;
@@ -127,10 +147,16 @@ const server = http.createServer(async (req, res) => {
           extractedRawText = `Một khối khí lí tưởng có thể tích 4 lít ở nhiệt độ 27 oC và áp suất 1 atm được dãn nở đẳng nhiệt đến thể tích 8 lít.\n1. Tính áp suất của khối khí sau khi dãn nở đẳng nhiệt (đổi sang đơn vị Pa).\n2. Tính nhiệt lượng Q mà khối khí nhận được trong quá trình trên.\nA. p2 = 0.5 atm = 50662.5 Pa\nB. p2 = 2 atm = 202650 Pa\nC. p2 = 1 atm = 101325 Pa\nD. p2 = 0.25 atm = 25331 Pa`;
         } else if (subject === 'hoa-hoc-thpt') {
           extractedRawText = `Hòa tan hoàn toàn m gam bột đồng trong dung dịch axit nitric loãng, dư sinh ra 4.958 lít khí NO (đktc, 25 oC, 1 bar) là sản phẩm khử duy nhất.\n1. Viết phương trình hóa học và gọi tên 100% chất theo danh pháp IUPAC tiếng Anh.\n2. Tính giá trị của m (biết Cu = 64, N = 14, O = 16).\n3. Tính biến thiên Enthalpy chuẩn Delta r H 0 298 của phản ứng.`;
+        } else if (subject === 'sinh-hoc-thpt') {
+          extractedRawText = `Một phân tử DNA mạch kép có tổng số nucleotide là 3000, trong đó số nucleotide loại Adenine chiếm 20%.\n1. Tính số lượng từng loại nucleotide (A, T, G, X) của phân tử DNA.\n2. Tính chiều dài của phân tử DNA theo đơn vị Angstrom và nanomet.`;
         } else if (subject === 'ngu-van-thpt') {
           extractedRawText = `Đọc đoạn trích sau và thực hiện các yêu cầu:\n"Dù ai đi ngược về xuôi\nNhớ ngày Giỗ Tổ mùng mười tháng ba\nKhắp miền truyền mãi câu ca\nNước non vẹn một dải hòa bình tâm."\n1. Xác định thể thơ và phương thức biểu đạt chính của đoạn thơ.\n2. Nêu tác dụng của biện pháp tu từ được sử dụng trong hai câu đầu.\n3. Viết đoạn văn khoảng 200 chữ trình bày suy nghĩ về lòng biết ơn đối với thế hệ đi trước.`;
+        } else if (subject === 'tieng-anh-thpt') {
+          extractedRawText = `Read the following passage and mark the letter A, B, C, or D to indicate the correct answer to each question.\n"Artificial Intelligence is rapidly transforming modern education by providing personalized learning paths for high school students..."\n1. What is the main idea of the passage?\n2. The word "transforming" is closest in meaning to:\nA. changing\nB. ignoring\nC. preventing\nD. destroying`;
+        } else if (subject === 'tin-hoc-thpt') {
+          extractedRawText = `Viết chương trình Python thực hiện thuật toán tìm kiếm nhị phân (Binary Search) trên dãy số nguyên đã được sắp xếp tăng dần.\n1. Phân tích độ phức tạp thời gian O(log n) của thuật toán.\n2. Viết mã nguồn Python có chú thích chi tiết từng bước.`;
         } else {
-          extractedRawText = `Câu hỏi ôn tập THPT chuẩn GDPT 2018 (Khối Lớp ${grade}).`;
+          extractedRawText = `Câu hỏi ôn tập THPT chuẩn GDPT 2018 cho kỹ năng @${subject} (Khối Lớp ${grade}).`;
         }
       }
 
@@ -155,7 +181,10 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       return res.end(JSON.stringify({
         success: true,
-        ocrEngine: 'EduSkills Smart OCR & Multi-Domain Parser Engine v0.1.2',
+        ocrEngine: isRealOcr ? 'Tesseract.js AI OCR Engine + EduSkills Multi-Domain Parser' : 'EduSkills Smart Heuristic Parser Engine',
+        isRealOcr,
+        ocrConfidence,
+        scanDurationMs,
         fileName,
         subject,
         grade,

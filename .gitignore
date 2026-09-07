@@ -24,4 +24,7 @@ Thumbs.db
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
-.idea/
+# OCR trained data models
+*.traineddata
+eng.traineddata
+vie.traineddata

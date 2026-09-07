@@ -1,11 +1,19 @@
 /**
  * EduSkills-VN Smart OCR & Multi-Domain Educational Parser Engine
- * Hỗ trợ nhận diện đề thi, bóc tách công thức Toán, Vật lí, Hóa học IUPAC, Ngữ văn
+ * Hỗ trợ quét chữ thực tế từ hình ảnh (Tesseract AI OCR Engine)
+ * Bóc tách công thức Toán LaTeX, Vật lí SI, Hóa học IUPAC, Ngữ văn
  * Tác giả: Nguyễn Duy Quang | Hotline: 0795277227 | Email: poiairo4628@gmail.com
  */
 
 const fs = require('fs');
 const path = require('path');
+let Tesseract = null;
+
+try {
+  Tesseract = require('tesseract.js');
+} catch (e) {
+  console.warn('⚠️ Ghi chú: tesseract.js chưa được cài đặt, sẽ dùng heuristic OCR parser.');
+}
 
 // IUPAC Dictionary for High School Chemistry (GDPT 2018)
 const IUPAC_DICTIONARY = [
@@ -46,6 +54,35 @@ const SI_UNITS = [
   { raw: /\b(J\/kg\.K)\b/g, si: '$\\text{J/(kg}\\cdot\\text{K)}$' },
   { raw: /\b(rad\/s)\b/g, si: '$\\text{rad/s}$' }
 ];
+
+/**
+ * 0. Quét chữ thực tế từ hình ảnh bằng Tesseract AI Engine
+ */
+async function scanImageOCR(imageSource, lang = 'eng') {
+  if (!imageSource || !Tesseract) {
+    return { rawText: '', confidence: 0 };
+  }
+
+  let bufferTarget = imageSource;
+  if (typeof imageSource === 'string' && imageSource.startsWith('data:image/')) {
+    const base64Data = imageSource.replace(/^data:image\/\w+;base64,/, '');
+    bufferTarget = Buffer.from(base64Data, 'base64');
+  }
+
+  try {
+    const result = await Tesseract.recognize(bufferTarget, lang, {
+      errorHandler: e => console.warn('Tesseract notice:', e)
+    });
+
+    const text = result && result.data && result.data.text ? result.data.text.trim() : '';
+    const confidence = result && result.data && result.data.confidence ? Math.round(result.data.confidence) : 0;
+
+    return { rawText: text, confidence };
+  } catch (err) {
+    console.warn('Tesseract scan warning:', err.message);
+    return { rawText: '', confidence: 0, error: err.message };
+  }
+}
 
 /**
  * 1. Toán học: Chuẩn hóa công thức sang LaTeX
@@ -148,7 +185,7 @@ function formatLiteratureReading(rawText) {
   let text = rawText.trim();
 
   // Đảm bảo cấu trúc rõ ràng giữa Ngữ liệu và Hệ thống câu hỏi
-  if (!text.includes('### I. PHẦN ĐỌC HIỂU')) {
+  if (!text.includes('PHẦN ĐỌC HIỂU')) {
     text = `### I. PHẦN ĐỌC HIỂU (4,0 điểm)\n\n**1. Ngữ liệu trích dẫn:**\n${text}\n\n**2. Hệ thống câu hỏi định hướng:**\n- **Câu 1 (Nhận biết):** Xác định thể thơ / phương thức biểu đạt chính.\n- **Câu 2 (Thông hiểu):** Chỉ ra và nêu tác dụng của biện pháp tu từ trong ngữ liệu.\n- **Câu 3 (Vận dụng):** Nêu thông điệp hoặc bài học sâu sắc nhất rút ra từ đoạn trích.\n\n### II. PHẦN LÀM VĂN (6,0 điểm)\n- **Câu 1 (2,0 điểm):** Viết đoạn văn nghị luận xã hội (khoảng 200 chữ) bàn về vấn đề đặt ra từ đoạn trích.\n- **Câu 2 (4,0 điểm):** Viết bài văn nghị luận phân tích giá trị tư tưởng và nghệ thuật của tác phẩm.`;
   }
 
@@ -156,7 +193,34 @@ function formatLiteratureReading(rawText) {
 }
 
 /**
- * Xử lý đa năng theo môn học được chọn
+ * 5. Sinh học: Chuẩn hóa công thức di truyền, tế bào & barem BGD
+ */
+function formatBiologyToGenetics(rawText) {
+  if (!rawText) return '';
+  let text = rawText.trim();
+  text = text.replace(/([0-9]+)\s*Angstrom\b/gi, '$1\\text{ \\AA}');
+  text = text.replace(/([0-9]+)\s*nm\b/gi, '$1\\text{ nm}');
+  text = text.replace(/\bDelta\s*L\b/gi, '$\\Delta L$');
+  text = text.replace(/([A-D])[\.\)]\s*/g, '\n**$1.** ');
+  return text;
+}
+
+/**
+ * 6. Tin học: Chuẩn hóa khối mã nguồn và độ phức tạp thuật toán
+ */
+function formatInformaticsCode(rawText) {
+  if (!rawText) return '';
+  let text = rawText.trim();
+  text = text.replace(/\bO\(n\^2\)/g, '$O(n^2)$');
+  text = text.replace(/\bO\(n\s*log\s*n\)/gi, '$O(n \\log n)$');
+  text = text.replace(/\bO\(log\s*n\)/gi, '$O(\\log n)$');
+  text = text.replace(/\bO\(n\)/g, '$O(n)$');
+  text = text.replace(/\bO\(1\)/g, '$O(1)$');
+  return text;
+}
+
+/**
+ * Xử lý đa năng theo kỹ năng/môn học chuyên biệt (16 kỹ năng chuẩn BGD 2026)
  */
 function processTextBySubject(rawText, subject) {
   switch (subject) {
@@ -175,10 +239,70 @@ function processTextBySubject(rawText, subject) {
         formattedText: formatChemistryToIUPAC(rawText),
         domainBadge: '🧪 Hóa học • 100% IUPAC Tiếng Anh & Enthalpy'
       };
+    case 'sinh-hoc-thpt':
+      return {
+        formattedText: formatBiologyToGenetics(rawText),
+        domainBadge: '🧬 Sinh học • Di Truyền Phân Tử & Barem BGD'
+      };
     case 'ngu-van-thpt':
       return {
         formattedText: formatLiteratureReading(rawText),
         domainBadge: '📖 Ngữ văn • Đọc Hiểu Ngoài SGK & Đoạn Văn 200 Chữ'
+      };
+    case 'tieng-anh-thpt':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '🌐 Tiếng Anh • BGD Reading & Grammar B2-C1'
+      };
+    case 'lich-su-thpt':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '📜 Lịch Sử • Mốc Thời Gian & Lập Luận Kháng Chiến'
+      };
+    case 'dia-li-thpt':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '🌍 Địa Lí • Phân Tích Biểu Đồ & Atlat Địa Lí'
+      };
+    case 'ktpl-thpt':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '⚖️ KTPL • Tình Huống Pháp Luật & Kinh Tế Thị Trường'
+      };
+    case 'tin-hoc-thpt':
+      return {
+        formattedText: formatInformaticsCode(rawText),
+        domainBadge: '💻 Tin Học • Thuật Toán & Mã Nguồn Python'
+      };
+    case 'cong-nghe-thpt':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '⚙️ Công Nghệ • Kỹ Thuật Mạch Điện & Nông Nghiệp 4.0'
+      };
+    case 'giai-chi-tiet':
+      return {
+        formattedText: formatMathToLatex(rawText),
+        domainBadge: '🧩 Giải Chi Tiết • Sư Phạm Đa Tầng Socrates'
+      };
+    case 'tao-quiz-bgd':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '🎯 Khảo Thí BGD • Ma Trận Đề Thi 3 Phần QĐ 764'
+      };
+    case 'slide-thuyet-trinh':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '📊 Slide Marp • Kiến Trúc Trực Quan 16:9'
+      };
+    case 'tomtat-mindmap':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '🧠 Mindmap Mermaid • Siêu Trí Nhớ Cornell'
+      };
+    case 'luan-an-nghiencuu':
+      return {
+        formattedText: rawText.trim(),
+        domainBadge: '🔬 Nghiên Cứu ViSEF • Đề Cương Khoa Học Kỹ Thuật'
       };
     default:
       return {
@@ -288,6 +412,7 @@ function generateIntentDrivenPrompt({
 }
 
 module.exports = {
+  scanImageOCR,
   formatMathToLatex,
   formatPhysicsToSI,
   formatChemistryToIUPAC,
