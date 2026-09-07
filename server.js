@@ -41,6 +41,21 @@ const server = http.createServer((req, res) => {
     return res.end(data);
   }
 
+  if (pathname === '/api/skill-content') {
+    const skillPath = parsedUrl.searchParams.get('path');
+    if (skillPath) {
+      const targetFile = path.resolve(ROOT_DIR, skillPath);
+      // Đảm bảo an toàn không thoát khỏi ROOT_DIR
+      if (targetFile.startsWith(ROOT_DIR) && fs.existsSync(targetFile)) {
+        const content = fs.readFileSync(targetFile, 'utf-8');
+        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+        return res.end(content);
+      }
+    }
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('Skill file not found');
+  }
+
   if (pathname === '/api/validate') {
     const report = runValidation();
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });

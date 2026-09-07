@@ -4,7 +4,7 @@
     "name": "hoa-hoc-thpt",
     "version": "1.0.0-beta",
     "category": "khoa-hoc-tu-nhien",
-    "description": "Chuyên gia sư phạm Hóa học THPT (Lớp 10, 11, 12) chuẩn hóa 100% danh pháp IUPAC quốc tế theo Bộ SGK Thống Nhất Toàn Quốc 2026 và cấu trúc đề thi BGD 2025-2027.",
+    "description": "Chuyên gia sư phạm Hóa học THPT chuẩn hóa 100% danh pháp IUPAC quốc tế theo Bộ SGK Thống Nhất 2026 và cấu trúc đề thi tốt nghiệp THPT 2025-2027 của Bộ Giáo dục & Đào tạo.",
     "gradeLevels": [
       "10",
       "11",
@@ -14,23 +14,25 @@
     "tools": [
       "chemistry_engine",
       "iupac_validator",
-      "reaction_balancer"
+      "reaction_balancer",
+      "stoichiometry_calculator"
     ],
     "antiHallucinationRules": [
-      "BẮT BUỘC 100% dùng tên nguyên tố và hợp chất theo chuẩn tiếng Anh IUPAC SGK mới (Sodium, Copper, Sulfuric acid, Ethanoic acid, Glucose, v.v.). CẤM dùng tên cũ.",
+      "BẮT BUỘC 100% dùng tên nguyên tố và hợp chất theo chuẩn tiếng Anh IUPAC SGK mới (Sodium, Copper, Sulfuric acid, Ethanoic acid, Glucose, v.v.). CẤM dùng tên phiên âm cũ.",
       "Phương trình phản ứng phải cân bằng chính xác số nguyên tử và điện tích (ion thu gọn).",
-      "Nêu rõ điều kiện phản ứng (nhiệt độ, xúc tác, áp suất)."
+      "Nêu rõ điều kiện phản ứng (nhiệt độ, xúc tác, áp suất, dung môi).",
+      "Mọi bài toán tính toán phải kiểm tra các định luật bảo toàn (khối lượng, nguyên tố, mol electron, điện tích) trước khi đưa ra đáp số."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/khoa-hoc-tu-nhien/hoa-hoc-thpt/SKILL.md",
-    "contentSample": "\n# ⚗️ Skill: Chuyên Gia Hóa Học THPT Chuẩn IUPAC 2026–2027\n\n## 1. Bảng Quy Chuẩn Tên Gọi IUPAC Bắt Buộc\n- Kim loại: *Sodium, Potassium, Magnesium, Aluminium, Iron, Copper, Zinc, Silver, Gold*.\n- Acid & Base: *Hydrochloric acid, Sulfuric acid, Nitric acid, Sodium hydroxide, Barium hydroxide*.\n- Hữu c..."
+    "contentSample": "\n# ⚗️ Skill: Chuyên Gia Sư Phạm Hóa Học THPT Chuẩn IUPAC 2026–2027\n\n`hoa-hoc-thpt` là bộ não Agentic chuyên biệt hướng dẫn, giải toán và biên soạn đề kiểm tra môn Hóa học cấp THPT (Lớp 10, 11, 12). Kỹ năng này tuân thủ tuyệt đối Chương trình Giáo dục Phổ thông 2018, Bộ SGK Thống Nhất Toàn Quốc từ nă..."
   },
   {
     "id": "sinh-hoc-thpt",
     "name": "sinh-hoc-thpt",
     "version": "1.0.0-beta",
     "category": "khoa-hoc-tu-nhien",
-    "description": "Chuyên gia sư phạm Sinh học THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất Toàn Quốc 2026. Giải mã sơ đồ phả hệ, bài toán di truyền học phân tử và tiến hóa - sinh thái học.",
+    "description": "Chuyên gia sư phạm Sinh học THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất 2026 và cấu trúc đề thi tốt nghiệp THPT 2025-2027 của Bộ Giáo dục & Đào tạo.",
     "gradeLevels": [
       "10",
       "11",
@@ -39,23 +41,26 @@
     "subject": "Sinh Học",
     "tools": [
       "pedigree_analyzer",
-      "genetics_calculator"
+      "genetics_calculator",
+      "bio_engine",
+      "evolution_mapper"
     ],
     "antiHallucinationRules": [
-      "Xác minh quy luật di truyền (trội/lặn, liên kết giới tính) trước khi tính xác suất đời con.",
-      "Bảng mã di truyền phải bám sát codon dịch mã chuẩn trên phân tử mRNA (5' -> 3').",
-      "Sơ đồ phả hệ phải phân tích chặt chẽ qua các thế hệ I, II, III không suy đoán võ đoán."
+      "Bắt buộc xác định chiều sinh học: Mạch khuôn ADN có chiều 3' -> 5'; Phân tử mARN được tổng hợp theo chiều 5' -> 3'; Ribosome dịch mã mARN theo chiều 5' -> 3'.",
+      "Bộ ba mã sao (Codon) trên mARN: AUG (mã mở đầu, mã hóa Methionine ở sinh vật nhân thực hoặc Formyl-methionine ở sinh vật nhân sơ); UAA, UAG, UGA (mã kết thúc, không mã hóa amino acid).",
+      "Phương pháp giải phả hệ: Bắt buộc biện luận xác định gen trội/lặn, gen nằm trên NST thường hay NST giới tính X/Y trước khi gán kiểu gen và tính xác suất.",
+      "Quần thể ngẫu phối cân bằng di truyền Hardy-Weinberg: p²(AA) + 2pq(Aa) + q²(aa) = 1 với p + q = 1."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/khoa-hoc-tu-nhien/sinh-hoc-thpt/SKILL.md",
-    "contentSample": "\n# 🧬 Skill: Chuyên Gia Sinh Học THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Sinh học tế bào (Cấu trúc tế bào, Chuyển hóa vật chất & năng lượng, Phân bào, Vi sinh vật & Virus).\n- **Lớp 11:** Sinh học cơ thể (Trao đổi chất & chuyển hóa năng lượng ở thực vật/động v..."
+    "contentSample": "\n# 🧬 Skill: Chuyên Gia Sư Phạm Sinh Học THPT Chuẩn BGD 2026–2027\n\n`sinh-hoc-thpt` là bộ não Agentic chuyên biệt hướng dẫn tư duy sinh học hiện đại, giải mã cơ chế phân tử của sự sống, phân tích di truyền phả hệ và biên soạn đề kiểm tra chuẩn cấu trúc Bộ GD&ĐT 2026-2027.\n\n---\n\n## 1. Bản Đồ Trọng Tâm..."
   },
   {
     "id": "toan-thpt",
     "name": "toan-thpt",
     "version": "1.0.0-beta",
     "category": "khoa-hoc-tu-nhien",
-    "description": "Chuyên gia sư phạm Toán học THPT (Lớp 10, 11, 12) theo Bộ Sách Giáo Khoa Thống Nhất Toàn Quốc từ năm 2026 và cấu trúc đề thi tốt nghiệp THPT 2025-2027 của Bộ GD&ĐT.",
+    "description": "Chuyên gia sư phạm Toán học THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất 2026 và cấu trúc đề thi tốt nghiệp THPT 2025-2027 của Bộ Giáo dục & Đào tạo.",
     "gradeLevels": [
       "10",
       "11",
@@ -65,24 +70,26 @@
     "tools": [
       "latex_renderer",
       "function_grapher",
-      "math_solver"
+      "math_solver",
+      "geometry_3d_engine"
     ],
     "antiHallucinationRules": [
       "Bắt buộc tìm tập xác định D trước khi giải phương trình, bất phương trình hoặc tính đạo hàm.",
-      "Công thức toán học 100% hiển thị bằng LaTeX: $...$ (inline) hoặc $$...$$ (block).",
-      "Phân biệt tuyệt đối: Điểm cực trị hàm số (x) vs Giá trị cực trị hàm số (y) vs Điểm cực trị đồ thị ((x; y)).",
-      "Hình học không gian Oxyz: Phương trình mặt phẳng và đường thẳng phải chỉ rõ vector pháp tuyến hoặc chỉ phương."
+      "Công thức toán học 100% hiển thị bằng chuẩn LaTeX: $...$ (inline) hoặc $$...$$ (block).",
+      "Phân biệt tuyệt đối 3 khái niệm: Điểm cực trị của hàm số (x₀) vs Giá trị cực trị của hàm số (y₀ = f(x₀)) vs Điểm cực trị của đồ thị hàm số (M(x₀; y₀)).",
+      "Tiệm cận xiên y = ax + b: bắt buộc tính đúng hai giới hạn a = lim[f(x)/x] và b = lim[f(x) - ax] khi x -> ±∞.",
+      "Hình học không gian Oxyz: Phương trình mặt phẳng và đường thẳng phải chỉ rõ vector pháp tuyến n hoặc vector chỉ phương u."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md",
-    "contentSample": "\n# 📐 Skill: Chuyên Gia Toán Học THPT Chuẩn BGD 2026–2027\n\n## 1. Bản Đồ Trọng Tâm Kiến Thức Theo Lớp\n*   **Lớp 10:** Mệnh đề - Tập hợp, Bất phương trình bậc nhất 2 ẩn, Hàm số bậc hai, Hệ thức lượng trong tam giác, Vector & Tọa độ Oxy, Thống kê & Xác suất cổ điển.\n*   **Lớp 11:** Hàm số & Phương trìn..."
+    "contentSample": "\n# 📐 Skill: Chuyên Gia Sư Phạm Toán Học THPT Chuẩn BGD 2026–2027\n\n`toan-thpt` là bộ não Agentic chuyên biệt hướng dẫn tư duy toán học, chứng minh định lý, giải toán tự luận & trắc nghiệm và xây dựng đề kiểm tra chuẩn cấu trúc Bộ GD&ĐT mới nhất.\n\n---\n\n## 1. Bản Đồ Trọng Tâm Kiến Thức SGK Thống Nhất ..."
   },
   {
     "id": "vat-li-thpt",
     "name": "vat-li-thpt",
     "version": "1.0.0-beta",
     "category": "khoa-hoc-tu-nhien",
-    "description": "Chuyên gia sư phạm Vật lí THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất Toàn Quốc 2026. Chuẩn hóa hệ đơn vị SI, phân tích vector lực và hiện tượng vật lí thực tế.",
+    "description": "Chuyên gia sư phạm Vật lí THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất 2026 và cấu trúc đề thi tốt nghiệp THPT 2025-2027 của Bộ Giáo dục & Đào tạo.",
     "gradeLevels": [
       "10",
       "11",
@@ -92,16 +99,19 @@
     "tools": [
       "physics_calculator",
       "circuit_simulator",
-      "graph_analyzer"
+      "graph_analyzer",
+      "thermodynamics_engine"
     ],
     "antiHallucinationRules": [
-      "Luôn kèm đơn vị đo lường chuẩn hệ SI cho mọi đại lượng tính toán.",
-      "Trong nhiệt động lực học và khí lí tưởng (Lớp 12), bắt buộc đổi nhiệt độ Celsius sang Kelvin: T = t + 273.",
-      "Giải thích bản chất vật lí trước khi ráp công thức số học."
+      "Luôn kèm đơn vị đo lường chuẩn hệ SI cho mọi đại lượng tính toán (m, kg, s, Pa, J, K, W, A, V, T, Bq).",
+      "Trong nhiệt động lực học và khí lí tưởng (Lớp 12), bắt buộc đổi nhiệt độ Celsius sang Kelvin: T(K) = t(°C) + 273 (hoặc 273.15 khi cần độ chính xác cao).",
+      "Quy ước dấu Định luật I Nhiệt động lực học ΔU = Q + A: Hệ nhận nhiệt Q > 0, hệ truyền nhiệt Q < 0; Hệ nhận công A > 0, hệ thực hiện công A < 0.",
+      "Chuyển đổi thể tích: 1 L = 1 dm³ = 10⁻³ m³; 1 mL = 1 cm³ = 10⁻⁶ m³; 1 bar = 10⁵ Pa; 1 atm = 1.013 × 10⁵ Pa.",
+      "Hằng số vật lí chuẩn: Hằng số khí lí tưởng R = 8.31 J/(mol·K); Hằng số Boltzmann k = 1.38 × 10⁻²³ J/K; Hằng số Avogadro N_A = 6.022 × 10²³ mol⁻¹."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/khoa-hoc-tu-nhien/vat-li-thpt/SKILL.md",
-    "contentSample": "\n# ⚡ Skill: Chuyên Gia Vật Lí THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Động học chuyển động, Động lực học Newton, Năng lượng, Công, Công suất, Động lượng & Va chạm.\n- **Lớp 11:** Dao động điều hòa, Sóng cơ & Sóng dừng, Giao thoa sóng, Điện trường & Điện thế, D..."
+    "contentSample": "\n# ⚡ Skill: Chuyên Gia Sư Phạm Vật Lí THPT Chuẩn BGD 2026–2027\n\n`vat-li-thpt` là bộ não Agentic chuyên biệt hướng dẫn tư duy vật lí thực nghiệm, giải thích bản chất hiện tượng tự nhiên, giải bài tập định lượng và biên soạn đề kiểm tra chuẩn cấu trúc Bộ GD&ĐT 2026-2027.\n\n---\n\n## 1. Bản Đồ Trọng Tâm K..."
   },
   {
     "id": "dia-li-thpt",
@@ -183,7 +193,7 @@
     "name": "ngu-van-thpt",
     "version": "1.0.0-beta",
     "category": "khoa-hoc-xa-hoi",
-    "description": "Chuyên gia sư phạm Ngữ văn THPT (Lớp 10, 11, 12) theo cấu trúc thi tốt nghiệp 100% tự luận từ 2025: Đọc hiểu ngữ liệu ngoài SGK (4đ), Nghị luận xã hội 200 chữ (2đ), Nghị luận văn học 600 chữ (4đ).",
+    "description": "Chuyên gia sư phạm Ngữ văn THPT (Lớp 10, 11, 12) theo cấu trúc thi tốt nghiệp 100% tự luận của Bộ GD&ĐT từ 2025: Đọc hiểu ngữ liệu ngoài SGK (4đ), Nghị luận xã hội 200 chữ (2đ), Nghị luận văn học 600 chữ (4đ).",
     "gradeLevels": [
       "10",
       "11",
@@ -193,16 +203,18 @@
     "tools": [
       "essay_evaluator",
       "literary_rubric",
-      "text_analyzer"
+      "text_analyzer",
+      "rhetoric_detector"
     ],
     "antiHallucinationRules": [
-      "Ngữ liệu đọc hiểu luyện thi BẮT BUỘC là văn bản ngoài SGK để chống học vẹt, học tủ.",
-      "Đoạn văn nghị luận xã hội 200 chữ: BẮT BUỘC là 1 đoạn văn duy nhất, không xuống dòng, dung lượng 180-230 chữ.",
-      "Bài văn nghị luận văn học: Đầy đủ 3 phần Mở bài - Thân bài (các luận điểm rõ ràng) - Kết bài."
+      "Ngữ liệu đọc hiểu và nghị luận văn học luyện thi BẮT BUỘC là văn bản NGOÀI SGK theo quy định chống học vẹt, học tủ của Bộ GD&ĐT từ 2025.",
+      "Đoạn văn Nghị luận xã hội 200 chữ: BẮT BUỘC viết đúng 1 đoạn văn duy nhất (không xuống dòng ngắt đoạn), dung lượng chuẩn 180-220 từ.",
+      "Bài văn Nghị luận văn học 600 chữ: BẮT BUỘC có cấu trúc 3 phần (Mở bài - Thân bài có các luận điểm rõ ràng - Kết bài), phân tích theo đặc trưng thể loại (hình tượng, không gian, thời gian, ngôn ngữ nghệ thuật) thay vì kể lại cốt truyện.",
+      "Tuyệt đối không dùng văn mẫu sáo rỗng, sáo ngữ; phải có tư duy phản biện và liên hệ trải nghiệm cá nhân sâu sắc."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/khoa-hoc-xa-hoi/ngu-van-thpt/SKILL.md",
-    "contentSample": "\n# 📚 Skill: Chuyên Gia Ngữ Văn THPT Chuẩn BGD 2026–2027\n\n## 1. Cấu Trúc Barem Chấm Điểm 100% Tự Luận\n- **Phần I: Đọc hiểu (4.0 điểm):** 5 câu hỏi phân hóa từ nhận biết thể loại, chi tiết nghệ thuật, thông điệp tư tưởng đến thái độ tác giả.\n- **Phần II: Viết đoạn NLXH (2.0 điểm):** Bàn về một vấn đề..."
+    "contentSample": "\n# 📚 Skill: Chuyên Gia Sư Phạm Ngữ Văn THPT Chuẩn BGD 2026–2027\n\n`ngu-van-thpt` là bộ não Agentic chuyên biệt hướng dẫn đọc hiểu văn bản hiện đại, rèn luyện tư duy nghị luận xã hội sắc bén, kỹ năng viết bài nghị luận văn học theo đặc trưng thể loại và chấm chữa bài văn theo barem chính thức của Bộ ..."
   },
   {
     "id": "giai-chi-tiet",

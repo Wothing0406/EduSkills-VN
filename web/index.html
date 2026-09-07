@@ -619,7 +619,7 @@
           <div class="brand-title">EduSkills-VN Hub</div>
           <div class="brand-subtitle">Bộ Não AI Skills THPT Chuẩn Bộ GD&ĐT 2026</div>
         </div>
-        <span class="badge-vn"><i class="fa-solid fa-graduation-cap"></i> GDPT 2018 Thống Nhất</span>
+        <span class="badge-vn"><i class="fa-solid fa-graduation-cap"></i> GDPT 202ống Nhất</span>
       </div>
 
       <div class="header-actions">
@@ -682,18 +682,70 @@
 
         <div class="workstation-body">
           
-          <!-- View 1: Skill Inspector & Prompt Generator -->
+          <!-- View 1: Skill Inspector & Prompt Generator (AAS Core Standard) -->
           <div id="view-inspector">
-            <div class="detail-header">
-              <div>
-                <h2 id="ins-title" class="detail-title">Tạo Đề Thi Chuẩn BGD 2025–2027</h2>
-                <span id="ins-cmd" class="detail-cmd">/taoquiz-bgd</span>
-              </div>
-              <span id="ins-badge" class="skill-card-badge badge-meta">Document-First</span>
+            
+            <!-- Breadcrumb & Badges -->
+            <button class="btn-back-catalog" onclick="resetFilter()">
+              <i class="fa-solid fa-arrow-left"></i> Back to Catalog
+            </button>
+            <div class="aas-badges-row">
+              <span id="aas-badge-cat" class="aas-pill pill-category">KHOA HỌC TỰ NHIÊN</span>
+              <span id="aas-badge-self" class="aas-pill pill-self">self</span>
+              <span id="aas-badge-date" class="aas-pill pill-date">Added 2026-08-19</span>
             </div>
 
-            <!-- Quiz Document Drop Area -->
-            <div id="quiz-drop-container" style="display: none;">
+            <!-- Title & Description -->
+            <h1 id="aas-title" class="aas-skill-title">@hoa-hoc-thpt</h1>
+            <p id="aas-desc" class="aas-skill-desc">
+              Chuyên gia sư phạm Hóa học THPT chuẩn hóa 100% danh pháp IUPAC quốc tế theo Bộ SGK Thống Nhất 2026 và cấu trúc đề thi tốt nghiệp THPT 2025-2027 của Bộ Giáo dục & Đào tạo.
+            </p>
+
+            <!-- AAS Core Actions Bar -->
+            <div class="aas-btn-bar">
+              <button class="btn-aas btn-aas-outline" id="btn-save-locally" onclick="saveSkillLocally()">
+                <i class="fa-regular fa-star"></i> Save locally
+              </button>
+              <button class="btn-aas btn-aas-shortlist" id="btn-shortlist" onclick="toggleShortlist()">
+                <i class="fa-solid fa-check"></i> In Shortlist
+              </button>
+              <button class="btn-aas btn-aas-primary" onclick="copySkillTag()">
+                <i class="fa-solid fa-clipboard"></i> Copy @Skill
+              </button>
+              <button class="btn-aas btn-aas-outline" onclick="copyFullContent()">
+                <i class="fa-solid fa-file-lines"></i> Copy Full Content
+              </button>
+            </div>
+
+            <!-- Canonical Skill ID Section -->
+            <div class="canonical-block">
+              <div class="canonical-label">CANONICAL SKILL ID</div>
+              <div class="canonical-header">
+                <div class="canonical-left">
+                  <div class="canonical-pill" id="aas-canonical-id">hoa-hoc-thpt</div>
+                  <div>
+                    <button class="btn-review-artifacts" onclick="reviewCoreArtifacts()">
+                      <i class="fa-solid fa-cube"></i> Review Core artifacts
+                    </button>
+                  </div>
+                </div>
+                <div class="canonical-desc">
+                  Give this exact ID to your agent when it selects an AAS Core stack, or use it when reviewing a proposed stack. Workbench reviews completed stack and plan artifacts; it does not compose or install them.
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Prompt Builder (Optional) -->
+            <div class="builder-section">
+              <div class="builder-title">Interactive Prompt Builder (Optional)</div>
+              <div class="builder-subtitle">
+                Add specific details below (e.g. "Tạo bài tập este đa chức lớp 12 mức độ Vận dụng cao"). Both copy buttons above will attach your context.
+              </div>
+              <textarea id="interactiveTaskInput" class="builder-textarea" placeholder="Type your specific task requirements here..." oninput="updatePromptPayload()"></textarea>
+            </div>
+
+            <!-- Quiz Document Drop Area (For Meta-tools) -->
+            <div id="quiz-drop-container" style="display: none; margin-bottom: 20px;">
               <div class="quiz-drop-area">
                 <p style="font-weight: 600; color: var(--accent-cyan);"><i class="fa-solid fa-file-arrow-up"></i> Bước 1: Dán Tài Liệu Hoặc Bài Học SGK 2026 Vào Đây</p>
                 <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">AI chỉ sinh đề khi đã nhận được tài liệu để đảm bảo ĐỘ KHÓ CAO và chống ảo giác!</p>
@@ -701,13 +753,7 @@
               </div>
             </div>
 
-            <div class="info-card">
-              <h4><i class="fa-solid fa-bullseye"></i> Mục Tiêu Sư Phạm & Đặc Quyền GDPT 2018:</h4>
-              <p id="ins-desc" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
-                Tạo đề kiểm tra đủ 3 phần: Phần I trắc nghiệm 4 lựa chọn, Phần II Đúng/Sai lũy tiến điểm (0.1đ - 0.25đ - 0.5đ - 1.0đ) và Phần III Trả lời ngắn.
-              </p>
-            </div>
-
+            <!-- Anti-Hallucination Guardrails -->
             <div class="info-card">
               <h4><i class="fa-solid fa-shield-halved"></i> Quy Tắc Chống Ảo Giác (Anti-Hallucination Guardrails):</h4>
               <div id="ins-rules">
@@ -715,19 +761,12 @@
               </div>
             </div>
 
+            <!-- Full Prompt Payload Live Preview -->
             <div class="info-card">
-              <h4><i class="fa-solid fa-code"></i> Chuẩn Hóa Prompt Payload (Dán Trực Tiếp Vào Mọi AI):</h4>
+              <h4><i class="fa-solid fa-code"></i> Live Prompt Payload (Ghép Kèm Ngữ Cảnh Tương Tác):</h4>
               <div id="ins-prompt" class="code-box"></div>
             </div>
 
-            <div class="btn-action-row">
-              <button class="btn-action-primary" onclick="copyPrompt()">
-                <i class="fa-solid fa-copy"></i> Sao Chép Prompt Vào Bộ Nhớ Tạm
-              </button>
-              <button class="btn-nav" onclick="copySkillPath()">
-                <i class="fa-solid fa-folder-open"></i> Copy Đường Dẫn File SKILL.md
-              </button>
-            </div>
           </div>
 
           <!-- View 2: Quick Easy Injection Guide -->
@@ -1112,20 +1151,30 @@
       currentSelectedSkill = skill;
       renderSkillList();
 
-      // Update Inspector
-      document.getElementById('ins-title').innerText = skill.name;
-      document.getElementById('ins-cmd').innerText = skill.command;
-      document.getElementById('ins-badge').innerText = skill.badge;
-      document.getElementById('ins-badge').className = `skill-card-badge ${skill.badgeClass}`;
-      document.getElementById('ins-desc').innerText = skill.desc;
+      // Update AAS Core Header & Badges
+      const catNames = {
+        'stem': 'KHOA HỌC TỰ NHIÊN',
+        'social': 'KHOA HỌC XÃ HỘI',
+        'tech': 'NGÔN NGỮ & CÔNG NGHỆ',
+        'meta': 'META-TOOLS KHẢO THÍ'
+      };
+      document.getElementById('aas-title').innerText = '@' + skill.id;
+      document.getElementById('aas-canonical-id').innerText = skill.id;
+      document.getElementById('aas-badge-cat').innerText = catNames[skill.category] || skill.category.toUpperCase();
+      document.getElementById('aas-desc').innerText = skill.desc;
 
-      // Rules
+      // Update Shortlist Button State
+      updateShortlistBtnState(skill.id);
+
+      // Render Anti-hallucination Rules
       const rulesContainer = document.getElementById('ins-rules');
       rulesContainer.innerHTML = skill.rules.map(r => `<div class="rule-pill"><i class="fa-solid fa-check"></i> ${r}</div>`).join('');
 
-      // Dropzone Visibility
+      // Dropzone Visibility for Document-first Meta-tools
       const dropzone = document.getElementById('quiz-drop-container');
-      dropzone.style.display = skill.hasDoc ? 'block' : 'none';
+      if (dropzone) {
+        dropzone.style.display = skill.hasDoc ? 'block' : 'none';
+      }
 
       updatePromptPayload();
 
@@ -1135,59 +1184,158 @@
 
     function updatePromptPayload() {
       const skill = currentSelectedSkill;
-      const docInput = document.getElementById('quizDocInput').value.trim();
-      let prompt = `[EduSkills-VN Standardized Prompt Plugin]\nLoad Skill Playbook: ${skill.path}\nLệnh kích hoạt: ${skill.command}\n`;
+      const taskInput = (document.getElementById('interactiveTaskInput')?.value || '').trim();
+      const docInput = (document.getElementById('quizDocInput')?.value || '').trim();
 
-      if (skill.hasDoc) {
-        prompt += `\n[TÀI LIỆU / NGỮ LIỆU ĐÍNH KÈM]:\n${docInput ? docInput : '[Dán tài liệu học tập hoặc đoạn trích bài học SGK 2026 vào đây]'}\n\nYêu cầu: Hãy phân tích kỹ tài liệu trên và thực hiện nhiệm vụ với độ khó cao theo đúng barem Bộ GD&ĐT.`;
-      } else {
-        prompt += `\nYêu cầu: Hãy giải quyết bài toán / nhiệm vụ sau đây theo đúng quy chuẩn sư phạm GDPT 2018:\n[Nhập câu hỏi hoặc bài tập của bạn tại đây]`;
+      let payload = `[EduSkills-VN AAS Core Standardized Payload]\n`;
+      payload += `@${skill.id}\n`;
+      payload += `Canonical ID: ${skill.id}\n`;
+      payload += `Playbook Path: ${skill.path}\n`;
+      payload += `Curriculum: GDPT 2018 (SGK Thống Nhất 2026) | Quy chuẩn BGD 2025-2027\n`;
+
+      if (skill.hasDoc && docInput) {
+        payload += `\n[TÀI LIỆU / NGỮ LIỆU ĐÍNH KÈM (DOCUMENT-FIRST)]:\n${docInput}\n`;
       }
 
-      document.getElementById('ins-prompt').innerText = prompt;
-    }
-
-    function filterSkills() {
-      renderSkillList();
-    }
-
-    function setCategoryFilter(category, btn) {
-      currentCategory = category;
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-      renderSkillList();
-    }
-
-    function switchTab(tab) {
-      const viewInspector = document.getElementById('view-inspector');
-      const viewGuide = document.getElementById('view-guide');
-      const tabInspectorBtn = document.getElementById('tab-inspector-btn');
-      const tabGuideBtn = document.getElementById('tab-guide-btn');
-
-      if (tab === 'inspector') {
-        viewInspector.style.display = 'block';
-        viewGuide.style.display = 'none';
-        tabInspectorBtn.classList.add('active');
-        tabGuideBtn.classList.remove('active');
+      if (taskInput) {
+        payload += `\n[NHIỆM VỤ CỤ THỂ / SPECIFIC TASK REQUIREMENTS]:\n${taskInput}\n`;
       } else {
-        viewInspector.style.display = 'none';
-        viewGuide.style.display = 'block';
-        tabInspectorBtn.classList.remove('active');
-        tabGuideBtn.classList.add('active');
+        payload += `\n[NHIỆM VỤ]: Hãy thực hiện giải quyết yêu cầu bài học theo đúng ma trận và quy tắc sư phạm của Skill này.\n`;
+      }
+
+      const promptBox = document.getElementById('ins-prompt');
+      if (promptBox) {
+        promptBox.innerText = payload;
       }
     }
 
-    function copyPrompt() {
-      const text = document.getElementById('ins-prompt').innerText;
+    function copySkillTag() {
+      const skill = currentSelectedSkill;
+      const taskInput = (document.getElementById('interactiveTaskInput')?.value || '').trim();
+      let text = `@${skill.id}`;
+      if (taskInput) {
+        text += `\n\nTask requirements:\n${taskInput}`;
+      }
       navigator.clipboard.writeText(text).then(() => {
-        alert('✅ Đã sao chép Prompt chuẩn hóa! Bạn có thể dán ngay vào Claude, Gemini, ChatGPT hoặc Antigravity IDE.');
+        showToast(`✅ Đã sao chép @${skill.id} kèm yêu cầu vào bộ nhớ tạm!`);
+      }).catch(() => {
+        alert('Đã sao chép: ' + text);
       });
     }
 
-    function copySkillPath() {
-      navigator.clipboard.writeText(currentSelectedSkill.path).then(() => {
-        alert('✅ Đã sao chép đường dẫn file: ' + currentSelectedSkill.path);
+    async function copyFullContent() {
+      const skill = currentSelectedSkill;
+      const taskInput = (document.getElementById('interactiveTaskInput')?.value || '').trim();
+      
+      try {
+        const res = await fetch(`/api/skill-content?path=${encodeURIComponent(skill.path)}`);
+        if (res.ok) {
+          let fullText = await res.text();
+          if (taskInput) {
+            fullText += `\n\n========================================\n[NHIỆM VỤ CỤ THỂ / SPECIFIC TASK REQUIREMENTS]:\n${taskInput}\n========================================\n`;
+          }
+          await navigator.clipboard.writeText(fullText);
+          showToast(`✅ Đã sao chép toàn bộ nội dung file ${skill.id} (Markdown) kèm yêu cầu!`);
+          return;
+        }
+      } catch (e) {
+        console.warn('Cannot fetch full content API, fallback to payload:', e);
+      }
+
+      // Fallback
+      const text = document.getElementById('ins-prompt')?.innerText || `@${skill.id}`;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`✅ Đã sao chép Prompt Payload vào bộ nhớ tạm!`);
       });
+    }
+
+    async function saveSkillLocally() {
+      const skill = currentSelectedSkill;
+      try {
+        const res = await fetch(`/api/skill-content?path=${encodeURIComponent(skill.path)}`);
+        let content = '';
+        if (res.ok) {
+          content = await res.text();
+        } else {
+          content = document.getElementById('ins-prompt')?.innerText || `@${skill.id}`;
+        }
+        const blob = new Blob([content], { type: 'text/markdown;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${skill.id}.SKILL.md`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`💾 Đã tải xuống file ${skill.id}.SKILL.md về máy!`);
+      } catch (err) {
+        alert('Lỗi tải file: ' + err.message);
+      }
+    }
+
+    function toggleShortlist() {
+      const skillId = currentSelectedSkill.id;
+      const key = 'eduskills_shortlist_' + skillId;
+      const isShortlisted = localStorage.getItem(key) === 'true';
+      if (isShortlisted) {
+        localStorage.removeItem(key);
+        showToast(`Đã bỏ @${skillId} khỏi danh sách quan tâm.`);
+      } else {
+        localStorage.setItem(key, 'true');
+        showToast(`⭐ Đã thêm @${skillId} vào Shortlist!`);
+      }
+      updateShortlistBtnState(skillId);
+    }
+
+    function updateShortlistBtnState(skillId) {
+      const key = 'eduskills_shortlist_' + skillId;
+      const btn = document.getElementById('btn-shortlist');
+      if (!btn) return;
+      const isShortlisted = localStorage.getItem(key) === 'true';
+      if (isShortlisted) {
+        btn.innerHTML = `<i class="fa-solid fa-check"></i> In Shortlist`;
+        btn.className = 'btn-aas btn-aas-shortlist';
+      } else {
+        btn.innerHTML = `<i class="fa-regular fa-bookmark"></i> Add to Shortlist`;
+        btn.className = 'btn-aas btn-aas-outline';
+      }
+    }
+
+    function resetFilter() {
+      document.getElementById('searchInput').value = '';
+      currentCategory = 'all';
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector('.filter-tab')?.classList.add('active');
+      renderSkillList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function reviewCoreArtifacts() {
+      alert(`📚 EduSkills-VN Core Artifacts & SGK 2026:
+- Thư mục SGK gốc: sgk/PDF SGK Lớp 12 2026-2027/
+- Kho tài liệu chuẩn hóa: docs/
+- Dataset catalog: dataset/skills-catalog.json
+- Báo cáo kiểm định: dataset/validation-report.json
+
+Tất cả 16 Skills đã sẵn sàng để nạp vào Claude Projects, Gemini Gems hoặc Antigravity IDE!`);
+    }
+
+    function showToast(msg) {
+      let toast = document.getElementById('app-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'app-toast';
+        toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#0284c7;color:#fff;padding:12px 24px;border-radius:10px;font-size:0.9rem;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,0.6);z-index:9999;transition:all 0.3s;opacity:0;transform:translateY(10px);pointer-events:none;';
+        document.body.appendChild(toast);
+      }
+      toast.innerText = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+      }, 2500);
     }
 
     // --- Three.js Background Galaxy Setup ---

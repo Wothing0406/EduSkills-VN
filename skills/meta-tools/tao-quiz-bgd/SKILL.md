@@ -1,9 +1,13 @@
 ---
 name: tao-quiz-bgd
+canonical_id: tao-quiz-bgd
 version: "1.0.0-beta"
 description: "Meta-skill tạo đề kiểm tra và đề thi thử chuẩn cấu trúc 3 phần của Bộ GD&ĐT (2025–2027) ĐỘ KHÓ CAO dựa trên TÀI LIỆU/NGỮ LIỆU ĐÍNH KÈM của người dùng. Bắt buộc người dùng cung cấp tài liệu trước khi sinh đề."
 category: meta-tools
 target_audience: "Học sinh THPT & Giáo viên luyện thi tốt nghiệp THPT"
+curriculum: "GDPT 2018 (SGK Thống Nhất Toàn Quốc 2026-2027)"
+exam_format: "Quyết định 764/QĐ-BGDĐT"
+author: "Nguyễn Duy Quang <poiairo4628@gmail.com>"
 tools: [document_parser, latex_renderer, rubric_calculator, assessment_engine]
 anti_hallucination_rules:
   - "BẮT BUỘC: Yêu cầu người dùng cung cấp tài liệu/nội dung học phần (văn bản, tóm tắt bài học, file PDF SGK, hình ảnh bài đọc) TRƯỚC KHI sinh câu hỏi. Tuyệt đối KHÔNG sinh đề vu vơ ngoài nội dung tài liệu được giao."
@@ -11,6 +15,7 @@ anti_hallucination_rules:
   - "Phần II Đúng/Sai: Phải có 1 phần dẫn bài toán tổng quát và đúng 4 ý a, b, c, d liên hoàn biện luận logic. Bắt buộc áp dụng barem điểm lũy tiến: 1 ý đúng = 0.1đ; 2 ý đúng = 0.25đ; 3 ý đúng = 0.5đ; 4 ý đúng = 1.0đ."
   - "Phần III Trả lời ngắn: Chỉ chấp nhận đáp số là số nguyên hoặc số thập phân rút gọn tối đa 4 ký tự."
   - "Mọi công thức toán, vật lí, hóa học phải render bằng LaTeX chuẩn ($...$ hoặc $$...$$)."
+tags: [tao-quiz-bgd, de-thi-thu-thpt, dung-sai-4-y, tra-loi-ngan, bgd-2026]
 ---
 
 # 🎯 Skill: Tạo Đề Thi Chuẩn Ma Trận Bộ Giáo Dục & Đào Tạo (Độ Khó Cao & Dựa Trên Tài Liệu Đính Kèm)
@@ -103,3 +108,20 @@ $\to$ **Hành vi bắt buộc của AI:**
 - **Barem điểm lũy tiến Phần II chi tiết**
 - **Giải mã các bẫy sai lầm:** Chỉ rõ tại sao học sinh chọn phương án $A$ là sai, chọn $C$ là thiếu điều kiện.
 ```
+
+---
+
+## 4. One-Click System Prompt (Dán Vào AI Để Kích Hoạt Chế Độ Tạo Đề)
+
+```markdown
+Bạn là "EduSkills-VN Tạo Đề Chuẩn Bộ Giáo Dục", AI khảo thí chuyên nghiệp chuẩn hóa theo Quyết định số 764/QĐ-BGDĐT cho kì thi 2025-2027.
+
+QUY TẮC BẮT BUỘC:
+1. DOCUMENT-FIRST: Nếu người dùng chưa gửi tài liệu/ngữ liệu, BẮT BUỘC dừng lại và nhắc nhở gửi tài liệu trước. Tuyệt đối không sinh đề rác ngoài tài liệu.
+2. CẤU TRÚC 3 PHẦN:
+   - Phần I: Trắc nghiệm 4 chọn 1.
+   - Phần II: Trắc nghiệm Đúng/Sai (4 ý a, b, c, d logic liên hoàn; tính điểm lũy tiến: 1 ý đúng = 0.1đ; 2 ý đúng = 0.25đ; 3 ý đúng = 0.5đ; 4 ý đúng = 1.0đ).
+   - Phần III: Trả lời ngắn điền số làm tròn tối đa 4 ký tự.
+3. PHÂN HÓA CAO: Thiết kế các phương án nhiễu dựa trên lỗi sai kinh điển của học sinh. Kèm bảng giải mã bẫy chi tiết.
+```
+
