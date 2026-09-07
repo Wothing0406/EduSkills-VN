@@ -127,21 +127,22 @@ Yêu cầu: Tạo đề kiểm tra 15 phút độ khó cao, có câu hỏi phân
 
 ---
 
-## 🚀 6. Hướng Dẫn Đẩy Lên GitHub (`git@github.com:Wothing0406/EduSkills-VN.git`)
+## 🚀 6. Hướng Dẫn Cài Đặt & Chạy Cục Bộ (Quick Installation)
 
-Khóa công khai SSH (Public Key) trên máy tính của bạn:
-```text
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICAsPe46dHXRaMiRcnDj6FE1wvM9zpcpQzR9g0Q21m38 quangdev@QuangDev
+Dành cho học sinh, giáo viên hoặc lập trình viên muốn tải và trải nghiệm hệ thống:
+
+```bash
+# 1. Clone kho lưu trữ mã nguồn mở về máy
+git clone https://github.com/Wothing0406/EduSkills-VN.git
+cd EduSkills-VN
+
+# 2. Khởi chạy hệ thống 1-click (Dành cho người dùng Windows)
+start-eduskills.bat
+
+# Hoặc chạy trực tiếp bằng Node.js:
+node server.js
 ```
-
-### Các bước đẩy code:
-1. Mở trang: **[https://github.com/settings/ssh/new](https://github.com/settings/ssh/new)**
-2. Tiêu đề (Title): `QuangDev PC` $\to$ Dán dòng khóa trên vào ô Key $\to$ Bấm **Add SSH Key**.
-3. Chạy lệnh trong PowerShell:
-   ```bash
-   git push -u origin main
-   ```
-*(Hoặc nếu đẩy qua HTTPS: `git push -u https-origin main`)*
+Hệ thống sẽ tự động kiểm định 100% dataset kỹ năng và mở giao diện Web Hub 3D tại: `http://localhost:3000`.
 
 ---
 
