@@ -10,8 +10,14 @@
 ## 1. Sự Kiện Chuyển Đổi 2026: Bộ SGK Thống Nhất Toàn Quốc
 
 Khác với giai đoạn 2020–2025 học sinh học theo 3 bộ sách phân tán, **từ năm 2026, Bộ Giáo dục & Đào tạo chính thức gộp và thống nhất một bộ SGK chuẩn mực duy nhất trên toàn quốc**.
-*   Các cuốn SGK và SGV (Sách giáo viên) chuẩn chính thức được lưu trữ trực tiếp trong thư mục `sgk/` của dự án (`10-sgk-...`, `11-sgk-...`, `12-sgk-...`).
+*   Toàn bộ kho dữ liệu SGK được số hóa và đồng bộ lên **Google Drive Cloud Storage** tốc độ cao (tránh vượt dung lượng 100MB của GitHub):
+    - 📗 **SGK Lớp 10 (GDPT 2018):** [Google Drive Folder Lớp 10](https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link)
+    - 📘 **SGK Lớp 11 (GDPT 2018):** [Google Drive Folder Lớp 11](https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link)
+    - 📙 **SGK Lớp 12 (SGK Thống Nhất 2026-2027):** [Google Drive Folder Lớp 12](https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link)
 *   Hệ thống **EduSkills-VN** được căn chỉnh chính xác 100% theo các bài học, thuật ngữ và bài tập thực hành trong bộ sách thống nhất này.
+*   **Phương thức nạp dữ liệu chuẩn (Standard Data Ingestion):**
+    1. Khi tương tác với Google Gemini / NotebookLM: Kết nối trực tiếp Drive folder tương ứng để đối chiếu ngữ cảnh sách giáo khoa.
+    2. Khi tương tác với Claude Code / Claude Projects / ChatGPT: Tải file PDF bài học cụ thể từ Drive và đính kèm vào kho tri thức (Knowledge Base).
 
 ---
 

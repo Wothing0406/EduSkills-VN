@@ -62,6 +62,31 @@ const server = http.createServer((req, res) => {
     return res.end(JSON.stringify(report, null, 2));
   }
 
+  if (pathname === '/api/drive-links') {
+    const driveLinks = {
+      lop_10: {
+        title: 'Sách Giáo Khoa Lớp 10 (GDPT 2018 Toàn Bộ Các Bộ Sách)',
+        url: 'https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link',
+        grade: 10,
+        badge: 'Đầy đủ các bộ sách chuẩn'
+      },
+      lop_11: {
+        title: 'Sách Giáo Khoa Lớp 11 (GDPT 2018 Bản Chuẩn Hóa BGD)',
+        url: 'https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link',
+        grade: 11,
+        badge: 'Bản chuẩn hóa BGD'
+      },
+      lop_12: {
+        title: 'Sách Giáo Khoa Lớp 12 (Bộ SGK Thống Nhất 2026-2027 Trọng Tâm Thi)',
+        url: 'https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link',
+        grade: 12,
+        badge: 'Trọng tâm thi THPT Quốc Gia'
+      }
+    };
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify(driveLinks, null, 2));
+  }
+
   if (pathname === '/api/stats') {
     const reportPath = path.join(DATASET_DIR, 'validation-report.json');
     let report = {};
@@ -69,14 +94,16 @@ const server = http.createServer((req, res) => {
       report = JSON.parse(fs.readFileSync(reportPath, 'utf-8'));
     }
     const stats = {
-      project: 'EduSkills-VN',
-      version: '0.1.0-beta',
+      project: 'EduSkills-VN Matcha Hub',
+      version: '0.1.2-beta',
+      theme: 'Matcha Mèo Ú Tối Giản',
       curriculum: 'Bộ SGK Thống Nhất Toàn Quốc 2026 & BGD 2025-2027',
       totalSkills: report.validCount || 16,
       categories: 4,
       author: 'Nguyễn Duy Quang',
       hotline: '0795277227',
-      email: 'poiairo4628@gmail.com'
+      email: 'poiairo4628@gmail.com',
+      driveStorage: 'Google Drive Cloud Storage (3 khối lớp 10, 11, 12)'
     };
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     return res.end(JSON.stringify(stats, null, 2));

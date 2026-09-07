@@ -221,7 +221,7 @@
     "name": "giai-chi-tiet",
     "version": "1.0.0-beta",
     "category": "meta-tools",
-    "description": "Meta-skill gia sư khơi mở tư duy Socrates: Hướng dẫn giải bài tập từng bước, không làm tắt, không đưa đáp số ngay mà đặt câu hỏi gợi ý bản chất, cảnh báo bẫy sai lầm.",
+    "description": "Meta-skill giải chi tiết bài tập THPT đa tầng theo phương pháp Socrates: Phân tích bản chất, lời giải từng bước, giải mã bẫy sai lầm và mở rộng phương pháp tư duy.",
     "gradeLevels": [
       10,
       11,
@@ -230,22 +230,26 @@
     "subject": "",
     "tools": [
       "socratic_tutor",
-      "math_reasoner"
+      "multi_tier_solver",
+      "trap_detector",
+      "step_explainer"
     ],
     "antiHallucinationRules": [
-      "Nghiêm cấm trả lời ngay đáp án cuối cùng khi học sinh mới hỏi lần đầu. Phải chỉ ra dạng bài và gợi mở bước đầu tiên.",
-      "Khi trình bày lời giải hoàn chỉnh (khi được yêu cầu), phải diễn giải chi tiết 'tại sao lại chọn công thức này'."
+      "Lời giải bắt buộc chia thành 4 tầng rõ ràng: Tầng 1 (Gợi mở tư duy Socrates) -> Tầng 2 (Bản chất khoa học) -> Tầng 3 (Lời giải chi tiết từng bước) -> Tầng 4 (Giải mã bẫy & Bài tập tự luyện).",
+      "Công thức toán, lí, hóa 100% hiển thị bằng LaTeX ($...$ hoặc $$...$$).",
+      "Nghiêm cấm nhảy bước hoặc làm tắt khi chưa giải thích căn cứ định lý.",
+      "Hóa học tuân thủ 100% danh pháp IUPAC tiếng Anh chuẩn SGK mới (Sodium, Acetic acid, Glucose...)."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/meta-tools/giai-chi-tiet/SKILL.md",
-    "contentSample": "\n# 💡 Skill: Gia Sư Khơi Mở Tư Duy Socrates (/giai-chi-tiet)\n\n## 1. Phương Pháp Sư Phạm\nKhông bao giờ biến học sinh thành người sao chép thụ động:\n1. **Bước 1 (Nhận diện):** Xác định dạng toán và hỏi học sinh về định lý SGK liên quan.\n2. **Bước 2 (Gợi mở then chốt):** Đưa ra một câu hỏi định hướng (..."
+    "contentSample": "\n# 💡 Skill: Gia Sư Sư Phạm Giải Chi Tiết Đa Tầng Socrates (/giai-chi-tiet)\n\n`giai-chi-tiet` là bộ não Agentic chuyên biệt biến những bài tập THPT khó, phức tạp trở nên dễ hiểu, sáng tỏ và sâu sắc. Thay vì đưa ra một đáp số cộc lốc vô hồn, kỹ năng này áp dụng **Phương pháp Sư phạm Đa Tầng Socrates**..."
   },
   {
     "id": "luan-an-nghiencuu",
     "name": "luan-an-nghiencuu",
-    "version": "1.0.0-beta",
+    "version": "0.1.2-beta",
     "category": "meta-tools",
-    "description": "Meta-skill hướng dẫn nghiên cứu khoa học kỹ thuật dành cho học sinh THPT (Cuộc thi ViSEF), viết báo cáo dự án Hoạt động trải nghiệm hướng nghiệp và đề xuất ý tưởng sáng tạo.",
+    "description": "Meta-skill cố vấn nghiên cứu khoa học kỹ thuật cấp THPT (Hội thi ViSEF), hướng dẫn đề xuất ý tưởng sáng tạo, thiết kế thực nghiệm đối chứng, viết báo cáo chuẩn 5 phần và thuyết trình trước hội đồng giám khảo.",
     "gradeLevels": [
       10,
       11,
@@ -254,23 +258,26 @@
     "subject": "",
     "tools": [
       "academic_advisor",
-      "hypothesis_tester"
+      "hypothesis_tester",
+      "visef_rubric_checker",
+      "statistical_methodology"
     ],
     "antiHallucinationRules": [
-      "Đề tài nghiên cứu phải thực tế, an toàn, phù hợp với năng lực và điều kiện phòng thí nghiệm cấp THPT.",
-      "Cấu trúc báo cáo khoa học bắt buộc đủ 5 phần: Đặt vấn đề -> Tổng quan -> Phương pháp nghiên cứu -> Kết quả & Bàn luận -> Kết luận.",
-      "Trích dẫn tài liệu tham khảo theo chuẩn IEEE hoặc APA."
+      "Đề tài đề xuất phải mang tính khả thi cao, an toàn sinh học - hóa học, phù hợp ngân sách và điều kiện thiết bị cấp THPT.",
+      "Báo cáo khoa học bắt buộc tuân thủ 5 cấu phần ViSEF: Đặt vấn đề -> Tổng quan -> Phương pháp & Thực nghiệm -> Kết quả & Thảo luận -> Kết luận.",
+      "Tất cả số liệu giả định trong ví dụ phải hợp lý về mặt vật lý, hóa học, sinh học và khoa học xã hội.",
+      "Quy chuẩn trích dẫn tài liệu tham khảo theo định dạng APA 7th hoặc IEEE."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/meta-tools/luan-an-nghiencuu/SKILL.md",
-    "contentSample": "\n# 🧪 Skill: Hướng Dẫn Nghiên Cứu Khoa Học Kỹ Thuật THPT (ViSEF)\n\n## 1. Phạm Vi Trợ Giúp\n- **Ý tưởng đề tài:** Gợi ý các đề tài nghiên cứu xuất phát từ thực tiễn đời sống địa phương, an toàn, phù hợp kinh phí và năng lực học sinh cấp 3.\n- **Phương pháp luận:** Hướng dẫn xây dựng giả thuyết khoa học,..."
+    "contentSample": "\n# 🧪 Skill: Cố Vấn Nghiên Cứu Khoa Học Kỹ Thuật THPT (ViSEF) (/luan-an-nghiencuu)\n\n`luan-an-nghiencuu` là bộ não cố vấn học thuật toàn diện cho học sinh THPT tham gia **Cuộc thi Khoa học Kỹ thuật dành cho học sinh trung học (ViSEF)** và các đề tài sáng tạo STEM liên môn. Kỹ năng dẫn dắt học sinh từ..."
   },
   {
     "id": "slide-thuyet-trinh",
     "name": "slide-thuyet-trinh",
-    "version": "1.0.0-beta",
+    "version": "0.1.2-beta",
     "category": "meta-tools",
-    "description": "Meta-skill tạo mã nguồn slide thuyết trình Marp Markdown và HTML/Tailwind CSS Standalone với visual chuẩn quốc tế, tỷ lệ 16:9, bảng màu sang trọng, tối đa 6 dòng/slide, tích hợp sơ đồ Mermaid.",
+    "description": "Meta-skill kiến tạo slide thuyết trình Marp Markdown và HTML/Tailwind CSS Standalone với tỷ lệ 16:9, Rule of Six, bảng màu cao cấp, sơ đồ Mermaid và bố cục sư phạm chuẩn quốc tế.",
     "gradeLevels": [
       10,
       11,
@@ -280,16 +287,18 @@
     "tools": [
       "marp_compiler",
       "mermaid_renderer",
-      "design_styler"
+      "design_styler",
+      "presentation_architect"
     ],
     "antiHallucinationRules": [
-      "Quy tắc 6 dòng (Rule of Six): Tuyệt đối không quá 6 gạch đầu dòng trên 1 slide. Không viết văn xuôi đặc quánh.",
-      "Chuẩn màu sắc cao cấp: Dùng bảng màu HSL/Hex hiện đại (Slate Dark, Cyber Teal, Deep Indigo, Amber Glow). Nghiêm cấm dùng màu nguyên bản #FF0000 hoặc #00FF00.",
-      "Bắt buộc chia slide bằng cú pháp Marp `---` và hỗ trợ tỷ lệ 16:9 (`_class: lead`, `paginate: true`)."
+      "Quy tắc 6 dòng (Rule of Six): Tuyệt đối không quá 6 gạch đầu dòng trên 1 slide. Tuyệt đối không viết văn bản đặc quánh.",
+      "Chuẩn màu sắc cao cấp: Dùng bảng màu HSL/Tailwind hiện đại (Slate Dark, Emerald Matcha, Cyber Cyan, Amber Glow). Nghiêm cấm dùng màu thuần #FF0000 hoặc #00FF00.",
+      "Bắt buộc chia slide bằng cú pháp Marp chuẩn `---` và hỗ trợ tỷ lệ 16:9 (`_class: lead`, `paginate: true`).",
+      "Mọi slide có khái niệm trừu tượng bắt buộc đi kèm sơ đồ luồng Mermaid hoặc bảng so sánh đối xứng."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/meta-tools/slide-thuyet-trinh/SKILL.md",
-    "contentSample": "\n# 🎨 Skill: Tạo Slide Thuyết Trình Marp / HTML Chuẩn Visual Sang Trọng\n\n## 1. Phong Cách Thiết Kế (Design Philosophy)\nBiến mọi bài học khô khan thành một bài thuyết trình chuẩn chuyên nghiệp:\n- **Tối giản & Tinh tế:** Khoảng trắng thở tốt, phân cấp chữ rõ ràng (Tiêu đề to, từ khóa in đậm có nền bad..."
+    "contentSample": "\n# 🎨 Skill: Thiết Kế Slide Thuyết Trình Marp & HTML Sư Phạm (/slide-thuyettrinh)\n\n`slide-thuyet-trinh` là meta-skill cao cấp chuyển hóa nội dung bài học khô khan hoặc đề tài dự án THPT thành bộ slide trình chiếu trực quan, hiện đại, mang tính thuyết phục cao. Kết xuất có thể nạp ngay vào **VS Code ..."
   },
   {
     "id": "tao-quiz-bgd",
@@ -323,9 +332,9 @@
   {
     "id": "tomtat-mindmap",
     "name": "tomtat-mindmap",
-    "version": "1.0.0-beta",
+    "version": "0.1.2-beta",
     "category": "meta-tools",
-    "description": "Meta-skill tóm tắt nội dung bài học SGK thành sơ đồ tư duy Mermaid.js trực quan và Cheatsheet ghi nhớ nhanh trong 60 giây, hỗ trợ sao chép vào Notion, Obsidian hoặc Markdown viewers.",
+    "description": "Meta-skill cô đọng bài học SGK thành sơ đồ tư duy Mermaid.js đa tầng, khung ghi chép Cornell Note và Cheatsheet ghi nhớ cốt lõi trong 60 giây hỗ trợ ôn thi siêu tốc.",
     "gradeLevels": [
       10,
       11,
@@ -334,15 +343,18 @@
     "subject": "",
     "tools": [
       "mermaid_generator",
-      "cheatsheet_builder"
+      "cornell_builder",
+      "cheatsheet_synthesizer",
+      "active_recall_quizzer"
     ],
     "antiHallucinationRules": [
-      "Cú pháp Mermaid bắt buộc hợp lệ 100% (dùng mindmap hoặc flowchart TD/LR), không dùng các thẻ HTML lạ làm hỏng renderer.",
-      "Bắt buộc có bảng Cheatsheet 3 cột: Khái niệm | Công thức cốt lõi | Bẫy cần tránh."
+      "Cú pháp Mermaid bắt buộc 100% hợp lệ (không chứa ký tự ngoặc tròn, ngoặc vuông không thoát trong nhãn, không dùng HTML lạ làm hỏng renderer).",
+      "Bắt buộc có cấu trúc 3 phần hoàn chỉnh: Sơ đồ tư duy trực quan -> Bảng Cheatsheet ghi nhớ 60s -> 3 câu hỏi tự vấn Active Recall.",
+      "Tất cả công thức toán, lý, hóa phải dùng ký hiệu LaTeX chuẩn xác."
     ],
     "curriculum": "Bộ SGK Thống Nhất 2026",
     "filePath": "skills/meta-tools/tomtat-mindmap/SKILL.md",
-    "contentSample": "\n# 🧠 Skill: Tóm Tắt Bài Học & Sơ Đồ Tư Duy Mermaid (60s Cheatsheet)\n\n## 1. Mục Đích & Cú Pháp Kích Hoạt\nGiúp học sinh cô đọng toàn bộ 10–15 trang sách giáo khoa thành một sơ đồ tư duy trực quan và bảng công thức cốt lõi.\n\n```text\n/tomtat-mindmap [Tên bài học hoặc nội dung văn bản]\n```\n*Ví dụ:* `/to..."
+    "contentSample": "\n# 🧠 Skill: Tóm Tắt Đa Tầng & Sơ Đồ Tư Duy Mermaid (/tomtat-mindmap)\n\n`tomtat-mindmap` là meta-skill cô đọng kiến thức đỉnh cao, chuyển hóa các bài học SGK dài hàng chục trang thành cấu trúc trực quan, dễ nạp vào não bộ theo nguyên lý **Dual Coding Theory** (Mã hóa kép: Hình ảnh kết hợp Ngôn ngữ).\n..."
   },
   {
     "id": "cong-nghe-thpt",
