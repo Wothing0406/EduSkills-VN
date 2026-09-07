@@ -1,181 +1,152 @@
 # 🎓 EduSkills-VN: Bộ Não Agentic AI Skills Dành Cho Học Sinh THPT
 
-> **Hệ sinh thái Agentic Skills chuẩn hóa theo Chương trình GDPT 2018 & Định dạng Đề thi Tốt nghiệp THPT 2025–2027 của Bộ Giáo dục & Đào tạo Việt Nam.**  
-> Tương thích đa nền tảng: **Claude Code / Cursor**, **Google Antigravity / Gemini**, **OpenAI ChatGPT / Codex**.  
-> Cấu trúc thiết kế tham chiếu tiêu chuẩn công nghiệp: [`sickn33/agentic-awesome-skills`](https://github.com/sickn33/agentic-awesome-skills).
+> **Phiên bản:** `Beta v0.1-beta`  
+> **Chuẩn hóa:** Bộ Sách Giáo Khoa Thống Nhất Toàn Quốc từ năm học 2026 & Định Dạng Đề Thi Tốt Nghiệp THPT 2025–2027 của Bộ Giáo dục & Đào tạo Việt Nam.  
+> **Tương thích:** **Claude Code / Cursor**, **Google Antigravity / Gemini**, **OpenAI ChatGPT / Codex**.  
+> **Kiến trúc:** AAS Core Standard ([`sickn33/agentic-awesome-skills`](https://github.com/sickn33/agentic-awesome-skills)).
 
 ---
 
+[![Version: Beta v0.1-beta](https://img.shields.io/badge/Version-Beta%20v0.1--beta-orange.svg)](#)
+[![Curriculum: BGD 2026 Unified](https://img.shields.io/badge/Curriculum-BGD%202026%20Unified%20SGK-blue.svg)](https://moet.gov.vn)
+[![Exam: BGD 2025-2027](https://img.shields.io/badge/Exam%20Format-3%20Phần%20Chuẩn%20BGD-red.svg)](https://moet.gov.vn)
+[![Interface: 3D Web Experience](https://img.shields.io/badge/UI-3D%20Three.js%20Experience-emerald.svg)](web/index.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Curriculum: GDPT 2018](https://img.shields.io/badge/Curriculum-GDPT%202018-blue.svg)](https://moet.gov.vn)
-[![Exam: BGD 2025-2027](https://img.shields.io/badge/Exam%20Format-BGD%202025--2027-red.svg)](https://moet.gov.vn)
-[![Models: Claude | Gemini | GPT](https://img.shields.io/badge/Models-Claude%20%7C%20Gemini%20%7C%20GPT-green.svg)](#-ma-trận-tương-thích-đa-mô-hình)
-[![Architecture: AAS Core](https://img.shields.io/badge/Architecture-AAS%20Core%20Standard-purple.svg)](https://github.com/sickn33/agentic-awesome-skills)
 
 ---
 
-## 📌 1. Tại Sao EduSkills-VN Ra Đời? (Problem & Solution)
+## 🌟 1. Điểm Mới Cốt Lõi: Bộ SGK Thống Nhất 2026 & Quy Chuẩn Đề Thi Mới
 
-### Vấn nạn của học sinh khi học bài bằng AI phổ thông:
-Hầu hết học sinh khi hỏi bài trên ChatGPT, Gemini hay Claude bản mặc định đều gặp 5 vấn đề nghiêm trọng:
-1. **Kết quả "xàm" & ảo giác công thức**: AI giải sai các bước toán học, tự nghĩ ra công thức không có trong SGK, nhảy cóc bước mà không chứng minh.
-2. **Lỗi thời so với Chương trình GDPT 2018**: AI vẫn dùng danh pháp Hóa học cũ (*axit axetic, etilen, natri clorit* thay vì *ethanoic acid, ethene, sodium chloride* theo chuẩn IUPAC SGK mới); trích dẫn tác phẩm văn học không thuộc ma trận thi mới.
-3. **Đề thi và Quiz sai cấu trúc Bộ Giáo dục**: AI chỉ biết tạo trắc nghiệm 4 lựa chọn đơn giản (A, B, C, D) kiểu cũ, hoàn toàn không biết đến **cấu trúc đề thi mới từ 2025** của Bộ GD&ĐT (Phần II Trắc nghiệm Đúng/Sai tính điểm lũy tiến, Phần III Trả lời ngắn điền số).
-4. **Slide thuyết trình và sơ đồ xấu**: AI sinh nội dung slide dạng các đoạn văn dài ngoằng, không phân cấp thị giác, bố cục cẩu thả, không hỗ trợ xuất sang Marp/Reveal.js chuẩn thuyết trình chuyên nghiệp.
-5. **Prompting tùy tiện, thiếu tính nhất quán**: Học sinh không biết viết prompt thế nào cho chuẩn sư phạm, dẫn đến AI giải bài theo kiểu "làm hộ bài tập" thay vì giảng giải bản chất (Socratic method).
-
-### Giải pháp đột phá từ EduSkills-VN:
-**EduSkills-VN** đóng gói tri thức thành các **Agentic Skills** độc lập (mỗi skill là một cẩm nang chỉ dẫn chuyên gia `SKILL.md` gồm bộ quy tắc chống ảo giác, ma trận kiến thức SGK 3 bộ sách *Kết nối tri thức, Chân trời sáng tạo, Cánh Diều*, và bộ tiêu chí kiểm định nghiêm ngặt).
+Khác với các công cụ AI thông thường đưa ra kết quả lệch chuẩn hoặc dùng tài liệu cũ:
+1. **Dữ liệu chuẩn 100% SGK Thống Nhất 2026:** Từ năm 2026, Bộ GD&ĐT chính thức gộp và thống nhất một bộ SGK chuẩn toàn quốc (kho PDF SGK Lớp 10, 11, 12 được lưu trữ tại thư mục `sgk/`). Mọi công thức, định lý và ví dụ của EduSkills-VN đều trích xuất trực tiếp từ bộ sách chuẩn này.
+2. **Quy trình tạo Quiz "Document-First" (`/taoquiz-bgd`):** Học sinh bắt buộc phải gửi tài liệu/ngữ liệu bài học trước $\to$ AI phân tích sâu để tạo đề thi **ĐỘ KHÓ CAO** (Vận dụng & Vận dụng cao) bám sát tài liệu, có bẫy tư duy tinh vi và barem điểm chuẩn 3 phần (Phần I trắc nghiệm 4 lựa chọn, Phần II Đúng/Sai lũy tiến điểm 0.1-0.25-0.5-1.0, Phần III Trả lời ngắn).
+3. **Danh pháp Hóa học 100% IUPAC tiếng Anh:** *Sodium, Copper, Sulfuric acid, Ethanoic acid, Glucose, Fructose* theo đúng sách mới.
+4. **Trải nghiệm 3D Web Experience (`web/index.html`):** Giao diện vũ trụ 3D không gian Three.js tương tác trực quan để khám phá kỹ năng và copy prompt chuẩn.
 
 ---
 
-## ⚡ 2. Bảng Tra Cứu Nhanh Hệ Thống Skills (Slash Commands)
+## 🌐 2. Trải Nghiệm Giao Diện 3D Web (3D Web Experience)
 
-Học sinh hoặc lập trình viên chỉ cần gõ lệnh tắt (Slash Command) để kích hoạt chuyên gia tương ứng:
-
-### 🔬 Nhóm Môn Khoa Học Tự Nhiên
-| Lệnh Kích Hoạt | Mô Tả Chức Năng Chuyên Biệt | Khối Lớp | Định Dạng Đầu Ra |
-| :--- | :--- | :---: | :--- |
-| `/toan10` | Giải tích, Hình học tọa độ Oxy, Bất đẳng thức, Thống kê Lớp 10 | 10 | LaTeX chuẩn, bảng biến thiên, giải từng bước |
-| `/toan11` | Lượng giác, Cấp số, Giới hạn, Đạo hàm, Hình không gian 11 | 11 | LaTeX chuẩn, hình vẽ minh họa không gian (TikZ/SVG) |
-| `/toan12` | Ứng dụng đạo hàm khảo sát hàm số, Tọa độ Oxyz, Tích phân 12 | 12 | Định dạng đề thi BGD 2025-2027, sơ đồ tư duy giải |
-| `/vatli10` | Cơ học chuyển động, Động lực học Newton, Năng lượng, Động lượng | 10 | Đơn vị SI, phân tích vector lực, hiện tượng thực tế |
-| `/vatli11` | Dao động cơ, Sóng cơ, Điện trường, Dòng điện không đổi | 11 | Đồ thị dao động, sơ đồ mạch điện, hiện tượng vật lí |
-| `/vatli12` | Vật lí nhiệt, Khí lí tưởng, Từ trường, Hạt nhân nguyên tử | 12 | Bảng công thức nhiệt/từ, bài tập trắc nghiệm Đúng/Sai |
-| `/hoahoc10` | Cấu tạo nguyên tử, Bảng tuần hoàn, Liên kết hóa học, Oxi hóa - khử | 10 | Danh pháp IUPAC, cấu hình electron, năng lượng liên kết |
-| `/hoahoc11` | Cân bằng hóa học, Nitrogen - Sulfur, Hóa học hữu cơ đại cương | 11 | Cấu trúc Lewis, phương trình ion thu gọn |
-| `/hoahoc12` | Ester - Lipid, Carbohydrate, Hợp chất chứa Nitrogen, Polime | 12 | Cơ chế phản ứng, bài toán hiệu suất, phân loại polime |
-| `/sinhhoc10-12`| Sinh học tế bào, Di truyền học Men-đen, Tiến hóa và Sinh thái học | 10-12 | Sơ đồ phả hệ, bảng mã di truyền, bài toán quy luật |
-
-### 📚 Nhóm Môn Khoa Học Xã Hội & Ngôn Ngữ
-| Lệnh Kích Hoạt | Mô Tả Chức Năng Chuyên Biệt | Khối Lớp | Định Dạng Đầu Ra |
-| :--- | :--- | :---: | :--- |
-| `/nguvan10` | Thần thoại, Sử thi, Chèo/Tuồng, Văn bản nghị luận & thông tin 10 | 10 | Bảng giải mã đặc trưng thể loại, mở bài/kết bài mẫu |
-| `/nguvan11` | Truyện ngắn hiện thực, Thơ hiện đại, Kịch bản văn học 11 | 11 | Dàn ý chi tiết 3 phần, dẫn chứng lý luận văn học |
-| `/nguvan12` | Đọc hiểu ngữ liệu ngoài SGK, Nghị luận xã hội & Nghị luận văn học | 12 | Khung barem chấm điểm BGD (Đọc hiểu 4đ + Viết 6đ) |
-| `/lichsu-thpt` | Lịch sử thế giới cận - hiện đại, Lịch sử Việt Nam từ 1858 đến nay | 10-12 | Trục thời gian (Timeline), sơ đồ nguyên nhân - ý nghĩa |
-| `/diali-thpt` | Địa lí tự nhiên, dân cư, chuyển dịch cơ cấu kinh tế các vùng | 10-12 | Phân tích Atlat Địa lí Việt Nam, bảng số liệu & biểu đồ |
-| `/ktpl-thpt` | Giáo dục Kinh tế & Pháp luật (Cung - cầu, Lạm phát, Hiến pháp) | 10-12 | Xử lí tình huống pháp luật, phân tích ma trận hành vi |
-| `/tienganh-thpt`| Ngữ pháp trọng điểm THPT, Collocations, Đọc hiểu IELTS/BGD format| 10-12 | Bảng từ vựng phiên âm IPA, giải thích ngữ cảnh bẫy |
-
-### 🛠️ Nhóm Meta-Skills: Công Cụ Tác Vụ Học Tập Thông Minh
-| Lệnh Kích Hoạt | Mô Tả Chức Năng | Điểm Đột Phá Khác Biệt |
-| :--- | :--- | :--- |
-| `/taoquiz-bgd` | Tạo đề thi thử & trắc nghiệm chuẩn ma trận BGD 2025–2027 | **Đủ 3 phần**: Phần I (Nhiều lựa chọn), Phần II (Đúng/Sai lũy tiến điểm), Phần III (Trả lời ngắn) kèm đáp án chi tiết. |
-| `/slide-thuyettrinh` | Sinh mã thuyết trình Marp/HTML chuẩn visual sang trọng | Thiết kế chuẩn tỷ lệ 16:9, bảng màu hiện đại, tối đa 6 dòng/slide, hiệu ứng micro-animations, không generic AI. |
-| `/tomtat-mindmap` | Tóm tắt kiến thức SGK ra Mermaid Mindmap & Cheatsheet | Sơ đồ tư duy trực quan, bảng so sánh đa chiều, nhớ nhanh công thức cốt lõi. |
-| `/giai-chi-tiet` | Trợ giảng giải bài tập theo phương pháp Socrates | Không đưa ngay đáp án; gợi mở tư duy từng bước, giải thích "tại sao lại chọn công thức này", cảnh báo bẫy sai lầm. |
-| `/luan-an-nghiencuu`| Hướng dẫn NCKH kỹ thuật học sinh THPT (ViSEF) & Trải nghiệm | Khung phương pháp nghiên cứu, đề xuất giả thuyết khoa học, thiết kế khảo sát và cấu trúc bài báo cáo chuẩn học thuật. |
+Dự án tích hợp sẵn một ứng dụng Web 3D hiện đại xây dựng bằng **Three.js & WebGL** tại [`web/index.html`](web/index.html):
+*   **Vũ trụ kỹ năng 3D:** Khối cầu trung tâm *"EduSkills Brain"* cùng 4 quỹ đạo hành tinh đại diện cho 4 phân hệ kỹ năng.
+*   **Hộp kiểm tra & Tạo Prompt tương tác:** Click vào từng quả cầu kỹ năng để xem thông số, thử nghiệm tính năng thả tài liệu (Dropzone), và bấm 1 nút để sao chép Prompt Payload.
+*   **Cách khởi chạy:** Mở trực tiếp file `web/index.html` bằng trình duyệt (Chrome, Edge, Firefox) hoặc chạy lệnh trong terminal:
+    ```bash
+    start web/index.html
+    ```
 
 ---
 
-## 🧩 3. Ma Trận Tương Thích Đa Mô Hình (Multi-Model Matrix)
+## 📂 3. Cấu Trúc Phân Mục Kỹ Năng (`skills/`)
 
-EduSkills-VN được thiết kế theo nguyên lý **"Decoupled Knowledge & Platform-Agnostic Execution"**:
-
-```mermaid
-flowchart TD
-    User([Học sinh / Người dùng]) --> Command{Gõ Slash Command ví dụ: /toan12}
-    Command --> Router[Bộ định tuyến Skill Router]
-    
-    subgraph AAS_Engine ["Hạt Nhân Kỹ Năng (EduSkills-VN AAS Engine)"]
-        SKILL["SKILL.md (Playbook)"]
-        RAG["SGK Knowledge Base (2026-2027)"]
-        Guard["Anti-Hallucination Guardrails"]
-        Rubric["Barem Đánh Giá Chuẩn BGD"]
-    end
-    
-    Router --> AAS_Engine
-    
-    subgraph Platforms ["Môi Trường Thực Thi"]
-        Claude["Anthropic Claude Code / Cursor"]
-        Gemini["Google Antigravity IDE / Gemini Studio"]
-        OpenAI["OpenAI Codex / ChatGPT Custom GPTs"]
-    end
-    
-    AAS_Engine --> Platforms
-    Platforms --> Output([Kết quả chuẩn xác 100% SGK & Đẹp])
-```
-
-| Nền Tảng | Model Đề Xuất | Phương Thức Tích Hợp | Tính Năng Nổi Bật |
-| :--- | :--- | :--- | :--- |
-| **Google Antigravity / Gemini** | Gemini 2.0 Flash / Pro | Skill folder trong `.gemini/config/` | Tốc độ siêu nhanh, context window cực lớn (2M tokens) nuốt trọn cả cuốn SGK |
-| **Claude Code / Cursor** | Claude 3.5 Sonnet | File `SKILL.md` hoặc `.cursorrules` | Tư duy lập luận môn Toán/Văn siêu sâu sắc, viết văn mượt mà giàu cảm xúc |
-| **OpenAI / ChatGPT** | GPT-4o / GPT-4.5 | Custom Instructions / Custom GPTs | Đa năng, xử lý hội thoại mượt, công cụ trắc nghiệm linh hoạt |
-
----
-
-## 📂 4. Cấu Trúc Thư Mục Chuẩn
-
-Thiết kế mô-đun hóa phỏng theo kiến trúc của `sickn33/agentic-awesome-skills`:
+Thư mục `skills/` được phân chia thành 4 phân hệ chủ đề khoa học, không để lộn xộn:
 
 ```text
-skillsGeminiTHPT/
-├── readme.md                           # Trang chủ & bảng tra cứu hệ thống
-├── .gitignore                          # Loại trừ file tạm và file PDF SGK nặng
-├── docs/                               # Bộ tài liệu thiết kế & kỹ thuật chuyên sâu
-│   ├── 01_IDEA_AUTOPSY_AND_VALIDATION.md    # Khám nghiệm ý tưởng & giải mã bẫy AI
-│   ├── 02_ARCHITECTURE_AGENTIC_SKILLS.md     # Bản đặc tả kiến trúc chuẩn SKILL.md
-│   ├── 03_CURRICULUM_BGD_2026_STANDARDS.md   # Chuẩn GDPT 2018 & Quy chế thi BGD mới
-│   ├── 04_SKILLS_CATALOG_MATRIX.md           # Ma trận chi tiết 36+ skills
-│   ├── 05_PDF_EXTRACTION_PIPELINE.md         # Pipeline trích xuất PDF SGK Azure AI
-│   ├── 06_TESTING_AND_BENCHMARK_FRAMEWORK.md # Bộ tiêu chí kiểm thử & Benchmark
-│   └── 07_ROADMAP_AND_TASK_BOARD.md          # Lộ trình triển khai & Bảng việc mã màu
-├── skills/                             # Thư mục chứa từng Agentic Skill độc lập
-│   ├── toan-thpt/                      # Skill Toán học THPT (Lớp 10, 11, 12)
-│   │   ├── SKILL.md
-│   │   └── references/
-│   ├── ngu-van-thpt/                   # Skill Ngữ văn THPT
-│   │   ├── SKILL.md
-│   │   └── references/
-│   ├── vat-li-thpt/                    # Skill Vật lí THPT
-│   ├── hoa-hoc-thpt/                   # Skill Hóa học THPT (Chuẩn IUPAC)
-│   ├── tao-quiz-bgd/                   # Meta-skill tạo đề thi chuẩn 3 phần
-│   ├── slide-thuyet-trinh/             # Meta-skill tạo slide Marp chuẩn visual
-│   └── tomtat-mindmap/                 # Meta-skill tóm tắt sơ đồ tư duy Mermaid
-└── sgk/                                # Kho dữ liệu SGK Lớp 10, 11, 12 (Lưu cục bộ)
-    ├── PDF SGK Lớp 10 2026-2027/
-    ├── PDF SGK Lớp 11 2026-2027/
-    └── PDF SGK Lớp 12 2026-2027/
+skills/
+├── khoa-hoc-tu-nhien/         # 🔬 Môn Khoa Học Tự Nhiên
+│   ├── toan-thpt/SKILL.md     # Giải tích, Hình không gian Oxyz, Xác suất Bayes (Lớp 10, 11, 12)
+│   ├── vat-li-thpt/SKILL.md   # Dao động cơ, Sóng, Vật lí nhiệt (Kelvin), Khí lí tưởng
+│   ├── hoa-hoc-thpt/SKILL.md  # Chuẩn hóa 100% danh pháp IUPAC tiếng Anh, bài toán bảo toàn e
+│   └── sinh-hoc-thpt/SKILL.md # Di truyền học phân tử, sơ đồ phả hệ, tiến hóa
+├── khoa-hoc-xa-hoi/          # 📚 Môn Khoa Học Xã Hội
+│   ├── ngu-van-thpt/SKILL.md  # Đọc hiểu ngữ liệu ngoài SGK (4đ), NLXH 200 chữ (2đ), NLVH (4đ)
+│   ├── lich-su-thpt/SKILL.md  # Trục thời gian (Timeline), phân tích nguyên nhân - ý nghĩa lịch sử
+│   ├── dia-li-thpt/SKILL.md   # Bảng số liệu, biểu đồ kinh tế - xã hội và khai thác Atlat VN
+│   └── ktpl-thpt/SKILL.md     # Cơ chế thị trường, Lạm phát, giải quyết tình huống pháp lý
+├── ngon-ngu-cong-nghe/       # 💻 Ngôn Ngữ & Kỹ Thuật
+│   ├── tieng-anh-thpt/SKILL.md# Ngữ pháp trọng điểm, phiên âm IPA, kỹ năng đọc hiểu phân hóa
+│   ├── tin-hoc-thpt/SKILL.md  # Lập trình Python, CSDL quan hệ SQL, mạng máy tính
+│   └── cong-nghe-thpt/SKILL.md# Mạch điện 3 pha, vi điều khiển, cơ khí & nông nghiệp CNC
+└── meta-tools/               # 🛠️ Công Cụ Học Tập Thông Minh
+    ├── tao-quiz-bgd/SKILL.md  # Tạo đề thi 3 phần chuẩn BGD độ khó cao (Document-First)
+    ├── slide-thuyet-trinh/SKILL.md # Slide Marp / HTML tỷ lệ 16:9 chuẩn visual sang trọng
+    ├── tomtat-mindmap/SKILL.md# Sơ đồ tư duy Mermaid.js & Cheatsheet nhớ nhanh 60 giây
+    ├── giai-chi-tiet/SKILL.md # Gia sư khơi mở tư duy Socrates (không làm tắt, không giải hộ)
+    └── luan-an-nghiencuu/SKILL.md # Hướng dẫn NCKH kỹ thuật học sinh THPT ViSEF
 ```
 
 ---
 
-## 🚀 5. Hướng Dẫn Cài Đặt & Sử Dụng Nhanh (Quickstart)
+## 🛠️ 4. Hướng Dẫn Nạp Skills Vào Các Nền Tảng AI Cục Bộ (Local Prompting Guide)
 
-### Cách 1: Sử dụng trực tiếp trong Antigravity IDE (Gemini)
-1. Clone kho lưu trữ về thư mục cấu hình của bạn:
+### 🤖 Cách 1: Sử dụng trong Google Antigravity IDE (Gemini)
+Vì dự án nằm trực tiếp trong thư mục cấu hình của Antigravity (`~/.gemini/config/projects/skillsGeminiTHPT`), hệ thống tự động nhận diện các skills:
+```text
+/taoquiz-bgd [Dán bài học Toán 12] Hãy tạo đề thi 50 phút phân hóa học sinh khá giỏi.
+```
+
+### 🧠 Cách 2: Sử dụng trong Claude Code / Claude Desktop
+Khi chat với Claude Code, bạn chỉ cần nạp playbook tương ứng:
+```text
+Áp dụng toàn bộ quy tắc và barem chấm điểm từ file:
+skills/meta-tools/tao-quiz-bgd/SKILL.md
+
+Đây là tài liệu bài học của tôi:
+[Dán đoạn trích SGK 2026 hoặc tải file tài liệu]
+
+Yêu cầu: Hãy phân tích tài liệu và xuất đề thi 3 phần chuẩn Bộ GD&ĐT với các câu hỏi Vận dụng cao.
+```
+
+### 💻 Cách 3: Sử dụng trong Cursor IDE
+Thêm vào file `.cursorrules` hoặc gõ trong cửa sổ Composer của Cursor:
+```text
+@skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md Giải bài toán khảo sát hàm số sau theo đúng quy chuẩn sư phạm 4 bước: y = (x^2 - 3x + 2)/(x - 1).
+```
+
+### 🌐 Cách 4: Sử dụng trong OpenAI ChatGPT (Custom GPTs / System Instructions)
+1. Mở trang tạo **Custom GPT** trên ChatGPT Plus.
+2. Sao chép toàn bộ nội dung file `SKILL.md` (ví dụ `skills/meta-tools/tao-quiz-bgd/SKILL.md`) dán vào mục **Instructions**.
+3. Học sinh chỉ cần tải ảnh bài tập hoặc dán tài liệu, GPT sẽ tự động đóng vai chuyên viên khảo thí BGD tạo đề thi chuẩn mực.
+
+---
+
+## 🎯 5. Hướng Dẫn Sử Dụng Chi Tiết Meta-Skill `/taoquiz-bgd`
+
+> [!IMPORTANT]
+> **Định luật Document-First:** `/taoquiz-bgd` sẽ từ chối sinh đề nếu bạn không cung cấp ngữ liệu hoặc tài liệu đính kèm.
+
+### Ví Dụ Thực Tế:
+*   **Bước 1 (Học sinh gửi):**
+    ```text
+    /taoquiz-bgd
+    [ĐÍNH KÈM HOẶC DÁN VĂN BẢN]:
+    "Bài 2: Khí lí tưởng - Định luật Boyle và định luật Charles. Ở nhiệt độ không đổi, áp suất của một lượng khí tỉ lệ nghịch với thể tích... Định luật Charles: Khi áp suất không đổi, thể tích của một lượng khí xác định tỉ lệ thuận với nhiệt độ tuyệt đối T (Kelvin)..."
+    
+    Yêu cầu: Tạo đề kiểm tra 15 phút độ khó cao có bẫy về thang đo nhiệt độ Celsius và Kelvin.
+    ```
+*   **Bước 2 (AI phân tích và xuất đề):**
+    *   **Phần I:** 4 câu trắc nghiệm nhiều lựa chọn gài bẫy nhầm lẫn giữa $t$ (°C) và $T$ (K).
+    *   **Phần II:** 2 câu Đúng/Sai, mỗi câu có 4 ý $a, b, c, d$ liên hoàn biện luận đồ thị $p-V$ và $V-T$.
+    *   **Phần III:** 2 câu trả lời ngắn yêu cầu tính áp suất cuối cùng và điền đáp số số học $\le 4$ ký tự.
+    *   **Barem điểm:** Tính lũy tiến chuẩn xác (1 ý = 0.1đ; 2 ý = 0.25đ; 3 ý = 0.5đ; 4 ý = 1.0đ).
+
+---
+
+## 🚀 6. Hướng Dẫn Đẩy Code Lên GitHub (`git@github.com:Wothing0406/EduSkills-VN.git`)
+
+Khóa công khai SSH (Public Key) trên máy tính của bạn đã được khởi tạo:
+```text
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICAsPe46dHXRaMiRcnDj6FE1wvM9zpcpQzR9g0Q21m38 quangdev@QuangDev
+```
+
+### Các bước thực hiện:
+1. Mở trình duyệt và truy cập: [https://github.com/settings/ssh/new](https://github.com/settings/ssh/new)
+2. Nhập tiêu đề (Title): `QuangDev PC`
+3. Dán toàn bộ dòng khóa `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICAsPe46dHXRaMiRcnDj6FE1wvM9zpcpQzR9g0Q21m38 quangdev@QuangDev` vào ô Key rồi bấm **Add SSH Key**.
+4. Mở terminal và chạy lệnh:
    ```bash
-   git clone https://github.com/Wothing0406/EduSkills-VN.git
+   git push -u origin main
    ```
-2. Mở dự án trong Antigravity IDE. Hệ thống tự động nhận diện các skills trong thư mục `skills/`.
-3. Nhập lệnh trực tiếp vào khung chat:
-   ```text
-   /toan12 Giải bài toán tìm giá trị lớn nhất, nhỏ nhất của hàm số y = x^3 - 3x + 2 trên đoạn [0; 2]
-   ```
-
-### Cách 2: Sử dụng trong Claude Code / Cursor
-- Đọc file playbook của skill cần dùng:
-  ```text
-  Please apply the instructions from skills/tao-quiz-bgd/SKILL.md to generate a 15-minute physics quiz for Grade 12.
-  ```
+*(Nếu bạn muốn đẩy qua HTTPS, chạy lệnh: `git push -u https-origin main`)*
 
 ---
 
-## 📚 6. Khám Phá Chi Tiết Bộ Tài Liệu Kỹ Thuật
+## 📚 7. Danh Mục Tài Liệu Kỹ Thuật Trong [`docs/`](docs/)
 
-| Tài Liệu | Tóm Tắt Nội Dung |
-| :--- | :--- |
-| 📖 [**01. Khám Nghiệm Ý Tưởng (Idea Autopsy)**](docs/01_IDEA_AUTOPSY_AND_VALIDATION.md) | Phân tích tử huyệt của AI học tập truyền thống, 5 bộ lọc khắt khe và rào cản phòng vệ (Moat). |
-| 🏗️ [**02. Kiến Trúc Agentic Skills**](docs/02_ARCHITECTURE_AGENTIC_SKILLS.md) | Đặc tả cấu trúc `SKILL.md`, YAML Schema, bộ lọc chống ảo giác và adapter đa mô hình. |
-| 📜 [**03. Chuẩn BGD 2026–2027**](docs/03_CURRICULUM_BGD_2026_STANDARDS.md) | Toàn bộ ma trận đề thi tốt nghiệp THPT mới (Phần I, II, III), chuẩn IUPAC và LaTeX. |
-| 🗺️ [**04. Ma Trận Danh Mục Skills**](docs/04_SKILLS_CATALOG_MATRIX.md) | Chi tiết 36+ skills cho từng môn học và các meta-skills học tập thông minh. |
-| ⚙️ [**05. Pipeline Trích Xuất PDF SGK**](docs/05_PDF_EXTRACTION_PIPELINE.md) | Bóc tách bảng, công thức, bài tập SGK bằng Azure AI Document Intelligence. |
-| 🧪 [**06. Khung Kiểm Thử & Benchmark**](docs/06_TESTING_AND_BENCHMARK_FRAMEWORK.md) | Tiêu chí rubrics, bộ test chống ảo giác và thang điểm đánh giá thẩm mỹ slide. |
-| 📋 [**07. Lộ Trình & Bảng Phân Việc**](docs/07_ROADMAP_AND_TASK_BOARD.md) | Bảng công việc phân cấp mã màu (`🔴 P0`, `🟡 P1`, `🟢 P2`, `🟣 P3`). |
-
----
-
-## 🤝 7. Đóng Góp & Giấy Phép (License)
-
-Dự án được phân phối dưới giấy phép mã nguồn mở **MIT License**. Mọi đóng góp từ giáo viên, sinh viên sư phạm và học sinh THPT trên toàn quốc nhằm hoàn thiện bộ kỹ năng đều được hoan nghênh nồng nhiệt!
+- [**01. Khám Nghiệm Ý Tưởng (Idea Autopsy)**](docs/01_IDEA_AUTOPSY_AND_VALIDATION.md)
+- [**02. Kiến Trúc Agentic Skills Chuẩn AAS**](docs/02_ARCHITECTURE_AGENTIC_SKILLS.md)
+- [**03. Chuẩn BGD & Bộ SGK Thống Nhất 2026**](docs/03_CURRICULUM_BGD_2026_STANDARDS.md)
+- [**04. Ma Trận Danh Mục Toàn Diện 36+ Skills**](docs/04_SKILLS_CATALOG_MATRIX.md)
+- [**05. Pipeline Trích Xuất SGK Bằng Azure AI**](docs/05_PDF_EXTRACTION_PIPELINE.md)
+- [**06. Khung Kiểm Thử & Benchmark Chất Lượng**](docs/06_TESTING_AND_BENCHMARK_FRAMEWORK.md)
+- [**07. Lộ Trình Phát Triển & Bảng Phân Việc Mã Màu**](docs/07_ROADMAP_AND_TASK_BOARD.md)

@@ -1,30 +1,21 @@
-# 📜 Quy Chuẩn GDPT 2018 & Định Dạng Đề Thi Tốt Nghiệp THPT 2025–2027 Của Bộ GD&ĐT
+# 📜 Quy Chuẩn GDPT 2018 & Bộ SGK Thống Nhất Toàn Quốc 2026–2027 Của Bộ GD&ĐT
 
-> **Căn cứ pháp lý:**  
-> - Thông tư số 32/2018/TT-BGDĐT ban hành Chương trình Giáo dục phổ thông mới (GDPT 2018).  
+> **Căn cứ chuyên môn & pháp lý:**  
+> - Nghị quyết của Quốc hội & Quyết định của Bộ Giáo dục & Đào tạo về việc **Thống nhất một bộ Sách giáo khoa chuẩn toàn quốc từ năm học 2026** (kế thừa và tinh hoa hóa từ 3 bộ sách Kết nối tri thức, Chân trời sáng tạo, Cánh Diều).  
 > - Quyết định số 764/QĐ-BGDĐT quy định về Cấu trúc định dạng đề thi Kỳ thi tốt nghiệp THPT từ năm 2025.  
-> - Các hướng dẫn chuyên môn và đề minh họa chính thức của Bộ Giáo dục & Đào tạo.
+> - Toàn bộ dữ liệu thực tế được chuẩn hóa trực tiếp theo kho SGK PDF Lớp 10, 11, 12 hiện có trong thư mục `sgk/`.
 
 ---
 
-## 1. Bản Đồ Chương Trình GDPT 2018 & Ba Bộ Sách Giáo Khoa
+## 1. Sự Kiện Chuyển Đổi 2026: Bộ SGK Thống Nhất Toàn Quốc
 
-Chương trình GDPT 2018 chuyển từ **"truyền thụ kiến thức một chiều"** sang **"phát triển phẩm chất và năng lực người học"**. Giáo trình được biên soạn thành 3 bộ sách chính:
-1.  **Kết nối tri thức với cuộc sống** (Nhà xuất bản Giáo dục Việt Nam)
-2.  **Chân trời sáng tạo** (Nhà xuất bản Giáo dục Việt Nam)
-3.  **Cánh Diều** (NXB ĐH Sư phạm Hà Nội & NXB ĐH Sư phạm TP.HCM)
-
-> [!IMPORTANT]
-> **Nguyên tắc cốt lõi của EduSkills-VN:**  
-> Đề thi và tài liệu học tập không được lấy ngữ liệu độc quyền của riêng một bộ sách nào để tránh thiên vị. Kiến thức phải chuẩn hóa theo **Yêu cầu cần đạt (YCCĐ)** được ban hành trong khung chương trình tổng thể của Bộ.
+Khác với giai đoạn 2020–2025 học sinh học theo 3 bộ sách phân tán, **từ năm 2026, Bộ Giáo dục & Đào tạo chính thức gộp và thống nhất một bộ SGK chuẩn mực duy nhất trên toàn quốc**.
+*   Các cuốn SGK và SGV (Sách giáo viên) chuẩn chính thức được lưu trữ trực tiếp trong thư mục `sgk/` của dự án (`10-sgk-...`, `11-sgk-...`, `12-sgk-...`).
+*   Hệ thống **EduSkills-VN** được căn chỉnh chính xác 100% theo các bài học, thuật ngữ và bài tập thực hành trong bộ sách thống nhất này.
 
 ---
 
-## 2. Ma Trận & Định Dạng Đề Thi Tốt Nghiệp THPT Từ Năm 2025–2027
-
-Kỳ thi tốt nghiệp THPT từ năm 2025 có sự thay đổi mang tính cách mạng về cấu trúc đề thi trắc nghiệm đối với tất cả các môn khoa học (Toán, Vật lí, Hóa học, Sinh học, Lịch sử, Địa lí, Giáo dục Kinh tế & Pháp luật, Tin học, Công nghệ).
-
-Đề thi bao gồm **3 phần thi riêng biệt**:
+## 2. Ma Trận Đề Thi Tốt Nghiệp THPT Từ Năm 2025–2027 (3 Phần Bắt Buộc)
 
 ```mermaid
 pie title Tỷ Lệ Điểm Số Cấu Trúc Đề Thi Mới (Môn Toán: 10 Điểm)
@@ -33,79 +24,42 @@ pie title Tỷ Lệ Điểm Số Cấu Trúc Đề Thi Mới (Môn Toán: 10 Đi
     "Phần III: Trả lời ngắn điền số (3.0đ)" : 30
 ```
 
----
-
 ### PHẦN I: Trắc Nghiệm Nhiều Lựa Chọn (Single Choice)
-*   **Hình thức:** Câu hỏi trắc nghiệm truyền thống gồm 4 phương án $A, B, C, D$, thí sinh chỉ chọn duy nhất 1 phương án đúng.
-*   **Số lượng & Thang điểm:**
-    *   Môn Toán: 12 câu $\times$ 0.25 điểm = **3.0 điểm**.
-    *   Môn Lí, Hóa, Sinh, Sử, Địa, KTPL, Tin, Công nghệ: 18 câu $\times$ 0.25 điểm = **4.5 điểm**.
-*   **Cấp độ tư duy:** Chủ yếu ở mức độ **Nhận biết** và **Thông hiểu**.
+*   Mỗi câu có 4 phương án $A, B, C, D$, chọn 1 đáp án đúng duy nhất.
+*   Thang điểm: 0.25 điểm / câu.
+*   Cấp độ: Nhận biết và Thông hiểu.
 
----
-
-### PHẦN II: Trắc Nghiệm Đúng / Sai (True / False Compound)
-*   **Hình thức:** Mỗi câu hỏi có một phần dẫn chung (ngữ cảnh/đồ thị/thí nghiệm) và 4 mệnh đề nhỏ được đánh dấu $a), b), c), d)$. Thí sinh phải xác định từng ý là **Đúng** hay **Sai**.
-*   **Cơ chế tính điểm lũy tiến ĐẶC BIỆT của Bộ GD&ĐT:**
-    *   Thí sinh chỉ chọn chính xác **01 ý** trong 1 câu: được **0.1 điểm**.
-    *   Thí sinh chỉ chọn chính xác **02 ý** trong 1 câu: được **0.25 điểm**.
-    *   Thí sinh chỉ chọn chính xác **03 ý** trong 1 câu: được **0.5 điểm**.
-    *   Thí sinh chọn chính xác cả **04 ý** trong 1 câu: được **1.0 điểm**.
-*   **Số lượng câu hỏi:**
-    *   Môn Toán: 4 câu $\times$ 1.0 điểm tối đa = **4.0 điểm**.
-    *   Môn Lí, Hóa, Sinh, Sử, Địa, KTPL, Tin, Công nghệ: 4 câu $\times$ 1.0 điểm tối đa = **4.0 điểm**.
-*   **Ý nghĩa sư phạm:** Triệt tiêu hoàn toàn nạn "khoanh bừa may rủi" (xác suất đoán đúng cả 4 ý chỉ là $1/16 \approx 6.25\%$), đòi hỏi học sinh phải hiểu sâu và bao quát mọi khía cạnh của một bài toán.
-
----
+### PHẦN II: Trắc Nghiệm Đúng / Sai Lũy Tiến Điểm (True/False Compound)
+*   Mỗi câu hỏi có 1 phần dẫn bài toán tổng quát và 4 ý $a), b), c), d)$.
+*   **Thang điểm tính lũy tiến bắt buộc:**
+    *   Đúng **01 ý**: được **0.1 điểm**.
+    *   Đúng **02 ý**: được **0.25 điểm**.
+    *   Đúng **03 ý**: được **0.5 điểm**.
+    *   Đúng cả **04 ý**: được **1.0 điểm**.
+*   *Mục đích:* Chống khoanh bừa, phân hóa học sinh khá - giỏi cực mạnh.
 
 ### PHẦN III: Trắc Nghiệm Dạng Trả Lời Ngắn (Short Answer)
-*   **Hình thức:** Câu hỏi không có sẵn đáp án để chọn. Thí sinh phải tự giải ra kết quả cuối cùng và điền đáp số vào các ô trên phiếu trả lời trắc nghiệm (tối đa 4 ký tự, có thể chứa dấu âm `"-"` hoặc dấu phẩy thập phân `","`).
-*   **Số lượng & Thang điểm:**
-    *   Môn Toán: 6 câu $\times$ 0.5 điểm = **3.0 điểm**.
-    *   Môn Lí, Hóa, Sinh: 6 câu $\times$ 0.25 điểm = **1.5 điểm**.
-*   **Cấp độ tư duy:** Tập trung toàn bộ vào cấp độ **Vận dụng** và **Vận dụng cao**, kiểm tra năng lực tính toán thực tế và mô hình hóa toán học/khoa học đời sống.
+*   Thí sinh tự giải và điền đáp số số học (tối đa 4 ký tự, có thể có dấu âm hoặc dấu phẩy).
+*   Thang điểm: 0.5 điểm/câu (Toán) hoặc 0.25 điểm/câu (Lí, Hóa, Sinh).
+*   Cấp độ: Vận dụng và Vận dụng cao.
 
 ---
 
-## 3. Đặc Tả Môn Ngữ Văn (100% Tự Luận - 120 Phút)
+## 3. Quy Trình Tạo Đề Thi "Document-First" Bắt Buộc
 
-Đề thi môn Ngữ văn xóa bỏ hoàn toàn tình trạng học sinh học thuộc lòng bài văn mẫu trong SGK:
-
-| Cấu Phần | Thời Gian | Điểm Số | Yêu Cầu Chuyên Môn Bắt Buộc |
-| :--- | :---: | :---: | :--- |
-| **I. Đọc hiểu** | 40 phút | **4.0 điểm** | - Ngữ liệu là văn bản văn học hoặc văn bản thông tin/nghị luận **HOÀN TOÀN MỚI, NẰM NGOÀI SGK**.<br/>- Gồm 5 câu hỏi phân hóa từ nhận biết thể loại, biện pháp tu từ, thông điệp rút ra đến đánh giá quan điểm tác giả. |
-| **II. Viết đoạn NLXH** | 25 phút | **2.0 điểm** | - Viết đoạn văn nghị luận xã hội khoảng **200 chữ** bàn về một vấn đề tư tưởng đạo lí hoặc hiện tượng đời sống được gợi ra từ phần Đọc hiểu. |
-| **III. Viết bài NLVH** | 55 phút | **4.0 điểm** | - Viết bài văn nghị luận văn học khoảng **600 chữ** phân tích một khía cạnh nghệ thuật, hình tượng nhân vật hoặc đặc trưng thể loại của ngữ liệu mới. |
+Đối với meta-skill `/taoquiz-bgd`:
+1.  **Học sinh bắt buộc phải gửi tài liệu/nội dung bài học trước.** AI không sinh đề chung chung hay bịa đề rác ngoài chương trình.
+2.  **Độ khó cao:** Tập trung vào các bẫy tư duy thực tế, tính toán logic và các câu hỏi phân hóa 8+, 9+, 10 điểm trong kỳ thi tốt nghiệp.
 
 ---
 
-## 4. Chuẩn Danh Pháp Hóa Học IUPAC Quốc Tế Bắt Buộc
+## 4. Chuẩn Danh Pháp Hóa Học IUPAC Quốc Tế
 
-Chương trình GDPT 2018 chuyển toàn bộ tên gọi các chất hóa học sang tiếng Anh theo khuyến nghị của IUPAC (International Union of Pure and Applied Chemistry). Mọi skill trong hệ thống EduSkills-VN phải áp dụng 100% bảng quy chuẩn này:
-
-| Tên Cũ (Pre-2018 - CẤM DÙNG) | Danh Pháp Chuẩn IUPAC SGK Mới (BẮT BUỘC) | Ký Hiệu / Công Thức |
+| Tên Cũ (Pre-2018 - CẤM DÙNG) | Danh Pháp Chuẩn IUPAC SGK Thống Nhất 2026 | Công Thức Hóa Học |
 | :--- | :--- | :--- |
-| Axit sunfuric | **Sulfuric acid** | $H_2SO_4$ |
-| Axit clohidric | **Hydrochloric acid** | $HCl$ |
 | Axit axetic | **Ethanoic acid** (hoặc Acetic acid) | $CH_3COOH$ |
 | Rượu etylic | **Ethanol** | $C_2H_5OH$ |
 | Khí etilen | **Ethene** | $C_2H_4$ |
-| Khí axetilen | **Ethyne** | $C_2H_2$ |
-| Khí cacbonic | **Carbon dioxide** | $CO_2$ |
-| Sắt, Đồng, Kẽm, Chì | **Iron, Copper, Zinc, Lead** | $Fe, Cu, Zn, Pb$ |
+| Axit sunfuric | **Sulfuric acid** | $H_2SO_4$ |
 | Natri hidroxit | **Sodium hydroxide** | $NaOH$ |
-
----
-
-## 5. Quy Chuẩn Hiển Thị Công Thức Toán - Lí (LaTeX Protocol)
-
-Mọi công thức trong hệ thống phải tuân thủ chuẩn render KaTeX/MathJax:
-1.  **Công thức trong dòng (Inline Math):** Sử dụng cặp dấu dollar đơn `$ ... $`.  
-    *Ví dụ:* Gia tốc tức thời được tính bằng đạo hàm của vận tốc: `$a(t) = v'(t) = s''(t)$` $\rightarrow$ $a(t) = v'(t) = s''(t)$.
-2.  **Công thức khối riêng biệt (Block Math):** Sử dụng cặp dấu dollar kép `$$ ... $$`.  
-    *Ví dụ:*
-    ```latex
-    $$V = \pi \int_{a}^{b} [f(x)]^2 dx$$
-    ```
-    $$V = \pi \int_{a}^{b} [f(x)]^2 dx$$
-3.  **Vectơ và Ma trận:** Bắt buộc dùng `\vec{a}` hoặc `\overrightarrow{AB}`, không dùng chữ in hoa cộc lốc $AB$ đại diện cho vector.
+| Đồng, Sắt, Kẽm | **Copper, Iron, Zinc** | $Cu, Fe, Zn$ |

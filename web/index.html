@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduSkills-VN 3D Experience — Bộ Não AI Skills THPT Chuẩn BGD 2026</title>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Three.js & OrbitControls via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  
+  <style>
+    :root {
+      --bg-dark: #070913;
+      --panel-bg: rgba(15, 23, 42, 0.75);
+      --panel-border: rgba(56, 189, 248, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-purple: #a855f7;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #webgl-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* UI Overlay Layer */
+    .ui-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    .interactive {
+      pointer-events: auto;
+    }
+
+    /* Header Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 12px 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-beta {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--accent-amber);
+      color: var(--accent-amber);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .header-hint {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Left Sidebar: Skill Navigator */
+    .sidebar {
+      position: absolute;
+      top: 90px;
+      left: 20px;
+      width: 320px;
+      max-height: calc(100vh - 120px);
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 16px;
+      overflow-y: auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--panel-border);
+      border-radius: 4px;
+    }
+
+    .category-group {
+      margin-bottom: 16px;
+    }
+
+    .category-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cat-stem { color: var(--accent-cyan); }
+    .cat-social { color: var(--accent-amber); }
+    .cat-tech { color: var(--accent-purple); }
+    .cat-meta { color: var(--accent-emerald); }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .skill-item:hover, .skill-item.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent-cyan);
+      transform: translateX(4px);
+    }
+
+    .skill-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .skill-tag {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Right Panel: Skill Inspector & Prompt Playground */
+    .inspector {
+      position: absolute;
+      top: 90px;
+      right: 20px;
+      width: 440px;
+      max-height: calc(100vh - 120px);
+      background: var(--panel-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 24px;
+      overflow-y: auto;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .inspector-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 12px;
+    }
+
+    .inspector-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+
+    .inspector-command {
+      font-family: monospace;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--accent-amber);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin: 16px 0 6px 0;
+    }
+
+    .doc-dropzone {
+      border: 2px dashed rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .doc-dropzone:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    .prompt-box {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 180px;
+      overflow-y: auto;
+      user-select: text;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* 3D Scene Tooltip */
+    #tooltip-3d {
+      position: absolute;
+      display: none;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--accent-cyan);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: white;
+      pointer-events: none;
+      z-index: 20;
+      transform: translate(-50%, -130%);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .inspector { width: calc(100vw - 40px); right: 20px; left: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 3D Canvas -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <div id="tooltip-3d">Skill Info</div>
+
+  <!-- UI Overlay -->
+  <div class="ui-overlay">
+    <!-- Header -->
+    <header class="interactive">
+      <div class="logo-box">
+        <div class="logo-title">EduSkills-VN 3D Navigator</div>
+        <span class="badge-beta">Beta v0.1-beta</span>
+      </div>
+      <div class="header-hint">
+        <span>✨ Kéo xoay 3D • Click quả cầu kỹ năng để nạp Prompt</span>
+      </div>
+    </header>
+
+    <!-- Left Sidebar -->
+    <div class="sidebar interactive">
+      <!-- Group 1: Khoa học Tự nhiên -->
+      <div class="category-group">
+        <div class="category-title cat-stem">🔬 Khoa Học Tự Nhiên</div>
+        <div class="skill-item" onclick="selectSkill('toan-thpt')">
+          <span class="skill-name">Toán Học THPT (10-12)</span>
+          <span class="skill-tag">/toan10-12</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('vat-li-thpt')">
+          <span class="skill-name">Vật Lí THPT</span>
+          <span class="skill-tag">/vatli10-12</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('hoa-hoc-thpt')">
+          <span class="skill-name">Hóa Học IUPAC</span>
+          <span class="skill-tag">/hoahoc10-12</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('sinh-hoc-thpt')">
+          <span class="skill-name">Sinh Học Phân Tử</span>
+          <span class="skill-tag">/sinhhoc-thpt</span>
+        </div>
+      </div>
+
+      <!-- Group 2: Khoa học Xã hội -->
+      <div class="category-group">
+        <div class="category-title cat-social">📚 Khoa Học Xã Hội</div>
+        <div class="skill-item" onclick="selectSkill('ngu-van-thpt')">
+          <span class="skill-name">Ngữ Văn (Tự luận 100%)</span>
+          <span class="skill-tag">/nguvan10-12</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('lich-su-thpt')">
+          <span class="skill-name">Lịch Sử Tiến Trình</span>
+          <span class="skill-tag">/lichsu-thpt</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('dia-li-thpt')">
+          <span class="skill-name">Địa Lí & Atlat VN</span>
+          <span class="skill-tag">/diali-thpt</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('ktpl-thpt')">
+          <span class="skill-name">Kinh Tế & Pháp Luật</span>
+          <span class="skill-tag">/ktpl-thpt</span>
+        </div>
+      </div>
+
+      <!-- Group 3: Ngôn ngữ & Công nghệ -->
+      <div class="category-group">
+        <div class="category-title cat-tech">💻 Ngôn Ngữ & Kỹ Thuật</div>
+        <div class="skill-item" onclick="selectSkill('tieng-anh-thpt')">
+          <span class="skill-name">Tiếng Anh BGD/IELTS</span>
+          <span class="skill-tag">/tienganh-thpt</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('tin-hoc-thpt')">
+          <span class="skill-name">Tin Học & Python</span>
+          <span class="skill-tag">/tinhoc-thpt</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('cong-nghe-thpt')">
+          <span class="skill-name">Công Nghệ & Điện Tử</span>
+          <span class="skill-tag">/congnghe-thpt</span>
+        </div>
+      </div>
+
+      <!-- Group 4: Meta-Tools -->
+      <div class="category-group">
+        <div class="category-title cat-meta">🛠️ Meta-Skills Thông Minh</div>
+        <div class="skill-item active" onclick="selectSkill('tao-quiz-bgd')">
+          <span class="skill-name">Tạo Quiz 3 Phần (BGD)</span>
+          <span class="skill-tag">/taoquiz-bgd</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('slide-thuyet-trinh')">
+          <span class="skill-name">Slide Marp Visual 16:9</span>
+          <span class="skill-tag">/slide-thuyettrinh</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('tomtat-mindmap')">
+          <span class="skill-name">Sơ Đồ Tư Duy Mermaid</span>
+          <span class="skill-tag">/tomtat-mindmap</span>
+        </div>
+        <div class="skill-item" onclick="selectSkill('giai-chi-tiet')">
+          <span class="skill-name">Gia Sư Socrates</span>
+          <span class="skill-tag">/giai-chi-tiet</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Inspector Panel -->
+    <div id="inspector-panel" class="inspector interactive">
+      <div class="inspector-header">
+        <div>
+          <h3 id="ins-title" class="inspector-title">Tạo Đề Thi Chuẩn BGD 2025-2027</h3>
+          <span id="ins-command" class="inspector-command">/taoquiz-bgd</span>
+        </div>
+        <span id="ins-badge" class="badge-beta">Độ Khó Cao</span>
+      </div>
+
+      <div class="section-label">Mô tả nhiệm vụ sư phạm:</div>
+      <p id="ins-desc" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+        Tạo đề kiểm tra chuẩn 3 phần (Phần I trắc nghiệm 4 lựa chọn, Phần II Đúng/Sai tính điểm lũy tiến 0.1-0.25-0.5-1.0, Phần III Trả lời ngắn).
+      </p>
+
+      <div id="doc-section">
+        <div class="section-label">Tài liệu đính kèm (Document-First Workflow):</div>
+        <div class="doc-dropzone" onclick="alert('Tính năng: Dán hoặc tải lên tài liệu học tập SGK để AI phân tích trước khi sinh đề!')">
+          <p style="font-size: 0.85rem; color: var(--accent-cyan);">📄 Dán hoặc thả tài liệu bài học vào đây</p>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">AI chỉ sinh đề khi đã nhận được tài liệu chuẩn SGK!</p>
+        </div>
+      </div>
+
+      <div class="section-label">Mẫu Prompt Nạp Vào LLM (Prompt Payload):</div>
+      <div id="ins-prompt" class="prompt-box">
+Load skill: skills/meta-tools/tao-quiz-bgd/SKILL.md
+Tài liệu cung cấp: [Đoạn trích bài học SGK 2026-2027]
+Yêu cầu: Thiết kế đề thi 50 phút độ khó cao phân hóa học sinh khá giỏi.
+      </div>
+
+      <div class="btn-group">
+        <button class="btn-primary" onclick="copyPrompt()">
+          📋 Sao Chép Prompt
+        </button>
+        <button class="btn-secondary" onclick="alert('Đang mở file SKILL.md trong IDE của bạn...')">
+          📂 Mở SKILL.md
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js Interactive Scene Logic -->
+  <script>
+    // --- Skill Data Registry ---
+    const SKILLS_DATABASE = {
+      'tao-quiz-bgd': {
+        title: 'Tạo Quiz Chuẩn BGD 2025–2027',
+        command: '/taoquiz-bgd',
+        badge: 'Độ Khó Cao',
+        category: 'meta',
+        color: 0x10b981,
+        desc: 'Bắt buộc học sinh cung cấp tài liệu trước khi sinh đề. Tạo đề thi gồm đủ 3 phần: Trắc nghiệm 4 lựa chọn, Trắc nghiệm Đúng/Sai lũy tiến (0.1đ - 0.25đ - 0.5đ - 1.0đ), và Trả lời ngắn.',
+        prompt: `Load skill: skills/meta-tools/tao-quiz-bgd/SKILL.md\n[USER_ATTACHMENT]: [Dán nội dung bài học SGK 2026 vào đây]\nYêu cầu: Hãy phân tích tài liệu trên và tạo đề thi thử tốt nghiệp THPT chuẩn 3 phần với các câu hỏi Vận dụng cao và bẫy tư duy tinh vi.`,
+        hasDocDrop: true
+      },
+      'toan-thpt': {
+        title: 'Toán Học THPT (Lớp 10, 11, 12)',
+        command: '/toan10-12',
+        badge: 'GDPT 2018',
+        category: 'stem',
+        color: 0x38bdf8,
+        desc: 'Giải tích, Hình học không gian Oxyz, Tích phân và Xác suất Bayes theo Bộ SGK Thống Nhất Toàn Quốc 2026. Công thức 100% LaTeX chuẩn, giải từng bước.',
+        prompt: `Load skill: skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md\nĐề bài: Cho hàm số y = (2x - 1)/(x + 1). Khảo sát sự biến thiên và tìm tiệm cận đứng, tiệm cận ngang của đồ thị hàm số theo chuẩn BGD 2026.`,
+        hasDocDrop: false
+      },
+      'vat-li-thpt': {
+        title: 'Vật Lí THPT Chuyên Sâu',
+        command: '/vatli10-12',
+        badge: 'Chuẩn Hệ SI',
+        category: 'stem',
+        color: 0x38bdf8,
+        desc: 'Động học, Dao động cơ, Sóng cơ, Vật lí nhiệt (Kelvin) và Khí lí tưởng. Phân tích hiện tượng thực tế trước khi thế số.',
+        prompt: `Load skill: skills/khoa-hoc-tu-nhien/vat-li-thpt/SKILL.md\nĐề bài: Một khối khí lí tưởng có thể tích 4L ở nhiệt độ 27°C. Tính áp suất theo định luật Clapeyron-Mendeleev khi nhiệt độ tăng lên 127°C.`,
+        hasDocDrop: false
+      },
+      'hoa-hoc-thpt': {
+        title: 'Hóa Học THPT Chuẩn IUPAC',
+        command: '/hoahoc10-12',
+        badge: '100% IUPAC',
+        category: 'stem',
+        color: 0x38bdf8,
+        desc: '100% danh pháp quốc tế IUPAC SGK mới (Sodium, Sulfuric acid, Ethanoic acid, Glucose). Cấm dùng tên cũ.',
+        prompt: `Load skill: skills/khoa-hoc-tu-nhien/hoa-hoc-thpt/SKILL.md\nĐề bài: Viết phương trình este hóa giữa Ethanoic acid và Ethanol với xúc tác Sulfuric acid đặc. Gọi tên sản phẩm theo IUPAC và nêu ứng dụng.`,
+        hasDocDrop: false
+      },
+      'sinh-hoc-thpt': {
+        title: 'Sinh Học THPT Phân Tử',
+        command: '/sinhhoc-thpt',
+        badge: 'Di Truyền Học',
+        category: 'stem',
+        color: 0x38bdf8,
+        desc: 'Sinh học tế bào, Di truyền Men-đen, Sơ đồ phả hệ gia đình và bài toán xác suất di truyền quần thể.',
+        prompt: `Load skill: skills/khoa-hoc-tu-nhien/sinh-hoc-thpt/SKILL.md\nĐề bài: Phân tích sơ đồ phả hệ bệnh mù màu ở người (gen lặn trên NST X) và tính xác suất sinh con bình thường của cặp vợ chồng thế hệ III.`,
+        hasDocDrop: false
+      },
+      'ngu-van-thpt': {
+        title: 'Ngữ Văn 100% Tự Luận',
+        command: '/nguvan10-12',
+        badge: 'Đọc Hiểu Ngoài SGK',
+        category: 'social',
+        color: 0xf59e0b,
+        desc: 'Đọc hiểu ngữ liệu mới hoàn toàn ngoài SGK (4đ), Nghị luận xã hội 200 chữ (2đ) và Nghị luận văn học 600 chữ (4đ).',
+        prompt: `Load skill: skills/khoa-hoc-xa-hoi/ngu-van-thpt/SKILL.md\nNgữ liệu: [Dán bài thơ hoặc đoạn trích mới ngoài SGK]\nYêu cầu: Lập dàn ý 3 phần phân tích nét đặc sắc nghệ thuật và thông điệp nhân sinh.`,
+        hasDocDrop: true
+      },
+      'lich-su-thpt': {
+        title: 'Lịch Sử THPT Tiến Trình',
+        command: '/lichsu-thpt',
+        badge: 'Trục Thời Gian',
+        category: 'social',
+        color: 0xf59e0b,
+        desc: 'Tiến trình lịch sử Việt Nam và thế giới, phân tích nguyên nhân - ý nghĩa và bài học lịch sử.',
+        prompt: `Load skill: skills/khoa-hoc-xa-hoi/lich-su-thpt/SKILL.md\nYêu cầu: Vẽ trục thời gian các chiến dịch lớn trong cuộc kháng chiến chống Mỹ (1954-1975) và rút ra bài học về nghệ thuật quân sự.`,
+        hasDocDrop: false
+      },
+      'dia-li-thpt': {
+        title: 'Địa Lí & Atlat Việt Nam',
+        command: '/diali-thpt',
+        badge: 'Atlat & Số Liệu',
+        category: 'social',
+        color: 0xf59e0b,
+        desc: 'Phân tích bảng số liệu, biểu đồ kinh tế - xã hội và khai thác Atlat Địa lí Việt Nam.',
+        prompt: `Load skill: skills/khoa-hoc-xa-hoi/dia-li-thpt/SKILL.md\nBảng số liệu: [Dán bảng GDP các vùng kinh tế]\nYêu cầu: Nhận xét sự chuyển dịch cơ cấu và giải thích nguyên nhân.`,
+        hasDocDrop: false
+      },
+      'ktpl-thpt': {
+        title: 'Kinh Tế & Pháp Luật',
+        command: '/ktpl-thpt',
+        badge: 'Tình Huống Luật',
+        category: 'social',
+        color: 0xf59e0b,
+        desc: 'Cơ chế thị trường, Lạm phát, Hiến pháp và giải quyết các tình huống pháp lý dân sự, lao động.',
+        prompt: `Load skill: skills/khoa-hoc-xa-hoi/ktpl-thpt/SKILL.md\nTình huống: Anh A tự ý đơn phương chấm dứt hợp đồng lao động không báo trước 30 ngày. Hãy phân tích tính hợp pháp theo Bộ luật Lao động.`,
+        hasDocDrop: false
+      },
+      'tieng-anh-thpt': {
+        title: 'Tiếng Anh THPT BGD & IELTS',
+        command: '/tienganh-thpt',
+        badge: 'Ngữ Pháp & IPA',
+        category: 'tech',
+        color: 0xa855f7,
+        desc: 'Ngữ pháp trọng điểm, bảng phiên âm IPA, kỹ thuật Skimming/Scanning đọc hiểu phân hóa cao.',
+        prompt: `Load skill: skills/ngon-ngu-cong-nghe/tieng-anh-thpt/SKILL.md\nĐoạn văn đọc hiểu: [Dán bài đọc]\nYêu cầu: Giải thích 3 câu hỏi suy luận khó và các cụm Collocations bẫy thí sinh.`,
+        hasDocDrop: true
+      },
+      'tin-hoc-thpt': {
+        title: 'Tin Học & Thuật Toán Python',
+        command: '/tinhoc-thpt',
+        badge: 'Python & SQL',
+        category: 'tech',
+        color: 0xa855f7,
+        desc: 'Lập trình Python, Giải thuật tìm kiếm/sắp xếp, Cơ sở dữ liệu quan hệ SQL và mạng máy tính.',
+        prompt: `Load skill: skills/ngon-ngu-cong-nghe/tin-hoc-thpt/SKILL.md\nBài toán: Viết chương trình Python đếm số lượng số nguyên tố trong mảng và tối ưu độ phức tạp thời gian bằng Sàng Eratosthenes.`,
+        hasDocDrop: false
+      },
+      'cong-nghe-thpt': {
+        title: 'Công Nghệ Điện & Cơ Khí',
+        command: '/congnghe-thpt',
+        badge: 'Điện & Cơ Khí',
+        category: 'tech',
+        color: 0xa855f7,
+        desc: 'Bản vẽ kỹ thuật, Mạch điện xoay chiều 3 pha, Điện tử vi điều khiển và Nông nghiệp công nghệ cao.',
+        prompt: `Load skill: skills/ngon-ngu-cong-nghe/cong-nghe-thpt/SKILL.md\nYêu cầu: Giải thích nguyên lý hoạt động của động cơ điện xoay chiều 3 pha và vẽ sơ đồ đấu nối hình sao / hình tam giác.`,
+        hasDocDrop: false
+      },
+      'slide-thuyet-trinh': {
+        title: 'Slide Marp Visual Sang Trọng',
+        command: '/slide-thuyettrinh',
+        badge: 'Tỷ Lệ 16:9',
+        category: 'meta',
+        color: 0x10b981,
+        desc: 'Quy tắc 6 dòng (Rule of Six), bảng màu Slate Dark / Cyber Teal hiện đại, tích hợp sơ đồ Mermaid, sẵn sàng xuất trình chiếu.',
+        prompt: `Load skill: skills/meta-tools/slide-thuyet-trinh/SKILL.md\nChủ đề: "Bản đồ tư duy Ứng dụng đạo hàm Lớp 12"\nYêu cầu: Tạo 6 slide theo cú pháp Marp Markdown tỷ lệ 16:9 phong cách Dark Mode sang trọng.`,
+        hasDocDrop: false
+      },
+      'tomtat-mindmap': {
+        title: 'Sơ Đồ Tư Duy Mermaid.js',
+        command: '/tomtat-mindmap',
+        badge: '60s Cheatsheet',
+        category: 'meta',
+        color: 0x10b981,
+        desc: 'Tóm tắt bài học ra Mermaid Mindmap trực quan kèm bảng công thức "nhớ nhanh trong 60 giây", dán ngay vào Notion/Obsidian.',
+        prompt: `Load skill: skills/meta-tools/tomtat-mindmap/SKILL.md\nNội dung: "Toàn bộ công thức Nguyên hàm và Tích phân Toán 12"\nYêu cầu: Xuất khối mã Mermaid.js và bảng cheatsheet các bẫy hay gặp.`,
+        hasDocDrop: false
+      },
+      'giai-chi-tiet': {
+        title: 'Gia Sư Khơi Mở Socrates',
+        command: '/giai-chi-tiet',
+        badge: 'Phương Pháp Socrates',
+        category: 'meta',
+        color: 0x10b981,
+        desc: 'Không đưa ngay đáp số khiến học sinh ỷ lại; gợi mở từng bước, giải thích "tại sao", chỉ ra bẫy sai lầm.',
+        prompt: `Load skill: skills/meta-tools/giai-chi-tiet/SKILL.md\nBài toán: Giải phương trình 2^(2x) - 3 * 2^x + 2 = 0\nYêu cầu: Hãy đặt câu hỏi gợi ý bước đặt ẩn phụ cho em thay vì giải luôn.`,
+        hasDocDrop: false
+      }
+    };
+
+    // --- Three.js Scene Setup ---
+    const canvas = document.getElementById('webgl-canvas');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x070913, 0.02);
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 18, 38);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.maxDistance = 80;
+    controls.minDistance = 10;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.6;
+
+    // --- Lighting ---
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+
+    const pointLight = new THREE.PointLight(0x38bdf8, 2.5, 80);
+    pointLight.position.set(0, 0, 0);
+    scene.add(pointLight);
+
+    // --- Background Starfield ---
+    const starsGeo = new THREE.BufferGeometry();
+    const starsCount = 1200;
+    const starPos = new Float32Array(starsCount * 3);
+    for (let i = 0; i < starsCount * 3; i += 3) {
+      starPos[i] = (Math.random() - 0.5) * 200;
+      starPos[i + 1] = (Math.random() - 0.5) * 200;
+      starPos[i + 2] = (Math.random() - 0.5) * 200;
+    }
+    starsGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    const starsMat = new THREE.PointsMaterial({ color: 0x94a3b8, size: 0.6, transparent: true, opacity: 0.8 });
+    const starField = new THREE.Points(starsGeo, starsMat);
+    scene.add(starField);
+
+    // --- Central Core: "EduSkills Brain" ---
+    const coreGeo = new THREE.SphereGeometry(3.5, 32, 32);
+    const coreMat = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      emissive: 0x0369a1,
+      roughness: 0.2,
+      metalness: 0.8,
+      wireframe: true
+    });
+    const coreSphere = new THREE.Mesh(coreGeo, coreMat);
+    scene.add(coreSphere);
+
+    // Core Aura
+    const auraGeo = new THREE.SphereGeometry(4.2, 32, 32);
+    const auraMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.15,
+      wireframe: true
+    });
+    const coreAura = new THREE.Mesh(auraGeo, auraMat);
+    scene.add(coreAura);
+
+    // --- Orbiting Skill Nodes ---
+    const skillNodes = [];
+    const raycastMeshes = [];
+
+    const keys = Object.keys(SKILLS_DATABASE);
+    const totalSkills = keys.length;
+
+    keys.forEach((key, idx) => {
+      const data = SKILLS_DATABASE[key];
+      const orbitRadius = 12 + (idx % 3) * 5.5;
+      const angle = (idx / totalSkills) * Math.PI * 2;
+      const yOffset = Math.sin(idx * 1.5) * 4;
+
+      // Sphere Node
+      const nodeGeo = new THREE.SphereGeometry(1.2, 24, 24);
+      const nodeMat = new THREE.MeshStandardMaterial({
+        color: data.color,
+        emissive: data.color,
+        emissiveIntensity: 0.5,
+        roughness: 0.3,
+        metalness: 0.5
+      });
+      const mesh = new THREE.Mesh(nodeGeo, nodeMat);
+      mesh.userData = { id: key, name: data.title, command: data.command };
+
+      // Glow Ring
+      const ringGeo = new THREE.RingGeometry(1.5, 1.8, 32);
+      const ringMat = new THREE.MeshBasicMaterial({ color: data.color, side: THREE.DoubleSide, transparent: true, opacity: 0.4 });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI / 2;
+      mesh.add(ring);
+
+      scene.add(mesh);
+      skillNodes.push({ mesh, radius: orbitRadius, angle, speed: 0.002 + (idx % 4) * 0.001, yOffset });
+      raycastMeshes.push(mesh);
+    });
+
+    // --- Raycasting for Interaction ---
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    const tooltip = document.getElementById('tooltip-3d');
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(raycastMeshes);
+
+      if (intersects.length > 0) {
+        document.body.style.cursor = 'pointer';
+        const hit = intersects[0].object;
+        tooltip.style.display = 'block';
+        tooltip.style.left = e.clientX + 'px';
+        tooltip.style.top = e.clientY + 'px';
+        tooltip.innerText = `${hit.userData.name} (${hit.userData.command})`;
+      } else {
+        document.body.style.cursor = 'default';
+        tooltip.style.display = 'none';
+      }
+    });
+
+    window.addEventListener('click', () => {
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(raycastMeshes);
+      if (intersects.length > 0) {
+        const hit = intersects[0].object;
+        selectSkill(hit.userData.id);
+      }
+    });
+
+    // --- Animation Loop ---
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // Rotate Brain
+      coreSphere.rotation.y += 0.005;
+      coreAura.rotation.y -= 0.003;
+      starField.rotation.y += 0.0003;
+
+      // Orbit Skill Nodes
+      skillNodes.forEach((node) => {
+        node.angle += node.speed;
+        node.mesh.position.x = Math.cos(node.angle) * node.radius;
+        node.mesh.position.z = Math.sin(node.angle) * node.radius;
+        node.mesh.position.y = node.yOffset + Math.sin(node.angle * 2) * 1.2;
+        node.mesh.rotation.y += 0.01;
+      });
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Resize Handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // --- UI State Management ---
+    function selectSkill(skillId) {
+      const data = SKILLS_DATABASE[skillId];
+      if (!data) return;
+
+      document.getElementById('ins-title').innerText = data.title;
+      document.getElementById('ins-command').innerText = data.command;
+      document.getElementById('ins-badge').innerText = data.badge;
+      document.getElementById('ins-desc').innerText = data.desc;
+      document.getElementById('ins-prompt').innerText = data.prompt;
+
+      const docSection = document.getElementById('doc-section');
+      if (data.hasDocDrop) {
+        docSection.style.display = 'block';
+      } else {
+        docSection.style.display = 'none';
+      }
+
+      // Update Active State in Sidebar
+      document.querySelectorAll('.skill-item').forEach(el => el.classList.remove('active'));
+      const activeEl = Array.from(document.querySelectorAll('.skill-item')).find(el => el.innerText.includes(data.command));
+      if (activeEl) activeEl.classList.add('active');
+
+      // Camera Fly-to Target Node
+      const targetNode = skillNodes.find(n => n.mesh.userData.id === skillId);
+      if (targetNode) {
+        controls.autoRotate = false;
+        setTimeout(() => { controls.autoRotate = true; }, 4000);
+      }
+    }
+
+    function copyPrompt() {
+      const promptText = document.getElementById('ins-prompt').innerText;
+      navigator.clipboard.writeText(promptText).then(() => {
+        alert('✅ Đã sao chép Prompt vào bộ nhớ tạm! Bạn có thể dán ngay vào Claude Code, Cursor hoặc Antigravity IDE.');
+      });
+    }
+
+    // Default Selection
+    selectSkill('tao-quiz-bgd');
+  </script>
+</body>
+</html>
