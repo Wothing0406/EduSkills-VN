@@ -1,0 +1,121 @@
+{
+  "timestamp": "2026-09-07T06:31:35.488Z",
+  "totalScanned": 16,
+  "validCount": 16,
+  "errorCount": 0,
+  "warningCount": 0,
+  "details": [
+    {
+      "file": "skills/khoa-hoc-tu-nhien/hoa-hoc-thpt/SKILL.md",
+      "name": "hoa-hoc-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/khoa-hoc-tu-nhien/sinh-hoc-thpt/SKILL.md",
+      "name": "sinh-hoc-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md",
+      "name": "toan-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/khoa-hoc-tu-nhien/vat-li-thpt/SKILL.md",
+      "name": "vat-li-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/khoa-hoc-xa-hoi/dia-li-thpt/SKILL.md",
+      "name": "dia-li-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/khoa-hoc-xa-hoi/ktpl-thpt/SKILL.md",
+      "name": "ktpl-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/khoa-hoc-xa-hoi/lich-su-thpt/SKILL.md",
+      "name": "lich-su-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/khoa-hoc-xa-hoi/ngu-van-thpt/SKILL.md",
+      "name": "ngu-van-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/meta-tools/giai-chi-tiet/SKILL.md",
+      "name": "giai-chi-tiet",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/meta-tools/luan-an-nghiencuu/SKILL.md",
+      "name": "luan-an-nghiencuu",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/meta-tools/slide-thuyet-trinh/SKILL.md",
+      "name": "slide-thuyet-trinh",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/meta-tools/tao-quiz-bgd/SKILL.md",
+      "name": "tao-quiz-bgd",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/meta-tools/tomtat-mindmap/SKILL.md",
+      "name": "tomtat-mindmap",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/ngon-ngu-cong-nghe/cong-nghe-thpt/SKILL.md",
+      "name": "cong-nghe-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/ngon-ngu-cong-nghe/tieng-anh-thpt/SKILL.md",
+      "name": "tieng-anh-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    },
+    {
+      "file": "skills/ngon-ngu-cong-nghe/tin-hoc-thpt/SKILL.md",
+      "name": "tin-hoc-thpt",
+      "isValid": true,
+      "issues": [],
+      "warnings": []
+    }
+  ]
+}

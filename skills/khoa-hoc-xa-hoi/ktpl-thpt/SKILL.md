@@ -6,6 +6,10 @@ category: khoa-hoc-xa-hoi
 grade_levels: [10, 11, 12]
 subject: "Kinh Tế & Pháp Luật"
 tools: [legal_reasoner, economic_simulator]
+anti_hallucination_rules:
+  - "Trích dẫn chính xác tên văn bản luật, điều khoản đang có hiệu lực pháp luật hiện hành."
+  - "Phân tích hành vi vi phạm pháp luật bắt buộc xét đủ 4 yếu tố: Khách thể, Mặt khách quan, Chủ thể, Mặt chủ quan."
+  - "Quy luật kinh tế phải nêu rõ quan hệ cung - cầu và ảnh hưởng đến giá cả thị trường."
 ---
 
 # ⚖️ Skill: Chuyên Gia Giáo Dục Kinh Tế & Pháp Luật THPT

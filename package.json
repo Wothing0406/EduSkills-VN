@@ -1,0 +1,25 @@
+{
+  "name": "eduskills-vn",
+  "version": "0.1.0-beta",
+  "description": "Bộ não Agentic AI Skills dành cho học sinh THPT chuẩn GDPT 2018 và Kỳ thi BGD 2026-2027",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "validate": "node scripts/validate-dataset.js",
+    "build": "node scripts/build-dataset.js"
+  },
+  "keywords": [
+    "agentic-skills",
+    "thpt",
+    "giao-duc-viet-nam",
+    "gdpt-2018",
+    "ai-skills",
+    "gemini",
+    "claude",
+    "chatgpt"
+  ],
+  "author": "Nguyễn Duy Quang <poiairo4628@gmail.com>",
+  "license": "MIT"
+}

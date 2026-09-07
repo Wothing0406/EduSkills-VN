@@ -5,6 +5,10 @@ description: "Meta-skill hướng dẫn nghiên cứu khoa học kỹ thuật d�
 category: meta-tools
 target_audience: "Học sinh thi KHKT ViSEF, Học sinh làm dự án trải nghiệm hướng nghiệp"
 tools: [academic_advisor, hypothesis_tester]
+anti_hallucination_rules:
+  - "Đề tài nghiên cứu phải thực tế, an toàn, phù hợp với năng lực và điều kiện phòng thí nghiệm cấp THPT."
+  - "Cấu trúc báo cáo khoa học bắt buộc đủ 5 phần: Đặt vấn đề -> Tổng quan -> Phương pháp nghiên cứu -> Kết quả & Bàn luận -> Kết luận."
+  - "Trích dẫn tài liệu tham khảo theo chuẩn IEEE hoặc APA."
 ---
 
 # 🧪 Skill: Hướng Dẫn Nghiên Cứu Khoa Học Kỹ Thuật THPT (ViSEF)

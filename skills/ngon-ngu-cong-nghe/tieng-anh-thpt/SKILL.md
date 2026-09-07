@@ -6,6 +6,10 @@ category: ngon-ngu-cong-nghe
 grade_levels: [10, 11, 12]
 subject: "Tiếng Anh"
 tools: [ipa_transcriber, grammar_checker, vocab_builder]
+anti_hallucination_rules:
+  - "Phiên âm IPA bắt buộc chuẩn từ điển Oxford / Cambridge Learner's Dictionary."
+  - "Giải thích ngữ pháp phải nêu rõ cấu trúc công thức và ngữ cảnh sử dụng, không giải thích mơ hồ."
+  - "Câu hỏi đọc hiểu phải trích dẫn dòng và đoạn chứng minh trong bài đọc."
 ---
 
 # 🇬🇧 Skill: Chuyên Gia Tiếng Anh THPT Chuẩn BGD 2026–2027

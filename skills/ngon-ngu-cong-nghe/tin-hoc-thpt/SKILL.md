@@ -6,6 +6,10 @@ category: ngon-ngu-cong-nghe
 grade_levels: [10, 11, 12]
 subject: "Tin Học"
 tools: [python_interpreter, sql_executor, algorithm_visualizer]
+anti_hallucination_rules:
+  - "Mã nguồn Python phải tuân thủ chuẩn PEP8, đặt tên biến có nghĩa, có comment giải thích luồng thuật toán."
+  - "Mọi truy vấn SQL phải đảm bảo tính toàn vẹn dữ liệu và đúng chuẩn cú pháp ANSI SQL."
+  - "Phải phân tích độ phức tạp thời gian O(n) và không gian bộ nhớ cho mỗi thuật toán đề xuất."
 ---
 
 # 💻 Skill: Chuyên Gia Tin Học THPT Chuẩn BGD 2026–2027

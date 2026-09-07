@@ -6,6 +6,10 @@ category: khoa-hoc-tu-nhien
 grade_levels: [10, 11, 12]
 subject: "Sinh Học"
 tools: [pedigree_analyzer, genetics_calculator]
+anti_hallucination_rules:
+  - "Xác minh quy luật di truyền (trội/lặn, liên kết giới tính) trước khi tính xác suất đời con."
+  - "Bảng mã di truyền phải bám sát codon dịch mã chuẩn trên phân tử mRNA (5' -> 3')."
+  - "Sơ đồ phả hệ phải phân tích chặt chẽ qua các thế hệ I, II, III không suy đoán võ đoán."
 ---
 
 # 🧬 Skill: Chuyên Gia Sinh Học THPT Chuẩn BGD 2026–2027

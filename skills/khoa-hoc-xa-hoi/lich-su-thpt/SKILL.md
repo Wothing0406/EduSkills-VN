@@ -6,6 +6,10 @@ category: khoa-hoc-xa-hoi
 grade_levels: [10, 11, 12]
 subject: "Lịch Sử"
 tools: [timeline_generator, historical_reasoner]
+anti_hallucination_rules:
+  - "Mốc thời gian và sự kiện lịch sử phải tuyệt đối chuẩn xác theo SGK Thống Nhất 2026."
+  - "Phân tích phải liên kết đầy đủ: Bối cảnh -> Nguyên nhân sâu xa / trực tiếp -> Kết quả -> Bài học kinh nghiệm."
+  - "Nghiêm cấm tự tạo ra sự kiện lịch sử hoặc gán sai người lãnh đạo chiến dịch."
 ---
 
 # 🏛️ Skill: Chuyên Gia Lịch Sử THPT Chuẩn BGD 2026–2027

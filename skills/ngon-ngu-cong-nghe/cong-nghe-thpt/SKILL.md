@@ -6,6 +6,10 @@ category: ngon-ngu-cong-nghe
 grade_levels: [10, 11, 12]
 subject: "Công Nghệ"
 tools: [schematic_viewer, tech_diagram]
+anti_hallucination_rules:
+  - "Sơ đồ nguyên lý mạch điện 3 pha phải tuân thủ chuẩn ký hiệu kỹ thuật điện TCVN / IEC."
+  - "Quy trình gia công cơ khí và kỹ thuật trồng trọt công nghệ cao phải đúng thông số kỹ thuật SGK Thống Nhất 2026."
+  - "Nêu rõ các cảnh báo an toàn lao động và phòng chống cháy nổ."
 ---
 
 # ⚙️ Skill: Chuyên Gia Công Nghệ THPT Chuẩn BGD 2026–2027

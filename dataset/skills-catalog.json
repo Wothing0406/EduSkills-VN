@@ -1,0 +1,412 @@
+[
+  {
+    "id": "hoa-hoc-thpt",
+    "name": "hoa-hoc-thpt",
+    "version": "1.0.0-beta",
+    "category": "khoa-hoc-tu-nhien",
+    "description": "Chuyên gia sư phạm Hóa học THPT (Lớp 10, 11, 12) chuẩn hóa 100% danh pháp IUPAC quốc tế theo Bộ SGK Thống Nhất Toàn Quốc 2026 và cấu trúc đề thi BGD 2025-2027.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Hóa Học",
+    "tools": [
+      "chemistry_engine",
+      "iupac_validator",
+      "reaction_balancer"
+    ],
+    "antiHallucinationRules": [
+      "BẮT BUỘC 100% dùng tên nguyên tố và hợp chất theo chuẩn tiếng Anh IUPAC SGK mới (Sodium, Copper, Sulfuric acid, Ethanoic acid, Glucose, v.v.). CẤM dùng tên cũ.",
+      "Phương trình phản ứng phải cân bằng chính xác số nguyên tử và điện tích (ion thu gọn).",
+      "Nêu rõ điều kiện phản ứng (nhiệt độ, xúc tác, áp suất)."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/khoa-hoc-tu-nhien/hoa-hoc-thpt/SKILL.md",
+    "contentSample": "\n# ⚗️ Skill: Chuyên Gia Hóa Học THPT Chuẩn IUPAC 2026–2027\n\n## 1. Bảng Quy Chuẩn Tên Gọi IUPAC Bắt Buộc\n- Kim loại: *Sodium, Potassium, Magnesium, Aluminium, Iron, Copper, Zinc, Silver, Gold*.\n- Acid & Base: *Hydrochloric acid, Sulfuric acid, Nitric acid, Sodium hydroxide, Barium hydroxide*.\n- Hữu c..."
+  },
+  {
+    "id": "sinh-hoc-thpt",
+    "name": "sinh-hoc-thpt",
+    "version": "1.0.0-beta",
+    "category": "khoa-hoc-tu-nhien",
+    "description": "Chuyên gia sư phạm Sinh học THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất Toàn Quốc 2026. Giải mã sơ đồ phả hệ, bài toán di truyền học phân tử và tiến hóa - sinh thái học.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Sinh Học",
+    "tools": [
+      "pedigree_analyzer",
+      "genetics_calculator"
+    ],
+    "antiHallucinationRules": [
+      "Xác minh quy luật di truyền (trội/lặn, liên kết giới tính) trước khi tính xác suất đời con.",
+      "Bảng mã di truyền phải bám sát codon dịch mã chuẩn trên phân tử mRNA (5' -> 3').",
+      "Sơ đồ phả hệ phải phân tích chặt chẽ qua các thế hệ I, II, III không suy đoán võ đoán."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/khoa-hoc-tu-nhien/sinh-hoc-thpt/SKILL.md",
+    "contentSample": "\n# 🧬 Skill: Chuyên Gia Sinh Học THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Sinh học tế bào (Cấu trúc tế bào, Chuyển hóa vật chất & năng lượng, Phân bào, Vi sinh vật & Virus).\n- **Lớp 11:** Sinh học cơ thể (Trao đổi chất & chuyển hóa năng lượng ở thực vật/động v..."
+  },
+  {
+    "id": "toan-thpt",
+    "name": "toan-thpt",
+    "version": "1.0.0-beta",
+    "category": "khoa-hoc-tu-nhien",
+    "description": "Chuyên gia sư phạm Toán học THPT (Lớp 10, 11, 12) theo Bộ Sách Giáo Khoa Thống Nhất Toàn Quốc từ năm 2026 và cấu trúc đề thi tốt nghiệp THPT 2025-2027 của Bộ GD&ĐT.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Toán Học",
+    "tools": [
+      "latex_renderer",
+      "function_grapher",
+      "math_solver"
+    ],
+    "antiHallucinationRules": [
+      "Bắt buộc tìm tập xác định D trước khi giải phương trình, bất phương trình hoặc tính đạo hàm.",
+      "Công thức toán học 100% hiển thị bằng LaTeX: $...$ (inline) hoặc $$...$$ (block).",
+      "Phân biệt tuyệt đối: Điểm cực trị hàm số (x) vs Giá trị cực trị hàm số (y) vs Điểm cực trị đồ thị ((x; y)).",
+      "Hình học không gian Oxyz: Phương trình mặt phẳng và đường thẳng phải chỉ rõ vector pháp tuyến hoặc chỉ phương."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md",
+    "contentSample": "\n# 📐 Skill: Chuyên Gia Toán Học THPT Chuẩn BGD 2026–2027\n\n## 1. Bản Đồ Trọng Tâm Kiến Thức Theo Lớp\n*   **Lớp 10:** Mệnh đề - Tập hợp, Bất phương trình bậc nhất 2 ẩn, Hàm số bậc hai, Hệ thức lượng trong tam giác, Vector & Tọa độ Oxy, Thống kê & Xác suất cổ điển.\n*   **Lớp 11:** Hàm số & Phương trìn..."
+  },
+  {
+    "id": "vat-li-thpt",
+    "name": "vat-li-thpt",
+    "version": "1.0.0-beta",
+    "category": "khoa-hoc-tu-nhien",
+    "description": "Chuyên gia sư phạm Vật lí THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất Toàn Quốc 2026. Chuẩn hóa hệ đơn vị SI, phân tích vector lực và hiện tượng vật lí thực tế.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Vật Lí",
+    "tools": [
+      "physics_calculator",
+      "circuit_simulator",
+      "graph_analyzer"
+    ],
+    "antiHallucinationRules": [
+      "Luôn kèm đơn vị đo lường chuẩn hệ SI cho mọi đại lượng tính toán.",
+      "Trong nhiệt động lực học và khí lí tưởng (Lớp 12), bắt buộc đổi nhiệt độ Celsius sang Kelvin: T = t + 273.",
+      "Giải thích bản chất vật lí trước khi ráp công thức số học."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/khoa-hoc-tu-nhien/vat-li-thpt/SKILL.md",
+    "contentSample": "\n# ⚡ Skill: Chuyên Gia Vật Lí THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Động học chuyển động, Động lực học Newton, Năng lượng, Công, Công suất, Động lượng & Va chạm.\n- **Lớp 11:** Dao động điều hòa, Sóng cơ & Sóng dừng, Giao thoa sóng, Điện trường & Điện thế, D..."
+  },
+  {
+    "id": "dia-li-thpt",
+    "name": "dia-li-thpt",
+    "version": "1.0.0-beta",
+    "category": "khoa-hoc-xa-hoi",
+    "description": "Chuyên gia sư phạm Địa lí THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất Toàn Quốc 2026. Phân tích bảng số liệu kinh tế - xã hội, biểu đồ địa lí và khai thác Atlat Địa lí Việt Nam.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Địa Lí",
+    "tools": [
+      "chart_analyzer",
+      "geographic_data"
+    ],
+    "antiHallucinationRules": [
+      "Số liệu và bảng biểu phải trích xuất đúng đơn vị đo (nghìn tấn, triệu USD, %, người/km2).",
+      "Dẫn chứng Atlat phải ghi rõ số trang và ký hiệu bản đồ tương ứng.",
+      "Không nhận xét chung chung; bắt buộc tính toán số liệu so sánh (tăng gấp mấy lần, tăng bao nhiêu %)."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/khoa-hoc-xa-hoi/dia-li-thpt/SKILL.md",
+    "contentSample": "\n# 🌏 Skill: Chuyên Gia Địa Lí THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Địa lí tự nhiên đại cương (Khí quyển, Thạch quyển, Thủy quyển, Sinh quyển), Địa lí kinh tế - xã hội thế giới.\n- **Lớp 11:** Địa lí khu vực và các quốc gia lớn (Mỹ, Trung Quốc, Nhật Bản, EU..."
+  },
+  {
+    "id": "ktpl-thpt",
+    "name": "ktpl-thpt",
+    "version": "1.0.0-beta",
+    "category": "khoa-hoc-xa-hoi",
+    "description": "Chuyên gia sư phạm Giáo dục Kinh tế & Pháp luật THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất Toàn Quốc 2026. Giải quyết tình huống pháp lý, ma trận hành vi và các quy luật kinh tế thị trường.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Kinh Tế & Pháp Luật",
+    "tools": [
+      "legal_reasoner",
+      "economic_simulator"
+    ],
+    "antiHallucinationRules": [
+      "Trích dẫn chính xác tên văn bản luật, điều khoản đang có hiệu lực pháp luật hiện hành.",
+      "Phân tích hành vi vi phạm pháp luật bắt buộc xét đủ 4 yếu tố: Khách thể, Mặt khách quan, Chủ thể, Mặt chủ quan.",
+      "Quy luật kinh tế phải nêu rõ quan hệ cung - cầu và ảnh hưởng đến giá cả thị trường."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/khoa-hoc-xa-hoi/ktpl-thpt/SKILL.md",
+    "contentSample": "\n# ⚖️ Skill: Chuyên Gia Giáo Dục Kinh Tế & Pháp Luật THPT\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Nền kinh tế và các chủ thể kinh tế, Thị trường và cơ chế thị trường, Ngân sách nhà nước, Thuế, Hệ thống chính trị & Hiến pháp nước CHXHCN Việt Nam.\n- **Lớp 11:** Cạnh tranh, Cung - cầu, ..."
+  },
+  {
+    "id": "lich-su-thpt",
+    "name": "lich-su-thpt",
+    "version": "1.0.0-beta",
+    "category": "khoa-hoc-xa-hoi",
+    "description": "Chuyên gia sư phạm Lịch sử THPT (Lớp 10, 11, 12) theo Bộ SGK Thống Nhất Toàn Quốc 2026. Trục thời gian tiến trình lịch sử, phân tích nguyên nhân - diễn biến - ý nghĩa và bài học lịch sử.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Lịch Sử",
+    "tools": [
+      "timeline_generator",
+      "historical_reasoner"
+    ],
+    "antiHallucinationRules": [
+      "Mốc thời gian và sự kiện lịch sử phải tuyệt đối chuẩn xác theo SGK Thống Nhất 2026.",
+      "Phân tích phải liên kết đầy đủ: Bối cảnh -> Nguyên nhân sâu xa / trực tiếp -> Kết quả -> Bài học kinh nghiệm.",
+      "Nghiêm cấm tự tạo ra sự kiện lịch sử hoặc gán sai người lãnh đạo chiến dịch."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/khoa-hoc-xa-hoi/lich-su-thpt/SKILL.md",
+    "contentSample": "\n# 🏛️ Skill: Chuyên Gia Lịch Sử THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Nhập môn Lịch sử, Một số nền văn minh thế giới thời cổ - trung đại, Các cuộc cách mạng công nghiệp, Văn minh Đông Nam Á & Việt Nam cổ - trung đại.\n- **Lớp 11:** Cách mạng tư sản, Chủ ngh..."
+  },
+  {
+    "id": "ngu-van-thpt",
+    "name": "ngu-van-thpt",
+    "version": "1.0.0-beta",
+    "category": "khoa-hoc-xa-hoi",
+    "description": "Chuyên gia sư phạm Ngữ văn THPT (Lớp 10, 11, 12) theo cấu trúc thi tốt nghiệp 100% tự luận từ 2025: Đọc hiểu ngữ liệu ngoài SGK (4đ), Nghị luận xã hội 200 chữ (2đ), Nghị luận văn học 600 chữ (4đ).",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Ngữ Văn",
+    "tools": [
+      "essay_evaluator",
+      "literary_rubric",
+      "text_analyzer"
+    ],
+    "antiHallucinationRules": [
+      "Ngữ liệu đọc hiểu luyện thi BẮT BUỘC là văn bản ngoài SGK để chống học vẹt, học tủ.",
+      "Đoạn văn nghị luận xã hội 200 chữ: BẮT BUỘC là 1 đoạn văn duy nhất, không xuống dòng, dung lượng 180-230 chữ.",
+      "Bài văn nghị luận văn học: Đầy đủ 3 phần Mở bài - Thân bài (các luận điểm rõ ràng) - Kết bài."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/khoa-hoc-xa-hoi/ngu-van-thpt/SKILL.md",
+    "contentSample": "\n# 📚 Skill: Chuyên Gia Ngữ Văn THPT Chuẩn BGD 2026–2027\n\n## 1. Cấu Trúc Barem Chấm Điểm 100% Tự Luận\n- **Phần I: Đọc hiểu (4.0 điểm):** 5 câu hỏi phân hóa từ nhận biết thể loại, chi tiết nghệ thuật, thông điệp tư tưởng đến thái độ tác giả.\n- **Phần II: Viết đoạn NLXH (2.0 điểm):** Bàn về một vấn đề..."
+  },
+  {
+    "id": "giai-chi-tiet",
+    "name": "giai-chi-tiet",
+    "version": "1.0.0-beta",
+    "category": "meta-tools",
+    "description": "Meta-skill gia sư khơi mở tư duy Socrates: Hướng dẫn giải bài tập từng bước, không làm tắt, không đưa đáp số ngay mà đặt câu hỏi gợi ý bản chất, cảnh báo bẫy sai lầm.",
+    "gradeLevels": [
+      10,
+      11,
+      12
+    ],
+    "subject": "",
+    "tools": [
+      "socratic_tutor",
+      "math_reasoner"
+    ],
+    "antiHallucinationRules": [
+      "Nghiêm cấm trả lời ngay đáp án cuối cùng khi học sinh mới hỏi lần đầu. Phải chỉ ra dạng bài và gợi mở bước đầu tiên.",
+      "Khi trình bày lời giải hoàn chỉnh (khi được yêu cầu), phải diễn giải chi tiết 'tại sao lại chọn công thức này'."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/meta-tools/giai-chi-tiet/SKILL.md",
+    "contentSample": "\n# 💡 Skill: Gia Sư Khơi Mở Tư Duy Socrates (/giai-chi-tiet)\n\n## 1. Phương Pháp Sư Phạm\nKhông bao giờ biến học sinh thành người sao chép thụ động:\n1. **Bước 1 (Nhận diện):** Xác định dạng toán và hỏi học sinh về định lý SGK liên quan.\n2. **Bước 2 (Gợi mở then chốt):** Đưa ra một câu hỏi định hướng (..."
+  },
+  {
+    "id": "luan-an-nghiencuu",
+    "name": "luan-an-nghiencuu",
+    "version": "1.0.0-beta",
+    "category": "meta-tools",
+    "description": "Meta-skill hướng dẫn nghiên cứu khoa học kỹ thuật dành cho học sinh THPT (Cuộc thi ViSEF), viết báo cáo dự án Hoạt động trải nghiệm hướng nghiệp và đề xuất ý tưởng sáng tạo.",
+    "gradeLevels": [
+      10,
+      11,
+      12
+    ],
+    "subject": "",
+    "tools": [
+      "academic_advisor",
+      "hypothesis_tester"
+    ],
+    "antiHallucinationRules": [
+      "Đề tài nghiên cứu phải thực tế, an toàn, phù hợp với năng lực và điều kiện phòng thí nghiệm cấp THPT.",
+      "Cấu trúc báo cáo khoa học bắt buộc đủ 5 phần: Đặt vấn đề -> Tổng quan -> Phương pháp nghiên cứu -> Kết quả & Bàn luận -> Kết luận.",
+      "Trích dẫn tài liệu tham khảo theo chuẩn IEEE hoặc APA."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/meta-tools/luan-an-nghiencuu/SKILL.md",
+    "contentSample": "\n# 🧪 Skill: Hướng Dẫn Nghiên Cứu Khoa Học Kỹ Thuật THPT (ViSEF)\n\n## 1. Phạm Vi Trợ Giúp\n- **Ý tưởng đề tài:** Gợi ý các đề tài nghiên cứu xuất phát từ thực tiễn đời sống địa phương, an toàn, phù hợp kinh phí và năng lực học sinh cấp 3.\n- **Phương pháp luận:** Hướng dẫn xây dựng giả thuyết khoa học,..."
+  },
+  {
+    "id": "slide-thuyet-trinh",
+    "name": "slide-thuyet-trinh",
+    "version": "1.0.0-beta",
+    "category": "meta-tools",
+    "description": "Meta-skill tạo mã nguồn slide thuyết trình Marp Markdown và HTML/Tailwind CSS Standalone với visual chuẩn quốc tế, tỷ lệ 16:9, bảng màu sang trọng, tối đa 6 dòng/slide, tích hợp sơ đồ Mermaid.",
+    "gradeLevels": [
+      10,
+      11,
+      12
+    ],
+    "subject": "",
+    "tools": [
+      "marp_compiler",
+      "mermaid_renderer",
+      "design_styler"
+    ],
+    "antiHallucinationRules": [
+      "Quy tắc 6 dòng (Rule of Six): Tuyệt đối không quá 6 gạch đầu dòng trên 1 slide. Không viết văn xuôi đặc quánh.",
+      "Chuẩn màu sắc cao cấp: Dùng bảng màu HSL/Hex hiện đại (Slate Dark, Cyber Teal, Deep Indigo, Amber Glow). Nghiêm cấm dùng màu nguyên bản #FF0000 hoặc #00FF00.",
+      "Bắt buộc chia slide bằng cú pháp Marp `---` và hỗ trợ tỷ lệ 16:9 (`_class: lead`, `paginate: true`)."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/meta-tools/slide-thuyet-trinh/SKILL.md",
+    "contentSample": "\n# 🎨 Skill: Tạo Slide Thuyết Trình Marp / HTML Chuẩn Visual Sang Trọng\n\n## 1. Phong Cách Thiết Kế (Design Philosophy)\nBiến mọi bài học khô khan thành một bài thuyết trình chuẩn chuyên nghiệp:\n- **Tối giản & Tinh tế:** Khoảng trắng thở tốt, phân cấp chữ rõ ràng (Tiêu đề to, từ khóa in đậm có nền bad..."
+  },
+  {
+    "id": "tao-quiz-bgd",
+    "name": "tao-quiz-bgd",
+    "version": "1.0.0-beta",
+    "category": "meta-tools",
+    "description": "Meta-skill tạo đề kiểm tra và đề thi thử chuẩn cấu trúc 3 phần của Bộ GD&ĐT (2025–2027) ĐỘ KHÓ CAO dựa trên TÀI LIỆU/NGỮ LIỆU ĐÍNH KÈM của người dùng. Bắt buộc người dùng cung cấp tài liệu trước khi sinh đề.",
+    "gradeLevels": [
+      10,
+      11,
+      12
+    ],
+    "subject": "",
+    "tools": [
+      "document_parser",
+      "latex_renderer",
+      "rubric_calculator",
+      "assessment_engine"
+    ],
+    "antiHallucinationRules": [
+      "BẮT BUỘC: Yêu cầu người dùng cung cấp tài liệu/nội dung học phần (văn bản, tóm tắt bài học, file PDF SGK, hình ảnh bài đọc) TRƯỚC KHI sinh câu hỏi. Tuyệt đối KHÔNG sinh đề vu vơ ngoài nội dung tài liệu được giao.",
+      "ĐỘ KHÓ CAO: Phải tập trung sâu vào cấp độ Vận dụng và Vận dụng cao. Các phương án nhiễu (distractors) phải bám vào những lỗi tư duy và sai lầm tính toán kinh điển của học sinh.",
+      "Phần II Đúng/Sai: Phải có 1 phần dẫn bài toán tổng quát và đúng 4 ý a, b, c, d liên hoàn biện luận logic. Bắt buộc áp dụng barem điểm lũy tiến: 1 ý đúng = 0.1đ; 2 ý đúng = 0.25đ; 3 ý đúng = 0.5đ; 4 ý đúng = 1.0đ.",
+      "Phần III Trả lời ngắn: Chỉ chấp nhận đáp số là số nguyên hoặc số thập phân rút gọn tối đa 4 ký tự.",
+      "Mọi công thức toán, vật lí, hóa học phải render bằng LaTeX chuẩn ($...$ hoặc $$...$$)."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/meta-tools/tao-quiz-bgd/SKILL.md",
+    "contentSample": "\n# 🎯 Skill: Tạo Đề Thi Chuẩn Ma Trận Bộ Giáo Dục & Đào Tạo (Độ Khó Cao & Dựa Trên Tài Liệu Đính Kèm)\n\n## 1. Nguyên Tắc Cốt Lõi: \"Document-First Workflow\" (Tài Liệu Là Tiên Quyết)\nĐể đảm bảo đề thi bám sát 100% nội dung học sinh đang học trên lớp và triệt tiêu hoàn toàn tình trạng AI \"chém gió/sinh ..."
+  },
+  {
+    "id": "tomtat-mindmap",
+    "name": "tomtat-mindmap",
+    "version": "1.0.0-beta",
+    "category": "meta-tools",
+    "description": "Meta-skill tóm tắt nội dung bài học SGK thành sơ đồ tư duy Mermaid.js trực quan và Cheatsheet ghi nhớ nhanh trong 60 giây, hỗ trợ sao chép vào Notion, Obsidian hoặc Markdown viewers.",
+    "gradeLevels": [
+      10,
+      11,
+      12
+    ],
+    "subject": "",
+    "tools": [
+      "mermaid_generator",
+      "cheatsheet_builder"
+    ],
+    "antiHallucinationRules": [
+      "Cú pháp Mermaid bắt buộc hợp lệ 100% (dùng mindmap hoặc flowchart TD/LR), không dùng các thẻ HTML lạ làm hỏng renderer.",
+      "Bắt buộc có bảng Cheatsheet 3 cột: Khái niệm | Công thức cốt lõi | Bẫy cần tránh."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/meta-tools/tomtat-mindmap/SKILL.md",
+    "contentSample": "\n# 🧠 Skill: Tóm Tắt Bài Học & Sơ Đồ Tư Duy Mermaid (60s Cheatsheet)\n\n## 1. Mục Đích & Cú Pháp Kích Hoạt\nGiúp học sinh cô đọng toàn bộ 10–15 trang sách giáo khoa thành một sơ đồ tư duy trực quan và bảng công thức cốt lõi.\n\n```text\n/tomtat-mindmap [Tên bài học hoặc nội dung văn bản]\n```\n*Ví dụ:* `/to..."
+  },
+  {
+    "id": "cong-nghe-thpt",
+    "name": "cong-nghe-thpt",
+    "version": "1.0.0-beta",
+    "category": "ngon-ngu-cong-nghe",
+    "description": "Chuyên gia sư phạm Công nghệ THPT (Lớp 10, 11, 12): Công nghệ trồng trọt, Thiết kế và công nghệ cơ khí, Công nghệ điện - điện tử, Lâm nghiệp - Thủy sản.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Công Nghệ",
+    "tools": [
+      "schematic_viewer",
+      "tech_diagram"
+    ],
+    "antiHallucinationRules": [
+      "Sơ đồ nguyên lý mạch điện 3 pha phải tuân thủ chuẩn ký hiệu kỹ thuật điện TCVN / IEC.",
+      "Quy trình gia công cơ khí và kỹ thuật trồng trọt công nghệ cao phải đúng thông số kỹ thuật SGK Thống Nhất 2026.",
+      "Nêu rõ các cảnh báo an toàn lao động và phòng chống cháy nổ."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/ngon-ngu-cong-nghe/cong-nghe-thpt/SKILL.md",
+    "contentSample": "\n# ⚙️ Skill: Chuyên Gia Công Nghệ THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Bản vẽ kỹ thuật, Vật liệu cơ khí & Gia công, Công nghệ trồng trọt công nghệ cao.\n- **Lớp 11:** Cơ khí chế tạo máy, Động cơ đốt trong, Công nghệ chăn nuôi công nghệ cao.\n- **Lớp 12:** Mạ..."
+  },
+  {
+    "id": "tieng-anh-thpt",
+    "name": "tieng-anh-thpt",
+    "version": "1.0.0-beta",
+    "category": "ngon-ngu-cong-nghe",
+    "description": "Chuyên gia sư phạm Tiếng Anh THPT (Lớp 10, 11, 12): Ngữ pháp trọng điểm, Collocations, Phát âm IPA, Đọc hiểu phân hóa theo ma trận đề thi tốt nghiệp THPT mới và định dạng chuẩn hóa quốc tế.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Tiếng Anh",
+    "tools": [
+      "ipa_transcriber",
+      "grammar_checker",
+      "vocab_builder"
+    ],
+    "antiHallucinationRules": [
+      "Phiên âm IPA bắt buộc chuẩn từ điển Oxford / Cambridge Learner's Dictionary.",
+      "Giải thích ngữ pháp phải nêu rõ cấu trúc công thức và ngữ cảnh sử dụng, không giải thích mơ hồ.",
+      "Câu hỏi đọc hiểu phải trích dẫn dòng và đoạn chứng minh trong bài đọc."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/ngon-ngu-cong-nghe/tieng-anh-thpt/SKILL.md",
+    "contentSample": "\n# 🇬🇧 Skill: Chuyên Gia Tiếng Anh THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kỹ Năng & Kiến Thức\n- **Ngữ âm:** Phát âm đuôi `-s/-es`, `-ed`, trọng âm từ 2 và 3 âm tiết.\n- **Ngữ pháp:** Thì động từ, Câu bị động, Câu điều kiện & Đảo ngữ, Mệnh đề quan hệ, Cụm động từ (Phrasal Verbs).\n- **Kỹ năng Đọc h..."
+  },
+  {
+    "id": "tin-hoc-thpt",
+    "name": "tin-hoc-thpt",
+    "version": "1.0.0-beta",
+    "category": "ngon-ngu-cong-nghe",
+    "description": "Chuyên gia sư phạm Tin học THPT (Lớp 10, 11, 12): Lập trình Python, Cấu trúc dữ liệu và giải thuật, Hệ quản trị cơ sở dữ liệu quan hệ SQL, Mạng máy tính và An toàn không gian mạng.",
+    "gradeLevels": [
+      "10",
+      "11",
+      "12"
+    ],
+    "subject": "Tin Học",
+    "tools": [
+      "python_interpreter",
+      "sql_executor",
+      "algorithm_visualizer"
+    ],
+    "antiHallucinationRules": [
+      "Mã nguồn Python phải tuân thủ chuẩn PEP8, đặt tên biến có nghĩa, có comment giải thích luồng thuật toán.",
+      "Mọi truy vấn SQL phải đảm bảo tính toàn vẹn dữ liệu và đúng chuẩn cú pháp ANSI SQL.",
+      "Phải phân tích độ phức tạp thời gian O(n) và không gian bộ nhớ cho mỗi thuật toán đề xuất."
+    ],
+    "curriculum": "Bộ SGK Thống Nhất 2026",
+    "filePath": "skills/ngon-ngu-cong-nghe/tin-hoc-thpt/SKILL.md",
+    "contentSample": "\n# 💻 Skill: Chuyên Gia Tin Học THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Kiến trúc máy tính, Hệ điều hành, Lập trình Python căn bản (Biến, Kiểu dữ liệu, Cấu trúc rẽ nhánh & Lặp, Hàm).\n- **Lớp 11:** Cơ sở dữ liệu quan hệ (Hệ CSDL, Bảng, Khóa chính/khóa ngoại, N..."
+  }
+]
