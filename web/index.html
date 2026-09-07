@@ -3,16 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduSkills-VN Matcha Hub 🍵🐾 | Nơi Lưu Trữ Kỹ Năng AI THPT Chuẩn BGD 2026</title>
-  
-  <!-- Google Fonts: Quicksand (Cute rounded) & Outfit & JetBrains Mono -->
+  <title>EduSkills-VN Matcha Hub 🍵🐾 | Hệ Sinh Thái Agentic AI THPT Chuẩn BGD 2026</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
+
+  <!-- React 18 & ReactDOM & Babel for zero-build execution -->
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+  <!-- Offline Static Skills Bundle (fallback for 100% offline usage) -->
+  <script src="./skills-data.js"></script>
+
   <style>
     :root {
       --bg-cream: #F7F9F6;
@@ -58,161 +66,136 @@
       line-height: 1.5;
     }
 
-    /* Top Navigation Header */
-    header {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
+    /* Top Navbar */
+    .top-navbar {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
       border-bottom: 1.5px solid var(--border-color);
-      padding: 12px 28px;
       position: sticky;
       top: 0;
       z-index: 100;
+      padding: 12px 28px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
+      gap: 16px;
     }
 
-    .brand-container {
+    .brand-section {
       display: flex;
       align-items: center;
-      gap: 14px;
-    }
-
-    /* Cute Chubby Matcha Cat Mascot Logo (SVG) */
-    .cat-logo-wrapper {
-      width: 48px;
-      height: 48px;
-      background: var(--bg-matcha-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid var(--matcha-leaf);
-      box-shadow: 0 4px 12px rgba(56, 94, 71, 0.15);
-      position: relative;
+      gap: 12px;
       cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .cat-logo-wrapper:hover {
-      transform: scale(1.08) rotate(-4deg);
     }
 
-    .brand-titles h1 {
+    .brand-logo-svg {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .brand-title-group h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--matcha-dark);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      letter-spacing: -0.3px;
+      line-height: 1.1;
     }
 
-    .brand-titles p {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 600;
+    .brand-title-group p {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--matcha-accent);
     }
 
     .version-tag {
-      font-size: 0.68rem;
-      background: var(--bg-matcha-subtle);
-      color: var(--matcha-primary);
+      background: var(--honey-light);
+      color: #9C4221;
+      font-size: 0.7rem;
+      font-weight: 800;
       padding: 2px 8px;
       border-radius: 20px;
-      border: 1px solid var(--matcha-leaf);
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
+      margin-left: 8px;
     }
 
-    .header-nav-btns {
+    .nav-tabs-group {
       display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-nav-cute {
-      background: var(--bg-card);
-      border: 1.5px solid var(--border-color);
-      color: var(--text-main);
-      padding: 8px 16px;
-      border-radius: var(--radius-md);
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
       align-items: center;
       gap: 8px;
-      text-decoration: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: 1.5px solid transparent;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       transition: all 0.2s ease;
     }
-    .btn-nav-cute:hover {
+
+    .nav-tab-btn:hover {
       background: var(--bg-matcha-subtle);
-      border-color: var(--matcha-leaf);
       color: var(--matcha-primary);
-      transform: translateY(-2px);
     }
-    .btn-nav-cute.active {
+
+    .nav-tab-btn.active {
       background: var(--matcha-primary);
-      color: #ffffff;
+      color: white;
       border-color: var(--matcha-primary);
-      box-shadow: 0 4px 14px rgba(56, 94, 71, 0.25);
+      box-shadow: 0 4px 12px rgba(56, 94, 71, 0.2);
     }
 
-    /* Subheader Strip: Author & Slogan */
-    .author-bar {
-      background: var(--bg-matcha-subtle);
-      border-bottom: 1px solid var(--border-color);
-      padding: 8px 28px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .author-bar a {
-      color: var(--matcha-primary);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    /* Main App Layout */
-    .app-main {
-      flex: 1;
-      padding: 24px 28px;
+    /* Layout */
+    .app-container {
       max-width: 1440px;
       width: 100%;
       margin: 0 auto;
+      padding: 24px 28px;
+      flex: 1;
     }
 
-    /* Two-Column Workspace */
-    .workspace-grid {
+    .skills-workspace-grid {
       display: grid;
       grid-template-columns: 360px 1fr;
-      gap: 24px;
+      gap: 28px;
       align-items: start;
     }
 
-    /* Left Column: Skill Catalog */
-    .catalog-box {
+    @media (max-width: 992px) {
+      .skills-workspace-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Sidebar: Catalog */
+    .catalog-sidebar {
       background: var(--bg-card);
       border: 1.5px solid var(--border-color);
       border-radius: var(--radius-lg);
       padding: 20px;
       box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
       position: sticky;
       top: 90px;
       max-height: calc(100vh - 120px);
+      display: flex;
+      flex-direction: column;
     }
 
-    .search-wrapper {
+    .search-box-cute {
       position: relative;
+      margin-bottom: 14px;
     }
-    .search-wrapper i {
+
+    .search-box-cute i {
       position: absolute;
       left: 14px;
       top: 50%;
@@ -220,112 +203,140 @@
       color: var(--matcha-leaf);
       font-size: 0.95rem;
     }
-    .search-input {
+
+    .search-input-cute {
       width: 100%;
-      padding: 10px 14px 10px 38px;
+      padding: 10px 14px 10px 40px;
+      background: var(--bg-cream);
       border: 1.5px solid var(--border-color);
       border-radius: var(--radius-md);
-      font-size: 0.88rem;
       font-family: 'Quicksand', sans-serif;
+      font-size: 0.88rem;
       font-weight: 600;
-      background: var(--bg-cream);
       color: var(--text-main);
       outline: none;
       transition: all 0.2s;
     }
-    .search-input:focus {
+
+    .search-input-cute:focus {
       border-color: var(--matcha-primary);
-      background: #ffffff;
+      background: white;
       box-shadow: 0 0 0 3px rgba(88, 139, 105, 0.15);
     }
 
-    /* Filter Tabs (Cute Pill Buttons) */
-    .filter-pills {
+    /* Category Pills - FIXED: NO UGLY HORIZONTAL SCROLLBAR */
+    .category-pills {
       display: flex;
+      flex-wrap: wrap; /* Bọc dòng tự nhiên, triệt tiêu thanh cuộn xám */
       gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 4px;
+      margin-bottom: 14px;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
+
+    .category-pills::-webkit-scrollbar {
+      display: none;
+    }
+
     .pill-btn {
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
       background: var(--bg-cream);
-      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-family: 'Quicksand', sans-serif;
       font-size: 0.78rem;
       font-weight: 700;
+      color: var(--text-muted);
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.2s;
+      white-space: nowrap;
     }
+
     .pill-btn:hover {
-      background: var(--bg-matcha-light);
-      color: var(--matcha-dark);
+      background: var(--bg-matcha-subtle);
+      color: var(--matcha-primary);
     }
+
     .pill-btn.active {
       background: var(--matcha-primary);
       color: white;
       border-color: var(--matcha-primary);
     }
 
-    .skill-list-scroll {
+    /* Skills List */
+    .skills-scroll-list {
       overflow-y: auto;
+      flex: 1;
+      padding-right: 4px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      padding-right: 4px;
+      gap: 8px;
     }
 
-    .skill-item-card {
+    .skills-scroll-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .skills-scroll-list::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 10px;
+    }
+
+    .skill-card-item {
       background: var(--bg-cream);
-      border: 1.5px solid var(--border-color);
+      border: 1.5px solid transparent;
       border-radius: var(--radius-md);
-      padding: 12px 16px;
+      padding: 12px 14px;
       cursor: pointer;
       transition: all 0.2s;
       display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .skill-item-card:hover, .skill-item-card.active {
-      background: var(--bg-matcha-subtle);
-      border-color: var(--matcha-primary);
-      transform: translateX(4px);
-    }
-    .skill-item-card.active {
-      box-shadow: 0 4px 16px rgba(56, 94, 71, 0.12);
-    }
-
-    .skill-item-top {
-      display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
-    .skill-item-name {
-      font-weight: 700;
-      font-size: 0.92rem;
-      color: var(--matcha-dark);
-    }
-    .skill-badge {
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 12px;
-    }
-    .badge-stem { background: #E3F2FD; color: #1976D2; }
-    .badge-social { background: #FFF3E0; color: #F57C00; }
-    .badge-tech { background: #F3E5F5; color: #7B1FA2; }
-    .badge-meta { background: #E8F5E9; color: #2E7D32; }
 
-    .skill-item-cmd {
+    .skill-card-item:hover {
+      background: var(--bg-matcha-subtle);
+      border-color: var(--matcha-leaf);
+      transform: translateX(3px);
+    }
+
+    .skill-card-item.active {
+      background: white;
+      border-color: var(--matcha-primary);
+      box-shadow: 0 4px 16px rgba(56, 94, 71, 0.1);
+    }
+
+    .skill-card-info h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--matcha-dark);
+      margin-bottom: 2px;
+    }
+
+    .skill-card-info p {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.76rem;
       color: var(--honey-warm);
       font-weight: 600;
     }
 
-    /* Right Column: AAS Core Workspace Detail */
-    .detail-view-box {
+    .badge-mini {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .badge-science { background: #E8F5E9; color: #2E7D32; }
+    .badge-social { background: #EDE7F6; color: #512DA8; }
+    .badge-tech { background: #E1F5FE; color: #0288D1; }
+    .badge-meta { background: #FFF3E0; color: #E65100; }
+
+    /* Right Main Panel: AAS Workstation */
+    .aas-workstation {
       background: var(--bg-card);
       border: 1.5px solid var(--border-color);
       border-radius: var(--radius-lg);
@@ -333,223 +344,322 @@
       box-shadow: var(--shadow-soft);
     }
 
-    .back-nav {
-      color: var(--matcha-primary);
-      font-size: 0.85rem;
-      font-weight: 700;
+    .workstation-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-back-catalog {
       background: none;
       border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-    .back-nav:hover {
-      text-decoration: underline;
-    }
-
-    .badge-row-aas {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-    .aas-pill-cute {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      padding: 4px 10px;
-      border-radius: 6px;
-    }
-    .pill-cat { background: var(--bg-matcha-light); color: var(--matcha-primary); }
-    .pill-self { background: #ECEFF1; color: #455A64; }
-    .pill-ver { background: #FFF8E1; color: #FF8F00; }
-
-    .skill-hero-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.3rem;
-      font-weight: 900;
-      color: var(--matcha-dark);
-      letter-spacing: -0.5px;
-      margin-bottom: 10px;
-      line-height: 1.2;
-    }
-
-    .skill-hero-desc {
-      font-size: 0.96rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    /* AAS Action Buttons */
-    .aas-actions-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-    }
-
-    .btn-aas-cute {
-      padding: 9px 18px;
-      border-radius: var(--radius-md);
+      color: var(--matcha-accent);
+      font-family: 'Quicksand', sans-serif;
       font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-back-catalog:hover {
+      background: var(--bg-matcha-subtle);
+    }
+
+    .badge-tag-aas {
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .workstation-header {
+      margin-bottom: 24px;
+    }
+
+    .workstation-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--matcha-dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .workstation-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 820px;
+      margin-bottom: 20px;
+    }
+
+    /* Action Bar */
+    .aas-action-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 24px;
+      border-bottom: 1.5px solid var(--border-color);
+      margin-bottom: 28px;
+    }
+
+    .btn-aas {
+      padding: 9px 16px;
+      border-radius: var(--radius-md);
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      font-family: 'Quicksand', sans-serif;
+      text-decoration: none;
     }
 
-    .btn-outline-cute {
-      background: var(--bg-cream);
+    .btn-primary-aas {
+      background: var(--matcha-primary);
+      color: white;
+      border: 1.5px solid var(--matcha-primary);
+    }
+
+    .btn-primary-aas:hover {
+      background: var(--matcha-dark);
+      border-color: var(--matcha-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-aas {
+      background: white;
       border: 1.5px solid var(--border-color);
       color: var(--text-main);
     }
-    .btn-outline-cute:hover {
+
+    .btn-outline-aas:hover {
       background: var(--bg-matcha-subtle);
       border-color: var(--matcha-leaf);
-      color: var(--matcha-primary);
     }
 
-    .btn-shortlist-cute {
-      background: #E8F5E9;
-      border: 1.5px solid #A5D6A7;
-      color: #2E7D32;
-    }
-    .btn-shortlist-cute:hover {
-      background: #C8E6C9;
+    .btn-honey-aas {
+      background: var(--honey-light);
+      border: 1.5px solid var(--honey-warm);
+      color: #9C4221;
     }
 
-    .btn-primary-matcha {
-      background: var(--matcha-primary);
-      border: none;
-      color: white;
-      box-shadow: 0 4px 14px rgba(56, 94, 71, 0.25);
-    }
-    .btn-primary-matcha:hover {
-      background: var(--matcha-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(56, 94, 71, 0.35);
+    .btn-honey-aas:hover {
+      background: #FFCAB9;
     }
 
-    /* Canonical Skill ID Block */
-    .canonical-block {
-      background: var(--bg-cream);
-      border: 1.5px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 16px 20px;
-      margin-bottom: 24px;
-    }
-    .canonical-label {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--text-light);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .canonical-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .canonical-code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--matcha-primary);
-      background: white;
-      padding: 6px 14px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-color);
-    }
-    .canonical-hint {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      flex: 1;
-    }
-
-    /* Interactive Prompt Builder (Matcha Mèo Ú Note Style) */
-    .builder-card {
-      background: var(--bg-matcha-subtle);
-      border: 1.5px dashed var(--matcha-leaf);
+    /* 5-Part Modern Prompt Builder */
+    .prompt-builder-card {
+      background: #FAFCF9;
+      border: 2px solid var(--matcha-leaf);
       border-radius: var(--radius-lg);
-      padding: 20px;
-      margin-bottom: 24px;
+      padding: 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(56, 94, 71, 0.05);
     }
+
     .builder-header {
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .builder-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
       font-weight: 800;
-      font-size: 0.95rem;
       color: var(--matcha-dark);
-      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .builder-subtitle {
+
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .builder-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .builder-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .builder-label {
       font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
+      font-weight: 800;
+      color: var(--matcha-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .builder-textarea {
+
+    .builder-input, .builder-select {
       width: 100%;
-      min-height: 90px;
+      padding: 9px 12px;
       background: white;
       border: 1.5px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 12px 14px;
+      border-radius: var(--radius-sm);
       font-family: 'Quicksand', sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .builder-input:focus, .builder-select:focus, .builder-textarea:focus {
+      border-color: var(--matcha-primary);
+      box-shadow: 0 0 0 3px rgba(88, 139, 105, 0.12);
+    }
+
+    .builder-textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px 12px;
+      background: white;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.86rem;
       font-weight: 600;
       color: var(--text-main);
       outline: none;
       resize: vertical;
-      transition: all 0.2s;
-    }
-    .builder-textarea:focus {
-      border-color: var(--matcha-primary);
-      box-shadow: 0 0 0 3px rgba(88, 139, 105, 0.15);
     }
 
-    /* Document-First Quiz Dropzone */
-    .doc-drop-box {
-      background: #FFF9E6;
-      border: 2px dashed #FFD54F;
+    /* Cognitive Toggles */
+    .cognitive-toggles-box {
+      background: white;
+      border: 1.5px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 18px;
-      margin-bottom: 24px;
-    }
-    .doc-drop-title {
-      font-weight: 800;
-      color: #E65100;
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-    }
-    .doc-drop-sub {
-      font-size: 0.78rem;
-      color: #795548;
-      margin-bottom: 10px;
+      padding: 14px;
+      margin-bottom: 16px;
     }
 
-    /* Rules & Code Preview Box */
-    .card-section {
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .toggle-item input[type="checkbox"] {
+      accent-color: var(--matcha-primary);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    /* Drive Citation Badge in Builder */
+    .drive-citation-box {
+      background: #E8F5E9;
+      border: 1.5px solid #81C784;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .drive-citation-text {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #1B5E20;
+    }
+
+    .drive-citation-link {
+      color: #2E7D32;
+      text-decoration: underline;
+      font-size: 0.8rem;
+    }
+
+    /* Live Output Box */
+    .live-payload-section {
+      background: #1B2820;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      position: relative;
+    }
+
+    .payload-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .payload-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #A5D6A7;
+      font-weight: 600;
+    }
+
+    .live-code-area {
+      color: #E8F5E9;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 280px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+
+    /* Anti-hallucination rules */
+    .rules-list-box {
       background: var(--bg-cream);
       border: 1.5px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
-    .card-section-title {
-      font-size: 0.85rem;
+
+    .rules-title {
+      font-size: 0.84rem;
       font-weight: 800;
       color: var(--matcha-primary);
       text-transform: uppercase;
@@ -560,12 +670,12 @@
       gap: 8px;
     }
 
-    .rule-item-cute {
+    .rule-chip {
       background: white;
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
-      padding: 6px 12px;
-      font-size: 0.82rem;
+      padding: 8px 12px;
+      font-size: 0.84rem;
       font-weight: 600;
       color: var(--text-main);
       margin-bottom: 6px;
@@ -573,59 +683,16 @@
       align-items: center;
       gap: 8px;
     }
-    .rule-item-cute i {
-      color: var(--matcha-primary);
-    }
 
-    .code-preview-area {
-      background: #1B2820;
-      color: #E8F5E9;
-      padding: 16px;
-      border-radius: var(--radius-md);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      white-space: pre-wrap;
-      word-break: break-word;
-      max-height: 240px;
-      overflow-y: auto;
-    }
-
-    /* Google Drive Storage View */
-    .drive-hub-view {
-      display: none;
-    }
-    .drive-header-banner {
-      background: linear-gradient(135deg, var(--bg-matcha-subtle), var(--bg-matcha-light));
-      border: 2px solid var(--matcha-leaf);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .drive-banner-text h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.8rem;
-      color: var(--matcha-dark);
-      margin-bottom: 6px;
-    }
-    .drive-banner-text p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 650px;
-    }
-
-    .drive-cards-grid {
+    /* Drive View */
+    .drive-grid-cute {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
+      gap: 24px;
       margin-bottom: 32px;
     }
 
-    .drive-card {
+    .drive-card-cute {
       background: white;
       border: 2px solid var(--border-color);
       border-radius: var(--radius-lg);
@@ -636,1028 +703,917 @@
       justify-content: space-between;
       transition: all 0.25s ease;
     }
-    .drive-card:hover {
+
+    .drive-card-cute:hover {
       border-color: var(--matcha-primary);
       transform: translateY(-4px);
       box-shadow: var(--shadow-hover);
     }
 
-    .drive-card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-md);
-      background: var(--bg-matcha-subtle);
-      color: var(--matcha-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 14px;
-    }
-
-    .drive-card-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--matcha-dark);
-      margin-bottom: 6px;
-    }
-
-    .drive-card-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      background: var(--bg-matcha-light);
-      color: var(--matcha-primary);
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-    }
-
-    .drive-card-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .drive-card-btns {
-      display: flex;
-      gap: 10px;
-    }
-    .btn-drive-open {
-      flex: 1;
-      background: var(--matcha-primary);
-      color: white;
-      border: none;
-      padding: 10px 14px;
-      border-radius: var(--radius-md);
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-    .btn-drive-open:hover {
-      background: var(--matcha-dark);
-    }
-    .btn-drive-copy {
-      background: var(--bg-cream);
-      border: 1.5px solid var(--border-color);
-      color: var(--text-main);
-      padding: 10px 14px;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-    .btn-drive-copy:hover {
-      background: var(--bg-matcha-subtle);
-      border-color: var(--matcha-leaf);
-    }
-
-    /* AI Injection Guide View */
-    .guide-view-box {
-      display: none;
-    }
-    .guide-grid-cute {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-    }
-    .guide-box-item {
+    /* Prompt Standards View (docs/Tieuchuanprompt.md) */
+    .standard-doc-card {
       background: white;
       border: 1.5px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 24px;
+      padding: 32px;
       box-shadow: var(--shadow-soft);
-    }
-    .guide-box-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .guide-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-    .g-gemini { background: #E1F5FE; color: #0288D1; }
-    .g-claude { background: #FFF3E0; color: #E65100; }
-    .g-gpt { background: #E8F5E9; color: #2E7D32; }
-    .g-notebook { background: #F3E5F5; color: #7B1FA2; }
-
-    .guide-ol {
-      list-style-position: inside;
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .guide-ol li {
-      margin-bottom: 8px;
-    }
-    .guide-ol strong {
-      color: var(--text-main);
+      margin-bottom: 32px;
     }
 
-    /* Floating Toast Notification */
-    #cute-toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--matcha-dark);
-      color: #ffffff;
-      padding: 12px 24px;
-      border-radius: 50px;
+    .standard-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
       font-size: 0.88rem;
+    }
+
+    .standard-table th {
+      background: var(--bg-matcha-subtle);
+      color: var(--matcha-dark);
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid var(--border-color);
+      font-weight: 800;
+    }
+
+    .standard-table td {
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      line-height: 1.5;
+    }
+
+    /* Cute Toast */
+    .cute-toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--matcha-dark);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
       font-weight: 700;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-      z-index: 9999;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: all 0.3s ease;
-      pointer-events: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-    #cute-toast.show {
-      opacity: 1;
-      transform: translateY(0);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1000;
     }
 
-    @media (max-width: 900px) {
-      .workspace-grid {
-        grid-template-columns: 1fr;
-      }
-      .catalog-box {
-        position: static;
-        max-height: 450px;
-      }
+    .cute-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer */
+    .footer-cute {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-top: 1.5px solid var(--border-color);
+      background: white;
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
+  <div id="root"></div>
 
-  <!-- Top Header -->
-  <header>
-    <div class="brand-container">
-      <!-- Cute Matcha Chubby Cat SVG -->
-      <div class="cat-logo-wrapper" onclick="showToast('Meow! Chào mừng bạn đến với EduSkills Matcha Hub! 🍵🐾')">
-        <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Ears -->
-          <polygon points="20,40 10,12 40,25" fill="#DFECE2" stroke="#385E47" stroke-width="4" stroke-linejoin="round"/>
-          <polygon points="80,40 90,12 60,25" fill="#DFECE2" stroke="#385E47" stroke-width="4" stroke-linejoin="round"/>
-          <polygon points="22,35 15,18 36,26" fill="#F7CAD0"/>
-          <polygon points="78,35 85,18 64,26" fill="#F7CAD0"/>
-          <!-- Chubby Face -->
-          <ellipse cx="50" cy="55" rx="38" ry="34" fill="#FFFFFF" stroke="#385E47" stroke-width="4"/>
-          <!-- Cheeks -->
-          <circle cx="26" cy="62" r="6" fill="#FFDDD2"/>
-          <circle cx="74" cy="62" r="6" fill="#FFDDD2"/>
-          <!-- Cute Closed Happy Eyes -->
-          <path d="M30 48 Q37 42 42 48" stroke="#385E47" stroke-width="4" stroke-linecap="round" fill="none"/>
-          <path d="M58 48 Q63 42 70 48" stroke="#385E47" stroke-width="4" stroke-linecap="round" fill="none"/>
-          <!-- Nose & Mouth -->
-          <ellipse cx="50" cy="55" rx="3" ry="2" fill="#E29578"/>
-          <path d="M45 58 Q50 63 50 59 Q50 63 55 58" stroke="#385E47" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <!-- Matcha Cup -->
-          <path d="M36 72 L64 72 L60 88 L40 88 Z" fill="#588B69" stroke="#385E47" stroke-width="3"/>
-          <ellipse cx="50" cy="72" rx="14" ry="4" fill="#DFECE2" stroke="#385E47" stroke-width="2"/>
-          <!-- Heart Steam -->
-          <path d="M48 68 C46 64 42 66 45 70 L50 74 L55 70 C58 66 54 64 52 68 Z" fill="#E29578"/>
-        </svg>
-      </div>
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
 
-      <div class="brand-titles">
-        <h1>EduSkills-VN <span style="font-weight: 500; font-size: 1rem; color: var(--matcha-leaf);">Matcha Hub</span> 🍵</h1>
-        <p>Kho Lưu Trữ Kỹ Năng & Kho Sách THPT Chuẩn BGD 2026</p>
-      </div>
-      <span class="version-tag">v0.1.2-beta</span>
-    </div>
-
-    <!-- Navigation Buttons -->
-    <div class="header-nav-btns">
-      <button class="btn-nav-cute active" id="btn-tab-skills" onclick="switchMainView('skills')">
-        <i class="fa-solid fa-shapes"></i> Kho Kỹ Năng (16)
-      </button>
-      <button class="btn-nav-cute" id="btn-tab-drive" onclick="switchMainView('drive')">
-        <i class="fa-brands fa-google-drive" style="color: #0F9D58;"></i> Tủ Sách SGK Drive
-      </button>
-      <button class="btn-nav-cute" id="btn-tab-guide" onclick="switchMainView('guide')">
-        <i class="fa-solid fa-lightbulb" style="color: #F4A261;"></i> Hướng Dẫn Nạp AI
-      </button>
-      <a href="https://github.com/Wothing0406/EduSkills-VN" target="_blank" class="btn-nav-cute">
-        <i class="fa-brands fa-github"></i> GitHub
-      </a>
-    </div>
-  </header>
-
-  <!-- Author Strip -->
-  <div class="author-bar">
-    <div>
-      🐾 Bản quyền & Thiết kế: <strong>Nguyễn Duy Quang</strong> • 📞 Hotline/Zalo: <strong>0795277227</strong> • ✉️ Email: <strong>poiairo4628@gmail.com</strong>
-    </div>
-    <div>
-      🍵 <em>Vibe matcha mèo ú tối giản: Không gian lưu trữ dịu mát, sạch sẽ cho học sinh THPT</em>
-    </div>
-  </div>
-
-  <!-- Main Container -->
-  <main class="app-main">
-
-    <!-- VIEW 1: SKILLS WORKSPACE -->
-    <div id="view-skills" class="workspace-grid">
-      
-      <!-- Left Column: Catalog -->
-      <aside class="catalog-box">
-        <div class="search-wrapper">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="skillSearch" class="search-input" placeholder="Tìm kỹ năng (/toan, /hoa, /quiz...)" oninput="filterSkills()" />
-        </div>
-
-        <div class="filter-pills">
-          <button class="pill-btn active" onclick="setCategoryFilter('all', this)">Tất cả (16)</button>
-          <button class="pill-btn" onclick="setCategoryFilter('stem', this)">🍵 Tự Nhiên</button>
-          <button class="pill-btn" onclick="setCategoryFilter('social', this)">🌸 Xã Hội</button>
-          <button class="pill-btn" onclick="setCategoryFilter('tech', this)">💻 Công Nghệ</button>
-          <button class="pill-btn" onclick="setCategoryFilter('meta', this)">🎯 Meta-Tools</button>
-        </div>
-
-        <div class="skill-list-scroll" id="skillListContainer">
-          <!-- Dynamically Loaded -->
-        </div>
-      </aside>
-
-      <!-- Right Column: Detail Workstation (AAS Core) -->
-      <section class="detail-view-box" id="skillDetailSection">
-        
-        <button class="back-nav" onclick="resetSkillFilter()">
-          <i class="fa-solid fa-arrow-left"></i> Quay lại toàn bộ danh mục
-        </button>
-
-        <div class="badge-row-aas">
-          <span id="badgeCat" class="aas-pill-cute pill-cat">KHOA HỌC TỰ NHIÊN</span>
-          <span class="aas-pill-cute pill-self">AAS CORE</span>
-          <span class="aas-pill-cute pill-ver">GDPT 2018 THỐNG NHẤT 2026</span>
-        </div>
-
-        <h1 id="skillHeroTitle" class="skill-hero-title">@toan-thpt</h1>
-        <p id="skillHeroDesc" class="skill-hero-desc">
-          Chuyên gia sư phạm Toán học THPT theo Bộ SGK Thống Nhất 2026...
-        </p>
-
-        <!-- AAS Actions Bar -->
-        <div class="aas-actions-row">
-          <button class="btn-aas-cute btn-outline-cute" onclick="saveSkillFileLocally()">
-            <i class="fa-regular fa-star"></i> Lưu về máy (.md)
-          </button>
-          <button class="btn-aas-cute btn-shortlist-cute" id="btnShortlist" onclick="toggleSkillShortlist()">
-            <i class="fa-solid fa-check"></i> In Shortlist
-          </button>
-          <button class="btn-aas-cute btn-primary-matcha" onclick="copyAasSkillTag()">
-            <i class="fa-solid fa-clipboard"></i> Copy @Skill
-          </button>
-          <button class="btn-aas-cute btn-outline-cute" onclick="copyAasFullContent()">
-            <i class="fa-solid fa-file-lines"></i> Copy Toàn Bộ Nội Dung
-          </button>
-        </div>
-
-        <!-- Canonical Skill ID -->
-        <div class="canonical-block">
-          <div class="canonical-label">CANONICAL SKILL ID</div>
-          <div class="canonical-inner">
-            <span id="canonicalIdDisplay" class="canonical-code">toan-thpt</span>
-            <span class="canonical-hint">
-              Sử dụng mã định danh này để gọi trực tiếp Agent trong hệ thống Google Antigravity hoặc nạp vào AI Stack.
-            </span>
-          </div>
-        </div>
-
-        <!-- Interactive Prompt Builder (Matcha Note Style) -->
-        <div class="builder-card">
-          <div class="builder-header">
-            <i class="fa-solid fa-paw" style="color: var(--honey-warm);"></i>
-            Interactive Prompt Builder (Ghi Chú & Yêu Cầu Riêng)
-          </div>
-          <div class="builder-subtitle">
-            Nhập yêu cầu bài tập của bạn vào đây (ví dụ: <em>"Tạo bài tập este đa chức lớp 12 mức độ Vận dụng cao kèm lời giải 4 tầng"</em>). Cả hai nút Copy trên đều sẽ tự động đính kèm yêu cầu này!
-          </div>
-          <textarea id="taskCustomInput" class="builder-textarea" placeholder="Nhập câu hỏi, dạng toán hoặc yêu cầu cụ thể của bạn tại đây..." oninput="updateLivePayload()"></textarea>
-        </div>
-
-        <!-- Document-First Quiz Dropzone (For Meta Tools) -->
-        <div id="quizDropContainer" class="doc-drop-box" style="display: none;">
-          <div class="doc-drop-title"><i class="fa-solid fa-file-circle-check"></i> Document-First Gate: Dán Tài Liệu Hoặc Bài Học SGK 2026 Vào Đây</div>
-          <div class="doc-drop-sub">AI chỉ sinh đề kiểm tra khi đã nhận được ngữ liệu bài học để đảm bảo độ khó cao và triệt tiêu ảo giác!</div>
-          <textarea id="docPayloadInput" class="builder-textarea" style="background: white;" placeholder="Dán văn bản đoạn trích SGK 2026 hoặc tóm tắt lý thuyết bài học vào đây..." oninput="updateLivePayload()"></textarea>
-        </div>
-
-        <!-- Anti-Hallucination Guardrails -->
-        <div class="card-section">
-          <div class="card-section-title">
-            <i class="fa-solid fa-shield-cat"></i> Quy Tắc Chống Ảo Giác Sư Phạm (Anti-Hallucination Guardrails)
-          </div>
-          <div id="rulesListContainer">
-            <!-- Rendered Rules -->
-          </div>
-        </div>
-
-        <!-- Live Payload Preview -->
-        <div class="card-section">
-          <div class="card-section-title">
-            <i class="fa-solid fa-terminal"></i> Live Prompt Payload (Ghép Kèm Ngữ Cảnh)
-          </div>
-          <div id="livePayloadCode" class="code-preview-area"></div>
-        </div>
-
-      </section>
-
-    </div>
-
-    <!-- VIEW 2: GOOGLE DRIVE CLOUD STORAGE HUB -->
-    <div id="view-drive" class="drive-hub-view">
-      
-      <div class="drive-header-banner">
-        <div class="drive-banner-text">
-          <h2>📚 Tủ Sách SGK Điện Tử Trên Google Drive</h2>
-          <p>
-            Do toàn bộ kho Sách Giáo Khoa Lớp 10, 11, 12 có dung lượng hơn <strong>2.03GB (46+ cuốn PDF scan)</strong> vượt quá giới hạn 100MB của GitHub, toàn bộ sách đã được lưu trữ an toàn trên Google Drive tốc độ cao để học sinh và giáo viên đọc trực tiếp mà không làm nặng máy tính!
-          </p>
-        </div>
-        <div>
-          <button class="btn-aas-cute btn-primary-matcha" onclick="switchMainView('guide')">
-            <i class="fa-solid fa-bolt"></i> Xem Cách Nạp Drive Vào AI
-          </button>
-        </div>
-      </div>
-
-      <div class="drive-cards-grid">
-        
-        <!-- Grade 10 Card -->
-        <div class="drive-card">
-          <div>
-            <div class="drive-card-icon"><i class="fa-solid fa-book-bookmark"></i></div>
-            <div class="drive-card-title">Sách Giáo Khoa Lớp 10</div>
-            <span class="drive-card-badge">Toàn bộ các bộ sách GDPT 2018</span>
-            <p class="drive-card-desc">
-              Chứa đầy đủ các môn Toán, Vật lí, Hóa học, Sinh học, Ngữ văn, Lịch sử, Địa lí, Tin học, Công nghệ theo chương trình SGK mới.
-            </p>
-          </div>
-          <div class="drive-card-btns">
-            <a href="https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link" target="_blank" class="btn-drive-open">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở Drive Lớp 10
-            </a>
-            <button class="btn-drive-copy" onclick="copyDriveLink('https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link', 'Lớp 10')">
-              <i class="fa-solid fa-copy"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Grade 11 Card -->
-        <div class="drive-card">
-          <div>
-            <div class="drive-card-icon" style="background: #E3F2FD; color: #1976D2;"><i class="fa-solid fa-book-open"></i></div>
-            <div class="drive-card-title">Sách Giáo Khoa Lớp 11</div>
-            <span class="drive-card-badge" style="background: #E3F2FD; color: #1976D2;">Bản chuẩn hóa Bộ GD&ĐT</span>
-            <p class="drive-card-desc">
-              Hệ thống tài liệu SGK Lớp 11 chuẩn hóa, phục vụ học tập các phần trọng điểm cân bằng hóa học, dao động sóng, giải tích và lượng giác.
-            </p>
-          </div>
-          <div class="drive-card-btns">
-            <a href="https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link" target="_blank" class="btn-drive-open">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở Drive Lớp 11
-            </a>
-            <button class="btn-drive-copy" onclick="copyDriveLink('https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link', 'Lớp 11')">
-              <i class="fa-solid fa-copy"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Grade 12 Card -->
-        <div class="drive-card">
-          <div>
-            <div class="drive-card-icon" style="background: #FFF3E0; color: #E65100;"><i class="fa-solid fa-graduation-cap"></i></div>
-            <div class="drive-card-title">Sách Giáo Khoa Lớp 12</div>
-            <span class="drive-card-badge" style="background: #FFF3E0; color: #E65100;">SGK Thống Nhất 2026-2027</span>
-            <p class="drive-card-desc">
-              Bộ SGK Thống Nhất mới nhất dành cho kì thi tốt nghiệp THPT: Ứng dụng đạo hàm, Vật lí nhiệt & Khí lí tưởng, Este - Lipid, Di truyền học.
-            </p>
-          </div>
-          <div class="drive-card-btns">
-            <a href="https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link" target="_blank" class="btn-drive-open">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở Drive Lớp 12
-            </a>
-            <button class="btn-drive-copy" onclick="copyDriveLink('https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link', 'Lớp 12')">
-              <i class="fa-solid fa-copy"></i>
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Cloud Integration Guide for Students -->
-      <div class="card-section">
-        <div class="card-section-title">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> Mẹo Hay: Cách Cho AI Đọc Trực Tiếp Từ Link Drive Không Cần Tải File
-        </div>
-        <div style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.7;">
-          <p style="margin-bottom: 8px;"><strong>1. Sử dụng với Google NotebookLM (notebooklm.google.com):</strong></p>
-          <p style="margin-left: 16px; margin-bottom: 12px;">Mở một Notebook mới $\to$ Bấm <em>Thêm nguồn (Add Source)</em> $\to$ Chọn <em>Google Drive</em> $\to$ Dán đường dẫn thư mục sách trên. NotebookLM sẽ đọc trọn vẹn cuốn SGK và tạo Podcast đàm thoại giải thích bài học siêu cuốn hút!</p>
-          <p style="margin-bottom: 8px;"><strong>2. Sử dụng với Google Gemini Advanced:</strong></p>
-          <p style="margin-left: 16px;">Bật tiện ích mở rộng Google Workspace $\to$ Trong ô chat Gemini, gõ <code>@Google Drive</code> kèm tên file SGK. Với cửa sổ ngữ cảnh 2 triệu tokens, Gemini sẽ tra cứu công thức và giải bài chính xác 100% theo trang sách!</p>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- VIEW 3: AI INJECTION GUIDE -->
-    <div id="view-guide" class="guide-view-box">
-      
-      <div class="drive-header-banner" style="background: #FFFFFF;">
-        <div class="drive-banner-text">
-          <h2>📖 Hướng Dẫn Nạp Bộ Não EduSkills Vào Các AI</h2>
-          <p>
-            Bạn không cần lập trình! Chỉ cần thực hiện 3 bước đơn giản dưới đây để biến AI thông thường thành một gia sư THPT chuẩn Bộ Giáo dục:
-          </p>
-        </div>
-      </div>
-
-      <div class="guide-grid-cute">
-        
-        <div class="guide-box-item">
-          <div class="guide-box-header">
-            <div class="guide-avatar g-gemini"><i class="fa-solid fa-bolt"></i></div>
-            <div>
-              <h3 style="font-size: 1.05rem; font-weight: 800;">Google Gemini / AI Studio</h3>
-              <span style="font-size: 0.75rem; color: var(--text-muted);">Khuyên dùng cho Context 2M Tokens</span>
-            </div>
-          </div>
-          <ol class="guide-ol">
-            <li>Mở <strong>Google AI Studio</strong> hoặc Gemini Web.</li>
-            <li>Trong ô <strong>System Instructions</strong>, bấm nút <em>"Copy Toàn Bộ Nội Dung"</em> ở kỹ năng bạn cần rồi dán vào.</li>
-            <li>Liên kết Google Drive chứa SGK hoặc đính kèm tài liệu bài học để Gemini đối chiếu lời giải!</li>
-          </ol>
-        </div>
-
-        <div class="guide-box-item">
-          <div class="guide-box-header">
-            <div class="guide-avatar g-claude"><i class="fa-solid fa-brain"></i></div>
-            <div>
-              <h3 style="font-size: 1.05rem; font-weight: 800;">Anthropic Claude (Projects)</h3>
-              <span style="font-size: 0.75rem; color: var(--text-muted);">Khuyên dùng cho văn phong sư phạm</span>
-            </div>
-          </div>
-          <ol class="guide-ol">
-            <li>Tạo một <strong>Project</strong> mới trên Claude.ai mang tên <em>"EduSkills THPT"</em>.</li>
-            <li>Bấm nút <em>"Lưu về máy (.md)"</em> của các Skill bạn thích rồi tải lên mục <strong>Project Knowledge</strong>.</li>
-            <li>Claude sẽ tự động tuân thủ ma trận đề thi 3 phần và quy chuẩn danh pháp IUPAC.</li>
-          </ol>
-        </div>
-
-        <div class="guide-box-item">
-          <div class="guide-box-header">
-            <div class="guide-avatar g-gpt"><i class="fa-solid fa-robot"></i></div>
-            <div>
-              <h3 style="font-size: 1.05rem; font-weight: 800;">OpenAI ChatGPT (Custom GPT)</h3>
-              <span style="font-size: 0.75rem; color: var(--text-muted);">Hỗ trợ tính toán và Code Interpreter</span>
-            </div>
-          </div>
-          <ol class="guide-ol">
-            <li>Vào <strong>Explore GPTs $\to$ Create a GPT</strong>.</li>
-            <li>Trong tab <strong>Configure</strong>, dán nội dung Skill vào mục <strong>Instructions</strong>.</li>
-            <li>Bật <em>Code Interpreter</em> để hỗ trợ vẽ đồ thị hàm số và kiểm tra tính toán số học.</li>
-          </ol>
-        </div>
-
-        <div class="guide-box-item">
-          <div class="guide-box-header">
-            <div class="guide-avatar g-notebook"><i class="fa-solid fa-headphones"></i></div>
-            <div>
-              <h3 style="font-size: 1.05rem; font-weight: 800;">Google NotebookLM</h3>
-              <span style="font-size: 0.75rem; color: var(--text-muted);">Biến SGK thành Audio Podcast</span>
-            </div>
-          </div>
-          <ol class="guide-ol">
-            <li>Mở <strong>notebooklm.google.com</strong> và tạo cuốn sổ tay mới.</li>
-            <li>Dán link Google Drive SGK Lớp 10, 11 hoặc 12 vào nguồn dữ liệu.</li>
-            <li>Bấm <strong>Generate Audio Overview</strong> để AI tự động chuyển hóa thành bài giảng radio tương tác!</li>
-          </ol>
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-
-  <!-- Cute Toast Notification -->
-  <div id="cute-toast">
-    <i class="fa-solid fa-paw" style="color: var(--honey-warm);"></i>
-    <span id="toastMessage">Thông báo</span>
-  </div>
-
-  <script>
-    // --- 16 Standard Skills Data ---
-    const SKILLS = [
-      {
-        id: 'tao-quiz-bgd',
-        name: 'Tạo Đề Thi Chuẩn BGD 2026',
-        command: '/taoquiz-bgd',
-        category: 'meta',
-        badge: 'Document-First',
-        badgeClass: 'badge-meta',
-        path: 'skills/meta-tools/tao-quiz-bgd/SKILL.md',
-        desc: 'Tạo đề thi chuẩn 3 phần theo Quyết định số 764/QĐ-BGDĐT dựa trên bài học đính kèm: Phần I trắc nghiệm 4 chọn 1; Phần II Đúng/Sai tính điểm lũy tiến (0.1 - 0.25 - 0.5 - 1.0); Phần III Trả lời ngắn điền số làm tròn.',
-        rules: [
-          'Document-First Gate: Bắt buộc người dùng cung cấp bài học/tài liệu trước khi tạo đề.',
-          'Phần II Đúng/Sai gồm 4 ý a, b, c, d liên hoàn logic có bảng barem điểm.',
-          'Phần III đáp số số học tối đa 4 ký tự.',
-          'Bắt buộc kèm Hướng dẫn giải chi tiết giải mã các bẫy sai lầm của phương án nhiễu.'
-        ],
-        hasDoc: true
-      },
-      {
-        id: 'giai-chi-tiet',
-        name: 'Gia Sư Giải Chi Tiết Đa Tầng',
-        command: '/giai-chi-tiet',
-        category: 'meta',
-        badge: 'Socratic 4-Tier',
-        badgeClass: 'badge-meta',
-        path: 'skills/meta-tools/giai-chi-tiet/SKILL.md',
-        desc: 'Giải bài tập THPT theo phương pháp sư phạm Socrates 4 tầng: Gợi mở tư duy -> Bản chất khoa học -> Lời giải chi tiết từng bước chuẩn LaTeX -> Giải mã bẫy thi cử & Bài tập tương tự.',
-        rules: [
-          'Không bao giờ làm tắt hay đưa đáp số ngay khi chưa gợi mở.',
-          '100% công thức định dạng LaTeX $...$ hoặc $$...$$.',
-          'Chỉ rõ các bẫy kinh điển phòng thi trắc nghiệm.'
-        ],
-        hasDoc: false
-      },
+    // Fallback static catalog if offline
+    const DEFAULT_CATALOG = (typeof window !== 'undefined' && window.EDUSKILLS_CATALOG) ? window.EDUSKILLS_CATALOG : [
       {
         id: 'toan-thpt',
-        name: 'Toán Học THPT (Lớp 10, 11, 12)',
-        command: '/toan10-12',
-        category: 'stem',
-        badge: 'SGK 2026',
-        badgeClass: 'badge-stem',
-        path: 'skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md',
-        desc: 'Khảo sát hàm số (tiệm cận xiên mới), Hình học không gian Oxyz, Tích phân & Xác suất có điều kiện Bayes theo Bộ SGK Thống Nhất 2026.',
-        rules: [
-          'Luôn tìm tập xác định D trước khi lấy đạo hàm hay biện luận.',
-          'Phân biệt rõ điểm cực trị (x) vs giá trị cực trị (y) vs điểm đồ thị ((x; y)).',
-          'Hình Oxyz luôn nêu rõ vector chỉ phương hoặc vector pháp tuyến.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'vat-li-thpt',
-        name: 'Vật Lí THPT Chuyên Sâu',
-        command: '/vatli10-12',
-        category: 'stem',
-        badge: 'Hệ SI & Kelvin',
-        badgeClass: 'badge-stem',
-        path: 'skills/khoa-hoc-tu-nhien/vat-li-thpt/SKILL.md',
-        desc: 'Vật lí nhiệt (Định luật I Delta U = Q + A), Thuyết động học khí lí tưởng, Từ trường & Cảm ứng điện từ, Vật lí hạt nhân chuẩn hóa đơn vị SI.',
-        rules: [
-          'Nhiệt học bắt buộc đổi độ C sang Kelvin: T = t + 273.',
-          'Quy ước dấu Delta U = Q + A (Hệ nhận nhiệt Q > 0, sinh công A < 0).',
-          'Động năng trung bình phân tử Ed = (3/2)kT.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'hoa-hoc-thpt',
-        name: 'Hóa Học THPT Chuẩn IUPAC',
-        command: '/hoahoc10-12',
-        category: 'stem',
-        badge: 'IUPAC 100%',
-        badgeClass: 'badge-stem',
-        path: 'skills/khoa-hoc-tu-nhien/hoa-hoc-thpt/SKILL.md',
-        desc: '100% danh pháp tiếng Anh chuẩn IUPAC của Bộ Giáo dục (Sodium, Sulfuric acid, Acetic acid, Methyl acetate, Glucose...). Bảo toàn khối lượng, mol e và điện tích.',
-        rules: [
-          'Tuyệt đối không dùng danh pháp phiên âm cũ (Natri, Clo, Axit axetic).',
-          'Cân bằng chính xác số nguyên tử và điện tích ion thu gọn.',
-          'Ghi rõ điều kiện phản ứng (nhiệt độ, xúc tác H2SO4 đặc, dung môi).'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'sinh-hoc-thpt',
-        name: 'Sinh Học & Phả Hệ Di Truyền',
-        command: '/sinhhoc10-12',
-        category: 'stem',
-        badge: 'Phả Hệ & Gen',
-        badgeClass: 'badge-stem',
-        path: 'skills/khoa-hoc-tu-nhien/sinh-hoc-thpt/SKILL.md',
-        desc: 'Di truyền học phân tử (chiều 5\'->3\'), giải phả hệ xác định gen trội/lặn trên NST thường hay NST X, cấu trúc quần thể cân bằng Hardy-Weinberg.',
-        rules: [
-          'Xác định đúng chiều phiên mã và dịch mã codon trên mARN.',
-          'Biện luận chặt chẽ quy luật di truyền trước khi tính xác suất phả hệ.',
-          'Công thức Hardy-Weinberg: p^2 + 2pq + q^2 = 1.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'ngu-van-thpt',
-        name: 'Ngữ Văn 100% Tự Luận',
-        command: '/nguvan10-12',
-        category: 'social',
-        badge: 'Ngoài SGK',
-        badgeClass: 'badge-social',
-        path: 'skills/khoa-hoc-xa-hoi/ngu-van-thpt/SKILL.md',
-        desc: 'Đọc hiểu ngữ liệu ngoài SGK (4đ), Nghị luận xã hội 200 chữ đúng 1 đoạn duy nhất (2đ), Nghị luận văn học 600 chữ theo thi pháp thể loại (4đ).',
-        rules: [
-          'Đọc hiểu và NLVH bắt buộc dùng ngữ liệu hoàn toàn ngoài SGK.',
-          'Đoạn văn 200 chữ là 1 khối duy nhất, không xuống dòng.',
-          'Phân tích theo đặc trưng thể loại thay vì tóm tắt cốt truyện.'
-        ],
-        hasDoc: true
-      },
-      {
-        id: 'lich-su-thpt',
-        name: 'Lịch Sử THPT Tiến Trình',
-        command: '/lichsu-thpt',
-        category: 'social',
-        badge: 'Timeline',
-        badgeClass: 'badge-social',
-        path: 'skills/khoa-hoc-xa-hoi/lich-su-thpt/SKILL.md',
-        desc: 'Trục thời gian tiến trình lịch sử Việt Nam và thế giới, phân tích nguyên nhân - ý nghĩa và bài học lịch sử.',
-        rules: [
-          'Xây dựng trục thời gian rõ ràng, liên kết các sự kiện cốt lõi.',
-          'Tập trung tư duy lịch sử, không học vẹt mốc số khô khan.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'dia-li-thpt',
-        name: 'Địa Lí & Atlat Việt Nam',
-        command: '/diali-thpt',
-        category: 'social',
-        badge: 'Atlat & Charts',
-        badgeClass: 'badge-social',
-        path: 'skills/khoa-hoc-xa-hoi/dia-li-thpt/SKILL.md',
-        desc: 'Phân tích bảng số liệu, chuyển dịch cơ cấu kinh tế và khai thác Atlat Địa lí Việt Nam.',
-        rules: [
-          'Chỉ rõ trang Atlat tương ứng khi dẫn chứng.',
-          'Tính toán tốc độ tăng trưởng và cơ cấu phần trăm chính xác.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'ktpl-thpt',
-        name: 'Kinh Tế & Pháp Luật THPT',
-        command: '/ktpl-thpt',
-        category: 'social',
-        badge: 'Tình Huống',
-        badgeClass: 'badge-social',
-        path: 'skills/khoa-hoc-xa-hoi/ktpl-thpt/SKILL.md',
-        desc: 'Cơ chế thị trường, Lạm phát, Thất nghiệp, Hiến pháp và giải quyết các tình huống pháp lý dân sự, lao động.',
-        rules: [
-          'Trích dẫn đúng điều, khoản trong luật hiện hành.',
-          'Phân tích hành vi đa chiều: Chủ quan và khách quan.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'tieng-anh-thpt',
-        name: 'Tiếng Anh BGD & IELTS',
-        command: '/tienganh-thpt',
-        category: 'tech',
-        badge: 'IPA & Grammar',
-        badgeClass: 'badge-tech',
-        path: 'skills/ngon-ngu-cong-nghe/tieng-anh-thpt/SKILL.md',
-        desc: 'Ngữ pháp trọng điểm, phiên âm IPA chuẩn, kỹ thuật Skimming/Scanning đọc hiểu phân hóa cao.',
-        rules: [
-          'Cung cấp phiên âm IPA chuẩn Oxford/Cambridge.',
-          'Giải thích ngữ cảnh bẫy trong câu hỏi trắc nghiệm.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'tin-hoc-thpt',
-        name: 'Tin Học Python & CSDL',
-        command: '/tinhoc-thpt',
-        category: 'tech',
-        badge: 'Python & SQL',
-        badgeClass: 'badge-tech',
-        path: 'skills/ngon-ngu-cong-nghe/tin-hoc-thpt/SKILL.md',
-        desc: 'Lập trình Python chuẩn PEP 8, Thuật toán sắp xếp/tìm kiếm, Hệ quản trị cơ sở dữ liệu quan hệ SQL và mạng máy tính.',
-        rules: [
-          'Code Python có chú thích tường minh từng khối logic.',
-          'Độ phức tạp thuật toán tối ưu (Time/Space Complexity).'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'cong-nghe-thpt',
-        name: 'Công Nghệ Kỹ Thuật & Điện',
-        command: '/congnghe-thpt',
-        category: 'tech',
-        badge: 'Điện & Kỹ Thuật',
-        badgeClass: 'badge-tech',
-        path: 'skills/ngon-ngu-cong-nghe/cong-nghe-thpt/SKILL.md',
-        desc: 'Bản vẽ kỹ thuật, Mạch điện xoay chiều 3 pha, Điện tử vi điều khiển và Nông nghiệp công nghệ cao.',
-        rules: [
-          'Giải thích nguyên lý đấu dây hình sao và tam giác.',
-          'Tuân thủ quy chuẩn an toàn điện áp cao.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'slide-thuyet-trinh',
-        name: 'Slide Marp Visual 16:9',
-        command: '/slide-thuyettrinh',
-        category: 'meta',
-        badge: 'Marp Markdown',
-        badgeClass: 'badge-meta',
-        path: 'skills/meta-tools/slide-thuyet-trinh/SKILL.md',
-        desc: 'Tạo mã slide Marp Markdown 16:9 tối giản sang trọng, Quy tắc 6 dòng (Rule of Six), tích hợp sơ đồ Mermaid trực quan.',
-        rules: [
-          'Không quá 6 gạch đầu dòng trên 1 slide.',
-          'Sử dụng bảng màu phối pastel/matcha thanh nhã.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'tomtat-mindmap',
-        name: 'Sơ Đồ Tư Duy Mermaid',
-        command: '/tomtat-mindmap',
-        category: 'meta',
-        badge: 'Cheatsheet 60s',
-        badgeClass: 'badge-meta',
-        path: 'skills/meta-tools/tomtat-mindmap/SKILL.md',
-        desc: 'Tóm tắt bài học ra Mermaid Mindmap trực quan kèm bảng công thức "nhớ nhanh trong 60 giây" và phân tích bẫy.',
-        rules: [
-          'Cú pháp Mermaid hợp lệ 100%.',
-          'Bảng cheatsheet 3 cột: Khái niệm | Công thức | Bẫy cần tránh.'
-        ],
-        hasDoc: false
-      },
-      {
-        id: 'luan-an-nghiencuu',
-        name: 'Nghiên Cứu KHKT THPT (ViSEF)',
-        command: '/luan-an-nghiencuu',
-        category: 'meta',
-        badge: 'ViSEF Research',
-        badgeClass: 'badge-meta',
-        path: 'skills/meta-tools/luan-an-nghiencuu/SKILL.md',
-        desc: 'Hướng dẫn xây dựng đề tài KHKT, phương pháp nghiên cứu thực nghiệm định lượng và bài báo cáo chuẩn hội đồng.',
-        rules: [
-          'Đề tài phù hợp lứa tuổi và an toàn thực nghiệm.',
-          'Cấu trúc báo cáo chuẩn học thuật 5 chương.'
-        ],
-        hasDoc: false
+        name: 'toan-thpt',
+        category: 'khoa-hoc-tu-nhien',
+        description: 'Toán học 10-12 chuẩn BGD 2026: Giải tích 12, Tiệm cận xiên, Tối ưu hóa thực tế, Xác suất Bayes và Hình học không gian Oxyz.',
+        filePath: 'skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md',
+        antiHallucinationRules: [
+          '100% công thức toán học phải hiển thị bằng cú pháp LaTeX chuẩn.',
+          'Phân biệt rõ ràng: Điểm cực trị hàm số, Giá trị cực trị, và Điểm cực trị đồ thị.'
+        ]
       }
     ];
 
-    let currentSelectedSkill = SKILLS[0];
-    let currentCategoryFilter = 'all';
+    const DRIVE_LINKS_MAP = {
+      10: {
+        grade: 10,
+        title: 'Sách Giáo Khoa Lớp 10 (GDPT 2018)',
+        url: 'https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link',
+        badge: 'Đầy đủ các bộ sách chuẩn GDPT 2018'
+      },
+      11: {
+        grade: 11,
+        title: 'Sách Giáo Khoa Lớp 11 (Bản Chuẩn Hóa BGD)',
+        url: 'https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link',
+        badge: 'Bản chuẩn hóa Bộ GD&ĐT'
+      },
+      12: {
+        grade: 12,
+        title: 'Sách Giáo Khoa Lớp 12 (SGK Thống Nhất 2026-2027)',
+        url: 'https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link',
+        badge: 'Trọng tâm thi THPT Quốc Gia'
+      }
+    };
 
-    // --- Switch Main Views: Skills | Drive | Guide ---
-    function switchMainView(viewName) {
-      document.getElementById('view-skills').style.display = viewName === 'skills' ? 'grid' : 'none';
-      document.getElementById('view-drive').style.display = viewName === 'drive' ? 'block' : 'none';
-      document.getElementById('view-guide').style.display = viewName === 'guide' ? 'block' : 'none';
+    function App() {
+      const [skills, setSkills] = useState(DEFAULT_CATALOG);
+      const [selectedSkillId, setSelectedSkillId] = useState('toan-thpt');
+      const [activeTab, setActiveTab] = useState('skills'); // skills | drive | prompt-standard | guide
+      const [searchQuery, setSearchQuery] = useState('');
+      const [selectedCategory, setSelectedCategory] = useState('all');
+      const [shortlist, setShortlist] = useState({});
+      const [toastMsg, setToastMsg] = useState('');
+      const [showToast, setShowToast] = useState(false);
 
-      document.getElementById('btn-tab-skills').classList.toggle('active', viewName === 'skills');
-      document.getElementById('btn-tab-drive').classList.toggle('active', viewName === 'drive');
-      document.getElementById('btn-tab-guide').classList.toggle('active', viewName === 'guide');
+      // --- 5-Part Modern Prompt Builder State (docs/Tieuchuanprompt.md) ---
+      const [rolePrompt, setRolePrompt] = useState('Gia sư Sư phạm Toán THPT chuẩn BGD 2026');
+      const [gradeLevel, setGradeLevel] = useState(12);
+      const [studentLevel, setStudentLevel] = useState('Khá - Giỏi (Mục tiêu 8.5+ THPT Quốc Gia)');
+      const [currentStatus, setCurrentStatus] = useState('Đã nắm được phần lý thuyết cơ bản nhưng chưa vững phần bẫy trắc nghiệm');
+      const [taskPrompt, setTaskPrompt] = useState('Phân tích bản chất, giải bài từng bước và chỉ ra 3 bẫy sai lầm kinh điển');
+      const [constraintsPrompt, setConstraintsPrompt] = useState('Trình bày bằng LaTeX chuẩn ($...$), chia bảng so sánh, tuyệt đối không nhảy bước');
+      
+      // Cognitive Toggles
+      const [useCoT, setUseCoT] = useState(true);
+      const [useSocratic, setUseSocratic] = useState(true);
+      const [useFewShot, setUseFewShot] = useState(false);
+      const [useActiveRecall, setUseActiveRecall] = useState(true);
+      
+      // Document / Exercise Attachment
+      const [docAttachment, setDocAttachment] = useState('');
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // --- Render Skill List ---
-    function renderSkillsCatalog() {
-      const container = document.getElementById('skillListContainer');
-      const query = document.getElementById('skillSearch').value.toLowerCase();
-      container.innerHTML = '';
-
-      const filtered = SKILLS.filter(s => {
-        const matchesCategory = currentCategoryFilter === 'all' || s.category === currentCategoryFilter;
-        const matchesSearch = s.name.toLowerCase().includes(query) || s.command.toLowerCase().includes(query) || s.id.includes(query);
-        return matchesCategory && matchesSearch;
-      });
-
-      filtered.forEach(skill => {
-        const item = document.createElement('div');
-        item.className = `skill-item-card ${currentSelectedSkill.id === skill.id ? 'active' : ''}`;
-        item.onclick = () => selectSkill(skill.id);
-
-        item.innerHTML = `
-          <div class="skill-item-top">
-            <span class="skill-item-name">${skill.name}</span>
-            <span class="skill-badge ${skill.badgeClass}">${skill.badge}</span>
-          </div>
-          <span class="skill-item-cmd">${skill.command}</span>
-        `;
-        container.appendChild(item);
-      });
-    }
-
-    function selectSkill(skillId) {
-      const skill = SKILLS.find(s => s.id === skillId);
-      if (!skill) return;
-
-      currentSelectedSkill = skill;
-      renderSkillsCatalog();
-
-      const catNames = {
-        'stem': 'KHOA HỌC TỰ NHIÊN',
-        'social': 'KHOA HỌC XÃ HỘI',
-        'tech': 'NGÔN NGỮ & CÔNG NGHỆ',
-        'meta': 'META-TOOLS KHẢO THÍ'
+      const triggerToast = (msg) => {
+        setToastMsg(msg);
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2600);
       };
 
-      document.getElementById('skillHeroTitle').innerText = '@' + skill.id;
-      document.getElementById('canonicalIdDisplay').innerText = skill.id;
-      document.getElementById('badgeCat').innerText = catNames[skill.category] || skill.category.toUpperCase();
-      document.getElementById('skillHeroDesc').innerText = skill.desc;
+      // Load Catalog from API (with fallback to embedded data)
+      useEffect(() => {
+        fetch('/api/skills')
+          .then(res => res.json())
+          .then(data => {
+            if (Array.isArray(data) && data.length > 0) {
+              setSkills(data);
+            }
+          })
+          .catch(err => {
+            console.warn('Using offline static skills data bundle:', err);
+            if (window.EDUSKILLS_CATALOG) {
+              setSkills(window.EDUSKILLS_CATALOG);
+            }
+          });
 
-      // Update Shortlist Button State
-      updateShortlistBtnState(skill.id);
+        // Load Shortlist from LocalStorage
+        try {
+          const saved = localStorage.getItem('eduskills_shortlist');
+          if (saved) setShortlist(JSON.parse(saved));
+        } catch (e) {}
+      }, []);
 
-      // Render Anti-hallucination Rules
-      const rulesContainer = document.getElementById('rulesListContainer');
-      rulesContainer.innerHTML = skill.rules.map(r => `
-        <div class="rule-item-cute">
-          <i class="fa-solid fa-check-double"></i>
-          <span>${r}</span>
-        </div>
-      `).join('');
+      const selectedSkill = useMemo(() => {
+        return skills.find(s => s.id === selectedSkillId) || skills[0] || {};
+      }, [skills, selectedSkillId]);
 
-      // Dropzone for Document-First
-      const dropzone = document.getElementById('quizDropContainer');
-      dropzone.style.display = skill.hasDoc ? 'block' : 'none';
+      // Auto update role prompt when skill changes
+      useEffect(() => {
+        if (!selectedSkill.name) return;
+        const subjectMap = {
+          'toan-thpt': 'Chuyên gia Sư phạm Toán THPT chuẩn GDPT 2018 & Đề thi BGD 2026',
+          'vat-li-thpt': 'Gia sư Vật lí THPT chuyên sâu Vật lí nhiệt, Khí lí tưởng & Đơn vị SI',
+          'hoa-hoc-thpt': 'Chuyên gia Hóa học IUPAC 100% tiếng Anh chuẩn SGK mới',
+          'sinh-hoc-thpt': 'Cố vấn Sinh học THPT chuyên sâu Di truyền phân tử & Phả hệ',
+          'ngu-van-thpt': 'Giáo viên Ngữ văn THPT chuyên luyện Đọc hiểu ngoài SGK & NLXH 200 chữ',
+          'giai-chi-tiet': 'Gia sư Sư phạm Đa Tầng Socrates (Khơi mở tư duy, không lộ đáp số ngay)',
+          'tao-quiz-bgd': 'Chuyên gia khảo thí thiết kế đề thi 3 phần chuẩn QĐ 764/QĐ-BGDĐT',
+          'slide-thuyet-trinh': 'Presentation Architect chuyên thiết kế slide Marp 16:9 chuẩn sư phạm',
+          'tomtat-mindmap': 'Chuyên gia Siêu Trí Nhớ & Sơ đồ tư duy Mermaid Cornell 60 giây',
+          'luan-an-nghiencuu': 'Cố vấn Nghiên cứu Khoa học Kỹ thuật THPT (Hội thi ViSEF)'
+        };
+        setRolePrompt(subjectMap[selectedSkill.id] || `Chuyên gia giảng dạy môn ${selectedSkill.name} THPT`);
+      }, [selectedSkill]);
 
-      updateLivePayload();
-    }
+      // Filtered Skills
+      const filteredSkills = useMemo(() => {
+        return skills.filter(item => {
+          const matchCat = selectedCategory === 'all' || item.category === selectedCategory;
+          const matchQuery = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                             item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                             (item.id && item.id.toLowerCase().includes(searchQuery.toLowerCase()));
+          return matchCat && matchQuery;
+        });
+      }, [skills, selectedCategory, searchQuery]);
 
-    function updateLivePayload() {
-      const skill = currentSelectedSkill;
-      const customTask = (document.getElementById('taskCustomInput')?.value || '').trim();
-      const docInput = (document.getElementById('docPayloadInput')?.value || '').trim();
+      // Generate Standardized 5-Part Prompt according to docs/Tieuchuanprompt.md
+      const generatedPromptPayload = useMemo(() => {
+        const driveInfo = DRIVE_LINKS_MAP[gradeLevel] || DRIVE_LINKS_MAP[12];
+        
+        let p = `# [EDUSKILLS-VN STANDARDIZED PROMPT - CHUẨN TIEUCHUANPROMPT.MD]\n\n`;
+        p += `[Vai trò]: ${rolePrompt}.\n\n`;
+        p += `[Bối cảnh]: Tôi là học sinh Lớp ${gradeLevel}, trình độ "${studentLevel}". Hiện tại ${currentStatus}.\n\n`;
+        p += `[Yêu cầu]: Hãy thực hiện nhiệm vụ môn ${selectedSkill.name || selectedSkill.id}:\n`;
+        p += `- ${taskPrompt}.\n\n`;
+        p += `[Ràng buộc & Định dạng]:\n`;
+        p += `- ${constraintsPrompt}.\n`;
+        p += `- Tuân thủ nghiêm ngặt chuẩn kiến thức GDPT 2018 và định dạng đề thi BGD 2026-2027.\n\n`;
+        
+        p += `[Kỹ thuật kích hoạt tư duy (Cognitive Prompts)]:\n`;
+        if (useCoT) p += `- Chain-of-Thought: Giải thích bản chất từng bước (step-by-step) trước khi kết luận.\n`;
+        if (useSocratic) p += `- Socratic Method: Đặt câu hỏi gợi mở để người học tự động não, không đưa ngay đáp số thô.\n`;
+        if (useFewShot) p += `- Few-shot: Minh họa bằng 1 ví dụ tương đương theo phong cách chuẩn mực.\n`;
+        if (useActiveRecall) p += `- Active Recall: Ở cuối bài giải, hãy đặt 1 câu hỏi kiểm tra tư duy hoặc bài tập tương tự để tôi tự đánh giá mức độ hiểu sâu.\n`;
 
-      let payload = `[EduSkills-VN Matcha Hub Standardized Payload]\n`;
-      payload += `@${skill.id}\n`;
-      payload += `Canonical ID: ${skill.id}\n`;
-      payload += `Playbook Path: ${skill.path}\n`;
-      payload += `Curriculum: GDPT 2018 (SGK Thống Nhất 2026) | Định Dạng BGD 2025-2027\n`;
+        p += `\n[Nguồn SGK Google Drive Đối Chiếu & Kiểm Chứng]:\n`;
+        p += `- SGK Lớp ${gradeLevel}: ${driveInfo.url}\n`;
 
-      if (skill.hasDoc && docInput) {
-        payload += `\n[TÀI LIỆU / BÀI HỌC SGK ĐÍNH KÈM (DOCUMENT-FIRST)]:\n${docInput}\n`;
-      }
+        if (docAttachment.trim()) {
+          p += `\n[Tài Liệu / Bài Học SGK Đính Kèm (Document-First)]:\n${docAttachment.trim()}\n`;
+        }
 
-      if (customTask) {
-        payload += `\n[YÊU CẦU BÀI TẬP RIÊNG / SPECIFIC REQUIREMENTS]:\n${customTask}\n`;
-      } else {
-        payload += `\n[NHIỆM VỤ]: Thực hiện giải bài hoặc tạo nội dung theo đúng chuẩn sư phạm và ma trận phân hóa của Skill này.\n`;
-      }
+        return p;
+      }, [rolePrompt, gradeLevel, studentLevel, currentStatus, taskPrompt, constraintsPrompt, useCoT, useSocratic, useFewShot, useActiveRecall, docAttachment, selectedSkill]);
 
-      document.getElementById('livePayloadCode').innerText = payload;
-    }
+      // --- Download Skill .md (100% OFFLINE, ZERO FETCH FAILURE) ---
+      const handleDownloadSkillMd = () => {
+        try {
+          const content = selectedSkill.rawContent || `# ${selectedSkill.name}\n\n${selectedSkill.description}\n\n${generatedPromptPayload}`;
+          const blob = new Blob([content], { type: 'text/markdown;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${selectedSkill.id || 'skill'}.SKILL.md`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          triggerToast(`Đã tải file ${selectedSkill.id}.SKILL.md về máy tính! 💾🐾`);
+        } catch (e) {
+          triggerToast(`Lỗi tải file: ${e.message}`);
+        }
+      };
 
-    function filterSkills() {
-      renderSkillsCatalog();
-    }
-
-    function setCategoryFilter(category, btn) {
-      currentCategoryFilter = category;
-      document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderSkillsCatalog();
-    }
-
-    function resetSkillFilter() {
-      document.getElementById('skillSearch').value = '';
-      currentCategoryFilter = 'all';
-      document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('.pill-btn')?.classList.add('active');
-      renderSkillsCatalog();
-    }
-
-    // --- Copy & Action Handlers ---
-    function copyAasSkillTag() {
-      const skill = currentSelectedSkill;
-      const customTask = (document.getElementById('taskCustomInput')?.value || '').trim();
-      let text = `@${skill.id}`;
-      if (customTask) {
-        text += `\n\nYêu cầu bài tập:\n${customTask}`;
-      }
-      navigator.clipboard.writeText(text).then(() => {
-        showToast(`Đã sao chép @${skill.id} kèm ghi chú vào bộ nhớ tạm! 🐾`);
-      });
-    }
-
-    async function copyAasFullContent() {
-      const skill = currentSelectedSkill;
-      const customTask = (document.getElementById('taskCustomInput')?.value || '').trim();
-      
-      try {
-        const res = await fetch(`/api/skill-content?path=${encodeURIComponent(skill.path)}`);
-        if (res.ok) {
-          let fullMarkdown = await res.text();
-          if (customTask) {
-            fullMarkdown += `\n\n========================================\n[YÊU CẦU BÀI TẬP RIÊNG CỦA HỌC SINH]:\n${customTask}\n========================================\n`;
+      // --- Copy Full Content (Offline In-Memory) ---
+      const handleCopyFullContent = async () => {
+        try {
+          let text = selectedSkill.rawContent || '';
+          if (!text) {
+            text = `# ${selectedSkill.name}\n\n${selectedSkill.description}\n\n${generatedPromptPayload}`;
+          } else {
+            text += `\n\n========================================\n[PROMPT TẠO THEO CHUẨN TIEUCHUANPROMPT.MD]:\n${generatedPromptPayload}\n========================================\n`;
           }
-          await navigator.clipboard.writeText(fullMarkdown);
-          showToast(`Đã sao chép toàn bộ Master Playbook ${skill.id}.SKILL.md! 🍵`);
-          return;
+          await navigator.clipboard.writeText(text);
+          triggerToast(`Đã sao chép Master Playbook ${selectedSkill.id}.SKILL.md! 🍵`);
+        } catch (e) {
+          triggerToast(`Lỗi sao chép: ${e.message}`);
         }
-      } catch (e) {
-        console.warn('Fallback payload copy:', e);
-      }
+      };
 
-      // Fallback
-      const payloadText = document.getElementById('livePayloadCode').innerText;
-      navigator.clipboard.writeText(payloadText).then(() => {
-        showToast(`Đã sao chép Live Payload vào bộ nhớ tạm! 🐾`);
-      });
-    }
-
-    async function saveSkillFileLocally() {
-      const skill = currentSelectedSkill;
-      try {
-        const res = await fetch(`/api/skill-content?path=${encodeURIComponent(skill.path)}`);
-        let content = '';
-        if (res.ok) {
-          content = await res.text();
-        } else {
-          content = document.getElementById('livePayloadCode').innerText;
+      // --- Copy Quick Prompt ---
+      const handleCopyPromptPayload = async () => {
+        try {
+          await navigator.clipboard.writeText(generatedPromptPayload);
+          triggerToast(`Đã sao chép Prompt 5 Khung chuẩn Tieuchuanprompt.md! 📋✨`);
+        } catch (e) {
+          triggerToast(`Lỗi sao chép: ${e.message}`);
         }
-        const blob = new Blob([content], { type: 'text/markdown;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${skill.id}.SKILL.md`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showToast(`Đã tải file ${skill.id}.SKILL.md về máy tính! 💾`);
-      } catch (err) {
-        alert('Lỗi tải file: ' + err.message);
-      }
+      };
+
+      // --- Toggle Shortlist ---
+      const handleToggleShortlist = () => {
+        const id = selectedSkill.id;
+        const next = { ...shortlist, [id]: !shortlist[id] };
+        setShortlist(next);
+        try {
+          localStorage.setItem('eduskills_shortlist', JSON.stringify(next));
+        } catch (e) {}
+        triggerToast(next[id] ? `Đã thêm @${id} vào danh sách yêu thích! 💖` : `Đã bỏ @${id} khỏi danh sách.`);
+      };
+
+      return (
+        <div>
+          {/* Top Navbar */}
+          <header className="top-navbar">
+            <div className="brand-section" onClick={() => setActiveTab('skills')}>
+              <svg className="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="46" fill="#588B69" />
+                <path d="M28 35L36 18L44 32" fill="#E29578" />
+                <path d="M72 35L64 18L56 32" fill="#E29578" />
+                <circle cx="50" cy="52" r="32" fill="#FFFFFF" />
+                <ellipse cx="40" cy="48" rx="4" ry="5" fill="#22382B" />
+                <ellipse cx="60" cy="48" rx="4" ry="5" fill="#22382B" />
+                <circle cx="41.5" cy="46" r="1.5" fill="#FFFFFF" />
+                <circle cx="61.5" cy="46" r="1.5" fill="#FFFFFF" />
+                <path d="M48 54L52 54L50 57Z" fill="#E29578" />
+                <path d="M46 59C48 61 52 61 54 59" stroke="#22382B" strokeWidth="2" strokeLinecap="round" />
+                <ellipse cx="33" cy="53" rx="4" ry="2.5" fill="#FFDDD2" />
+                <ellipse cx="67" cy="53" rx="4" ry="2.5" fill="#FFDDD2" />
+                <path d="M38 72H62C62 72 60 84 50 84C40 84 38 72 38 72Z" fill="#385E47" />
+                <ellipse cx="50" cy="72" rx="12" ry="3" fill="#7DAA8B" />
+              </svg>
+              <div className="brand-title-group">
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <h1>EduSkills-VN</h1>
+                  <span className="version-tag">v0.1.2-beta</span>
+                </div>
+                <p>🍵 Matcha Mèo Ú • Hệ Sinh Thái AI THPT Chuẩn BGD</p>
+              </div>
+            </div>
+
+            {/* Navigation Tabs */}
+            <div className="nav-tabs-group">
+              <button 
+                className={`nav-tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
+                onClick={() => setActiveTab('skills')}
+              >
+                <i className="fa-solid fa-graduation-cap"></i> 16 Kỹ Năng THPT
+              </button>
+              <button 
+                className={`nav-tab-btn ${activeTab === 'drive' ? 'active' : ''}`}
+                onClick={() => setActiveTab('drive')}
+              >
+                <i className="fa-brands fa-google-drive"></i> Tủ Sách SGK Cloud
+              </button>
+              <button 
+                className={`nav-tab-btn ${activeTab === 'prompt-standard' ? 'active' : ''}`}
+                onClick={() => setActiveTab('prompt-standard')}
+              >
+                <i className="fa-solid fa-scroll"></i> Tiêu Chuẩn Prompt Mạnh
+              </button>
+              <button 
+                className={`nav-tab-btn ${activeTab === 'guide' ? 'active' : ''}`}
+                onClick={() => setActiveTab('guide')}
+              >
+                <i className="fa-solid fa-book-open"></i> Hướng Dẫn Nạp AI
+              </button>
+            </div>
+          </header>
+
+          {/* Main App Container */}
+          <main className="app-container">
+            {/* VIEW 1: SKILLS & WORKSTATION */}
+            {activeTab === 'skills' && (
+              <div className="skills-workspace-grid">
+                {/* Left: Sidebar Catalog */}
+                <aside className="catalog-sidebar">
+                  <div className="search-box-cute">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                    <input 
+                      type="text" 
+                      className="search-input-cute" 
+                      placeholder="Tìm môn học (/toan, /hoa, /quiz)..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </div>
+
+                  {/* Category Pills - FIXED: wrap neatly, zero ugly scrollbar */}
+                  <div className="category-pills">
+                    {[
+                      { id: 'all', label: 'Tất cả (16)' },
+                      { id: 'khoa-hoc-tu-nhien', label: 'Tự nhiên' },
+                      { id: 'khoa-hoc-xa-hoi', label: 'Xã hội' },
+                      { id: 'ngon-ngu-cong-nghe', label: 'Công nghệ' },
+                      { id: 'meta-tools', label: 'Meta-tools' }
+                    ].map(cat => (
+                      <button 
+                        key={cat.id} 
+                        className={`pill-btn ${selectedCategory === cat.id ? 'active' : ''}`}
+                        onClick={() => setSelectedCategory(cat.id)}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Skills Scrollable List */}
+                  <div className="skills-scroll-list">
+                    {filteredSkills.map(skill => {
+                      const isSelected = skill.id === selectedSkill.id;
+                      const isFav = !!shortlist[skill.id];
+                      return (
+                        <div 
+                          key={skill.id} 
+                          className={`skill-card-item ${isSelected ? 'active' : ''}`}
+                          onClick={() => setSelectedSkillId(skill.id)}
+                        >
+                          <div className="skill-card-info">
+                            <h4>{skill.name}</h4>
+                            <p>@{skill.id} {isFav ? '💖' : ''}</p>
+                          </div>
+                          <span className={`badge-mini ${
+                            skill.category === 'khoa-hoc-tu-nhien' ? 'badge-science' :
+                            skill.category === 'khoa-hoc-xa-hoi' ? 'badge-social' :
+                            skill.category === 'ngon-ngu-cong-nghe' ? 'badge-tech' : 'badge-meta'
+                          }`}>
+                            {skill.category ? skill.category.split('-')[0].toUpperCase() : 'SKILL'}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </aside>
+
+                {/* Right: AAS Core Workstation */}
+                <section className="aas-workstation">
+                  <div className="workstation-breadcrumb">
+                    <button className="btn-back-catalog" onClick={() => setSelectedCategory('all')}>
+                      <i className="fa-solid fa-arrow-left"></i> Danh mục kỹ năng
+                    </button>
+                    <span className="badge-tag-aas badge-science">
+                      {selectedSkill.category || 'AAS CORE'}
+                    </span>
+                    <span className="badge-tag-aas badge-meta">
+                      v0.1.2-beta
+                    </span>
+                    <span className="badge-tag-aas badge-tech">
+                      GDPT 2018 • BGD 2026
+                    </span>
+                  </div>
+
+                  <div className="workstation-header">
+                    <div className="workstation-title">
+                      @{selectedSkill.id}
+                      {shortlist[selectedSkill.id] && <span style={{ fontSize: '1.4rem' }}>💖</span>}
+                    </div>
+                    <p className="workstation-desc">{selectedSkill.description}</p>
+                  </div>
+
+                  {/* Action Bar */}
+                  <div className="aas-action-bar">
+                    {/* Instant Offline Download Button */}
+                    <button className="btn-aas btn-primary-aas" onClick={handleDownloadSkillMd}>
+                      <i className="fa-solid fa-download"></i> Lưu về máy (.md)
+                    </button>
+                    <button 
+                      className={`btn-aas ${shortlist[selectedSkill.id] ? 'btn-honey-aas' : 'btn-outline-aas'}`}
+                      onClick={handleToggleShortlist}
+                    >
+                      <i className={`fa-${shortlist[selectedSkill.id] ? 'solid' : 'regular'} fa-bookmark`}></i>
+                      {shortlist[selectedSkill.id] ? 'In Shortlist' : 'Add to Shortlist'}
+                    </button>
+                    <button className="btn-aas btn-outline-aas" onClick={handleCopyPromptPayload}>
+                      <i className="fa-solid fa-clipboard-check"></i> Copy Prompt 5 Khung
+                    </button>
+                    <button className="btn-aas btn-outline-aas" onClick={handleCopyFullContent}>
+                      <i className="fa-solid fa-copy"></i> Copy Toàn Bộ File SKILL.md
+                    </button>
+                  </div>
+
+                  {/* 5-PART MODERN PROMPT BUILDER (docs/Tieuchuanprompt.md) */}
+                  <div className="prompt-builder-card">
+                    <div className="builder-header">
+                      <div className="builder-title">
+                        <i className="fa-solid fa-wand-magic-sparkles" style={{ color: 'var(--matcha-accent)' }}></i>
+                        Bộ Tạo Prompt Sư Phạm 5 Khung (Chuẩn Tieuchuanprompt.md)
+                      </div>
+                      <span className="badge-tag-aas badge-science">Chống Ảo Giác 100%</span>
+                    </div>
+
+                    <div className="builder-grid">
+                      {/* Component 1: Role */}
+                      <div className="builder-field">
+                        <label className="builder-label">
+                          <i className="fa-solid fa-user-tie"></i> 1. Role (Vai trò chuyên môn)
+                        </label>
+                        <input 
+                          type="text" 
+                          className="builder-input" 
+                          value={rolePrompt}
+                          onChange={(e) => setRolePrompt(e.target.value)}
+                          placeholder="Vai trò định vị cho AI..."
+                        />
+                      </div>
+
+                      {/* Component 2: Context & Grade */}
+                      <div className="builder-field">
+                        <label className="builder-label">
+                          <i className="fa-solid fa-bullseye"></i> 2. Context (Khối Lớp & Trình Độ)
+                        </label>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <select 
+                            className="builder-select" 
+                            style={{ width: '110px' }}
+                            value={gradeLevel}
+                            onChange={(e) => setGradeLevel(Number(e.target.value))}
+                          >
+                            <option value={10}>Lớp 10</option>
+                            <option value={11}>Lớp 11</option>
+                            <option value={12}>Lớp 12</option>
+                          </select>
+                          <input 
+                            type="text" 
+                            className="builder-input" 
+                            value={studentLevel}
+                            onChange={(e) => setStudentLevel(e.target.value)}
+                            placeholder="Mục tiêu điểm số hoặc trình độ..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Context Status Details */}
+                    <div className="builder-field" style={{ marginBottom: '14px' }}>
+                      <label className="builder-label">
+                        <i className="fa-solid fa-compass"></i> Bối cảnh hiện tại (Đã nắm gì, chưa rõ gì)
+                      </label>
+                      <input 
+                        type="text" 
+                        className="builder-input" 
+                        value={currentStatus}
+                        onChange={(e) => setCurrentStatus(e.target.value)}
+                        placeholder="Nêu rõ lỗ hổng kiến thức để AI hỗ trợ trúng đích..."
+                      />
+                    </div>
+
+                    {/* Component 3: Task */}
+                    <div className="builder-field" style={{ marginBottom: '14px' }}>
+                      <label className="builder-label">
+                        <i className="fa-solid fa-list-check"></i> 3. Task (Nhiệm vụ cụ thể)
+                      </label>
+                      <input 
+                        type="text" 
+                        className="builder-input" 
+                        value={taskPrompt}
+                        onChange={(e) => setTaskPrompt(e.target.value)}
+                        placeholder="Hành động chính xác cần AI thực hiện..."
+                      />
+                    </div>
+
+                    {/* Component 4: Constraints & Format */}
+                    <div className="builder-field" style={{ marginBottom: '16px' }}>
+                      <label className="builder-label">
+                        <i className="fa-solid fa-ruler-combined"></i> 4. Constraints & Format (Ràng buộc & Định dạng)
+                      </label>
+                      <input 
+                        type="text" 
+                        className="builder-input" 
+                        value={constraintsPrompt}
+                        onChange={(e) => setConstraintsPrompt(e.target.value)}
+                        placeholder="LaTeX $...$, bảng đối chiếu, IUPAC 100%..."
+                      />
+                    </div>
+
+                    {/* Component 5: Cognitive Prompts Toggles */}
+                    <div className="cognitive-toggles-box">
+                      <div className="builder-label" style={{ marginBottom: '10px' }}>
+                        <i className="fa-solid fa-brain"></i> 5. Kỹ Thuật Kích Hoạt Tư Duy Phản Biện (Cognitive Prompts)
+                      </div>
+                      <div className="toggle-grid">
+                        <label className="toggle-item">
+                          <input 
+                            type="checkbox" 
+                            checked={useCoT}
+                            onChange={(e) => setUseCoT(e.target.checked)}
+                          />
+                          <span>Chain-of-Thought (Step-by-step)</span>
+                        </label>
+                        <label className="toggle-item">
+                          <input 
+                            type="checkbox" 
+                            checked={useSocratic}
+                            onChange={(e) => setUseSocratic(e.target.checked)}
+                          />
+                          <span>Socratic Method (Gợi mở tư duy)</span>
+                        </label>
+                        <label className="toggle-item">
+                          <input 
+                            type="checkbox" 
+                            checked={useFewShot}
+                            onChange={(e) => setUseFewShot(e.target.checked)}
+                          />
+                          <span>Few-shot (Kèm ví dụ mẫu)</span>
+                        </label>
+                        <label className="toggle-item">
+                          <input 
+                            type="checkbox" 
+                            checked={useActiveRecall}
+                            onChange={(e) => setUseActiveRecall(e.target.checked)}
+                          />
+                          <span>Active Recall (Câu hỏi tự vấn cuối)</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Drive Citation Auto-Injected */}
+                    <div className="drive-citation-box">
+                      <div className="drive-citation-text">
+                        <i className="fa-brands fa-google-drive"></i> Dẫn chứng SGK Lớp {gradeLevel}: {DRIVE_LINKS_MAP[gradeLevel].title}
+                      </div>
+                      <a href={DRIVE_LINKS_MAP[gradeLevel].url} target="_blank" className="drive-citation-link">
+                        Mở thư mục Drive gốc <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                      </a>
+                    </div>
+
+                    {/* Document-First Attachment */}
+                    <div className="builder-field" style={{ marginBottom: '18px' }}>
+                      <label className="builder-label">
+                        <i className="fa-solid fa-file-lines"></i> Đính kèm đề bài / Văn bản SGK (Document-First)
+                      </label>
+                      <textarea 
+                        className="builder-textarea" 
+                        value={docAttachment}
+                        onChange={(e) => setDocAttachment(e.target.value)}
+                        placeholder="Dán nội dung bài tập, câu hỏi hoặc đoạn văn bản SGK cần xử lý vào đây..."
+                      />
+                    </div>
+
+                    {/* Live Output Preview */}
+                    <div className="live-payload-section">
+                      <div className="payload-header-bar">
+                        <span className="payload-badge">LIVE PROMPT PREVIEW (TIÊU CHUẨN 5 KHUNG)</span>
+                        <button 
+                          className="btn-aas btn-primary-aas" 
+                          style={{ padding: '4px 10px', fontSize: '0.78rem' }}
+                          onClick={handleCopyPromptPayload}
+                        >
+                          <i className="fa-solid fa-copy"></i> Sao chép Prompt
+                        </button>
+                      </div>
+                      <pre className="live-code-area">{generatedPromptPayload}</pre>
+                    </div>
+                  </div>
+
+                  {/* Anti-hallucination Rules of Selected Skill */}
+                  {selectedSkill.antiHallucinationRules && selectedSkill.antiHallucinationRules.length > 0 && (
+                    <div className="rules-list-box">
+                      <div className="rules-title">
+                        <i className="fa-solid fa-shield-halved"></i> Quy Tắc Chống Ảo Giác Bắt Buộc Của Kỹ Năng Này
+                      </div>
+                      {selectedSkill.antiHallucinationRules.map((rule, idx) => (
+                        <div key={idx} className="rule-chip">
+                          <i className="fa-solid fa-circle-check" style={{ color: 'var(--matcha-primary)' }}></i>
+                          <span>{rule}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              </div>
+            )}
+
+            {/* VIEW 2: TỦ SÁCH SGK CLOUD */}
+            {activeTab === 'drive' && (
+              <div>
+                <div style={{ marginBottom: '24px' }}>
+                  <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.8rem', color: 'var(--matcha-dark)' }}>
+                    📚 Tủ Sách SGK Điện Tử (Google Drive Cloud Storage)
+                  </h2>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
+                    Kho tài liệu SGK chuẩn mới có dung lượng hơn 2.03GB, được số hóa và phân luồng trên Google Drive nhằm tối ưu tốc độ và không làm phình kho mã nguồn Git.
+                  </p>
+                </div>
+
+                <div className="drive-grid-cute">
+                  {[10, 11, 12].map(grade => {
+                    const item = DRIVE_LINKS_MAP[grade];
+                    return (
+                      <div key={grade} className="drive-card-cute">
+                        <div>
+                          <div style={{ 
+                            width: '46px', 
+                            height: '46px', 
+                            borderRadius: '12px', 
+                            background: grade === 10 ? '#E8F5E9' : grade === 11 ? '#E3F2FD' : '#FFF3E0',
+                            color: grade === 10 ? '#2E7D32' : grade === 11 ? '#1565C0' : '#E65100',
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'center',
+                            fontSize: '1.3rem',
+                            marginBottom: '14px'
+                          }}>
+                            <i className="fa-solid fa-book-bookmark"></i>
+                          </div>
+                          <h3 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.25rem', marginBottom: '6px' }}>
+                            {item.title}
+                          </h3>
+                          <span style={{ 
+                            fontSize: '0.74rem', 
+                            fontWeight: 700, 
+                            padding: '3px 10px', 
+                            borderRadius: '20px',
+                            background: 'var(--bg-matcha-light)',
+                            color: 'var(--matcha-primary)',
+                            display: 'inline-block',
+                            marginBottom: '12px'
+                          }}>
+                            {item.badge}
+                          </span>
+                          <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                            Bao gồm đầy đủ sách giáo khoa và chuyên đề học tập các môn Toán, Vật lí, Hóa học, Sinh học, Ngữ văn, Lịch sử, Địa lí, Tin học, Công nghệ.
+                          </p>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '8px', marginTop: '20px' }}>
+                          <a 
+                            href={item.url} 
+                            target="_blank" 
+                            className="btn-aas btn-primary-aas" 
+                            style={{ flex: 1, justifyContent: 'center' }}
+                          >
+                            <i className="fa-solid fa-arrow-up-right-from-square"></i> Mở Drive Lớp {grade}
+                          </a>
+                          <button 
+                            className="btn-aas btn-outline-aas"
+                            onClick={() => {
+                              navigator.clipboard.writeText(item.url);
+                              triggerToast(`Đã sao chép link Drive Lớp ${grade}! 📂`);
+                            }}
+                          >
+                            <i className="fa-solid fa-copy"></i>
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 3: TIÊU CHUẨN PROMPT MẠNH (docs/Tieuchuanprompt.md) */}
+            {activeTab === 'prompt-standard' && (
+              <div className="standard-doc-card">
+                <div style={{ borderBottom: '2px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
+                  <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.8rem', color: 'var(--matcha-dark)', marginBottom: '8px' }}>
+                    📜 Bộ Tiêu Chuẩn Prompt Mạnh Trong Học Tập (Modern Prompt Engineering)
+                  </h2>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
+                    Trích xuất từ tài liệu <code>docs/Tieuchuanprompt.md</code> của dự án EduSkills-VN.
+                  </p>
+                </div>
+
+                <div style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-main)' }}>
+                  <p style={{ marginBottom: '16px' }}>
+                    Một prompt mạnh trong học tập hiện nay không phải là câu lệnh dài dòng, mà là câu lệnh có <strong>cấu trúc chặt chẽ</strong>, <strong>giảm thiểu ảo giác (hallucination)</strong> và <strong>buộc AI phải kích hoạt tư duy phản biện thay vì chỉ đưa ra câu trả lời có sẵn</strong>.
+                  </p>
+
+                  <h3 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.2rem', color: 'var(--matcha-primary)', margin: '20px 0 10px 0' }}>
+                    1. Khung 5 Thành Phần Cốt Lõi (Core Framework)
+                  </h3>
+                  <ul style={{ paddingLeft: '24px', marginBottom: '20px' }}>
+                    <li style={{ marginBottom: '8px' }}><strong>Role (Vai trò chuyên môn):</strong> Định vị góc nhìn và trình độ chuyên môn cho AI (ví dụ: Gia sư Feynman, Giám khảo chấm thi, Chuyên gia IUPAC).</li>
+                    <li style={{ marginBottom: '8px' }}><strong>Context (Bối cảnh & Trình độ):</strong> Nêu rõ cấp độ kiến thức của người học, mục tiêu cụ thể (ôn thi 8+, hiểu bản chất, nghiên cứu ViSEF) và những gì đã nắm vững.</li>
+                    <li style={{ marginBottom: '8px' }}><strong>Task (Nhiệm vụ cụ thể):</strong> Hành động chính xác cần thực hiện. Tránh các câu chung chung như "giải thích X", thay vào đó dùng "phân tích cơ chế hoạt động của X, so sánh với Y và chỉ ra 3 lỗi sai phổ biến".</li>
+                    <li style={{ marginBottom: '8px' }}><strong>Constraints & Format (Ràng buộc & Định dạng):</strong> Giới hạn độ dài, phong cách hành văn, bảng so sánh, công thức LaTeX ($...$), code có chú thích.</li>
+                    <li style={{ marginBottom: '8px' }}><strong>Cognitive Prompts (Kỹ thuật kích hoạt tư duy):</strong>
+                      <ul style={{ paddingLeft: '20px', marginTop: '6px' }}>
+                        <li><em>Chain-of-Thought:</em> Giải thích từng bước (step-by-step) trước khi kết luận.</li>
+                        <li><em>Socratic Method:</em> Đặt câu hỏi gợi mở để người học tự tư duy thay vì đưa ngay đáp án.</li>
+                        <li><em>Few-shot:</em> Cung cấp 1-2 ví dụ mẫu chuẩn mực.</li>
+                        <li><em>Active Recall:</em> Đặt câu hỏi kiểm tra tư duy ở cuối phản hồi.</li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                  <h3 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.2rem', color: 'var(--matcha-primary)', margin: '24px 0 10px 0' }}>
+                    2. Bảng So Sánh Prompt Yếu vs. Prompt Mạnh Đạt Chuẩn
+                  </h3>
+                  <table className="standard-table">
+                    <thead>
+                      <tr>
+                        <th>Tiêu chí</th>
+                        <th>Prompt yếu / Lỗi thời</th>
+                        <th>Prompt mạnh đạt chuẩn EduSkills-VN</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Mục tiêu lý thuyết</strong></td>
+                        <td>"Giải thích thuật toán Dijkstra."</td>
+                        <td>"Đóng vai trò là giảng viên Cấu trúc dữ liệu & Giải thuật. Hãy giải thích cơ chế thuật toán Dijkstra theo phương pháp trực quan cho học sinh/sinh viên mới học. Đi kèm bảng mô phỏng từng bước (trace) trên đồ thị mẫu 5 đỉnh và chỉ rõ trường hợp thuật toán bị sai (trọng số âm)."</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Sửa lỗi & Tối ưu</strong></td>
+                        <td>"Sửa code này giúp tôi: [Code]"</td>
+                        <td>"Đóng vai trò chuyên gia review mã nguồn. Hãy kiểm tra đoạn mã dưới đây về: độ phức tạp thời gian/không gian ($O(n)$), các trường hợp biên (edge cases) có thể gây tràn mảng, và đề xuất cách tối ưu. Giải thích nguyên nhân của từng lỗi sai trước khi đưa ra code sửa đổi."</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Học hiểu bản chất</strong></td>
+                        <td>"Tóm tắt bài học X."</td>
+                        <td>"Hãy đóng vai trò là người phản biện phương pháp học (Feynman). Tôi sẽ giải thích khái niệm X bằng từ ngữ của mình bên dưới. Hãy chỉ ra những điểm tôi hiểu sai, lỗ hổng logic và đặt cho tôi 2 câu hỏi tình huống thực tế để kiểm tra mức độ hiểu sâu."</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 4: HƯỚNG DẪN NẠP AI */}
+            {activeTab === 'guide' && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+                {[
+                  {
+                    title: 'Google Gemini 1.5 Pro / AI Studio',
+                    subtitle: 'Khuyên dùng với cửa sổ ngữ cảnh 2M Tokens',
+                    icon: 'fa-bolt',
+                    color: '#2E7D32',
+                    bg: '#E8F5E9',
+                    steps: [
+                      'Mở Google AI Studio hoặc Gemini Web.',
+                      'Trong ô System Instructions, dán toàn bộ nội dung file SKILL.md (bấm nút "Copy Toàn Bộ File SKILL.md" ở giao diện này).',
+                      'Đính kèm file PDF SGK từ Google Drive Lớp 10, 11 hoặc 12 vào chat để Gemini đối chiếu chính xác từng trang sách.'
+                    ]
+                  },
+                  {
+                    title: 'Anthropic Claude (Projects)',
+                    subtitle: 'Văn phong sư phạm mạch lạc & Socratic',
+                    icon: 'fa-brain',
+                    color: '#512DA8',
+                    bg: '#EDE7F6',
+                    steps: [
+                      'Tạo một Project mới trên Claude.ai đặt tên "EduSkills THPT".',
+                      'Bấm nút "Lưu về máy (.md)" của các Skill bạn cần và tải lên mục Project Knowledge.',
+                      'Trong Project Instructions: "Bạn là Gia sư Sư phạm EduSkills, luôn giải bài 4 tầng Socrates và trích dẫn chuẩn SGK mới".'
+                    ]
+                  },
+                  {
+                    title: 'OpenAI ChatGPT (Custom GPT)',
+                    subtitle: 'Hỗ trợ tính toán và Code Interpreter',
+                    icon: 'fa-robot',
+                    color: '#0288D1',
+                    bg: '#E1F5FE',
+                    steps: [
+                      'Vào Explore GPTs -> Create a GPT.',
+                      'Trong tab Configure, dán Prompt 5 Khung chuẩn Tieuchuanprompt.md vào ô Instructions.',
+                      'Bật tính năng Code Interpreter để hỗ trợ vẽ đồ thị hàm số và kiểm toán số học.'
+                    ]
+                  },
+                  {
+                    title: 'Google NotebookLM',
+                    subtitle: 'Tạo Podcast đàm thoại SGK tự động',
+                    icon: 'fa-headphones',
+                    color: '#E65100',
+                    bg: '#FFF3E0',
+                    steps: [
+                      'Truy cập notebooklm.google.com -> Tạo Notebook mới.',
+                      'Tải file PDF SGK từ liên kết Google Drive của môn học lên làm Nguồn (Source).',
+                      'Bấm nút "Audio Overview" để AI tự động tạo buổi đàm thoại Podcast giải thích bài học siêu hấp dẫn.'
+                    ]
+                  }
+                ].map((guide, i) => (
+                  <div key={i} style={{ 
+                    background: 'white', 
+                    border: '1.5px solid var(--border-color)', 
+                    borderRadius: 'var(--radius-lg)', 
+                    padding: '24px',
+                    boxShadow: 'var(--shadow-soft)'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                      <div style={{ 
+                        width: '42px', 
+                        height: '42px', 
+                        borderRadius: '12px', 
+                        background: guide.bg, 
+                        color: guide.color, 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        fontSize: '1.2rem'
+                      }}>
+                        <i className={`fa-solid ${guide.icon}`}></i>
+                      </div>
+                      <div>
+                        <h3 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.05rem', fontWeight: 800 }}>{guide.title}</h3>
+                        <p style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>{guide.subtitle}</p>
+                      </div>
+                    </div>
+                    <ol style={{ paddingLeft: '20px', fontSize: '0.86rem', color: 'var(--text-main)', lineHeight: '1.6' }}>
+                      {guide.steps.map((step, si) => (
+                        <li key={si} style={{ marginBottom: '8px' }}>{step}</li>
+                      ))}
+                    </ol>
+                  </div>
+                ))}
+              </div>
+            )}
+          </main>
+
+          {/* Footer */}
+          <footer className="footer-cute">
+            <p>🐾 EduSkills-VN v0.1.2-beta • Chủ nhiệm dự án: <strong>Nguyễn Duy Quang</strong> (📞 0795277227 | ✉️ poiairo4628@gmail.com)</p>
+            <p style={{ marginTop: '4px', fontSize: '0.76rem', color: 'var(--text-light)' }}>
+              Được thiết kế theo tiêu chuẩn AAS Core Specification & Khung 5 Thành Phần Modern Prompt Engineering.
+            </p>
+          </footer>
+
+          {/* Cute Toast Notification */}
+          <div className={`cute-toast ${showToast ? 'show' : ''}`}>
+            <i className="fa-solid fa-paw" style={{ color: 'var(--honey-warm)' }}></i>
+            <span>{toastMsg}</span>
+          </div>
+        </div>
+      );
     }
 
-    function toggleSkillShortlist() {
-      const skillId = currentSelectedSkill.id;
-      const key = 'matcha_shortlist_' + skillId;
-      const isSaved = localStorage.getItem(key) === 'true';
-      if (isSaved) {
-        localStorage.removeItem(key);
-        showToast(`Đã bỏ @${skillId} khỏi danh sách quan tâm.`);
-      } else {
-        localStorage.setItem(key, 'true');
-        showToast(`Đã thêm @${skillId} vào Shortlist yêu thích! 💖`);
-      }
-      updateShortlistBtnState(skillId);
-    }
-
-    function updateShortlistBtnState(skillId) {
-      const key = 'matcha_shortlist_' + skillId;
-      const btn = document.getElementById('btnShortlist');
-      if (!btn) return;
-      const isSaved = localStorage.getItem(key) === 'true';
-      if (isSaved) {
-        btn.innerHTML = `<i class="fa-solid fa-check"></i> In Shortlist`;
-        btn.className = 'btn-aas-cute btn-shortlist-cute';
-      } else {
-        btn.innerHTML = `<i class="fa-regular fa-bookmark"></i> Add to Shortlist`;
-        btn.className = 'btn-aas-cute btn-outline-cute';
-      }
-    }
-
-    function copyDriveLink(link, grade) {
-      navigator.clipboard.writeText(link).then(() => {
-        showToast(`Đã sao chép link Google Drive ${grade}! 📂`);
-      });
-    }
-
-    function showToast(message) {
-      const toast = document.getElementById('cute-toast');
-      const toastMsg = document.getElementById('toastMessage');
-      toastMsg.innerText = message;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2500);
-    }
-
-    // --- Init ---
-    window.addEventListener('DOMContentLoaded', () => {
-      renderSkillsCatalog();
-      selectSkill('toan-thpt');
-    });
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
   </script>
 </body>
 </html>

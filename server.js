@@ -27,10 +27,31 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
+  // CORS Headers cho moi yeu cau
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    return res.end();
+  }
+
   const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
   let pathname = decodeURIComponent(parsedUrl.pathname);
 
   // --- API Endpoints ---
+  if (pathname === '/api/prompt-standard') {
+    const promptDocPath = path.join(ROOT_DIR, 'docs', 'Tieuchuanprompt.md');
+    if (fs.existsSync(promptDocPath)) {
+      const content = fs.readFileSync(promptDocPath, 'utf-8');
+      res.writeHead(200, { 'Content-Type': 'text/markdown; charset=utf-8' });
+      return res.end(content);
+    }
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('Prompt standard document not found');
+  }
+
   if (pathname === '/api/skills') {
     const catalogPath = path.join(DATASET_DIR, 'skills-catalog.json');
     if (!fs.existsSync(catalogPath)) {

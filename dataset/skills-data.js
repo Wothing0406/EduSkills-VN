@@ -1,4 +1,9 @@
-[
+/**
+ * EduSkills-VN Offline Static Data Bundle
+ * Tự động sinh bởi scripts/validate-dataset.js
+ * Giúp giao diện hoạt động 100% offline không phụ thuộc mạng
+ */
+window.EDUSKILLS_CATALOG = [
   {
     "id": "hoa-hoc-thpt",
     "name": "hoa-hoc-thpt",
@@ -449,4 +454,24 @@
     "contentSample": "\n# 💻 Skill: Chuyên Gia Tin Học THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Kiến trúc máy tính, Hệ điều hành, Lập trình Python căn bản (Biến, Kiểu dữ liệu, Cấu trúc rẽ nhánh & Lặp, Hàm).\n- **Lớp 11:** Cơ sở dữ liệu quan hệ (Hệ CSDL, Bảng, Khóa chính/khóa ngoại, N...",
     "rawContent": "---\nname: tin-hoc-thpt\nversion: \"1.0.0-beta\"\ndescription: \"Chuyên gia sư phạm Tin học THPT (Lớp 10, 11, 12): Lập trình Python, Cấu trúc dữ liệu và giải thuật, Hệ quản trị cơ sở dữ liệu quan hệ SQL, Mạng máy tính và An toàn không gian mạng.\"\ncategory: ngon-ngu-cong-nghe\ngrade_levels: [10, 11, 12]\nsubject: \"Tin Học\"\ntools: [python_interpreter, sql_executor, algorithm_visualizer]\nanti_hallucination_rules:\n  - \"Mã nguồn Python phải tuân thủ chuẩn PEP8, đặt tên biến có nghĩa, có comment giải thích luồng thuật toán.\"\n  - \"Mọi truy vấn SQL phải đảm bảo tính toàn vẹn dữ liệu và đúng chuẩn cú pháp ANSI SQL.\"\n  - \"Phải phân tích độ phức tạp thời gian O(n) và không gian bộ nhớ cho mỗi thuật toán đề xuất.\"\n---\n\n# 💻 Skill: Chuyên Gia Tin Học THPT Chuẩn BGD 2026–2027\n\n## 1. Trọng Tâm Kiến Thức SGK Thống Nhất\n- **Lớp 10:** Kiến trúc máy tính, Hệ điều hành, Lập trình Python căn bản (Biến, Kiểu dữ liệu, Cấu trúc rẽ nhánh & Lặp, Hàm).\n- **Lớp 11:** Cơ sở dữ liệu quan hệ (Hệ CSDL, Bảng, Khóa chính/khóa ngoại, Ngôn ngữ truy vấn SQL), Định hướng Khoa học máy tính / Tin học ứng dụng.\n- **Lớp 12:** Mạng máy tính & Internet, Giao thức TCP/IP, Thiết kế trang web cơ bản (HTML/CSS), Trí tuệ nhân tạo & Đạo đức công nghệ số.\n"
   }
-]
+];
+window.EDUSKILLS_DRIVE_LINKS = {
+  "lop_10": {
+    "title": "Sách Giáo Khoa Lớp 10 (GDPT 2018 Toàn Bộ Các Bộ Sách)",
+    "url": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link",
+    "grade": 10,
+    "badge": "Đầy đủ các bộ sách chuẩn"
+  },
+  "lop_11": {
+    "title": "Sách Giáo Khoa Lớp 11 (GDPT 2018 Bản Chuẩn Hóa BGD)",
+    "url": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link",
+    "grade": 11,
+    "badge": "Bản chuẩn hóa BGD"
+  },
+  "lop_12": {
+    "title": "Sách Giáo Khoa Lớp 12 (Bộ SGK Thống Nhất 2026-2027 Trọng Tâm Thi)",
+    "url": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link",
+    "grade": 12,
+    "badge": "Trọng tâm thi THPT Quốc Gia"
+  }
+};

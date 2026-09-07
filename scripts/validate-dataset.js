@@ -140,7 +140,8 @@ function runValidation() {
         antiHallucinationRules: meta.anti_hallucination_rules || [],
         curriculum: meta.curriculum_alignment || 'Bộ SGK Thống Nhất 2026',
         filePath: relPath,
-        contentSample: body.substring(0, 300) + '...'
+        contentSample: body.substring(0, 300) + '...',
+        rawContent: content
       });
     } else {
       report.errorCount++;
@@ -171,6 +172,43 @@ function runValidation() {
   fs.writeFileSync(CATALOG_FILE, JSON.stringify(catalog, null, 2), 'utf-8');
   fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2), 'utf-8');
 
+  // Ghi file JS Static Bundle để chạy 100% offline kể cả khi mở trực tiếp file:///
+  const driveLinks = {
+    lop_10: {
+      title: 'Sách Giáo Khoa Lớp 10 (GDPT 2018 Toàn Bộ Các Bộ Sách)',
+      url: 'https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link',
+      grade: 10,
+      badge: 'Đầy đủ các bộ sách chuẩn'
+    },
+    lop_11: {
+      title: 'Sách Giáo Khoa Lớp 11 (GDPT 2018 Bản Chuẩn Hóa BGD)',
+      url: 'https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link',
+      grade: 11,
+      badge: 'Bản chuẩn hóa BGD'
+    },
+    lop_12: {
+      title: 'Sách Giáo Khoa Lớp 12 (Bộ SGK Thống Nhất 2026-2027 Trọng Tâm Thi)',
+      url: 'https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link',
+      grade: 12,
+      badge: 'Trọng tâm thi THPT Quốc Gia'
+    }
+  };
+
+  const jsBundle = `/**
+ * EduSkills-VN Offline Static Data Bundle
+ * Tự động sinh bởi scripts/validate-dataset.js
+ * Giúp giao diện hoạt động 100% offline không phụ thuộc mạng
+ */
+window.EDUSKILLS_CATALOG = ${JSON.stringify(catalog, null, 2)};
+window.EDUSKILLS_DRIVE_LINKS = ${JSON.stringify(driveLinks, null, 2)};
+`;
+
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'skills-data.js'), jsBundle, 'utf-8');
+  const webDir = path.join(__dirname, '..', 'web');
+  if (fs.existsSync(webDir)) {
+    fs.writeFileSync(path.join(webDir, 'skills-data.js'), jsBundle, 'utf-8');
+  }
+
   console.log('\n-------------------------------------------------------------');
   console.log(`  📊 KẾT QUẢ KIỂM ĐỊNH:`);
   console.log(`     - Tổng số skills:  ${report.totalScanned}`);
@@ -178,8 +216,9 @@ function runValidation() {
   console.log(`     - Lỗi cần sửa:     ${report.errorCount}`);
   console.log(`     - Cảnh báo:        ${report.warningCount}`);
   console.log('-------------------------------------------------------------');
-  console.log(`  💾 Đã biên dịch Catalog tại:  dataset/skills-catalog.json`);
-  console.log(`  📋 Đã lưu Báo cáo kiểm định: dataset/validation-report.json\n`);
+  console.log(`  💾 Đã biên dịch Catalog tại:     dataset/skills-catalog.json`);
+  console.log(`  📦 Đã xuất Bundle Offline tại:   web/skills-data.js`);
+  console.log(`  📋 Đã lưu Báo cáo kiểm định:    dataset/validation-report.json\n`);
 
   return report;
 }

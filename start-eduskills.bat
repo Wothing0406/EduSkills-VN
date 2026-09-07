@@ -39,7 +39,7 @@ if %errorlevel% neq 0 (
 )
 
 :: 3. Mở trình duyệt và chạy Máy chủ cục bộ
-echo [3/3] Đang khởi chạy máy chủ cục bộ và mở giao diện Web Hub 3D...
+echo [3/3] Đang khởi chạy máy chủ cục bộ và mở giao diện Matcha Mèo Ú Hub (React 18)...
 timeout /t 2 >nul
 start http://localhost:3000
 
