@@ -1,0 +1,27 @@
+# EduSkills-VN Git Ignore
+
+# Ignore heavy raw PDF textbooks (2GB+ of copyrighted SGK PDFs)
+# SGK PDFs should be kept locally in sgk/ for Azure AI Document Intelligence ingestion
+sgk/
+*.pdf
+
+# Environment & Credentials
+.env
+.env.local
+*.key
+*.pem
+
+# Node.js dependencies & builds
+node_modules/
+dist/
+build/
+.cache/
+
+# OS and Editor artifacts
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
