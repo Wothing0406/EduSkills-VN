@@ -74,7 +74,7 @@
     ],
     "12": [
       {
-        "title": "Sách học sinh Vật lí 12 (Vật lí nhiệt & Khí lí tưởng)",
+        "title": "Sách học sinh Vật lí 12 (Vật lí nhiệt, Khí lí tưởng, Từ trường & Hạt nhân)",
         "file": "12-shs-vat-li-12.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       },
@@ -100,14 +100,14 @@
     ],
     "11": [
       {
-        "title": "Chuyên đề học tập Hóa học 11",
+        "title": "SGK & Chuyên đề học tập Hóa học 11 (IUPAC)",
         "file": "11-sgk-chuyen-de-hoc-tap-hoa-hoc-11.pdf",
         "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
       }
     ],
     "12": [
       {
-        "title": "Chuyên đề học tập Hóa học 12 (IUPAC Thống Nhất 2026)",
+        "title": "SGK & Chuyên đề Hóa học 12 (IUPAC Thống Nhất 2026)",
         "file": "12-sgk-chuyen-de-hoc-tap-hoa-hoc-12.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       },
@@ -121,21 +121,21 @@
   "sinh-hoc-thpt": {
     "10": [
       {
-        "title": "SGK Sinh học 10",
+        "title": "SGK Sinh học 10 (Sinh học Tế bào & Vi sinh vật)",
         "file": "10-sgk-sinh-hoc-10.pdf",
         "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
       }
     ],
     "11": [
       {
-        "title": "SGK Sinh học 11",
+        "title": "SGK Sinh học 11 (Sinh học Cơ thể Thực vật & Động vật)",
         "file": "11-sgk-sinh-hoc-11.pdf",
         "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
       }
     ],
     "12": [
       {
-        "title": "Sách giáo viên Sinh học 12 (Di truyền phân tử & Phả hệ)",
+        "title": "SGK & Chuyên đề Sinh học 12 (Di truyền phân tử, Quần thể & Sinh thái)",
         "file": "12-sgv-chuyen-de-hoc-tap-sinh-hoc-12.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       }
@@ -144,21 +144,21 @@
   "ngu-van-thpt": {
     "10": [
       {
-        "title": "SGK Ngữ văn 10 - Tập 1 & 2",
+        "title": "SGK Ngữ văn 10 - Tập 1 & 2 (GDPT 2018)",
         "file": "10-sgk-ngu-van-10-tap-hai.pdf",
         "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
       }
     ],
     "11": [
       {
-        "title": "SGK Ngữ văn 11",
+        "title": "SGK Ngữ văn 11 - Tập 1 & 2 (GDPT 2018)",
         "file": "11-sgk-ngu-van-11.pdf",
         "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
       }
     ],
     "12": [
       {
-        "title": "SGK Ngữ văn 12 - Tập 2 (Đọc hiểu ngoài SGK)",
+        "title": "SGK Ngữ văn 12 - Tập 1 & 2 (Đọc hiểu theo thể loại & Viết 200/600 chữ)",
         "file": "12-sgk-ngu-van-12-tap-hai.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       },
@@ -172,15 +172,21 @@
   "lich-su-thpt": {
     "10": [
       {
-        "title": "SGK Lịch sử 10",
+        "title": "SGK Lịch sử 10 (Văn minh Thế giới & Đại Việt)",
         "file": "10-sgk-lich-su-10.pdf",
         "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
       }
     ],
-    "11": [],
+    "11": [
+      {
+        "title": "SGK Lịch sử 11 (Cách mạng Tư sản, CNXH & Chiến tranh bảo vệ Tổ quốc)",
+        "file": "11-sgk-lich-su-11.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
     "12": [
       {
-        "title": "SGK Lịch sử 12 (Thống Nhất 2026)",
+        "title": "SGK Lịch sử 12 (Thế giới hiện đại, ASEAN, Cách mạng VN 1945-1975 & Đổi mới)",
         "file": "12-sgk-lich-su-12.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       }
@@ -189,21 +195,21 @@
   "dia-li-thpt": {
     "10": [
       {
-        "title": "SGK Địa lí 10 (Khai thác Atlat)",
+        "title": "SGK Địa lí 10 (Địa lí Tự nhiên & Kinh tế - Xã hội Đại cương)",
         "file": "10-sgk-dia-li-10.pdf",
         "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
       }
     ],
     "11": [
       {
-        "title": "Chuyên đề học tập Địa lí 11",
+        "title": "SGK & Chuyên đề Địa lí 11 (Địa lí Khu vực và Quốc gia)",
         "file": "11-sgv-chuyen-de-hoc-tap-dia-li-11.pdf",
         "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
       }
     ],
     "12": [
       {
-        "title": "SGK Địa lí 12 (Thống Nhất 2026)",
+        "title": "SGK Địa lí 12 (Địa lí Tự nhiên, Dân cư, Ngành & Vùng kinh tế Việt Nam)",
         "file": "12-sgk-dia-li-12.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       }
@@ -212,15 +218,21 @@
   "ktpl-thpt": {
     "10": [
       {
-        "title": "SGK Giáo dục Kinh tế & Pháp luật 10",
+        "title": "SGK Giáo dục Kinh tế & Pháp luật 10 (Cơ chế thị trường & Hiến pháp)",
         "file": "10-sgk-giao-duc-kinh-te-va-phap-luat-10.pdf",
         "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
       }
     ],
-    "11": [],
+    "11": [
+      {
+        "title": "SGK Giáo dục Kinh tế & Pháp luật 11 (Cạnh tranh, Lạm phát & Quyền công dân)",
+        "file": "11-sgk-giao-duc-kinh-te-va-phap-luat-11.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
     "12": [
       {
-        "title": "SGK Giáo dục Kinh tế & Pháp luật 12",
+        "title": "SGK Giáo dục Kinh tế & Pháp luật 12 (Tăng trưởng, Hội nhập, Bảo hiểm & Luật Quốc tế)",
         "file": "12-sgk-giao-duc-kinh-te-va-phap-luat-12.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       }
@@ -229,15 +241,21 @@
   "tin-hoc-thpt": {
     "10": [
       {
-        "title": "SGK Tin học 10 (Python & CSDL)",
+        "title": "SGK Tin học 10 (Lập trình Python & Xã hội số)",
         "file": "10-sgk-tin-hoc-10.pdf",
         "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
       }
     ],
-    "11": [],
+    "11": [
+      {
+        "title": "SGK Tin học 11 (Cơ sở dữ liệu SQL & Cấu trúc dữ liệu - Giải thuật)",
+        "file": "11-sgk-tin-hoc-11.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
     "12": [
       {
-        "title": "SGK Tin học 12 (Định hướng tin học ứng dụng & KHMT)",
+        "title": "SGK Tin học 12 (Trí tuệ nhân tạo, Mạng TCP/IP & Thiết kế Web HTML/CSS)",
         "file": "12-sgk-tin-hoc-12-dinh-huong-tin-hoc-ung-dung.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       }
@@ -246,15 +264,21 @@
   "cong-nghe-thpt": {
     "10": [
       {
-        "title": "SGK Công nghệ 10 (Thiết kế & Công nghệ)",
+        "title": "SGK Công nghệ 10 (Thiết kế kỹ thuật & Công nghệ trồng trọt)",
         "file": "10-sgk-cong-nghe-10-thiet-ke-va-cong-nghe.pdf",
         "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
       }
     ],
-    "11": [],
+    "11": [
+      {
+        "title": "SGK Công nghệ 11 (Cơ khí chế tạo, Động cơ đốt trong & Chăn nuôi)",
+        "file": "11-sgk-cong-nghe-11-cong-nghe-co-khi.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
     "12": [
       {
-        "title": "SGK Công nghệ 12 (Điện - Điện tử & Nông nghiệp)",
+        "title": "SGK Công nghệ 12 (Mạch điện 3 pha, Điện tử & Lâm nghiệp - Thủy sản)",
         "file": "12-sgk-cong-nghe-12-cong-nghe-dien-dien-tu.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       }
@@ -263,22 +287,137 @@
   "tieng-anh-thpt": {
     "10": [
       {
-        "title": "SGK Tiếng Anh 10 (Global Success)",
+        "title": "SGK Tiếng Anh 10 (Global Success - CEFR B1)",
         "file": "10-sgk-tieng-anh-10-global-sucess.pdf",
         "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
       }
     ],
     "11": [
       {
-        "title": "SGK Tiếng Anh 11 (Global Success)",
+        "title": "SGK Tiếng Anh 11 (Global Success - CEFR B1+/B2)",
         "file": "11-sgk-tieng-anh-11.pdf",
         "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
       }
     ],
     "12": [
       {
-        "title": "SGK Tiếng Anh 12 (Global Success)",
+        "title": "SGK Tiếng Anh 12 (Global Success - CEFR B2/C1 Trọng tâm Thi)",
         "file": "12-sgk-tieng-anh-12.pdf",
+        "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
+      }
+    ]
+  },
+  "giai-chi-tiet": {
+    "10": [
+      {
+        "title": "Tổng hợp SGK Lớp 10 (Phương pháp giải chi tiết 4 tầng Socrates)",
+        "file": "10-sgk-toan-10-tap-mot.pdf",
+        "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
+      }
+    ],
+    "11": [
+      {
+        "title": "Tổng hợp SGK Lớp 11 (Phương pháp giải chi tiết 4 tầng Socrates)",
+        "file": "11-sgk-toan-11-tap-mot.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
+    "12": [
+      {
+        "title": "Tổng hợp SGK Lớp 12 (Phương pháp giải chi tiết 4 tầng Socrates)",
+        "file": "12-sgk-toan-12-tap-mot.pdf",
+        "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
+      }
+    ]
+  },
+  "tao-quiz-bgd": {
+    "10": [
+      {
+        "title": "Khung Ma trận Đề kiểm tra Lớp 10 (Chuẩn QĐ 764/QĐ-BGDĐT)",
+        "file": "10-sgk-toan-10-tap-mot.pdf",
+        "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
+      }
+    ],
+    "11": [
+      {
+        "title": "Khung Ma trận Đề kiểm tra Lớp 11 (Chuẩn QĐ 764/QĐ-BGDĐT)",
+        "file": "11-sgk-toan-11-tap-mot.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
+    "12": [
+      {
+        "title": "Khung Ma trận Đề thi Tốt nghiệp THPT Lớp 12 (Chuẩn QĐ 764/QĐ-BGDĐT)",
+        "file": "12-sgk-toan-12-tap-mot.pdf",
+        "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
+      }
+    ]
+  },
+  "slide-thuyet-trinh": {
+    "10": [
+      {
+        "title": "Học liệu Dự án Thuyết trình Lớp 10 (Marp 16:9 & Mermaid)",
+        "file": "10-sgk-chuyen-de-hoc-tap-toan-10.pdf",
+        "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
+      }
+    ],
+    "11": [
+      {
+        "title": "Học liệu Dự án Thuyết trình Lớp 11 (Marp 16:9 & Mermaid)",
+        "file": "11-sgk-vat-li-11.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
+    "12": [
+      {
+        "title": "Học liệu Dự án Thuyết trình Lớp 12 (Marp 16:9 & Mermaid)",
+        "file": "12-sgk-chuyen-de-hoc-tap-toan-12.pdf",
+        "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
+      }
+    ]
+  },
+  "tomtat-mindmap": {
+    "10": [
+      {
+        "title": "Hệ thống Sơ đồ Tư duy & Cornell Cheatsheet Lớp 10",
+        "file": "10-sgk-sinh-hoc-10.pdf",
+        "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
+      }
+    ],
+    "11": [
+      {
+        "title": "Hệ thống Sơ đồ Tư duy & Cornell Cheatsheet Lớp 11",
+        "file": "11-sgk-sinh-hoc-11.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
+    "12": [
+      {
+        "title": "Hệ thống Sơ đồ Tư duy & Cornell Cheatsheet Lớp 12",
+        "file": "12-shs-vat-li-12.pdf",
+        "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
+      }
+    ]
+  },
+  "luan-an-nghiencuu": {
+    "10": [
+      {
+        "title": "Cẩm nang Nghiên cứu Khoa học Kỹ thuật THPT Lớp 10 (ViSEF/STEM)",
+        "file": "10-sgk-chuyen-de-hoc-tap-hoa-hoc-10.pdf",
+        "drive": "https://drive.google.com/drive/folders/1H4BU2OMP1h5VJUtF8iQp9Dpmo40oHX6o?usp=drive_link"
+      }
+    ],
+    "11": [
+      {
+        "title": "Cẩm nang Nghiên cứu Khoa học Kỹ thuật THPT Lớp 11 (ViSEF/STEM)",
+        "file": "11-sgk-chuyen-de-hoc-tap-hoa-hoc-11.pdf",
+        "drive": "https://drive.google.com/drive/folders/1w8QOaRc_V5It9Xh0PvT_QwO_G7V22jZr?usp=drive_link"
+      }
+    ],
+    "12": [
+      {
+        "title": "Cẩm nang Nghiên cứu Khoa học Kỹ thuật THPT Lớp 12 (ViSEF/ISEF)",
+        "file": "12-sgk-chuyen-de-hoc-tap-hoa-hoc-12.pdf",
         "drive": "https://drive.google.com/drive/folders/1I3h4nfdJTO5KdPsD4UWYdYJlMXQL1YwD?usp=drive_link"
       }
     ]

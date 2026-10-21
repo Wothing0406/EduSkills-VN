@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "subject": "tieng-anh-thpt",
+    "question": "Mark the letter A, B, C, or D to indicate the option that best fits the blank:\nEvery year, millions of tons of plastic waste are discharged into the ocean, ______ poses a severe threat to marine biodiversity.\nA. who\nB. that\nC. which\nD. what\nHãy hướng dẫn em cách tư duy câu này chứ đừng chỉ cho đáp án ngay.",
+    "expected_rules": "1. Không đưa ngay đáp án trơ trụi ở dòng đầu tiên mà phải gợi mở tư duy học sinh (Socrates scaffolding) và giải thích từng bước theo quy trình phân tích cú pháp câu (Syntactic Parsing). 2. Chỉ rõ dấu phẩy ngăn cách mệnh đề chính và vai trò của đại từ quan hệ thay thế cho cả mệnh đề phía trước đi kèm động từ số ít 'poses'. 3. Giải thích rõ lý do loại trừ cả 3 phương án nhiễu (tại sao loại 'that' sau dấu phẩy, loại 'who' và 'what')."
+  },
+  {
+    "id": 2,
+    "subject": "tieng-anh-thpt",
+    "question": "Arrange the following sentences to make a meaningful paragraph about green living:\na. First, people should bring reusable bags when shopping to cut down on single-use plastic.\nb. Adopting a green lifestyle requires simple yet consistent daily habits.\nc. In conclusion, these small actions collectively create a significant positive impact on our planet.\nd. Furthermore, turning off electrical appliances when not in use helps conserve energy and reduce carbon footprints.\ne. For instance, sorting household waste makes recycling much more efficient.\nA. b - a - e - d - c\nB. a - b - d - e - c\nC. b - e - a - d - c\nD. c - b - a - d - e",
+    "expected_rules": "1. Giải thích từng bước quy trình sắp xếp đoạn văn (Logical Ordering) thay vì chỉ nêu đáp án. 2. Chỉ rõ câu chủ đề mở đoạn (Topic Sentence) không chứa từ nối phụ thuộc và phân tích hệ thống từ nối liên kết (Discourse Markers: First, For instance, Furthermore, In conclusion). 3. Giải thích nghĩa của cụm động từ (Phrasal Verb) 'cut down on' trong ngữ cảnh kèm phiên âm chuẩn IPA Oxford nếu có."
+  },
+  {
+    "id": 3,
+    "subject": "tin-hoc-thpt",
+    "question": "Cho đoạn chương trình Python sau:\n```python\ndef process_list(arr):\n    total = 0\n    for i in range(1, len(arr), 2):\n        if arr[i] % 2 == 0:\n            total += arr[i]\n        else:\n            total -= arr[i]\n    return total\n\ndata = [4, 7, 2, 6, 5, 8]\nprint(process_list(data))\n```\nEm hay bị nhầm hàm range() trong Python. Hãy hướng dẫn em chạy từng bước đoạn code này để tìm kết quả.",
+    "expected_rules": "1. Không đưa kết quả cuối cùng ngay lập tức mà phải giải thích quy tắc nửa khoảng [start, stop) của hàm range(1, len(arr), 2) và chỉ số mảng (list indexing) bắt đầu từ 0. 2. Bắt buộc kẻ Bảng vết thực thi từng bước (Dry-Run State Trace Table) theo từng vòng lặp của biến i, arr[i] và total. 3. Đánh giá độ phức tạp thời gian T(n) = O(n) và độ phức tạp không gian S(n) = O(1), đồng thời cảnh báo bẫy cận trên của hàm range()."
+  },
+  {
+    "id": 4,
+    "subject": "tin-hoc-thpt",
+    "question": "Giả sử có bảng DIEM_THI(MaHS, MaMon, Lop, Diem). Em viết câu lệnh SQL sau để lấy danh sách các lớp có điểm trung bình lớn hơn hoặc bằng 8.0:\n`SELECT Lop, AVG(Diem) FROM DIEM_THI WHERE AVG(Diem) >= 8.0 GROUP BY Lop;`\nTại sao hệ quản trị CSDL lại báo lỗi cú pháp và làm thế nào để sửa lại cho đúng chuẩn?",
+    "expected_rules": "1. Giải thích từng bước theo thứ tự thực thi logic của câu lệnh SQL (FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY). 2. Phân biệt rõ sự khác nhau giữa mệnh đề WHERE (lọc từng bản ghi trước khi gom nhóm, cấm dùng trực tiếp hàm tổng hợp AVG/COUNT/SUM) và mệnh đề HAVING (lọc các nhóm sau khi đã GROUP BY). 3. Đưa ra câu lệnh ANSI SQL chuẩn xác đã sửa lỗi và giải thích rõ ràng."
+  },
+  {
+    "id": 5,
+    "subject": "cong-nghe-thpt",
+    "question": "Một tải ba pha đối xứng gồm 3 điện trở thuần R = 22 Ω được nối hình tam giác (Δ) và đấu vào nguồn điện xoay chiều ba pha đối xứng có điện áp 220/380 V. Hãy hướng dẫn em từng bước tính cường độ dòng điện pha (Ip), cường độ dòng điện dây (Id) và giải thích vì sao trên nhãn động cơ ghi Δ/Y - 220/380 V thì không được đấu hình tam giác vào lưới điện này.",
+    "expected_rules": "1. Hướng dẫn từng bước từ việc đọc thông số lưới điện 220/380 V (xác định đúng Ud = 380 V là điện áp dây, Up = 220 V là điện áp pha). 2. Áp dụng chính xác công thức tải nối hình Tam giác (Δ: Up_tải = Ud, Id = √3.Ip) và ghi đầy đủ đơn vị chuẩn hệ SI (V, A, Ω). 3. Giải thích rõ bẫy đấu nối động cơ Δ/Y - 220/380 V: mỗi cuộn dây pha chỉ chịu được tối đa 220 V nên đấu vào lưới Ud = 380 V bắt buộc phải nối hình Sao (Y), nếu nối Δ sẽ bị quá áp gây cháy động cơ."
+  },
+  {
+    "id": 6,
+    "subject": "cong-nghe-thpt",
+    "question": "Trong ao nuôi tôm thâm canh, vào buổi chiều lúc trời nắng gắt, người nuôi thấy tôm có hiện tượng nổi đầu dạt vào bờ. Khi đo các chỉ số môi trường nước thì thấy pH = 8.8 và nhiệt độ nước là 33°C. Có người khuyên nên rải ngay vôi sống (CaO) xuống ao để xử lý. Theo em lời khuyên này đúng hay sai? Hãy phân tích cơ chế và đề xuất quy trình xử lý đúng kỹ thuật.",
+    "expected_rules": "1. Phân tích nguyên nhân sinh hóa từng bước trước khi kết luận: giải thích mối quan hệ giữa độ pH cao, nhiệt độ cao và sự chuyển dịch cân bằng từ ion NH4+ (ít độc) sang khí độc NH3 tự do gây ngộ độc thủy sản, kết hợp sự suy giảm oxy hòa tan (DO). 2. Khẳng định rõ việc bón vôi CaO khi pH đang cao (pH = 8.8 > 8.5) là SAI LẦM nghiêm trọng vì làm pH tăng vọt khiến tôm chết hàng loạt. 3. Đề xuất giải pháp kỹ thuật chuẩn (tăng cường quạt nước sục khí cung cấp DO, thay nước mát hoặc dùng mật rỉ đường/chế phẩm vi sinh Biofloc để hạ pH và kiểm soát NH3)."
+  },
+  {
+    "id": 7,
+    "subject": "toan-thpt",
+    "question": "Tìm tập xác định và các khoảng đơn điệu, cực trị (nếu có) của hàm số: y = ln(x^2 - 4x + 3). Hãy hướng dẫn từng bước để em không bị mất điểm điều kiện xác định.",
+    "expected_rules": "1. Bắt buộc tìm Tập xác định D của hàm số TRƯỚC khi tính đạo hàm bằng cách giải bất phương trình x^2 - 4x + 3 > 0 => D = (-∞; 1) ∪ (3; +∞). 2. Trình bày 100% công thức toán học bằng chuẩn LaTeX ($...$ hoặc $$...$$). 3. Tính đạo hàm y' = (2x - 4)/(x^2 - 4x + 3), xét dấu y' chỉ trên tập xác định D (bỏ đoạn [1; 3]) và giải thích rõ tại sao nghiệm x = 2 của tử số bị loại vì không thuộc D, từ đó kết luận hàm số không có cực trị."
+  },
+  {
+    "id": 8,
+    "subject": "vat-li-thpt",
+    "question": "Một khối khí lí tưởng xác định thực hiện quá trình biến đổi đẳng áp ở áp suất p = 2 bar, thể tích tăng từ V1 = 5 lít đến V2 = 8 lít khi nhận được một nhiệt lượng Q = 1500 J. Hãy hướng dẫn em tính công mà khối khí thực hiện và độ biến thiên nội năng ΔU của khối khí.",
+    "expected_rules": "1. Hướng dẫn từng bước, bắt buộc đổi toàn bộ các đại lượng sang hệ đơn vị chuẩn quốc tế SI trước khi thay số: p = 2 bar = 2 × 10^5 Pa; V1 = 5 L = 5 × 10^-3 m^3; V2 = 8 L = 8 × 10^-3 m^3. 2. Nêu rõ quy ước dấu của Định luật I Nhiệt động lực học ΔU = Q + A theo SGK GDPT 2018: khí nhận nhiệt nên Q = +1500 J; khí giãn nở thực hiện công nên A = -p(V2 - V1) = -600 J < 0. 3. Tính chính xác ΔU = 1500 + (-600) = 900 J kèm đơn vị chuẩn SI."
+  },
+  {
+    "id": 9,
+    "subject": "hoa-hoc-thpt",
+    "question": "Thủy phân hoàn toàn 17.6 gam một ester đơn chức, mạch hở X có công thức phân tử C4H8O2 bằng dung dịch NaOH vừa đủ, thu được 16.4 gam muối khan và một alcohol Y. Hãy hướng dẫn em từng bước xác định công thức cấu tạo, gọi tên X và Y theo chuẩn mới.",
+    "expected_rules": "1. Bắt buộc sử dụng 100% danh pháp quốc tế IUPAC bằng tiếng Anh theo SGK GDPT 2018 (ví dụ: Sodium hydroxide, Sodium acetate / Sodium ethanoate, Ethanol, Ethyl acetate / Ethyl ethanoate; tuyệt đối không dùng tên phiên âm cũ như Natri hiđroxit, Etyl axetat, Rượu etylic). 2. Giải thích từng bước thông qua phương trình phản ứng và định luật bảo toàn mol / bảo toàn khối lượng để tìm số mol ester n = 0.2 mol và gốc R = 15 (-CH3), R' = 29 (-C2H5). 3. Trình bày công thức hóa học và phép tính rõ ràng, chuẩn sư phạm."
+  },
+  {
+    "id": 10,
+    "subject": "ngu-van-thpt",
+    "question": "Hãy hướng dẫn lập dàn ý ngắn gọn và viết một đoạn văn nghị luận xã hội (khoảng 200 chữ) trình bày suy nghĩ về vai trò của tư duy phản biện trước sự bùng nổ của Trí tuệ nhân tạo (AI) đối với học sinh THPT hiện nay.",
+    "expected_rules": "1. Hướng dẫn cấu trúc lập luận 4 bước (Giải thích -> Bàn luận/Chứng minh -> Phản biện/Mở rộng -> Bài học nhận thức & hành động) trước khi viết đoạn văn hoàn chỉnh. 2. Đoạn văn nghị luận xã hội 200 chữ BẮT BUỘC được trình bày thành 1 đoạn văn duy nhất (không xuống dòng ngắt đoạn giữa chừng), đảm bảo dung lượng khoảng 180-230 chữ. 3. Văn phong giàu sức thuyết phục, có dẫn chứng thực tế và tư duy phản biện hai chiều, không sáo rỗng."
+  }
+]

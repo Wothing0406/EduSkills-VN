@@ -1,5 +1,6 @@
 {
-  "timestamp": "2026-09-07T07:57:16.077Z",
+  "timestamp": "2026-10-21T05:07:23.436Z",
+  "standard": "Universal Agentic Skill Specification (UASS v2.0)",
   "totalScanned": 16,
   "validCount": 16,
   "errorCount": 0,
@@ -8,6 +9,11 @@
     {
       "file": "skills/khoa-hoc-tu-nhien/hoa-hoc-thpt/SKILL.md",
       "name": "hoa-hoc-thpt",
+      "version": "2.0.0",
+      "contentLength": 17967,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -15,6 +21,11 @@
     {
       "file": "skills/khoa-hoc-tu-nhien/sinh-hoc-thpt/SKILL.md",
       "name": "sinh-hoc-thpt",
+      "version": "2.0.0",
+      "contentLength": 17893,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -22,6 +33,11 @@
     {
       "file": "skills/khoa-hoc-tu-nhien/toan-thpt/SKILL.md",
       "name": "toan-thpt",
+      "version": "2.0.0",
+      "contentLength": 19694,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -29,6 +45,11 @@
     {
       "file": "skills/khoa-hoc-tu-nhien/vat-li-thpt/SKILL.md",
       "name": "vat-li-thpt",
+      "version": "2.0.0",
+      "contentLength": 17481,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -36,6 +57,11 @@
     {
       "file": "skills/khoa-hoc-xa-hoi/dia-li-thpt/SKILL.md",
       "name": "dia-li-thpt",
+      "version": "2.0.0",
+      "contentLength": 19089,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -43,6 +69,11 @@
     {
       "file": "skills/khoa-hoc-xa-hoi/ktpl-thpt/SKILL.md",
       "name": "ktpl-thpt",
+      "version": "2.0.0",
+      "contentLength": 21683,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -50,6 +81,11 @@
     {
       "file": "skills/khoa-hoc-xa-hoi/lich-su-thpt/SKILL.md",
       "name": "lich-su-thpt",
+      "version": "2.0.0",
+      "contentLength": 20885,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -57,6 +93,11 @@
     {
       "file": "skills/khoa-hoc-xa-hoi/ngu-van-thpt/SKILL.md",
       "name": "ngu-van-thpt",
+      "version": "2.0.0",
+      "contentLength": 15180,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -64,6 +105,11 @@
     {
       "file": "skills/meta-tools/giai-chi-tiet/SKILL.md",
       "name": "giai-chi-tiet",
+      "version": "2.0.0",
+      "contentLength": 8360,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -71,6 +117,11 @@
     {
       "file": "skills/meta-tools/luan-an-nghiencuu/SKILL.md",
       "name": "luan-an-nghiencuu",
+      "version": "2.0.0",
+      "contentLength": 8329,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -78,6 +129,11 @@
     {
       "file": "skills/meta-tools/slide-thuyet-trinh/SKILL.md",
       "name": "slide-thuyet-trinh",
+      "version": "2.0.0",
+      "contentLength": 7927,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -85,6 +141,11 @@
     {
       "file": "skills/meta-tools/tao-quiz-bgd/SKILL.md",
       "name": "tao-quiz-bgd",
+      "version": "2.0.0",
+      "contentLength": 9233,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -92,6 +153,11 @@
     {
       "file": "skills/meta-tools/tomtat-mindmap/SKILL.md",
       "name": "tomtat-mindmap",
+      "version": "2.0.0",
+      "contentLength": 6446,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -99,6 +165,11 @@
     {
       "file": "skills/ngon-ngu-cong-nghe/cong-nghe-thpt/SKILL.md",
       "name": "cong-nghe-thpt",
+      "version": "2.0.0",
+      "contentLength": 18000,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -106,6 +177,11 @@
     {
       "file": "skills/ngon-ngu-cong-nghe/tieng-anh-thpt/SKILL.md",
       "name": "tieng-anh-thpt",
+      "version": "2.0.0",
+      "contentLength": 17517,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []
@@ -113,6 +189,11 @@
     {
       "file": "skills/ngon-ngu-cong-nghe/tin-hoc-thpt/SKILL.md",
       "name": "tin-hoc-thpt",
+      "version": "2.0.0",
+      "contentLength": 16736,
+      "hasUniversalPrompt": true,
+      "hasTrapMatrix": true,
+      "hasCoVe": true,
       "isValid": true,
       "issues": [],
       "warnings": []

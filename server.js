@@ -1,22 +1,19 @@
 /**
- * EduSkills-VN Local Server (Node.js)
- * Máy chủ cục bộ phục vụ Web Hub Matcha Mèo Ú, API Dataset Kỹ Năng & OCR Backend
+ * EduSkills-VN Local Server (Node.js - v2.0.0 Universal Edition)
+ * Máy chủ cục bộ phục vụ Web Hub Matcha Mèo Ú, API Dataset Kỹ Năng & Universal 7-Pillar Prompt / OCR Backend
  * Tác giả: Nguyễn Duy Quang | Hotline: 0795277227 | Email: poiairo4628@gmail.com
  */
 
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
 const { runValidation } = require('./scripts/validate-dataset');
 const {
   scanImageOCR,
   processTextBySubject,
+  getDefaultSampleProblem,
   generateIntentDrivenPrompt,
-  formatMathToLatex,
-  formatPhysicsToSI,
-  formatChemistryToIUPAC,
-  formatLiteratureReading
+  SKILL_DEEP_PROFILES
 } = require('./backend/ocr-engine');
 
 let pdfParse = null;
@@ -48,7 +45,7 @@ function parseRequestBody(req) {
     let body = '';
     req.on('data', chunk => {
       body += chunk;
-      if (body.length > 25 * 1024 * 1024) { // 25MB limit
+      if (body.length > 25 * 1024 * 1024) {
         reject(new Error('Payload quá lớn (Vượt quá 25MB)'));
       }
     });
@@ -71,8 +68,11 @@ function lookupBookReference(subject, grade) {
   try {
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
     const subjectKey = subject || 'toan-thpt';
-    const gradeKey = grade || 12;
-    const books = (db[subjectKey] && db[subjectKey][gradeKey]) ? db[subjectKey][gradeKey] : (db['toan-thpt'][gradeKey] || []);
+    const gradeKey = Number(grade) || 12;
+    const subjectBooks = db[subjectKey] || db['toan-thpt'] || {};
+    const books = (subjectBooks[gradeKey] && subjectBooks[gradeKey].length > 0)
+      ? subjectBooks[gradeKey]
+      : (subjectBooks[12] || (db['toan-thpt'] && db['toan-thpt'][12]) || []);
     return books.length > 0 ? books[0] : null;
   } catch (e) {
     return null;
@@ -90,7 +90,7 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
 
-  const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
+  const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   let pathname = decodeURIComponent(parsedUrl.pathname);
 
   // --- API 1: OCR & Multi-Domain Problem Parser Backend ---
@@ -98,15 +98,19 @@ const server = http.createServer(async (req, res) => {
     try {
       const payload = await parseRequestBody(req);
       const {
-        image,         // Base64 data URL (nếu có)
-        text,          // Raw text (nếu có)
+        image,
+        text,
+        rawText,
         subject = 'toan-thpt',
         grade = 12,
         fileName = 'de-bai-tap.png',
-        fileType = 'image/png'
+        fileType = 'image/png',
+        lang = 'vie+eng'
       } = payload;
 
-      let extractedRawText = text || '';
+      const validGrade = [10, 11, 12].includes(Number(grade)) ? Number(grade) : 12;
+      const inputTxt = typeof text === 'string' ? text : (typeof rawText === 'string' ? rawText : '');
+      let extractedRawText = inputTxt.trim();
       let ocrConfidence = 100;
       let isRealOcr = false;
       let scanDurationMs = 0;
@@ -117,17 +121,19 @@ const server = http.createServer(async (req, res) => {
           const base64Content = image.replace(/^data:application\/pdf;base64,/, '');
           const buffer = Buffer.from(base64Content, 'base64');
           const pdfData = await pdfParse(buffer, { max: 5 });
-          extractedRawText = pdfData.text.trim();
+          if (pdfData && pdfData.text) {
+            extractedRawText = pdfData.text.trim();
+          }
         } catch (pdfErr) {
           console.warn('Lỗi đọc PDF:', pdfErr.message);
         }
       }
 
-      // Quét chữ thực tế từ hình ảnh qua Tesseract AI Engine
+      // Quét chữ thực tế từ hình ảnh qua Tesseract AI Engine (tự động ưu tiên vie+eng hoặc fallback eng)
       if (!extractedRawText && image) {
         const startTime = Date.now();
         try {
-          const scanRes = await scanImageOCR(image, 'eng');
+          const scanRes = await scanImageOCR(image, lang);
           scanDurationMs = Date.now() - startTime;
           if (scanRes.rawText && scanRes.rawText.trim().length > 3) {
             extractedRawText = scanRes.rawText.trim();
@@ -139,72 +145,67 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      // Nếu là ảnh trống hoặc chưa quét ra chữ, áp dụng đề mẫu chuẩn theo môn học
+      // Nếu là ảnh trống hoặc chưa quét ra chữ, áp dụng đề mẫu chuẩn theo từng skill trong 16 skills
       if (!extractedRawText) {
-        if (subject === 'toan-thpt') {
-          extractedRawText = `Cho hàm số y = (2x - 1)/(x + 1).\n1. Tìm tập xác định D và các đường tiệm cận đứng, tiệm cận ngang của đồ thị hàm số.\n2. Lập bảng biến thiên và tìm các khoảng đồng biến, nghịch biến.\nA. Tiệm cận đứng x = -1, tiệm cận ngang y = 2\nB. Tiệm cận đứng x = 1, tiệm cận ngang y = -1\nC. Tiệm cận đứng x = -1, tiệm cận ngang y = -1\nD. Hàm số không có tiệm cận`;
-        } else if (subject === 'vat-li-thpt') {
-          extractedRawText = `Một khối khí lí tưởng có thể tích 4 lít ở nhiệt độ 27 oC và áp suất 1 atm được dãn nở đẳng nhiệt đến thể tích 8 lít.\n1. Tính áp suất của khối khí sau khi dãn nở đẳng nhiệt (đổi sang đơn vị Pa).\n2. Tính nhiệt lượng Q mà khối khí nhận được trong quá trình trên.\nA. p2 = 0.5 atm = 50662.5 Pa\nB. p2 = 2 atm = 202650 Pa\nC. p2 = 1 atm = 101325 Pa\nD. p2 = 0.25 atm = 25331 Pa`;
-        } else if (subject === 'hoa-hoc-thpt') {
-          extractedRawText = `Hòa tan hoàn toàn m gam bột đồng trong dung dịch axit nitric loãng, dư sinh ra 4.958 lít khí NO (đktc, 25 oC, 1 bar) là sản phẩm khử duy nhất.\n1. Viết phương trình hóa học và gọi tên 100% chất theo danh pháp IUPAC tiếng Anh.\n2. Tính giá trị của m (biết Cu = 64, N = 14, O = 16).\n3. Tính biến thiên Enthalpy chuẩn Delta r H 0 298 của phản ứng.`;
-        } else if (subject === 'sinh-hoc-thpt') {
-          extractedRawText = `Một phân tử DNA mạch kép có tổng số nucleotide là 3000, trong đó số nucleotide loại Adenine chiếm 20%.\n1. Tính số lượng từng loại nucleotide (A, T, G, X) của phân tử DNA.\n2. Tính chiều dài của phân tử DNA theo đơn vị Angstrom và nanomet.`;
-        } else if (subject === 'ngu-van-thpt') {
-          extractedRawText = `Đọc đoạn trích sau và thực hiện các yêu cầu:\n"Dù ai đi ngược về xuôi\nNhớ ngày Giỗ Tổ mùng mười tháng ba\nKhắp miền truyền mãi câu ca\nNước non vẹn một dải hòa bình tâm."\n1. Xác định thể thơ và phương thức biểu đạt chính của đoạn thơ.\n2. Nêu tác dụng của biện pháp tu từ được sử dụng trong hai câu đầu.\n3. Viết đoạn văn khoảng 200 chữ trình bày suy nghĩ về lòng biết ơn đối với thế hệ đi trước.`;
-        } else if (subject === 'tieng-anh-thpt') {
-          extractedRawText = `Read the following passage and mark the letter A, B, C, or D to indicate the correct answer to each question.\n"Artificial Intelligence is rapidly transforming modern education by providing personalized learning paths for high school students..."\n1. What is the main idea of the passage?\n2. The word "transforming" is closest in meaning to:\nA. changing\nB. ignoring\nC. preventing\nD. destroying`;
-        } else if (subject === 'tin-hoc-thpt') {
-          extractedRawText = `Viết chương trình Python thực hiện thuật toán tìm kiếm nhị phân (Binary Search) trên dãy số nguyên đã được sắp xếp tăng dần.\n1. Phân tích độ phức tạp thời gian O(log n) của thuật toán.\n2. Viết mã nguồn Python có chú thích chi tiết từng bước.`;
-        } else {
-          extractedRawText = `Câu hỏi ôn tập THPT chuẩn GDPT 2018 cho kỹ năng @${subject} (Khối Lớp ${grade}).`;
-        }
+        extractedRawText = getDefaultSampleProblem(subject, validGrade);
       }
 
       // Phân tích định dạng theo từng môn học chuyên sâu
       const domainResult = processTextBySubject(extractedRawText, subject);
-      const bookRef = lookupBookReference(subject, grade);
+      const bookRef = lookupBookReference(subject, validGrade);
+      const skillProfile = SKILL_DEEP_PROFILES[subject] || SKILL_DEEP_PROFILES['toan-thpt'];
 
-      // Tạo Prompt Phân Chia Rõ Ràng Có Chủ Đích
+      // Tạo Universal Meta-Prompt 7 Trụ Cột
       const intentPrompt = generateIntentDrivenPrompt({
-        role: `Chuyên gia Sư phạm môn ${subject} THPT chuẩn BGD`,
-        gradeLevel: grade,
+        role: skillProfile.title,
+        gradeLevel: validGrade,
         studentLevel: 'Khá - Giỏi (Mục tiêu 8.5+ THPT Quốc Gia)',
-        currentStatus: 'Cần phân tích bản chất, lời giải chi tiết từng bước và giải mã các bẫy phòng thi',
-        taskPrompt: `Giải quyết bài tập / đề cương được cung cấp với độ chuẩn xác tuyệt đối`,
-        constraintsPrompt: `Trình bày bằng LaTeX chuẩn, danh pháp IUPAC chuẩn mực và cấu trúc 4 tầng Socrates`,
+        currentStatus: 'Cần phân tích bản chất nguyên lý gốc, lời giải 4 tầng Socrates, giải mã ma trận bẫy và tự kiểm chứng CoVe',
+        taskPrompt: 'Giải quyết bài tập / đề cương được cung cấp với độ chuẩn xác tuyệt đối',
+        constraintsPrompt: 'Trình bày bằng LaTeX chuẩn ($...$), đơn vị hệ SI, danh pháp IUPAC tiếng Anh và cấu trúc 4 tầng Socrates',
         cognitiveOptions: { useCoT: true, useSocratic: true, useFewShot: true, useActiveRecall: true },
         bookObject: bookRef,
         verifiedContent: domainResult.formattedText,
-        subject: subject,
+        subject,
         competencyTier: payload.competencyTier || 'vd',
         usageContext: payload.usageContext || 'giai-de',
         exportMode: payload.exportMode || 'standard'
       });
 
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      return res.end(JSON.stringify({
-        success: true,
-        ocrEngine: isRealOcr ? 'Tesseract.js AI OCR Engine + EduSkills Multi-Domain Parser' : 'EduSkills Smart Heuristic Parser Engine',
+      const responseData = {
+        ocrEngine: isRealOcr
+          ? 'Tesseract.js AI OCR Engine + EduSkills Universal Parser v2.0'
+          : 'EduSkills Universal Multi-Domain Heuristic Parser v2.0',
         isRealOcr,
         ocrConfidence,
         scanDurationMs,
         fileName,
         subject,
-        grade,
+        grade: validGrade,
         domainBadge: domainResult.domainBadge,
         rawText: extractedRawText,
         formattedText: domainResult.formattedText,
         bookReference: bookRef,
         intentDrivenPrompt: intentPrompt
+      };
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      return res.end(JSON.stringify({
+        success: true,
+        data: responseData,
+        ...responseData
       }, null, 2));
     } catch (ocrErr) {
       console.error('OCR Error:', ocrErr);
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
-      return res.end(JSON.stringify({ success: false, error: ocrErr.message }));
+      return res.end(JSON.stringify({
+        success: false,
+        error: { code: 'OCR_PROCESSING_ERROR', message: ocrErr.message }
+      }));
     }
   }
 
-  // --- API 2: Tạo Prompt Thông Minh Phân Chia Rõ Ràng (Intent-Driven Prompt Builder) ---
+  // --- API 2: Tạo Prompt Thông Minh 7 Trụ Cột (Universal Meta-Prompt Builder) ---
   if (pathname === '/api/generate-prompt' && req.method === 'POST') {
     try {
       const payload = await parseRequestBody(req);
@@ -224,15 +225,18 @@ const server = http.createServer(async (req, res) => {
         exportMode = 'standard'
       } = payload;
 
+      const validGrade = [10, 11, 12].includes(Number(gradeLevel)) ? Number(gradeLevel) : 12;
+      const resolvedBook = bookObject || lookupBookReference(subject, validGrade);
+
       const prompt = generateIntentDrivenPrompt({
         role,
-        gradeLevel,
+        gradeLevel: validGrade,
         studentLevel,
         currentStatus,
         taskPrompt,
         constraintsPrompt,
         cognitiveOptions,
-        bookObject: bookObject || lookupBookReference(subject, gradeLevel),
+        bookObject: resolvedBook,
         verifiedContent,
         subject,
         competencyTier,
@@ -241,10 +245,18 @@ const server = http.createServer(async (req, res) => {
       });
 
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      return res.end(JSON.stringify({ success: true, prompt }, null, 2));
+      return res.end(JSON.stringify({
+        success: true,
+        data: { prompt, subject, gradeLevel: validGrade, competencyTier, usageContext, exportMode, bookReference: resolvedBook },
+        prompt,
+        bookReference: resolvedBook
+      }, null, 2));
     } catch (pErr) {
-      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
-      return res.end(JSON.stringify({ success: false, error: pErr.message }));
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      return res.end(JSON.stringify({
+        success: false,
+        error: { code: 'PROMPT_GENERATION_ERROR', message: pErr.message }
+      }));
     }
   }
 
@@ -256,15 +268,18 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/markdown; charset=utf-8' });
       return res.end(content);
     }
-    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-    return res.end('Prompt standard document not found');
+    res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify({
+      success: false,
+      error: { code: 'NOT_FOUND', message: 'Prompt standard document not found' }
+    }));
   }
 
   // --- API 4: Danh mục Kỹ Năng ---
   if (pathname === '/api/skills') {
     const catalogPath = path.join(DATASET_DIR, 'skills-catalog.json');
     if (!fs.existsSync(catalogPath)) {
-      runValidation();
+      runValidation(true);
     }
     const data = fs.readFileSync(catalogPath, 'utf-8');
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -281,15 +296,22 @@ const server = http.createServer(async (req, res) => {
         return res.end(content);
       }
     }
-    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-    return res.end('Skill file not found');
+    res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify({
+      success: false,
+      error: { code: 'SKILL_NOT_FOUND', message: 'Skill file not found' }
+    }));
   }
 
   // --- API 5: Kiểm định Dataset ---
   if (pathname === '/api/validate') {
-    const report = runValidation();
+    const report = runValidation(true);
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    return res.end(JSON.stringify(report, null, 2));
+    return res.end(JSON.stringify({
+      success: report.errorCount === 0,
+      data: report,
+      ...report
+    }, null, 2));
   }
 
   // --- API 6: Link Google Drive ---
@@ -327,19 +349,33 @@ const server = http.createServer(async (req, res) => {
     }
     const stats = {
       project: 'EduSkills-VN Matcha Hub',
-      version: '0.1.2-beta',
+      version: '2.0.0',
+      ecosystem: '100% Vendor-Agnostic & Self-Contained',
       theme: 'Matcha Mèo Ú Tối Giản',
-      curriculum: 'Bộ SGK Thống Nhất Toàn Quốc 2026 & BGD 2025-2027',
+      curriculum: 'Bộ SGK Thống Nhất Toàn Quốc 2026 & BGD 2025-2027 (QĐ 764/QĐ-BGDĐT)',
       totalSkills: report.validCount || 16,
       categories: 4,
       author: 'Nguyễn Duy Quang',
       hotline: '0795277227',
       email: 'poiairo4628@gmail.com',
-      ocrEngine: 'Active (Toán LaTeX • Vật lí SI • Hóa học IUPAC • Ngữ văn Đọc hiểu)',
+      ocrEngine: 'Active (16 Skills Deep Profiles • Toán LaTeX • Vật lí SI • Hóa học IUPAC • CoVe Verified)',
       driveStorage: 'Google Drive Cloud Storage (3 khối lớp 10, 11, 12)'
     };
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    return res.end(JSON.stringify(stats, null, 2));
+    return res.end(JSON.stringify({
+      success: true,
+      data: stats,
+      ...stats
+    }, null, 2));
+  }
+
+  // --- Unknown API Route Handler (404 JSON) ---
+  if (pathname.startsWith('/api/')) {
+    res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify({
+      success: false,
+      error: { code: 'ROUTE_NOT_FOUND', message: `Endpoint ${pathname} does not exist` }
+    }));
   }
 
   // --- Static Files Serving ---
@@ -365,29 +401,32 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log('\n=============================================================');
-  console.log('  🎓 EDUSKILLS-VN LOCAL NODE.JS SERVER & OCR BACKEND ĐANG CHẠY!');
-  console.log('=============================================================');
-  console.log(`  🌐 Web Hub 3D & Catalog:  http://localhost:${PORT}`);
-  console.log(`  📸 API OCR & Multi-Parser: http://localhost:${PORT}/api/ocr`);
-  console.log(`  🎯 API Tạo Prompt:        http://localhost:${PORT}/api/generate-prompt`);
-  console.log(`  📊 API Skills Dataset:    http://localhost:${PORT}/api/skills`);
-  console.log(`  🧪 API Kiểm Định:         http://localhost:${PORT}/api/validate`);
-  console.log('-------------------------------------------------------------');
-  console.log('  👨‍🏫 Tác giả & Hỗ trợ:     Nguyễn Duy Quang');
-  console.log('  📞 Hotline / Zalo:        0795277227');
-  console.log('  ✉️ Email:                 poiairo4628@gmail.com');
-  console.log('=============================================================\n');
-});
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log('\n=============================================================');
+    console.log('  🎓 EDUSKILLS-VN UNIVERSAL SERVER v2.0.0 ĐANG CHẠY!');
+    console.log('=============================================================');
+    console.log(`  🌐 Web Hub & Catalog:      http://localhost:${PORT}`);
+    console.log(`  📸 API OCR & Multi-Parser: http://localhost:${PORT}/api/ocr`);
+    console.log(`  🎯 API Tạo Prompt 7 Trụ:   http://localhost:${PORT}/api/generate-prompt`);
+    console.log(`  📊 API Skills Dataset:     http://localhost:${PORT}/api/skills`);
+    console.log(`  🧪 API Kiểm Định UASS:     http://localhost:${PORT}/api/validate`);
+    console.log('-------------------------------------------------------------');
+    console.log('  👨‍🏫 Tác giả & Hỗ trợ:      Nguyễn Duy Quang');
+    console.log('  📞 Hotline / Zalo:         0795277227');
+    console.log('  ✉️ Email:                  poiairo4628@gmail.com');
+    console.log('=============================================================\n');
+  });
 
-// Xử lý lỗi cổng đã bị chiếm
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    const altPort = Number(PORT) + 1;
-    console.log(`⚠️ Cổng ${PORT} đang bận, tự động chuyển sang cổng ${altPort}...`);
-    server.listen(altPort);
-  } else {
-    console.error('Lỗi máy chủ:', err);
-  }
-});
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      const altPort = Number(PORT) + 1;
+      console.log(`⚠️ Cổng ${PORT} đang bận, tự động chuyển sang cổng ${altPort}...`);
+      server.listen(altPort);
+    } else {
+      console.error('Lỗi máy chủ:', err);
+    }
+  });
+}
+
+module.exports = { server, lookupBookReference };

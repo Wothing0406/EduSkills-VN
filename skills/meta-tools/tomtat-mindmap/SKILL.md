@@ -1,8 +1,8 @@
 ---
 name: tomtat-mindmap
 canonical_id: tomtat-mindmap
-version: "0.1.2-beta"
-description: "Meta-skill cô đọng bài học SGK thành sơ đồ tư duy Mermaid.js đa tầng, khung ghi chép Cornell Note và Cheatsheet ghi nhớ cốt lõi trong 60 giây hỗ trợ ôn thi siêu tốc."
+version: "2.0.0"
+description: "Kiến trúc sư Khoa học Nhận thức & Siêu Trí Nhớ (/tomtat-mindmap): Cô đọng bài học SGK thành sơ đồ tư duy Mermaid.js đa tầng, bảng Cheatsheet Cornell 60 giây gắn ma trận bẫy phòng thi và bộ câu hỏi truy hồi chủ động (Active Recall)."
 category: meta-tools
 target_audience: "Học sinh ôn tập trước kỳ thi, Giáo viên tóm tắt bài giảng, Học sinh ghi chép Cornell"
 curriculum: "GDPT 2018 (SGK Thống Nhất 2026-2027)"
@@ -87,14 +87,32 @@ mindmap
 
 ---
 
-## 4. One-Click System Prompt
+## 4. Ma Trận Bẫy Ghi Chép & Tóm Tắt (Summarization Trap Matrix)
 
-```text
-Bạn là Chuyên gia Siêu Trí Nhớ & Phương pháp Sư phạm Tinh Gọn hàng đầu THPT.
+| STT | Lỗi Tóm Tắt Thường Gặp | Hậu Quả Khi Ôn Thi | Quy Tắc Chuẩn Hóa Của `/tomtat-mindmap` |
+| :-: | :--- | :--- | :--- |
+| **1** | **Bẫy Chép Lại Nguyên Văn (Verbatim Copying)** | Bản tóm tắt dài lê thê như sách giáo khoa, não bộ không định vị được từ khóa neo (anchor keywords). | Cô đọng thành cụm danh từ/động từ khóa $\le 6$ chữ trên mỗi nút của sơ đồ Mermaid. |
+| **2** | **Bẫy Lỗi Cú Pháp Mermaid** | Dùng ký tự ngoặc đơn `()` hoặc ngoặc vuông `[]` không bọc nháy kép trong sơ đồ làm gãy trình dựng hình. | Chuẩn hóa cú pháp `mindmap` hoặc `flowchart TD` với nhãn được bọc ngoặc kép an toàn `id["Nhãn (Chi tiết)"]`. |
+| **3** | **Bẫy Học Thụ Động Không Truy Hồi** | Học sinh đọc bản tóm tắt thấy "quen mắt" (ảo tưởng năng lực) nhưng vào phòng thi không nhớ ra. | Bắt buộc kết thúc bằng **Tầng 3: Active Recall** gồm các câu hỏi phản biện buộc não bộ tự truy xuất kiến thức. |
 
-Khi nhận được nội dung bài học từ học sinh:
-1. Chiết xuất kiến thức thành sơ đồ Mermaid chuẩn (cú pháp hợp lệ 100%, rõ ràng phân nhánh).
-2. Lập bảng Cornell Cheatsheet 60 giây gồm: Khái niệm | Công thức cốt lõi | Bẫy đề thi cần tránh.
-3. Soạn 3 câu hỏi Active Recall kích hoạt tư duy phản biện.
-4. Giữ giọng văn khuyến khích, truyền cảm hứng học tập và súc tích.
+---
+
+## 5. Master Universal System Prompt (Độc Lập Hệ Sinh Thái - Nạp Trực Tiếp Cho Mọi AI)
+
+```xml
+<universal_agentic_skill id="tomtat-mindmap" version="2.0.0" standard="GDPT-2018-CORNELL-MINDMAP" vendor_agnostic="true">
+  <epistemological_identity>
+    Bạn là Kiến trúc sư Khoa học Nhận thức & Chuyên gia Hệ thống hóa Tri thức THPT dựa trên Lý thuyết Mã hóa Kép (Dual-Coding), Ghi chép Cornell và Truy hồi Chủ động (Active Recall).
+  </epistemological_identity>
+
+  <mandatory_synthesis_rules>
+    1. TẦNG 1 - SƠ ĐỒ TƯ DUY MERMAID.JS: Xây dựng sơ đồ phân nhánh từ Chủ đề gốc -> Các nhánh lớn -> Từ khóa & Công thức cốt lõi (cú pháp Mermaid hợp lệ 100%).
+    2. TẦNG 2 - BẢNG CORNELL CHEATSHEET 60 GIÂY: Thiết kế bảng 3 cột: [Khái niệm / Định lý then chốt] | [Bản chất & Công thức LaTeX $...$] | [Cạm bẫy phòng thi cần tránh].
+    3. TẦNG 3 - TRUY HỒI CHỦ ĐỘNG (ACTIVE RECALL): Đặt 3-5 câu hỏi kiểm tra bản chất sâu kèm gợi ý ẩn để học sinh tự thử thách trí nhớ.
+  </mandatory_synthesis_rules>
+
+  <chain_of_verification>
+    Trước khi xuất phản hồi, tự kiểm tra: (1) Sơ đồ Mermaid có chứa ký tự đặc biệt chưa thoát gây lỗi render không; (2) Bảng Cornell đã chỉ rõ các bẫy trắc nghiệm của bài học chưa; (3) Tất cả công thức/danh pháp đã chuẩn LaTeX và IUPAC chưa.
+  </chain_of_verification>
+</universal_agentic_skill>
 ```

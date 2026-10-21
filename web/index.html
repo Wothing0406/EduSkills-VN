@@ -1613,7 +1613,7 @@
       // Cognitive Toggles
       const [useCoT, setUseCoT] = useState(true);
       const [useSocratic, setUseSocratic] = useState(true);
-      const [useFewShot, setUseFewShot] = useState(false);
+      const [useFewShot, setUseFewShot] = useState(true);
       const [useActiveRecall, setUseActiveRecall] = useState(true);
       
       // Specific Book Selection
@@ -1773,161 +1773,211 @@
         return () => window.removeEventListener('paste', handlePaste);
       }, [selectedSkillId, gradeLevel]);
 
-      // --- UNIVERSAL AI AGENT PROMPT GENERATOR (3 MODES: WEB CHAT, SYSTEM PROMPT, AGENT CLI) ---
+      // --- UNIVERSAL AI AGENT PROMPT GENERATOR v2.0.0 (7-PILLAR META-PROMPT, UNIVERSAL XML, VENDOR-AGNOSTIC CLI/API) ---
       const generatedPromptPayload = useMemo(() => {
         const driveInfo = DRIVE_LINKS_MAP[gradeLevel] || DRIVE_LINKS_MAP[12];
         const bookTitle = currentBookObject ? currentBookObject.title : `Sách Giáo Khoa Lớp ${gradeLevel}`;
-        const bookFile = currentBookObject ? currentBookObject.file : 'Tài liệu SGK chuẩn';
+        const bookFile = currentBookObject ? currentBookObject.file : 'Tài liệu SGK chuẩn GDPT 2018';
         const bookDrive = currentBookObject ? currentBookObject.drive : driveInfo.url;
-        
+
         const tierObj = COMPETENCY_TIERS[competencyTier] || COMPETENCY_TIERS['vd'];
         const contextObj = USAGE_CONTEXTS[usageContext] || USAGE_CONTEXTS['giai-de'];
+        const deepMap = window.EDUSKILLS_DEEP_PROFILES || {};
+        const skillProfile = deepMap[selectedSkillId] || deepMap['toan-thpt'] || {
+          title: selectedSkill.name || selectedSkillId,
+          domainBadge: 'GDPT 2018 • QĐ 764/QĐ-BGDĐT',
+          epistemology: 'Tư duy Bản chất Đệ quy (First-Principles Thinking) kết hợp kiến tạo nhận thức Socratic 4 tầng.',
+          methodologySteps: [
+            'Bước 1 (Gợi mở Socratic): Đặt câu hỏi định hướng nhận diện dữ kiện và bản chất, chưa tiết lộ đáp án.',
+            'Bước 2 (Cơ sở Lý thuyết & Mô hình hóa): Đối chiếu chính xác khái niệm/định lý trong SGK.',
+            'Bước 3 (Triển khai Tường minh Step-by-Step): Giải thích logic từng phép biến đổi.',
+            'Bước 4 (Cảnh báo Bẫy & Mở rộng Active Recall): Chỉ rõ bẫy sai lầm và giao 1 bài tập tương tự.'
+          ],
+          traps: [
+            'Quên điều kiện xác định hoặc điều kiện biên của bài toán.',
+            'Nhầm lẫn đơn vị chuẩn SI, danh pháp quốc tế IUPAC hoặc mốc sự kiện.',
+            'Bị đánh lừa bởi phương án nhiễu (distractors) hoặc mệnh đề phủ định trong câu Đúng/Sai.'
+          ],
+          coveChecklist: [
+            'Đã kiểm tra toàn bộ phép tính, điều kiện xác định, đơn vị và danh pháp chuẩn chưa?',
+            'Đã giải thích đủ 4 tầng Socratic mà không nhảy bước hay dùng mẹo phản sư phạm chưa?',
+            'Đã tuân thủ Epistemic Honesty (không bịa số trang SGK ngoài dữ liệu gốc) chưa?'
+          ],
+          fewShot: {
+            input: 'Giải thích bản chất và giải chi tiết bài toán điển hình theo chuẩn SGK.',
+            output: '- **Tầng 1 (Gợi mở Socratic):** Xác định điều kiện xác định và định lý cốt lõi trong SGK.\n- **Tầng 2 & 3 (Lời giải tường minh):** Áp dụng định lý nền tảng -> Biến đổi tương đương -> Đối chiếu điều kiện -> Kết luận.\n- **Tầng 4 (Cảnh báo bẫy):** Kiểm tra kỹ điều kiện biên để loại nghiệm ngoại lai.'
+          },
+          sampleProblem: 'Hãy phân tích bản chất và giải chi tiết một bài toán điển hình theo SGK hiện hành.'
+        };
 
-        // MODE 2: SYSTEM PROMPT CHO AI AGENT (XML / STRUCTURED FORMAT CHO CLAUDE / GEMINI / GPT-4O)
+        // MODE 2: UNIVERSAL XML SYSTEM PROMPT (100% VENDOR-AGNOSTIC)
         if (promptExportMode === 'system-prompt') {
-          let xml = `<system_instruction version="0.1.3-beta" framework="EduSkills-VN" standard="GDPT-2018">\n`;
-          xml += `  <identity>\n`;
-          xml += `    <role>${rolePrompt}</role>\n`;
-          xml += `    <subject_skill>@${selectedSkillId} (${selectedSkill.name || ''})</subject_skill>\n`;
-          xml += `    <grade_level>Lớp ${gradeLevel}</grade_level>\n`;
-          xml += `    <author_attribution>Dự án EduSkills-VN | Chủ nhiệm: Nguyễn Duy Quang (0795277227)</author_attribution>\n`;
-          xml += `  </identity>\n\n`;
+          let xml = `<universal_agentic_prompt version="2.0.0" framework="EduSkills-VN" ecosystem="vendor-agnostic" standard="GDPT-2018-QD764">\n`;
+          xml += `  <system_instruction>\n`;
+          xml += `    <epistemological_identity>\n`;
+          xml += `      <role>${rolePrompt}</role>\n`;
+          xml += `      <skill_id>@${selectedSkillId}</skill_id>\n`;
+          xml += `      <grade_level>Lớp ${gradeLevel}</grade_level>\n`;
+          xml += `      <axiomatic_mindset>${skillProfile.epistemology}</axiomatic_mindset>\n`;
+          xml += `    </epistemological_identity>\n\n`;
 
-          xml += `  <pedagogical_competency_tier level="${tierObj.id}">\n`;
-          xml += `    <tier_name>${tierObj.name}</tier_name>\n`;
-          xml += `    <target_score>${tierObj.scoreTarget}</target_score>\n`;
-          xml += `    <pedagogical_mandate>${tierObj.description}</pedagogical_mandate>\n`;
-          xml += `  </pedagogical_competency_tier>\n\n`;
+          xml += `    <cognitive_calibration tier="${tierObj.id}" scenario="${contextObj.id}">\n`;
+          xml += `      <tier_name>${tierObj.name}</tier_name>\n`;
+          xml += `      <target_score>${tierObj.scoreTarget}</target_score>\n`;
+          xml += `      <student_profile>${studentLevel} | ${currentStatus}</student_profile>\n`;
+          xml += `      <operational_scenario>${contextObj.title} (${contextObj.tagline}) — ${contextObj.description}</operational_scenario>\n`;
+          xml += `    </cognitive_calibration>\n\n`;
 
-          xml += `  <operational_context scenario="${contextObj.id}">\n`;
-          xml += `    <scenario_title>${contextObj.title}</scenario_title>\n`;
-          xml += `    <methodology_tagline>${contextObj.tagline}</methodology_tagline>\n`;
-          xml += `    <instruction_mandate>${contextObj.description}</instruction_mandate>\n`;
-          xml += `    <scaffolding_rule>Tuân thủ cấu trúc phân tích 4 tầng Socrates và barem Quyết định 764/QĐ-BGDĐT.</scaffolding_rule>\n`;
-          xml += `  </operational_context>\n\n`;
+          xml += `    <domain_methodology>\n`;
+          skillProfile.methodologySteps.forEach((step, idx) => {
+            xml += `      <step index="${idx + 1}">${step}</step>\n`;
+          });
+          xml += `    </domain_methodology>\n\n`;
 
-          xml += `  <grounding_knowledge_base>\n`;
-          xml += `    <mandate>TUYỆT ĐỐI CẤM BỊA ĐẶT CÔNG THỨC NGOÀI CHƯƠNG TRÌNH HOẶC DÙNG MẸO PHẢN SƯ PHẠM</mandate>\n`;
-          xml += `    <target_textbook>${bookTitle}</target_textbook>\n`;
-          xml += `    <pdf_reference_code>${bookFile}</pdf_reference_code>\n`;
-          xml += `    <cloud_drive_repository>${bookDrive}</cloud_drive_repository>\n`;
-          xml += `    <citation_rule>Mọi công thức, định lý, tên bài học phải được đối chiếu trực tiếp từ cuốn SGK trên.</citation_rule>\n`;
-          xml += `  </grounding_knowledge_base>\n\n`;
+          xml += `    <cognitive_trap_matrix>\n`;
+          skillProfile.traps.forEach((trap, idx) => {
+            xml += `      <trap index="${idx + 1}">${trap}</trap>\n`;
+          });
+          xml += `    </cognitive_trap_matrix>\n\n`;
 
-          xml += `  <execution_constraints>\n`;
-          xml += `    <constraints>${constraintsPrompt}</constraints>\n`;
-          xml += `    <latex_rule>Mọi biểu thức toán/lý phải bọc trong LaTeX chuẩn: $...$ hoặc $$...$$</latex_rule>\n`;
-          xml += `    <chemistry_rule>Nếu là môn Hóa: bắt buộc danh pháp IUPAC 100% tiếng Anh</chemistry_rule>\n`;
-          xml += `    <methodology>Chain-of-Thought từng bước, gợi mở Socratic khơi dậy phản biện, chống ảo giác 100%</methodology>\n`;
-          xml += `  </execution_constraints>\n\n`;
+          xml += `    <epistemic_grounding>\n`;
+          xml += `      <reference_textbook>${bookTitle}</reference_textbook>\n`;
+          xml += `      <pdf_source_code>${bookFile}</pdf_source_code>\n`;
+          xml += `      <cloud_repository>${bookDrive}</cloud_repository>\n`;
+          xml += `      <epistemic_honesty_protocol>TUYỆT ĐỐI CẤM BỊA ĐẶT SỐ TRANG/SỐ DÒNG SGK KHI KHÔNG CÓ TRONG VĂN BẢN ĐÍNH KÈM (EPISTEMIC HONESTY)</epistemic_honesty_protocol>\n`;
+          xml += `    </epistemic_grounding>\n\n`;
 
-          xml += `  <task_instruction>\n`;
-          xml += `    <task>${taskPrompt}</task>\n`;
+          if (useFewShot && skillProfile.fewShot) {
+            xml += `    <dynamic_few_shot_exemplar>\n`;
+            xml += `      <sample_input>${skillProfile.fewShot.input}</sample_input>\n`;
+            xml += `      <sample_reasoning_and_output>\n${skillProfile.fewShot.output}\n      </sample_reasoning_and_output>\n`;
+            xml += `    </dynamic_few_shot_exemplar>\n\n`;
+          }
+
+          xml += `    <chain_of_verification_protocol>\n`;
+          skillProfile.coveChecklist.forEach((check, idx) => {
+            xml += `      <verification_check index="${idx + 1}">${check}</verification_check>\n`;
+          });
+          xml += `      <formatting_constraint>${constraintsPrompt}</formatting_constraint>\n`;
+          xml += `    </chain_of_verification_protocol>\n`;
+          xml += `  </system_instruction>\n\n`;
+
+          xml += `  <user_turn>\n`;
+          xml += `    <task_directive>${taskPrompt}</task_directive>\n`;
           if (docAttachment.trim()) {
             xml += `    <verified_problem_input>\n${docAttachment.trim()}\n    </verified_problem_input>\n`;
           } else {
-            xml += `    <mode>Pure System Directive: Hãy tự động khởi tạo 01 đề bài mẫu chuẩn ở cấp độ "${tierObj.name}" theo SGK "${bookTitle}" và triển khai giảng dạy theo ngữ cảnh "${contextObj.title}".</mode>\n`;
+            xml += `    <autonomous_generation_mode>Chưa có đề bài đính kèm. Hãy sử dụng bài toán mẫu chuẩn sau hoặc khởi tạo 01 đề bài tương đương ở cấp độ "${tierObj.name}" theo SGK "${bookTitle}": "${skillProfile.sampleProblem}"</autonomous_generation_mode>\n`;
           }
-          xml += `  </task_instruction>\n`;
-          xml += `</system_instruction>`;
+          xml += `  </user_turn>\n`;
+          xml += `</universal_agentic_prompt>`;
           return xml;
         }
 
-        // MODE 3: LỆNH NẠP CLI / TERMINAL CHO AI AGENT (ANTIGRAVITY SDK / CLAUDE CODE / NPX)
+        // MODE 3: VENDOR-AGNOSTIC CLI / REST API / LOCAL LLM PAYLOAD
         if (promptExportMode === 'agent-cli') {
+          const problemPayload = docAttachment.trim() || skillProfile.sampleProblem;
           let cli = `# ==============================================================================\n`;
-          cli += `# 💻 BỘ NẠP KỸ NĂNG CHO AI AGENT (CLI / TERMINAL / ANTIGRAVITY SDK / CLAUDE CODE)\n`;
-          cli += `# Phiên bản: v0.1.3-beta • Dự án EduSkills-VN (Chủ nhiệm: Nguyễn Duy Quang)\n`;
+          cli += `# 💻 UNIVERSAL CLI & VENDOR-AGNOSTIC API EXECUTION (ĐỘC LẬP HỆ SINH THÁI 100%)\n`;
+          cli += `# Phiên bản: v2.0.0 • Dự án EduSkills-VN (Chủ nhiệm: Nguyễn Duy Quang)\n`;
+          cli += `# Tương thích mọi nền tảng: OpenAI-compatible API, Ollama, vLLM, Anthropic, Gemini, Local Server\n`;
           cli += `# ==============================================================================\n\n`;
 
-          cli += `# 1. Nạp kỹ năng vào Google Antigravity SDK & Gemini CLI:\n`;
-          cli += `gemini run --system-skill "skills/${selectedSkill.category || 'khoa-hoc-tu-nhien'}/${selectedSkillId}/SKILL.md" \\\n`;
-          cli += `  --grade ${gradeLevel} \\\n`;
-          cli += `  --tier "${tierObj.id}" \\\n`;
-          cli += `  --context "${contextObj.id}" \\\n`;
-          cli += `  --book "${bookFile}"`;
-          if (docAttachment.trim()) {
-            const cleanSnippet = docAttachment.trim().replace(/\r?\n/g, ' ').slice(0, 100);
-            cli += ` \\\n  --input "${cleanSnippet}..."\n\n`;
-          } else {
-            cli += `\n\n`;
-          }
-
-          cli += `# 2. Nạp kỹ năng vào Claude Code CLI:\n`;
-          cli += `/skill load skills/${selectedSkill.category || 'khoa-hoc-tu-nhien'}/${selectedSkillId}/SKILL.md\n\n`;
-
-          cli += `# 3. Nạp kỹ năng qua EduSkills-VN Package Manager (Node.js / NPX):\n`;
-          cli += `npx eduskills-vn load ${selectedSkillId} --grade ${gradeLevel} --tier ${tierObj.id} --context ${contextObj.id}\n\n`;
-
-          cli += `# 4. Gọi API Backend EduSkills-VN trực tiếp từ Terminal (Port 3000):\n`;
-          cli += `curl -X POST http://localhost:3000/api/generate-prompt \\\n`;
+          cli += `# 1. Gọi trực tiếp EduSkills-VN Local REST API (Port 3000):\n`;
+          cli += `curl -s -X POST http://localhost:3000/api/generate-prompt \\\n`;
           cli += `  -H "Content-Type: application/json" \\\n`;
           cli += `  -d '{\n`;
           cli += `    "subject": "${selectedSkillId}",\n`;
           cli += `    "gradeLevel": ${gradeLevel},\n`;
           cli += `    "competencyTier": "${tierObj.id}",\n`;
           cli += `    "usageContext": "${contextObj.id}",\n`;
-          cli += `    "exportMode": "system-prompt",\n`;
-          cli += `    "verifiedContent": ${JSON.stringify(docAttachment.trim())}\n`;
+          cli += `    "exportMode": "standard",\n`;
+          cli += `    "verifiedContent": ${JSON.stringify(problemPayload)}\n`;
+          cli += `  }' | jq -r ".prompt"\n\n`;
+
+          cli += `# 2. Chạy trên Local LLM (Ollama / Llama.cpp / vLLM) hoàn toàn độc lập:\n`;
+          cli += `ollama run qwen2.5:14b "$(cat skills/${selectedSkill.category || 'khoa-hoc-tu-nhien'}/${selectedSkillId}/SKILL.md)\n\nGiải bài toán sau (Lớp ${gradeLevel} - ${tierObj.name}): ${problemPayload.replace(/"/g, '\\"')}"\n\n`;
+
+          cli += `# 3. Chuẩn OpenAI-Compatible Chat Completions API (vLLM / LM Studio / OpenRouter / DeepSeek / GPT):\n`;
+          cli += `curl -s -X POST "http://localhost:11434/v1/chat/completions" \\\n`;
+          cli += `  -H "Content-Type: application/json" \\\n`;
+          cli += `  -H "Authorization: Bearer ollama" \\\n`;
+          cli += `  -d '{\n`;
+          cli += `    "model": "qwen2.5-coder:14b",\n`;
+          cli += `    "temperature": 0.2,\n`;
+          cli += `    "messages": [\n`;
+          cli += `      {"role": "system", "content": ${JSON.stringify(`${rolePrompt} | Triết lý: ${skillProfile.epistemology}`)}},\n`;
+          cli += `      {"role": "user", "content": ${JSON.stringify(`[Môn: ${skillProfile.title} | Lớp ${gradeLevel} | Cấp độ: ${tierObj.name}]\nĐề bài: ${problemPayload}`)}}\n`;
+          cli += `    ]\n`;
           cli += `  }'\n`;
           return cli;
         }
 
-        // MODE 1 (MẶC ĐỊNH): 5 KHUNG CHUẨN TIEUCHUANPROMPT.MD CHO CHAT WEB
+        // MODE 1 (MẶC ĐỊNH): 7-PILLAR UNIVERSAL META-COGNITIVE PROMPT (v2.0.0)
         let p = `# ==============================================================================\n`;
-        p += `# 🍵 EDUSKILLS-VN INTENT-DRIVEN PROMPT (CHUẨN TIEUCHUANPROMPT.MD & BGD 2026)\n`;
-        p += `# Phiên bản: v0.1.3-beta • Khối Lớp: ${gradeLevel} • Môn: ${selectedSkillId}\n`;
+        p += `# 🍵 EDUSKILLS-VN UNIVERSAL META-COGNITIVE PROMPT (CHUẨN 7 TRỤ CỘT v2.0 & BGD 2026)\n`;
+        p += `# Kỹ năng: @${selectedSkillId} • Khối Lớp: ${gradeLevel} • Cấp độ: ${tierObj.name} • Độc lập Hệ sinh thái\n`;
         p += `# ==============================================================================\n\n`;
 
-        p += `## 🎯 1. MỤC TIÊU & NHIỆM VỤ THỰC THI (WHAT THIS PROMPT DOES)\n`;
-        p += `- **Vai trò sư phạm:** ${rolePrompt}.\n`;
-        p += `- **Nhiệm vụ cụ thể:** ${taskPrompt}.\n`;
-        p += `- **Ngữ cảnh sử dụng sư phạm:** ${contextObj.title} (${contextObj.tagline}).\n`;
-        p += `  * *Định hướng sư phạm:* ${contextObj.description}\n`;
-        p += `- **Hành động sư phạm bắt buộc:**\n`;
-        if (useCoT) p += `  * [Chain-of-Thought]: Giải thích bản chất từng bước (step-by-step) trước khi kết luận.\n`;
-        if (useSocratic) p += `  * [Socratic Method]: Đặt câu hỏi gợi mở để người học tự động não, không đưa ngay đáp số thô.\n`;
-        if (useFewShot) p += `  * [Few-shot]: Minh họa bằng 1 ví dụ tương đương theo phong cách chuẩn mực.\n`;
-        if (useActiveRecall) p += `  * [Active Recall]: Ở cuối bài giải, BẮT BUỘC đặt 1 câu hỏi kiểm tra tư duy phản biện hoặc bài tập tương tự.\n`;
+        p += `## 🎯 1. ĐỊNH VỊ NHẬN THỨC LUẬN & NHIỆM VỤ THỰC THI (EPISTEMOLOGICAL IDENTITY & TASK)\n`;
+        p += `- **Định danh chuyên gia:** ${rolePrompt}.\n`;
+        p += `- **Hệ tiên đề & Phương pháp luận bộ môn:** ${skillProfile.epistemology}\n`;
+        p += `- **Nhiệm vụ trọng tâm:** ${taskPrompt}.\n`;
+        p += `- **Ngữ cảnh vận hành sư phạm:** **${contextObj.title}** (*${contextObj.tagline}*) — ${contextObj.description}\n`;
 
-        p += `\n## 🧠 2. CƠ SỞ NHẬN THỨC & BỐI CẢNH (WHAT THE AI MUST UNDERSTAND)\n`;
-        p += `- **Đối tượng người học:** Học sinh Lớp ${gradeLevel}, theo học Chương trình GDPT 2018.\n`;
-        p += `- **Phân cấp bậc năng lực nhận thức:** ${tierObj.name} [${tierObj.badge}].\n`;
-        p += `  * *Mục tiêu đánh giá:* ${tierObj.scoreTarget}\n`;
-        p += `  * *Yêu cầu năng lực:* ${tierObj.description}\n`;
-        p += `- **Trình độ người học thiết lập:** "${studentLevel}".\n`;
-        p += `- **Tình trạng nhận thức hiện thời:** ${currentStatus}.\n`;
-        p += `- **Bẫy phòng thi cần cảnh báo:** Quên điều kiện xác định, nhầm đơn vị chuẩn SI, sai danh pháp IUPAC hoặc lỗi suy luận trắc nghiệm.\n`;
+        p += `\n## 🧠 2. MÔ HÌNH HÓA NĂNG LỰC & VÙNG PHÁT TRIỂN GẦN (COGNITIVE CALIBRATION)\n`;
+        p += `- **Khối lớp & Chương trình:** Lớp ${gradeLevel} — Chương trình GDPT 2018 (QĐ 764/QĐ-BGDĐT).\n`;
+        p += `- **Phân cấp năng lực mục tiêu:** **${tierObj.name}** (${tierObj.scoreTarget}) — ${tierObj.description}\n`;
+        p += `- **Hồ sơ người học hiện tại:** "${studentLevel}" | Tình trạng: ${currentStatus}.\n`;
 
-        p += `\n## 📖 3. DẪN CHỨNG & CHỈ DẪN CÓ CHỦ ĐÍCH (INTENTIONAL GROUNDING & CITATIONS)\n`;
-        p += `- **Sách Giáo Khoa chỉ định:** ${bookTitle}\n`;
-        p += `- **Mã File PDF Gốc tham chiếu:** \`${bookFile}\`\n`;
-        p += `- **Thư mục Google Drive trực tiếp:** ${bookDrive}\n`;
-        p += `- **CHỈ DẪN BẮT BUỘC ĐỐI SOÁT:**\n`;
-        p += `  1. Mọi công thức, định lý, định luật và phương pháp giải ĐỀU PHẢI TRÍCH DẪN VÀ ĐỐI CHIẾU TRỰC TIẾP từ cuốn sách giáo khoa trên.\n`;
-        p += `  2. TUYỆT ĐỐI CẤM sử dụng các công thức ngoài chương trình hoặc các thuật toán mẹo làm mất đi bản chất khoa học.\n`;
-        p += `  3. Hãy chỉ rõ tên chương/bài học cụ thể trong SGK để học sinh có thể mở sách tra cứu lại ngay lập tức.\n`;
+        p += `\n## 🔄 3. QUY TRÌNH TƯ DUY BỘ MÔN & KHUNG GIÀN GIÁO 4 TẦNG SOCRATES\n`;
+        p += `- **Cơ chế kích hoạt nhận thức bắt buộc:**\n`;
+        if (useCoT) p += `  * **[First-Principles Chain-of-Thought]:** Suy luận từ định nghĩa, tiên đề và định luật gốc; chứng minh tường minh mọi bước biến đổi trước khi kết luận.\n`;
+        if (useSocratic) p += `  * **[Socratic Scaffolding]:** Khơi mở tư duy bằng câu hỏi định hướng ở Tầng 1 trước khi đi vào lời giải chi tiết.\n`;
+        if (useActiveRecall) p += `  * **[Active Recall & Transfer]:** Kết thúc bằng 01 câu hỏi phản biện hoặc bài tập tương tự để học sinh tự kiểm chứng.\n`;
+        p += `- **Chuỗi thao tác tư duy chuyên ngành (@${selectedSkillId}):**\n`;
+        skillProfile.methodologySteps.forEach((step) => {
+          p += `  * ${step}\n`;
+        });
 
-        p += `\n## ⚡ 4. RÀNG BUỘC KỸ THUẬT & ĐỊNH DẠNG ĐẦU RA (OUTPUT CONSTRAINTS & FORMAT)\n`;
-        p += `- ${constraintsPrompt}.\n`;
-        p += `- Tuân thủ nghiêm ngặt Barem điểm lũy tiến và định dạng đề thi 3 phần của Bộ GD&ĐT (Quyết định 764/QĐ-BGDĐT).\n`;
-        p += `- Cấu trúc trả lời 4 tầng Socrates:\n`;
-        p += `  * **Tầng 1:** Gợi Mở Tư Duy Socrates (Socratic Clue - Không lộ đáp số).\n`;
-        p += `  * **Tầng 2:** Bản Chất Lý Thuyết & Chiến Thuật Tiếp Cận Tối Ưu.\n`;
-        p += `  * **Tầng 3:** Lời Giải Chi Tiết Từng Bước (Full Step-by-Step, có lập luận cho từng phép biến đổi).\n`;
-        p += `  * **Tầng 4:** Giải Mã Bẫy Phòng Thi & 1 Bài Tập Tự Luyện Tương Tự.\n`;
+        p += `\n## ⚠️ 4. MA TRẬN BẪY NHẬN THỨC & SAI LẦM PHÒNG THI CẦN CẢNH BÁO (@${selectedSkillId})\n`;
+        skillProfile.traps.forEach((trap, idx) => {
+          p += `  ${idx + 1}. **Bẫy #${idx + 1}:** ${trap}\n`;
+        });
+
+        p += `\n## 📖 5. DẪN CHỨNG HỌC LIỆU & TRUNG THỰC NHẬN THỨC (EPISTEMIC GROUNDING)\n`;
+        p += `- **Sách Giáo Khoa chuẩn tham chiếu:** ${bookTitle}\n`;
+        p += `- **Mã học liệu chuẩn:** \`${bookFile}\` (Kho lưu trữ: ${bookDrive})\n`;
+        p += `- **GIAO THỨC TRUNG THỰC NHẬN THỨC (EPISTEMIC HONESTY PROTOCOL):**\n`;
+        p += `  1. Chỉ sử dụng định nghĩa, ký hiệu, công thức và phương pháp nằm trong phạm vi Chương trình GDPT 2018 của cuốn **${bookTitle}**.\n`;
+        p += `  2. **Chống ảo giác trích dẫn (Zero Fake-Citation):** Tuyệt đối KHÔNG tự bịa đặt số trang hoặc số dòng cụ thể trong SGK nếu không có trong ngữ liệu đính kèm; chỉ trích dẫn đến cấp **Chương / Chuyên đề / Tên định lý**.\n`;
+
+        p += `\n## 🛡️ 6. MẪU NEO CHẤT LƯỢNG (FEW-SHOT EXEMPLAR) & GIAO THỨC TỰ KIỂM CHỨNG (CoVe)\n`;
+        if (useFewShot && skillProfile.fewShot) {
+          p += `### 6.1. Mẫu Neo Chất Lượng Chuẩn Mực (Dynamic Few-Shot Exemplar cho @${selectedSkillId}):\n`;
+          p += `> **Đầu vào mẫu:** ${skillProfile.fewShot.input}\n`;
+          p += `> **Chuẩn phân tích & đầu ra mẫu:**\n`;
+          String(skillProfile.fewShot.output || '').split('\n').forEach(line => {
+            p += `> ${line}\n`;
+          });
+          p += `\n`;
+        }
+        p += `### 6.2. Danh sách Tự Kiểm Chứng Đa Chiều (Chain-of-Verification - CoVe Checklist):\n`;
+        skillProfile.coveChecklist.forEach((check, idx) => {
+          p += `- **[CoVe Check #${idx + 1}]:** ${check}\n`;
+        });
+        p += `- **[Ràng buộc định dạng]:** ${constraintsPrompt}.\n`;
 
         if (docAttachment.trim()) {
-          p += `\n## 📝 5. NỘI DUNG ĐỀ BÀI / NGỮ LIỆU ĐÃ XÁC NHẬN KIỂM CHỨNG\n`;
+          p += `\n## 📝 7. NỘI DUNG ĐỀ BÀI / NGỮ LIỆU ĐẦU VÀO ĐÃ XÁC NHẬN KIỂM CHỨNG\n`;
           p += `\`\`\`text\n${docAttachment.trim()}\n\`\`\`\n\n`;
-          p += `👉 Bắt đầu phân tích và giải quyết bài toán theo đầy đủ 4 tầng sư phạm trên:`;
+          p += `👉 **LỆNH THỰC THI:** Hãy vận dụng toàn bộ Kiến trúc 7 Trụ Cột trên để phân tích, giải quyết tường minh theo 4 tầng Socrates và thực hiện kiểm chứng CoVe cho đề bài trên:`;
         } else {
-          p += `\n## 📝 5. CHẾ ĐỘ PROMPT SƯ PHẠM THUẦN (CHƯA ĐÍNH KÈM BÀI TẬP CỤ THỂ)\n`;
-          p += `- **Tình trạng đính kèm:** Không có bài tập cụ thể trong prompt này (người dùng đã gỡ bài tập hoặc muốn dùng Prompt Hệ Thống).\n`;
-          p += `- **YÊU CẦU ĐỐI VỚI AI:**\n`;
-          p += `  1. Tự động khởi tạo 01 bài toán / câu hỏi mẫu điển hình trong chương trình SGK "${bookTitle}" ở Cấp độ nhận thức: "${tierObj.name}" (${tierObj.scoreTarget}).\n`;
-          p += `  2. Đóng vai trò "${rolePrompt}" và triển khai giảng dạy bài toán mẫu đó theo đúng ngữ cảnh "${contextObj.title}" (${contextObj.tagline}).\n`;
-          p += `  3. Hướng dẫn từng bước và đặt câu hỏi phản xạ để người học cùng tương tác.\n`;
+          p += `\n## 📝 7. CHẾ ĐỘ KHỞI TẠO ĐỀ BÀI & GIẢNG DẠY TỰ ĐỘNG (AUTONOMOUS PEDAGOGICAL MODE)\n`;
+          p += `- **Trạng thái đầu vào:** Người dùng chưa đính kèm đề bài cụ thể.\n`;
+          p += `- **Đề bài chuẩn khởi tạo gợi ý (Lớp ${gradeLevel} - ${tierObj.name}):**\n`;
+          p += `  > *"${skillProfile.sampleProblem}"*\n`;
+          p += `- **LỆNH THỰC THI:** Hãy sử dụng ngay đề bài chuẩn trên (hoặc khởi tạo 01 đề bài tương đương sát với SGK **"${bookTitle}"** ở cấp độ **"${tierObj.name}"**) và triển khai giảng dạy trọn vẹn theo 4 tầng Socrates.`;
         }
 
         return p;
@@ -2129,7 +2179,7 @@
               <div className="brand-title-group">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <h1>EduSkills-VN</h1>
-                  <span className="version-tag">v0.1.3-beta</span>
+                  <span className="version-tag">v2.0.0</span>
                 </div>
                 <p>🍵 Matcha Mèo Ú • Nhận Diện Đề Toán & Dẫn Chứng SGK Chuẩn</p>
               </div>
@@ -2706,21 +2756,21 @@
                             className={`btn-prompt-mode ${promptExportMode === 'standard' ? 'active' : ''}`}
                             onClick={() => setPromptExportMode('standard')}
                           >
-                            <i className="fa-solid fa-comments"></i> 💬 Web Chat (5 Khung)
+                            <i className="fa-solid fa-comments"></i> 💬 Universal Prompt (7 Trụ Cột)
                           </button>
                           <button 
                             type="button"
                             className={`btn-prompt-mode ${promptExportMode === 'system-prompt' ? 'active' : ''}`}
                             onClick={() => setPromptExportMode('system-prompt')}
                           >
-                            <i className="fa-solid fa-robot"></i> 🤖 Agent System Prompt (XML)
+                            <i className="fa-solid fa-robot"></i> 🤖 Universal XML System Prompt
                           </button>
                           <button 
                             type="button"
                             className={`btn-prompt-mode ${promptExportMode === 'agent-cli' ? 'active' : ''}`}
                             onClick={() => setPromptExportMode('agent-cli')}
                           >
-                            <i className="fa-solid fa-terminal"></i> 💻 Bộ Nạp CLI / Terminal
+                            <i className="fa-solid fa-terminal"></i> 💻 Universal CLI / API / Local LLM
                           </button>
                         </div>
                         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -2950,7 +3000,7 @@
 
           {/* Footer */}
           <footer className="footer-cute">
-            <p>🐾 EduSkills-VN v0.1.3-beta • Chủ nhiệm dự án: <strong>Nguyễn Duy Quang</strong> (📞 0795277227 | ✉️ poiairo4628@gmail.com)</p>
+            <p>🐾 EduSkills-VN v2.0.0 • Chủ nhiệm dự án: <strong>Nguyễn Duy Quang</strong> (📞 0795277227 | ✉️ poiairo4628@gmail.com)</p>
             <p style={{ marginTop: '4px', fontSize: '0.76rem', color: 'var(--text-light)' }}>
               Hệ thống Kỹ Nghệ Prompt Sư Phạm chuẩn GDPT 2018 & Định dạng Đề thi BGD 2026-2027.
             </p>
