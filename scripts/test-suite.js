@@ -18,6 +18,12 @@ const {
     formatPhysicsToSI,
     formatChemistryToIUPAC,
     formatEnglishAcademic,
+    formatHistoryChronology,
+    formatGeographyStats,
+    formatLegalScenario,
+    formatTechnologySpecs,
+    getDomainExecutionMandates,
+    processTextBySubject,
     generateIntentDrivenPrompt,
     SKILL_DEEP_PROFILES,
     COMPETENCY_TIERS,
@@ -299,6 +305,7 @@ async function main() {
             'USAGE_CONTEXTS', 'usageContext', 'window', 'selectedSkillId', 'selectedSkill',
             'promptExportMode', 'rolePrompt', 'studentLevel', 'currentStatus', 'useFewShot',
             'constraintsPrompt', 'taskPrompt', 'docAttachment', 'useCoT', 'useSocratic', 'useActiveRecall',
+            'getDomainExecutionMandates',
             fnBody
         );
 
@@ -324,16 +331,17 @@ async function main() {
                 'Khảo sát hàm số y = x^3 - 3x',
                 true,
                 true,
-                true
+                true,
+                getDomainExecutionMandates
             );
             assert.ok(typeof out === 'string' && out.length > 200, `Output chế độ ${mode} không hợp lệ`);
         }
     });
 
     // =========================================================================
-    // SUITE 5: ENGLISH ORTHOGRAPHY, WORD FORMATION & ANTI-TERSE VERIFICATION
+    // SUITE 5: UNIVERSAL ANTI-TERSE, DOMAIN-SPECIFIC RIGOR & ORTHOGRAPHY VERIFICATION
     // =========================================================================
-    console.log('\n🇬🇧 [SUITE 5] Kiểm định Chuẩn Chính Tả Tiếng Anh & Chống Trả Lời Cụt Ngủn 1 Từ (Anti-Terse)...');
+    console.log('\n🛡️ [SUITE 5] Kiểm định Chuẩn Chuyên Biệt 16/16 Skills & Chống Trả Lời Cụt Ngủn Toàn Hệ Thống...');
 
     runTest('Suite 5', 'formatEnglishAcademic tự động phát hiện và sửa các bẫy chính tả kinh điển (acheivement -> achievement, recieve -> receive, maintainance -> maintenance, enviroment -> environment)', () => {
         const input = 'Her remarkable acheivement was to recieve high scores despite poor maintainance and bad enviroment.';
@@ -357,20 +365,85 @@ async function main() {
         assert.ok(formatted.includes('IPA Oxford'), 'Thiếu yêu cầu IPA');
     });
 
-    runTest('Suite 5', 'Engine sinh Prompt cho tieng-anh-thpt chứa Quy tắc chống trả lời 1 từ và rà soát chính tả Oxford i/e', () => {
-        const prompt = generateIntentDrivenPrompt({
-            subject: 'tieng-anh-thpt',
-            gradeLevel: 12,
-            competencyTier: 'vd',
-            usageContext: 'giai-de',
-            exportMode: 'standard',
-            verifiedContent: 'achieve'
-        });
-        assert.ok(prompt.includes('ZERO-BARE-WORD POLICY'), 'Thiếu Zero-Bare-Word Policy');
-        assert.ok(prompt.includes('ORTHOGRAPHIC HONESTY'), 'Thiếu Orthographic Honesty');
-        assert.ok(prompt.includes('i before e except after c'), 'Thiếu quy tắc i before e');
-        assert.ok(prompt.includes('achievement'), 'Thiếu từ mẫu achievement');
-        assert.ok(!prompt.includes('*acheivement*') || prompt.includes('KHÔNG viết *acheivement'), 'Xử lý bẫy acheivement');
+    runTest('Suite 5', 'Các bộ parser Lịch sử, Địa lí, KTPL, Công nghệ tự động chèn giàn giáo chống câu trả lời cụt ngủn khi gặp câu hỏi ngắn', () => {
+        const hist = formatHistoryChronology('Chiến dịch Điện Biên Phủ 1954');
+        assert.ok(hist.includes('[CHỈ THỊ SƯ PHẠM BẮT BUỘC]'), 'Lịch sử thiếu chỉ thị');
+        assert.ok(hist.includes('AI TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ trả lời 1 mốc năm hay 1 dòng trần trụi'), 'Lịch sử thiếu anti-terse');
+
+        const geo = formatGeographyStats('Tính năng suất lúa ta/ha');
+        assert.ok(geo.includes('tạ/ha'), 'Địa lí chưa chuẩn hóa tạ/ha');
+        assert.ok(geo.includes('AI TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ đưa ra con số trần trụi'), 'Địa lí thiếu anti-terse');
+
+        const law = formatLegalScenario('Vi phạm quyền bất khả xâm phạm');
+        assert.ok(law.includes('AI TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ nêu 1 tên quyền hay 1 phán quyết cụt lủn'), 'KTPL thiếu anti-terse');
+
+        const tech = formatTechnologySpecs('Mạch điện 220V 50Hz 2kW');
+        assert.ok(tech.includes('220 V') && tech.includes('50 Hz'), 'Công nghệ chưa chuẩn hóa thông số');
+        assert.ok(tech.includes('AI TUYỆT ĐỐI KHÔNG ĐƯỢC trả lời cụt lủn 1 dòng'), 'Công nghệ thiếu anti-terse');
+    });
+
+    runTest('Suite 5', '100% 16/16 Skills được trang bị Quy tắc chống trả lời cụt ngủn (Zero-Bare-Answer Policy) trong prompt sinh ra', () => {
+        for (const skillId of Object.keys(SKILL_DEEP_PROFILES)) {
+            const p = generateIntentDrivenPrompt({
+                subject: skillId,
+                gradeLevel: 12,
+                competencyTier: 'vd',
+                usageContext: 'giai-de',
+                exportMode: 'standard',
+                verifiedContent: 'Bài tập kiểm thử cụt ngủn.'
+            });
+            assert.ok(
+                p.includes('ZERO-BARE-ANSWER POLICY') || p.includes('ZERO-BARE-WORD POLICY'),
+                `Kỹ năng ${skillId} không có Zero-Bare-Answer Policy!`
+            );
+            assert.ok(
+                p.includes('Tuyệt đối KHÔNG ĐƯỢC chỉ trả lời 1 từ, 1 con số, 1 ký hiệu hay 1 dòng đáp án trơ trọi') ||
+                p.includes('Tuyệt đối KHÔNG ĐƯỢC chỉ trả lời 1 từ đơn lẻ'),
+                `Kỹ năng ${skillId} thiếu lệnh cấm cụ thể!`
+            );
+        }
+    });
+
+    runTest('Suite 5', 'Bảo toàn tính thuần khiết bộ môn: Các môn tự nhiên/xã hội không bị chèn nhầm quy tắc chính tả Oxford của Tiếng Anh', () => {
+        const nonEnglishSkills = ['toan-thpt', 'vat-li-thpt', 'hoa-hoc-thpt', 'sinh-hoc-thpt', 'lich-su-thpt', 'dia-li-thpt', 'ktpl-thpt', 'tin-hoc-thpt', 'cong-nghe-thpt', 'ngu-van-thpt'];
+        for (const s of nonEnglishSkills) {
+            const prompt = generateIntentDrivenPrompt({
+                subject: s,
+                gradeLevel: 12,
+                competencyTier: 'vd',
+                usageContext: 'giai-de',
+                exportMode: 'standard',
+                verifiedContent: 'Kiểm tra độ thuần khiết chuyên môn.'
+            });
+            assert.ok(!prompt.includes('TỪ ĐIỂN OXFORD (ORTHOGRAPHIC HONESTY)'), `${s} bị nhiễm quy tắc từ điển Oxford!`);
+            assert.ok(!prompt.includes('CẤU TRÚC HỌ TỪ VỰNG (WORD FORMATION MATRIX)'), `${s} bị nhiễm ma trận họ từ tiếng Anh!`);
+        }
+    });
+
+    runTest('Suite 5', 'Mỗi bộ môn sở hữu Chỉ thị Sư phạm Chuyên biệt riêng (Toán: LaTeX/Tập xác định; Lý: Đơn vị SI; Hóa: IUPAC; Sinh: 3\'→5\'; Sử: Niên đại; Địa: Đơn vị; KTPL: Chủ thể; Tin: Bảng trace)', () => {
+        const toan = getDomainExecutionMandates('toan-thpt');
+        assert.ok(toan.includes('KHÓA TẬP XÁC ĐỊNH') && toan.includes('LaTeX'));
+
+        const ly = getDomainExecutionMandates('vat-li-thpt');
+        assert.ok(ly.includes('HỆ ĐƠN VỊ SI') && ly.includes('Định luật I NĐLH'));
+
+        const hoa = getDomainExecutionMandates('hoa-hoc-thpt');
+        assert.ok(hoa.includes('IUPAC') && hoa.includes('24.79 L/mol'));
+
+        const sinh = getDomainExecutionMandates('sinh-hoc-thpt');
+        assert.ok(sinh.includes("3'→5'") && sinh.includes('Hardy-Weinberg'));
+
+        const su = getDomainExecutionMandates('lich-su-thpt');
+        assert.ok(su.includes('PHÊ PHÁN TƯ LIỆU GỐC') && su.includes('CHUỖI NHÂN - QUẢ'));
+
+        const dia = getDomainExecutionMandates('dia-li-thpt');
+        assert.ok(dia.includes('CÔNG THỨC ĐỊNH LƯỢNG') && dia.includes('NHẬN DIỆN BIỂU ĐỒ'));
+
+        const ktpl = getDomainExecutionMandates('ktpl-thpt');
+        assert.ok(ktpl.includes('MA TRẬN GIẢI PHẪU TÌNH HUỐNG') && ktpl.includes('Sử dụng pháp luật'));
+
+        const tin = getDomainExecutionMandates('tin-hoc-thpt');
+        assert.ok(tin.includes('STATE TRACE TABLE') && tin.includes('PEP 8'));
     });
 
     runTest('Suite 5', 'tieng-anh-thpt/SKILL.md chứa đầy đủ quy tắc chính tả Oxford và phân tích họ từ (Word Formation)', () => {
@@ -468,6 +541,24 @@ async function main() {
             assert.ok(res.body.formattedText.includes('achievement'), 'Không thấy achievement trong formattedText');
             assert.ok(!res.body.formattedText.includes('acheivement'), 'Vẫn còn acheivement trong formattedText');
             assert.ok(res.body.formattedText.includes('CHỈ THỊ SƯ PHẠM BẮT BUỘC'), 'Thiếu chỉ thị Word Formation');
+        });
+
+        await runAsyncTest('Suite 4', 'POST /api/ocr xử lý môn Lịch sử & Địa lí: Tự động gắn chỉ thị chống cụt ngủn cho câu hỏi ngắn', async () => {
+            const resHist = await httpRequest(port, 'POST', '/api/ocr', {
+                subject: 'lich-su-thpt',
+                grade: 12,
+                text: 'Chiến dịch Điện Biên Phủ 1954'
+            });
+            assert.strictEqual(resHist.statusCode, 200);
+            assert.ok(resHist.body.formattedText.includes('CHỈ THỊ SƯ PHẠM BẮT BUỘC'), 'Lịch sử thiếu chỉ thị');
+
+            const resGeo = await httpRequest(port, 'POST', '/api/ocr', {
+                subject: 'dia-li-thpt',
+                grade: 12,
+                text: 'Tính năng suất lúa ta/ha'
+            });
+            assert.strictEqual(resGeo.statusCode, 200);
+            assert.ok(resGeo.body.formattedText.includes('tạ/ha'), 'Địa lí chưa chuẩn hóa đơn vị');
         });
 
         await runAsyncTest('Suite 4', 'GET /api/unknown-route trả về 404 Not Found với cấu trúc lỗi chuẩn', async () => {

@@ -64,5 +64,29 @@
     "subject": "tieng-anh-thpt",
     "question": "Cho dạng đúng của từ trong ngoặc để hoàn thành câu: \"Winning the prestigious scholarship was a remarkable (ACHIEVE) for her academic career.\" Hãy hướng dẫn em giải chi tiết câu này.",
     "expected_rules": "1. TUYỆT ĐỐI CẤM chỉ trả lời một từ trơ trọi 'achievement'. 2. Bắt buộc cung cấp Bảng họ từ vựng đầy đủ (Word Family: Verb achieve, Noun achievement/achiever, Adj achievable/unachievable). 3. Nhấn mạnh quy tắc chính tả 'i before e except after c' để chống bẫy viết sai thành *acheivement. 4. Phiên âm IPA Oxford chuẩn xác /əˈtʃiːvmənt/ và cụm Collocations đi kèm (sense of achievement, remarkable achievement)."
+  },
+  {
+    "id": 12,
+    "subject": "lich-su-thpt",
+    "question": "Thắng lợi quân sự nào của quân dân ta buộc Mỹ phải ký Hiệp định Paris ngày 27/1/1973? Em chỉ cần biết năm và sự kiện.",
+    "expected_rules": "1. TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ trả lời cộc lốc một năm '1972' hay 'Điện Biên Phủ trên không'. Bắt buộc triển khai 4 tầng Socrates. 2. Phân tích chuỗi Nhân - Quả: Bối cảnh cuối năm 1972, âm mưu dùng B-52 tập kích của Mỹ, diễn biến 12 ngày đêm và kết quả buộc Mỹ ký kết. 3. Phân biệt rõ sự kiện buộc Mỹ ngồi vào bàn đàm phán (Mậu Thân 1968) vs sự kiện buộc Mỹ đặt bút ký hiệp định (Điện Biên Phủ trên không 1972). 4. Kiểm chứng CoVe niên đại chính xác tuyệt đối."
+  },
+  {
+    "id": 13,
+    "subject": "ktpl-thpt",
+    "question": "Anh K do nghi ngờ anh P trộm đồ đã nhốt anh P vào kho 3 tiếng và đăng bài vu khống lên mạng. Anh K vi phạm quyền gì? Trả lời nhanh cho em.",
+    "expected_rules": "1. TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ nêu 1 tên quyền cộc lốc. Bắt buộc triển khai 4 tầng Socrates. 2. Lập Ma trận Chủ thể - Hành vi - Khách thể xâm phạm: tách riêng hành vi khóa cửa nhốt người (xâm phạm quyền bất khả xâm phạm về thân thể) và hành vi đăng bài bịa đặt vu khống (xâm phạm quyền được pháp luật bảo hộ về danh dự, nhân phẩm). 3. Phân tích rõ anh K không đánh đập nên không chọn xâm phạm tính mạng, sức khỏe; nhà kho không phải nơi ở của P nên không chọn bất khả xâm phạm chỗ ở."
+  },
+  {
+    "id": 14,
+    "subject": "dia-li-thpt",
+    "question": "Năm 2023, diện tích lúa nước ta là 3825 nghìn ha, sản lượng đạt 24150 nghìn tấn. Tính năng suất lúa theo đơn vị tạ/ha. Cho em con số.",
+    "expected_rules": "1. TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ đưa ra con số trần trụi '63.1'. Bắt buộc triển khai 4 tầng Socrates. 2. Nêu rõ công thức tính định lượng Năng suất = Sản lượng / Diện tích. 3. Bắt buộc quy đổi đơn vị: 1 tấn = 10 tạ, nhân 10 để ra đơn vị tạ/ha (tránh bẫy điền 6.3 tấn/ha). 4. Thay số và làm tròn chuẩn 1 chữ số thập phân: 63.1 tạ/ha."
+  },
+  {
+    "id": 15,
+    "subject": "sinh-hoc-thpt",
+    "question": "Một quần thể cân bằng di truyền có tỉ lệ kiểu hình lặn aa = 16%. Tính tỉ lệ cá thể dị hợp Aa trong số các cá thể mang kiểu hình trội A-.",
+    "expected_rules": "1. TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ trả lời một con số trần trụi '4/7' hoặc '0.57'. Bắt buộc triển khai 4 tầng Socrates. 2. Từ q^2 = 0.16 suy ra q(a) = 0.4 và p(A) = 0.6; viết cấu trúc quần thể cân bằng Hardy-Weinberg: 0.36 AA + 0.48 Aa + 0.16 aa = 1. 3. Phân tích rõ không gian mẫu điều kiện: mẫu số là nhóm cá thể kiểu hình trội A- (p^2 + 2pq = 0.84), không phải toàn bộ quần thể (tránh bẫy điền nhầm 0.48)."
   }
 ]

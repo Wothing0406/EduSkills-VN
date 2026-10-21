@@ -1267,6 +1267,69 @@
       return text;
     }
 
+    function formatHistoryProblem(rawText) {
+      if (!rawText) return '';
+      let text = rawText.trim();
+      text = text.replace(/(^|\n)\s*([A-D])[\.\)]\s+/g, '$1**$2.** ');
+      if (text.split(/\s+/).length <= 10 && !text.includes('**A.**') && !text.includes('\n')) {
+        text += `\n\n[CHỈ THỊ SƯ PHẠM BẮT BUỘC]: Câu hỏi lịch sử ngắn. AI TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ trả lời 1 mốc năm hay 1 dòng trần trụi. Bắt buộc triển khai:\n1. Bối cảnh lịch sử và nguyên nhân sâu xa / trực tiếp.\n2. Diễn biến trọng tâm và tính chất bước ngoặt của sự kiện.\n3. Kết quả, Ý nghĩa lịch sử & Bài học kinh nghiệm đối với cách mạng Việt Nam.`;
+      }
+      return text;
+    }
+
+    function formatGeographyProblem(rawText) {
+      if (!rawText) return '';
+      let text = rawText.trim();
+      text = text.replace(/(^|\n)\s*([A-D])[\.\)]\s+/g, '$1**$2.** ');
+      text = text.replace(/\bta\/ha\b/gi, 'tạ/ha').replace(/\btan\/ha\b/gi, 'tấn/ha').replace(/\bkm2\b/gi, 'km²');
+      if (text.split(/\s+/).length <= 10 && !text.includes('**A.**') && !text.includes('\n')) {
+        text += `\n\n[CHỈ THỊ SƯ PHẠM BẮT BUỘC]: Câu hỏi địa lí định lượng/khái niệm ngắn. AI TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ đưa ra con số trần trụi. Bắt buộc:\n1. Nêu rõ công thức địa lí định lượng và quy đổi đơn vị chuẩn trước khi tính.\n2. Thay số và tính toán từng bước, làm tròn chuẩn hàng thập phân.\n3. Rút ra nhận xét địa lí bản chất dựa trên số liệu vừa tính.`;
+      }
+      return text;
+    }
+
+    function formatLegalProblem(rawText) {
+      if (!rawText) return '';
+      let text = rawText.trim();
+      text = text.replace(/(^|\n)\s*([A-D])[\.\)]\s+/g, '$1**$2.** ');
+      if (text.split(/\s+/).length <= 10 && !text.includes('**A.**') && !text.includes('\n')) {
+        text += `\n\n[CHỈ THỊ SƯ PHẠM BẮT BUỘC]: Câu hỏi KTPL ngắn. AI TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ nêu 1 tên quyền hay 1 phán quyết cụt lủn. Bắt buộc:\n1. Phân tích Ma trận Chủ thể - Hành vi - Khách thể xâm phạm.\n2. Đối chiếu 4 hình thức thực hiện pháp luật (Sử dụng, Thi hành, Tuân thủ, Áp dụng).\n3. Kết luận căn cứ pháp lý và chế tài tương ứng theo quy định pháp luật.`;
+      }
+      return text;
+    }
+
+    function formatTechnologyProblem(rawText) {
+      if (!rawText) return '';
+      let text = rawText.trim();
+      text = text.replace(/(^|\n)\s*([A-D])[\.\)]\s+/g, '$1**$2.** ');
+      text = text.replace(/([0-9]+)\s*V\b/g, '$1 V').replace(/([0-9]+)\s*Hz\b/g, '$1 Hz').replace(/([0-9]+)\s*kW\b/g, '$1 kW');
+      if (text.split(/\s+/).length <= 10 && !text.includes('**A.**') && !text.includes('\n')) {
+        text += `\n\n[CHỈ THỊ SƯ PHẠM BẮT BUỘC]: Câu hỏi kỹ thuật ngắn. AI TUYỆT ĐỐI KHÔNG ĐƯỢC trả lời cụt lủn 1 dòng. Bắt buộc:\n1. Trình bày sơ đồ khối chức năng và nguyên lý biến đổi năng lượng/tín hiệu.\n2. Phân tích các thông số kỹ thuật định mức và quy trình công nghệ.\n3. Nêu các biện pháp an toàn kỹ thuật lao động bắt buộc.`;
+      }
+      return text;
+    }
+
+    function formatInformaticsProblem(rawText) {
+      if (!rawText) return '';
+      let text = rawText.trim();
+      text = text.replace(/\bO\(n\^2\)/g, '$O(n^2)$');
+      text = text.replace(/\bO\(n\s*log\s*n\)/gi, '$O(n \\log n)$');
+      text = text.replace(/\bO\(log\s*n\)/gi, '$O(\\log n)$');
+      text = text.replace(/\bO\(n\)/g, '$O(n)$');
+      text = text.replace(/\bO\(1\)/g, '$O(1)$');
+      return text;
+    }
+
+    function formatBiologyProblem(rawText) {
+      if (!rawText) return '';
+      let text = rawText.trim();
+      text = text.replace(/([0-9]+)\s*Angstrom\b/gi, '$1\\text{ \\AA}');
+      text = text.replace(/([0-9]+)\s*nm\b/gi, '$1\\text{ nm}');
+      text = text.replace(/\bDelta\s*L\b/gi, '$\\Delta L$');
+      text = text.replace(/(^|\n)\s*([A-D])[\.\)]\s+/g, '$1**$2.** ');
+      return text;
+    }
+
     const SKILL_PRESET_CONFIGS = {
       'toan-thpt': {
         domainBadge: '📐 Toán học • LaTeX',
@@ -1528,13 +1591,161 @@
       if (!rawText) return { formatted: '', badge: '' };
       const config = SKILL_PRESET_CONFIGS[subject] || SKILL_PRESET_CONFIGS['toan-thpt'];
       switch (subject) {
-        case 'toan-thpt': return { formatted: formatMathProblem(rawText), badge: config.domainBadge };
-        case 'vat-li-thpt': return { formatted: formatPhysicsProblem(rawText), badge: config.domainBadge };
-        case 'hoa-hoc-thpt': return { formatted: formatChemistryProblem(rawText), badge: config.domainBadge };
-        case 'ngu-van-thpt': return { formatted: formatLiteratureProblem(rawText), badge: config.domainBadge };
-        case 'tieng-anh-thpt': return { formatted: formatEnglishProblem(rawText), badge: config.domainBadge };
-        default: return { formatted: rawText.trim(), badge: config.domainBadge };
+        case 'toan-thpt':
+        case 'giai-chi-tiet':
+          return { formatted: formatMathProblem(rawText), badge: config.domainBadge };
+        case 'vat-li-thpt':
+          return { formatted: formatPhysicsProblem(rawText), badge: config.domainBadge };
+        case 'hoa-hoc-thpt':
+          return { formatted: formatChemistryProblem(rawText), badge: config.domainBadge };
+        case 'sinh-hoc-thpt':
+          return { formatted: formatBiologyProblem(rawText), badge: config.domainBadge };
+        case 'ngu-van-thpt':
+          return { formatted: formatLiteratureProblem(rawText), badge: config.domainBadge };
+        case 'tieng-anh-thpt':
+          return { formatted: formatEnglishProblem(rawText), badge: config.domainBadge };
+        case 'tin-hoc-thpt':
+          return { formatted: formatInformaticsProblem(rawText), badge: config.domainBadge };
+        case 'lich-su-thpt':
+          return { formatted: formatHistoryProblem(rawText), badge: config.domainBadge };
+        case 'dia-li-thpt':
+          return { formatted: formatGeographyProblem(rawText), badge: config.domainBadge };
+        case 'ktpl-thpt':
+          return { formatted: formatLegalProblem(rawText), badge: config.domainBadge };
+        case 'cong-nghe-thpt':
+          return { formatted: formatTechnologyProblem(rawText), badge: config.domainBadge };
+        default:
+          return { formatted: rawText.trim(), badge: config.domainBadge };
       }
+    }
+
+    function getDomainExecutionMandates(subject) {
+      const universalAntiTerse = `1. **QUY TẮC CHỐNG TRẢ LỜI CỤT NGỦN (ZERO-BARE-ANSWER POLICY - BẮT BUỘC TOÀN HỆ THỐNG):** Tuyệt đối KHÔNG ĐƯỢC chỉ trả lời 1 từ, 1 con số, 1 ký hiệu hay 1 dòng đáp án trơ trọi (kể cả với câu hỏi trắc nghiệm, điền số, hỏi nhanh hay biến đổi từ). Bắt buộc triển khai đầy đủ 4 tầng sư phạm Socrates (Tầng 1: Gợi mở Socrates; Tầng 2: Bản chất/Công thức gốc; Tầng 3: Biến đổi tường minh chi tiết; Tầng 4: Kiểm chứng CoVe & Bẫy).`;
+
+      switch (subject) {
+        case 'toan-thpt':
+          return [
+            universalAntiTerse,
+            `2. **KHÓA TẬP XÁC ĐỊNH & BẢO TOÀN BIẾN ĐỔI TƯƠNG ĐƯƠNG (AXIOMATIC RIGOR):** Luôn xác lập tập xác định D trước mọi phép tính. Bảo toàn phép biến đổi tương đương (\\iff), loại trừ nghiệm ngoại lai và kiểm tra điều kiện biên.`,
+            `3. **CHUẨN TRÌNH BÀY LATEX & ĐỊNH DẠNG KHẢO THÍ BGD 2026:** 100% biểu thức toán học viết bằng LaTeX ($...$ hoặc $$...$$). Phân biệt rành mạch hoành độ x, giá trị hàm số y = f(x) và tọa độ điểm M(x; y). Đáp án phần Trả lời ngắn phải làm tròn chuẩn và ≤ 4 ký tự.`
+          ].join('\n');
+
+        case 'vat-li-thpt':
+          return [
+            universalAntiTerse,
+            `2. **CHUẨN HÓA THỨ NGUYÊN & HỆ ĐƠN VỊ SI (DIMENSIONAL INTEGRITY):** 100% dữ kiện phải đổi về đơn vị SI trước khi tính toán (T(K) = t(°C) + 273; 1 L = 10⁻³ m³; p(Pa)). Rút biểu thức chữ tổng quát tường minh trước khi thay số.`,
+            `3. **KIỂM SOÁT DẤU NĂNG LƯỢNG & ĐỊNH LUẬT BẢO TOÀN:** Kiểm soát dấu trong Định luật I NĐLH ΔU = Q + A (khí sinh công A < 0, tỏa nhiệt Q < 0) và định luật bảo toàn động lượng, cơ năng, điện tích.`
+          ].join('\n');
+
+        case 'hoa-hoc-thpt':
+          return [
+            universalAntiTerse,
+            `2. **CHUẨN HÓA 100% DANH PHÁP QUỐC TẾ IUPAC TIẾNG ANH (GDPT 2018):** Mọi tên đơn chất, hợp chất và gốc chức phải viết bằng tiếng Anh IUPAC (sodium, copper, hydrochloric acid, ethanoic acid, methyl methacrylate...). Tuyệt đối không dùng tên cũ phiên âm.`,
+            `3. **HỆ 4 BẢO TOÀN VI MÔ & ĐIỀU KIỆN CHUẨN MỚI:** Sử dụng bảo toàn mol electron, bảo toàn nguyên tố, bảo toàn điện tích và bảo toàn khối lượng. Thể tích mol khí ở đkc mới (25°C, 1 bar) là 24.79 L/mol (không chia 22.4).`
+          ].join('\n');
+
+        case 'sinh-hoc-thpt':
+          return [
+            universalAntiTerse,
+            `2. **KIỂM SOÁT PHÂN CỰC ĐẠI PHÂN TỬ (3'→5' / 5'→3'):** Ghi rõ chiều của mạch khuôn DNA và mRNA trong phiên mã, dịch mã. Phân tích tách riêng từng cặp gen trước khi nhân tích xác suất.`,
+            `3. **XÁC SUẤT CÓ ĐIỀU KIỆN QUẦN THỂ (Hardy-Weinberg) & PHẢ HỆ:** Xác định chính xác không gian mẫu (mẫu số là toàn thể quần thể hay chỉ nhóm kiểu hình trội/bình thường). Phân biệt số loại giao tử của 1 tế bào vs 1 cơ thể.`
+          ].join('\n');
+
+        case 'ngu-van-thpt':
+          return [
+            universalAntiTerse,
+            `2. **ĐỌC HIỂU ĐỦ 3 LỚP ĂN ĐIỂM BAREM BGD:** Phân tích biện pháp tu từ phải đủ 3 lớp: (1) Chỉ ra từ ngữ chứa biện pháp -> (2) Tác dụng nghệ thuật (nhịp điệu, gợi cảm) -> (3) Tác dụng nội dung (tư tưởng, cảm xúc).`,
+            `3. **CHUẨN HÌNH THỨC NLXH 200 CHỮ & MÃ THỂ LOẠI NLVH:** Đoạn NLXH 200 chữ bắt buộc viết trong ĐÚNG 1 ĐOẠN VĂN DUY NHẤT (tuyệt đối không xuống dòng); bài NLVH 600 chữ phải phân tích theo mã thể loại (cấu tứ, thi ảnh, điểm nhìn), triệt tiêu lỗi diễn xuôi văn bản.`
+          ].join('\n');
+
+        case 'tieng-anh-thpt':
+          return [
+            universalAntiTerse,
+            `2. **CHUẨN CHÍNH TẢ & TỪ ĐIỂN OXFORD (ORTHOGRAPHIC HONESTY):** Mọi từ ngữ tiếng Anh phải được rà soát chính tả từng ký tự 100% theo từ điển Oxford OALD. Kiểm tra kỹ các bẫy đổi vị trí ký tự i/e (quy tắc "i before e except after c": achieve -> achievement, KHÔNG viết *acheivement; receive -> receipt) và nhân đôi phụ âm.`,
+            `3. **CẤU TRÚC HỌ TỪ VỰNG (WORD FORMATION MATRIX):** Nếu câu hỏi liên quan đến từ vựng hoặc chuyển đổi từ loại, BẮT BUỘC cung cấp bảng đầy đủ: Verb, Noun, Adj, Adv, Phiên âm IPA Oxford, Collocations thông dụng và 1 câu ví dụ chuẩn ngữ cảnh GDPT 2018.`
+          ].join('\n');
+
+        case 'lich-su-thpt':
+          return [
+            universalAntiTerse,
+            `2. **PHÊ PHÁN TƯ LIỆU GỐC & CHUẨN XÁC NIÊN ĐẠI:** Bảo toàn chính xác mốc thời gian (ngày, tháng, năm). Đối chiếu kép giữa văn bản tư liệu gốc với bối cảnh lịch sử của thời kỳ.`,
+            `3. **CHUỖI NHÂN - QUẢ & CHỐNG BẪY TUYỆT ĐỐI HÓA:** Tách bạch Bối cảnh -> Nguyên nhân -> Diễn biến bước ngoặt -> Ý nghĩa & Bài học lịch sử. Bác bỏ các phương án mang từ khóa cực đoan ("duy nhất", "hoàn toàn xóa bỏ ngay").`
+          ].join('\n');
+
+        case 'dia-li-thpt':
+          return [
+            universalAntiTerse,
+            `2. **CÔNG THỨC ĐỊNH LƯỢNG & ĐỒNG NHẤT ĐƠN VỊ ĐỊA LÍ:** Nêu rõ công thức tính toán và đơn vị đo lường (tạ/ha vs tấn/ha, % vs điểm phần trăm). Phân biệt bản chất giữa Tỉ trọng (%) và Quy mô tuyệt đối.`,
+            `3. **KIỂM CHỨNG BẢNG SỐ LIỆU & NHẬN DIỆN BIỂU ĐỒ:** Rà soát từng năm trung gian trước khi kết luận tăng/giảm liên tục. Nhận diện chuẩn dạng biểu đồ (Đường: tốc độ tăng trưởng; Tròn: cơ cấu ≤ 3 năm; Miền: chuyển dịch cơ cấu ≥ 4 năm).`
+          ].join('\n');
+
+        case 'ktpl-thpt':
+          return [
+            universalAntiTerse,
+            `2. **MA TRẬN GIẢI PHẪU TÌNH HUỐNG PHÁP LÝ:** Tách riêng hành vi của từng nhân vật (Chủ thể - Hành vi - Khách thể xâm phạm - Hình thức thực hiện - Chế tài).`,
+            `3. **CHUẨN HÓA KHÁI NIỆM PHÁP LUẬT & KINH TẾ VĨ MÔ:** Phân biệt rành mạch "Sử dụng pháp luật" (quyền) vs "Thi hành pháp luật" (nghĩa vụ); phân biệt xâm phạm "thân thể" (bắt nhốt) vs "tính mạng, sức khỏe" (đánh đập) vs "danh dự, nhân phẩm" (vu khống).`
+          ].join('\n');
+
+        case 'tin-hoc-thpt':
+          return [
+            universalAntiTerse,
+            `2. **MINH BẠCH BẢNG VẾT THỰC THI (STATE TRACE TABLE):** Kẻ bảng theo dõi giá trị biến số qua từng bước lặp thuật toán Python hoặc thứ tự thực thi mệnh đề SQL.`,
+            `3. **CHUẨN PEP 8 & ĐÁNH GIÁ ĐỘ PHỨC TẠP O(N):** Viết code Python chuẩn mực, chú ý quy tắc nửa khoảng [start, stop) của range() và tính biến đổi của danh sách; phân tích độ phức tạp thời gian/không gian Big-O.`
+          ].join('\n');
+
+        case 'cong-nghe-thpt':
+          return [
+            universalAntiTerse,
+            `2. **PHÂN TÍCH SƠ ĐỒ KHỐI & NGUYÊN LÝ HOẠT ĐỘNG:** Giải thích cấu trúc mạch điện - điện tử hoặc quy trình công nghệ theo sơ đồ khối chức năng tường minh.`,
+            `3. **THÔNG SỐ ĐỊNH MỨC & QUY TẮC AN TOÀN KỸ THUẬT:** Nêu rõ ý nghĩa các thông số kỹ thuật (U, I, P, f) và các tiêu chuẩn bảo vệ an toàn điện/công nghiệp bắt buộc.`
+          ].join('\n');
+
+        case 'giai-chi-tiet':
+          return [
+            universalAntiTerse,
+            `2. **GIẢI PHẪU ĐỀ THEO BAREM CHUẨN 0.25 ĐIỂM:** Chia nhỏ bài giải theo barem chấm của Bộ GD&ĐT, chỉ rõ từng bước để học sinh giành trọn vẹn điểm số.`,
+            `3. **GIẢI MÃ PHƯƠNG ÁN NHIỄU:** Với câu trắc nghiệm, giải thích cặn kẽ tại sao các phương án còn lại sai (sai bản chất, sai công thức hay bẫy số liệu).`
+          ].join('\n');
+
+        case 'tao-quiz-bgd':
+          return [
+            universalAntiTerse,
+            `2. **CHUẨN CẤU TRÚC 3 PHẦN KHẢO THÍ BGD 2025 (QĐ 764):** Xây dựng câu hỏi đủ Phần I (Trắc nghiệm 4 chọn 1), Phần II (Trắc nghiệm Đúng/Sai 4 ý a-b-c-d) và Phần III (Trả lời ngắn).`,
+            `3. **MA TRẬN NĂNG LỰC & ĐÁP ÁN KÈM BAREM:** Ghi rõ cấp độ nhận thức (Biết, Hiểu, Vận dụng) và cung cấp bảng đáp án chi tiết cho từng câu.`
+          ].join('\n');
+
+        case 'tomtat-mindmap':
+          return [
+            universalAntiTerse,
+            `2. **TRỰC QUAN HÓA BẰNG MERMAID MARKDOWN HỢP LỆ:** Cung cấp khối mã sơ đồ tư duy Mermaid (flowchart TD hoặc mindmap) có cú pháp chuẩn, render mượt mà.`,
+            `3. **BẢNG TỔNG KẾT CORNELL & TỪ KHÓA CỐT LÕI:** Tổng hợp kiến thức trọng tâm theo phương pháp Cornell (Keywords - Core Notes - Summary).`
+          ].join('\n');
+
+        case 'luan-an-nghiencuu':
+          return [
+            universalAntiTerse,
+            `2. **CẤU TRÚC HỌC THUẬT CHUẨN IMRAD:** Triển khai theo cấu trúc nghiên cứu chuẩn quốc tế: Introduction - Methods - Results - And - Discussion.`,
+            `3. **PHƯƠNG PHÁP LUẬN & ĐẠO ĐỨC HỌC THUẬT:** Nêu rõ phương pháp thu thập dữ liệu, cỡ mẫu và kiểm định giả thuyết thống kê, không đạo văn.`
+          ].join('\n');
+
+        case 'slide-thuyet-trinh':
+          return [
+            universalAntiTerse,
+            `2. **CẤU TRÚC BỘ SLIDE 10 TRANG CHUYÊN NGHIỆP:** Thiết kế bố cục Slide mạch lạc: Tiêu đề -> Vấn đề -> Giải pháp -> Dữ liệu -> Kết luận/Kêu gọi hành động.`,
+            `3. **LỜI THOẠI DIỄN THUYẾT (SPEAKER NOTES):** Kèm lời thoại thuyết trình chi tiết cho từng slide giúp người trình bày tự tin làm chủ sân khấu.`
+          ].join('\n');
+
+        default:
+          return [
+            universalAntiTerse,
+            `2. **BÁM SÁT CHƯƠNG TRÌNH GDPT 2018:** Vận dụng chuẩn mực kiến thức, kỹ năng và phương pháp luận chuyên ngành của môn học.`,
+            `3. **TRUNG THỰC HỌC THUẬT & KIỂM CHỨNG KẾT QUẢ:** Tự rà soát kiểm chứng kết quả trước khi đưa ra kết luận cuối cùng.`
+          ].join('\n');
+      }
+    }
+
+    if (typeof window !== 'undefined') {
+      window.getDomainExecutionMandates = getDomainExecutionMandates;
     }
 
     const COMPETENCY_TIERS = {
@@ -2004,13 +2215,16 @@
         if (docAttachment.trim()) {
           p += `\n## 📝 7. NỘI DUNG ĐỀ BÀI / NGỮ LIỆU ĐẦU VÀO ĐÃ XÁC NHẬN KIỂM CHỨNG\n`;
           p += `\`\`\`text\n${docAttachment.trim()}\n\`\`\`\n\n`;
-          p += `👉 **LỆNH THỰC THI BẮT BUỘC:**\n1. **QUY TẮC CHỐNG TRẢ LỜI CỤT NGỦN (ZERO-BARE-WORD POLICY):** Tuyệt đối KHÔNG ĐƯỢC chỉ trả lời 1 từ đơn lẻ hoặc đưa ra đáp án trơ trọi (kể cả với câu hỏi từ vựng ngắn, điền từ hoặc Word Formation). Bắt buộc triển khai đầy đủ 4 tầng sư phạm Socrates.\n2. **CHUẨN CHÍNH TẢ & TỪ ĐIỂN OXFORD (ORTHOGRAPHIC HONESTY):** Mọi từ ngữ tiếng Anh phải được rà soát chính tả từng ký tự 100% theo từ điển Oxford Advanced Learner's Dictionary (OALD). Kiểm tra kỹ các bẫy đổi vị trí ký tự i/e (quy tắc "i before e except after c": achieve -> achievement, KHÔNG viết *acheivement; receive -> receipt) và nhân đôi phụ âm.\n3. **CẤU TRÚC HỌ TỪ VỰNG (WORD FORMATION MATRIX):** Nếu câu hỏi liên quan đến từ vựng hoặc chuyển đổi từ loại, BẮT BUỘC cung cấp bảng đầy đủ các dạng: Động từ (Verb), Danh từ (Noun), Tính từ (Adj), Trạng từ (Adv), Phiên âm IPA Oxford, Cụm Collocations thông dụng và 1 câu ví dụ chuẩn ngữ cảnh GDPT 2018.\n4. Hãy bắt đầu giải quyết đề bài theo trọn vẹn 4 tầng sư phạm:`;
+          p += `👉 **LỆNH THỰC THI BẮT BUỘC ĐỐI VỚI AI:**\n`;
+          p += `${getDomainExecutionMandates(selectedSkillId)}\n`;
+          p += `4. Hãy bắt đầu giải quyết bài toán/đề bài theo trọn vẹn 4 tầng sư phạm:`;
         } else {
           p += `\n## 📝 7. CHẾ ĐỘ KHỞI TẠO ĐỀ BÀI & GIẢNG DẠY TỰ ĐỘNG (AUTONOMOUS PEDAGOGICAL MODE)\n`;
           p += `- **Trạng thái đầu vào:** Người dùng chưa đính kèm đề bài cụ thể.\n`;
           p += `- **Đề bài chuẩn khởi tạo gợi ý (Lớp ${gradeLevel} - ${tierObj.name}):**\n`;
           p += `  > *"${skillProfile.sampleProblem}"*\n`;
-          p += `- **LỆNH THỰC THI:** Hãy sử dụng ngay đề bài chuẩn trên (hoặc khởi tạo 01 đề bài tương đương sát với SGK **"${bookTitle}"** ở cấp độ **"${tierObj.name}"**) và triển khai giảng dạy trọn vẹn theo 4 tầng Socrates.`;
+          p += `- **LỆNH THỰC THI:** Hãy sử dụng ngay đề bài chuẩn trên (hoặc khởi tạo 01 đề bài tương đương sát với SGK **"${bookTitle}"** ở cấp độ **"${tierObj.name}"**) và triển khai giảng dạy trọn vẹn theo 4 tầng Socrates.\n`;
+          p += `- **CHỈ THỊ SƯ PHẠM BỘ MÔN BẮT BUỘC:**\n${getDomainExecutionMandates(selectedSkillId)}`;
         }
 
         return p;
