@@ -17,6 +17,7 @@ const {
     formatMathToLatex,
     formatPhysicsToSI,
     formatChemistryToIUPAC,
+    formatEnglishAcademic,
     generateIntentDrivenPrompt,
     SKILL_DEEP_PROFILES,
     COMPETENCY_TIERS,
@@ -330,6 +331,59 @@ async function main() {
     });
 
     // =========================================================================
+    // SUITE 5: ENGLISH ORTHOGRAPHY, WORD FORMATION & ANTI-TERSE VERIFICATION
+    // =========================================================================
+    console.log('\n🇬🇧 [SUITE 5] Kiểm định Chuẩn Chính Tả Tiếng Anh & Chống Trả Lời Cụt Ngủn 1 Từ (Anti-Terse)...');
+
+    runTest('Suite 5', 'formatEnglishAcademic tự động phát hiện và sửa các bẫy chính tả kinh điển (acheivement -> achievement, recieve -> receive, maintainance -> maintenance, enviroment -> environment)', () => {
+        const input = 'Her remarkable acheivement was to recieve high scores despite poor maintainance and bad enviroment.';
+        const corrected = formatEnglishAcademic(input);
+        assert.ok(corrected.includes('achievement'), `Không thấy achievement: ${corrected}`);
+        assert.ok(!corrected.includes('acheivement'), `Vẫn còn acheivement: ${corrected}`);
+        assert.ok(corrected.includes('receive'), `Không thấy receive: ${corrected}`);
+        assert.ok(!corrected.includes('recieve'), `Vẫn còn recieve: ${corrected}`);
+        assert.ok(corrected.includes('maintenance'), `Không thấy maintenance: ${corrected}`);
+        assert.ok(!corrected.includes('maintainance'), `Vẫn còn maintainance: ${corrected}`);
+        assert.ok(corrected.includes('environment'), `Không thấy environment: ${corrected}`);
+        assert.ok(!corrected.includes('enviroment'), `Vẫn còn enviroment: ${corrected}`);
+    });
+
+    runTest('Suite 5', 'formatEnglishAcademic tự động mở rộng câu hỏi từ vựng ngắn bằng Chỉ Thị Sư Phạm Word Formation 4 chiều', () => {
+        const shortQuery = 'achieve';
+        const formatted = formatEnglishAcademic(shortQuery);
+        assert.ok(formatted.includes('[CHỈ THỊ SƯ PHẠM BẮT BUỘC]'), 'Thiếu chỉ thị sư phạm mở rộng');
+        assert.ok(formatted.includes('TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ trả lời 1 từ đơn lẻ'), 'Thiếu lệnh cấm trả lời 1 từ');
+        assert.ok(formatted.includes('Word Family Matrix'), 'Thiếu yêu cầu Word Family');
+        assert.ok(formatted.includes('IPA Oxford'), 'Thiếu yêu cầu IPA');
+    });
+
+    runTest('Suite 5', 'Engine sinh Prompt cho tieng-anh-thpt chứa Quy tắc chống trả lời 1 từ và rà soát chính tả Oxford i/e', () => {
+        const prompt = generateIntentDrivenPrompt({
+            subject: 'tieng-anh-thpt',
+            gradeLevel: 12,
+            competencyTier: 'vd',
+            usageContext: 'giai-de',
+            exportMode: 'standard',
+            verifiedContent: 'achieve'
+        });
+        assert.ok(prompt.includes('ZERO-BARE-WORD POLICY'), 'Thiếu Zero-Bare-Word Policy');
+        assert.ok(prompt.includes('ORTHOGRAPHIC HONESTY'), 'Thiếu Orthographic Honesty');
+        assert.ok(prompt.includes('i before e except after c'), 'Thiếu quy tắc i before e');
+        assert.ok(prompt.includes('achievement'), 'Thiếu từ mẫu achievement');
+        assert.ok(!prompt.includes('*acheivement*') || prompt.includes('KHÔNG viết *acheivement'), 'Xử lý bẫy acheivement');
+    });
+
+    runTest('Suite 5', 'tieng-anh-thpt/SKILL.md chứa đầy đủ quy tắc chính tả Oxford và phân tích họ từ (Word Formation)', () => {
+        const skillPath = path.join(__dirname, '..', 'skills', 'ngon-ngu-cong-nghe', 'tieng-anh-thpt', 'SKILL.md');
+        const content = fs.readFileSync(skillPath, 'utf8');
+        assert.ok(content.includes('Zero-Bare-Word'), 'SKILL.md thiếu Zero-Bare-Word');
+        assert.ok(content.includes('i before e except after c'), 'SKILL.md thiếu quy tắc i before e');
+        assert.ok(content.includes('Word Formation'), 'SKILL.md thiếu Word Formation');
+        assert.ok(content.includes('achievement'), 'SKILL.md thiếu achievement');
+        assert.ok(content.includes('<universal_agentic_skill'), 'SKILL.md thiếu universal_agentic_skill');
+    });
+
+    // =========================================================================
     // SUITE 4: BACKEND HTTP SERVER API INTEGRATION TESTS
     // =========================================================================
     console.log('\n🌐 [SUITE 4] Kiểm thử tích hợp HTTP REST API Endpoints...');
@@ -401,6 +455,19 @@ async function main() {
             assert.ok(res.body.prompt.includes('## 🎯 1. ĐỊNH VỊ NHẬN THỨC LUẬN'));
             assert.ok(res.body.prompt.includes('## 📝 7.'));
             assert.ok(res.body.prompt.includes('Vật lí 12'));
+        });
+
+        await runAsyncTest('Suite 4', 'POST /api/ocr xử lý môn Tiếng Anh: Tự động sửa bẫy chính tả acheivement -> achievement và gắn chỉ thị Word Formation', async () => {
+            const res = await httpRequest(port, 'POST', '/api/ocr', {
+                subject: 'tieng-anh-thpt',
+                grade: 12,
+                text: 'acheivement'
+            });
+            assert.strictEqual(res.statusCode, 200);
+            assert.strictEqual(res.body.success, true);
+            assert.ok(res.body.formattedText.includes('achievement'), 'Không thấy achievement trong formattedText');
+            assert.ok(!res.body.formattedText.includes('acheivement'), 'Vẫn còn acheivement trong formattedText');
+            assert.ok(res.body.formattedText.includes('CHỈ THỊ SƯ PHẠM BẮT BUỘC'), 'Thiếu chỉ thị Word Formation');
         });
 
         await runAsyncTest('Suite 4', 'GET /api/unknown-route trả về 404 Not Found với cấu trúc lỗi chuẩn', async () => {

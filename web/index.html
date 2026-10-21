@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduSkills-VN Matcha Hub 🍵🐾 | Nhận Diện Đề Toán LaTeX & Dẫn Chứng SGK Chuẩn BGD 2026</title>
+  <title>EduSkills-VN 🍵 • Hỗ trợ học tập THPT & Trích xuất đề bài</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1226,6 +1226,38 @@
       return text;
     }
 
+        function formatEnglishProblem(rawText) {
+      if (!rawText) return '';
+      let text = rawText.trim();
+      const corrections = [
+        { wrong: /\bacheive\b/gi, right: 'achieve' },
+        { wrong: /\bacheivement\b/gi, right: 'achievement' },
+        { wrong: /\bacheivements\b/gi, right: 'achievements' },
+        { wrong: /\bacheived\b/gi, right: 'achieved' },
+        { wrong: /\bacheiving\b/gi, right: 'achieving' },
+        { wrong: /\bacheiver\b/gi, right: 'achiever' },
+        { wrong: /\bacheivers\b/gi, right: 'achievers' },
+        { wrong: /\brecieve\b/gi, right: 'receive' },
+        { wrong: /\breciept\b/gi, right: 'receipt' },
+        { wrong: /\bseperate\b/gi, right: 'separate' },
+        { wrong: /\boccurance\b/gi, right: 'occurrence' },
+        { wrong: /\bmaintainance\b/gi, right: 'maintenance' },
+        { wrong: /\bpronounciation\b/gi, right: 'pronunciation' },
+        { wrong: /\benviroment\b/gi, right: 'environment' },
+        { wrong: /\baccomodate\b/gi, right: 'accommodate' },
+        { wrong: /\bembarass\b/gi, right: 'embarrass' },
+        { wrong: /\bdefinately\b/gi, right: 'definitely' },
+        { wrong: /\bsuccessfull\b/gi, right: 'successful' },
+        { wrong: /\bindependant\b/gi, right: 'independent' }
+      ];
+      corrections.forEach(item => { text = text.replace(item.wrong, item.right); });
+      text = text.replace(/(^|\n)\s*([A-D])[\.\)]\s+/g, '$1**$2.** ');
+      if (text.split(/\s+/).length <= 6 && !text.includes('**A.**') && !text.includes('\n')) {
+        text += `\n\n[CHỈ THỊ SƯ PHẠM BẮT BUỘC]: Câu hỏi này về từ vựng / chuyển đổi từ loại (Word Formation). AI TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ trả lời 1 từ đơn lẻ. Bắt buộc cung cấp:\n1. Bảng họ từ (Word Family: Verb - Noun - Adj - Adv).\n2. Phiên âm IPA Oxford chuẩn xác.\n3. Quy tắc chính tả (Spelling Rules) chống nhầm lẫn âm/chữ cái ("i before e except after c").\n4. Cụm từ cố định (Collocations) và câu ví dụ chuẩn SGK Global Success.`;
+      }
+      return text;
+    }
+
     function formatLiteratureProblem(rawText) {
       if (!rawText) return '';
       let text = rawText.trim();
@@ -1237,256 +1269,256 @@
 
     const SKILL_PRESET_CONFIGS = {
       'toan-thpt': {
-        domainBadge: '📐 Toán học • LaTeX Chuẩn Quốc Tế',
-        standardDesc: 'LaTeX ($...$) • BGD 2026',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Toán Học THPT (LaTeX Chuẩn BGD)',
-        dropText: 'Kéo thả ảnh bài tập Toán (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động quét chữ và bóc tách công thức Toán sang chuẩn LaTeX ($...$)',
+        domainBadge: '📐 Toán học • LaTeX',
+        standardDesc: 'LaTeX ($...$)',
+        actionHeader: 'Nhận diện đề bài: Toán học THPT',
+        dropText: 'Kéo thả ảnh bài tập (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động trích xuất nội dung và chuyển công thức sang định dạng LaTeX ($...$)',
         samples: [
           {
-            title: 'Đề Tiệm Cận & Khảo Sát (12)',
+            title: 'Tiệm cận & Khảo sát hàm số (Lớp 12)',
             icon: '📐',
-            content: `Cho hàm số $y = \\frac{2x - 1}{x + 1}$.\n1. Tìm tập xác định $D$ và các đường tiệm cận đứng, tiệm cận ngang của đồ thị hàm số.\n2. Tìm các khoảng đơn điệu và vẽ bảng biến thiên của hàm số.\nA. Tiệm cận đứng $x = -1$, tiệm cận ngang $y = 2$\nB. Tiệm cận đứng $x = 1$, tiệm cận ngang $y = -1$\nC. Tiệm cận đứng $x = -1$, tiệm cận ngang $y = -1$\nD. Hàm số không có tiệm cận`
+            content: `Cho hàm số $y = \\frac{2x - 1}{x + 1}$.\n1. Tìm tập xác định $D$ và các đường tiệm cận đứng, tiệm cận ngang của đồ thị hàm số.\n2. Tìm các khoảng đơn điệu và lập bảng biến thiên của hàm số.\nA. Tiệm cận đứng $x = -1$, tiệm cận ngang $y = 2$\nB. Tiệm cận đứng $x = 1$, tiệm cận ngang $y = -1$\nC. Tiệm cận đứng $x = -1$, tiệm cận ngang $y = -1$\nD. Hàm số không có tiệm cận`
           },
           {
-            title: 'Đề Tọa Độ Không Gian Oxyz (12)',
+            title: 'Hệ tọa độ không gian Oxyz (Lớp 12)',
             icon: '📐',
-            content: `Trong không gian $Oxyz$, cho mặt cầu $(S): (x-1)^2 + (y+2)^2 + z^2 = 9$ và mặt phẳng $(P): 2x - 2y + z + 5 = 0$.\n1. Xác định tọa độ tâm $I$ và bán kính $R$ của mặt cầu $(S)$.\n2. Tính khoảng cách $d(I, (P))$ và biện luận vị trí tương đối giữa mặt cầu $(S)$ và mặt phẳng $(P)$.`
+            content: `Trong không gian $Oxyz$, cho mặt cầu $(S): (x-1)^2 + (y+2)^2 + z^2 = 9$ và mặt phẳng $(P): 2x - 2y + z + 5 = 0$.\n1. Xác định tọa độ tâm $I$ và bán kính $R$ của mặt cầu $(S)$.\n2. Tính khoảng cách $d(I, (P))$ và xét vị trí tương đối giữa mặt cầu $(S)$ và mặt phẳng $(P)$.`
           }
         ]
       },
       'vat-li-thpt': {
-        domainBadge: '⚡ Vật lí • Đơn Vị SI & Định Luật Bảo Toàn',
-        standardDesc: 'Đơn Vị SI • Khí Lí Tưởng',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Vật Lí THPT (Chuẩn SI & Đồ Thị)',
-        dropText: 'Kéo thả ảnh bài tập Vật lí (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động chuẩn hóa đơn vị SI ($m/s^2, K, Pa, J$) và công thức nhiệt/cơ/sóng',
+        domainBadge: '⚡ Vật lí • Đơn vị SI',
+        standardDesc: 'Đơn vị SI',
+        actionHeader: 'Nhận diện đề bài: Vật lí THPT',
+        dropText: 'Kéo thả ảnh bài tập (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động chuẩn hóa đơn vị đo SI và công thức',
         samples: [
           {
-            title: 'Đề Khí Lí Tưởng & Đẳng Nhiệt (SI)',
+            title: 'Khí lí tưởng & Quá trình đẳng nhiệt',
             icon: '⚡',
             content: `Một khối khí lí tưởng có thể tích 4 lít ở nhiệt độ $27^\\circ\\text{C}$ ($300\\text{ K}$) và áp suất $1\\text{ atm}$ ($101325\\text{ Pa}$) được dãn nở đẳng nhiệt đến thể tích 8 lít.\n1. Tính áp suất $p_2$ của khối khí sau khi dãn nở đẳng nhiệt (đổi sang đơn vị $\\text{Pa}$).\n2. Tính nhiệt lượng $Q$ mà khối khí nhận được trong quá trình trên (biết $\\Delta U = A + Q$).\nA. $p_2 = 0.5\\text{ atm} = 50662.5\\text{ Pa}$\nB. $p_2 = 2\\text{ atm} = 202650\\text{ Pa}$\nC. $p_2 = 1\\text{ atm} = 101325\\text{ Pa}$\nD. $p_2 = 0.25\\text{ atm} = 25331\\text{ Pa}`
           },
           {
-            title: 'Đề Dao Động Điều Hòa & Đồ Thị',
+            title: 'Dao động điều hòa & Đồ thị dao động',
             icon: '⚡',
             content: `Một chất điểm dao động điều hòa dọc theo trục $Ox$ với phương trình $x = 5\\cos(4\\pi t + \\frac{\\pi}{3})\\text{ cm}$.\n1. Xác định biên độ $A$, tần số góc $\\omega$ và pha ban đầu $\\varphi$ của dao động.\n2. Tính tốc độ cực đại $v_{\\max}$ và gia tốc cực đại $a_{\\max}$ của chất điểm (chuẩn đơn vị SI).`
           }
         ]
       },
       'hoa-hoc-thpt': {
-        domainBadge: '🧪 Hóa học • 100% IUPAC Tiếng Anh & Enthalpy',
-        standardDesc: '100% Danh Pháp IUPAC Tiếng Anh',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Hóa Học THPT (100% IUPAC Tiếng Anh)',
-        dropText: 'Kéo thả ảnh bài tập Hóa học (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động chuyển đổi tên nguyên tố/hợp chất sang IUPAC tiếng Anh chuẩn SGK mới',
+        domainBadge: '🧪 Hóa học • Danh pháp IUPAC',
+        standardDesc: 'Danh pháp IUPAC tiếng Anh',
+        actionHeader: 'Nhận diện đề bài: Hóa học THPT',
+        dropText: 'Kéo thả ảnh bài tập (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động chuẩn hóa tên chất theo danh pháp IUPAC tiếng Anh',
         samples: [
           {
-            title: 'Đề Đồng (Copper) & Nitric Acid',
+            title: 'Phản ứng của Đồng (Copper) & Nitric acid',
             icon: '🧪',
-            content: `Hòa tan hoàn toàn $m$ gam bột copper (Cu) trong dung dịch nitric acid (HNO3) loãng, dư sinh ra 4.958 lít khí nitrogen monoxide (NO) ở điều kiện chuẩn ($25^\\circ\\text{C}, 1\\text{ bar}$) là sản phẩm khử duy nhất.\n1. Viết phương trình hóa học và gọi tên $100\\%$ chất theo danh pháp IUPAC tiếng Anh.\n2. Tính giá trị của $m$ (biết $\\text{Cu} = 64, \\text{N} = 14, \\text{O} = 16$).\n3. Tính biến thiên Enthalpy chuẩn $\\Delta_r H^0_{298}$ của phản ứng.`
+            content: `Hòa tan hoàn toàn $m$ gam bột copper (Cu) trong dung dịch nitric acid (HNO3) loãng, dư sinh ra 4.958 lít khí nitrogen monoxide (NO) ở điều kiện chuẩn ($25^\\circ\\text{C}, 1\\text{ bar}$) là sản phẩm khử duy nhất.\n1. Viết phương trình hóa học và gọi tên chất theo danh pháp IUPAC tiếng Anh.\n2. Tính giá trị của $m$ (biết $\\text{Cu} = 64, \\text{N} = 14, \\text{O} = 16$).\n3. Tính biến thiên Enthalpy chuẩn $\\Delta_r H^0_{298}$ của phản ứng.`
           },
           {
-            title: 'Đề Cân Bằng Hóa Học & Enthalpy',
+            title: 'Cân bằng hóa học & Biến thiên Enthalpy',
             icon: '🧪',
-            content: `Cho phản ứng tổng hợp ammonia: $\\text{N}_2(g) + 3\\text{H}_2(g) \\rightleftharpoons 2\\text{NH}_3(g)$ có $\\Delta_r H^0_{298} = -92\\text{ kJ}$.\n1. Cho biết phản ứng thuận là tỏa nhiệt hay thu nhiệt.\n2. Cân bằng hóa học sẽ chuyển dịch theo chiều nào khi tăng nhiệt độ hoặc tăng áp suất của hệ? Giải thích dựa trên nguyên lí Le Chatelier.`
+            content: `Cho phản ứng tổng hợp ammonia: $\\text{N}_2(g) + 3\\text{H}_2(g) \\rightleftharpoons 2\\text{NH}_3(g)$ có $\\Delta_r H^0_{298} = -92\\text{ kJ}$.\n1. Cho biết phản ứng thuận là tỏa nhiệt hay thu nhiệt.\n2. Cân bằng hóa học sẽ chuyển dịch theo chiều nào khi tăng nhiệt độ hoặc tăng áp suất của hệ? Giải thích theo nguyên lí Le Chatelier.`
           }
         ]
       },
       'sinh-hoc-thpt': {
-        domainBadge: '🧬 Sinh học • Di Truyền Phân Tử & Barem BGD',
-        standardDesc: 'Di Truyền Phân Tử & Phả Hệ',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Sinh Học THPT (Di Truyền Phân Tử)',
-        dropText: 'Kéo thả ảnh bài tập Sinh học (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động chuẩn hóa công thức nucleotide ($A, T, G, X$), phiên mã và dịch mã',
+        domainBadge: '🧬 Sinh học • Di truyền & Tế bào',
+        standardDesc: 'Di truyền & Tế bào',
+        actionHeader: 'Nhận diện đề bài: Sinh học THPT',
+        dropText: 'Kéo thả ảnh bài tập (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động trích xuất dữ liệu di truyền và quá trình sinh học',
         samples: [
           {
-            title: 'Đề DNA, Nucleotide & Chiều Dài Gene',
+            title: 'Phân tử DNA & Số lượng Nucleotide',
             icon: '🧬',
             content: `Một phân tử DNA mạch kép có tổng số 3000 nucleotide, trong đó số nucleotide loại Adenine chiếm $20\\%$ tổng số nucleotide của gene.\n1. Tính số lượng từng loại nucleotide ($A, T, G, X$) của phân tử DNA.\n2. Tính chiều dài của phân tử DNA theo đơn vị $\\text{\\AA}$ và $\\text{nm}$.\n3. Tính số liên kết hydrogen hình thành giữa hai mạch đơn của phân tử DNA.`
           },
           {
-            title: 'Đề Phả Hệ Bệnh Di Truyền Ở Người',
+            title: 'Phả hệ bệnh di truyền ở người',
             icon: '🧬',
-            content: `Sơ đồ phả hệ dưới đây mô tả sự di truyền của một bệnh hiếm ở người do một gene có hai allele quy định nằm trên nhiễm sắc thể thường:\n1. Biện luận để xác định allele gây bệnh là trội hay lặn.\n2. Xác định kiểu gene của các cá thể trong thế hệ thứ I và thứ II.\n3. Tính xác suất để cặp vợ chồng ở thế hệ thứ III sinh ra người con đầu lòng không mắc bệnh.`
+            content: `Sơ đồ phả hệ dưới đây mô tả sự di truyền của một bệnh ở người do một gene có hai allele quy định nằm trên nhiễm sắc thể thường:\n1. Biện luận để xác định allele gây bệnh là trội hay lặn.\n2. Xác định kiểu gene của các cá thể trong thế hệ thứ I và thứ II.\n3. Tính xác suất để cặp vợ chồng ở thế hệ thứ III sinh ra người con đầu lòng không mắc bệnh.`
           }
         ]
       },
       'ngu-van-thpt': {
-        domainBadge: '📖 Ngữ văn • Đọc Hiểu Ngoài SGK & Đoạn Văn 200 Chữ',
-        standardDesc: 'Đọc Hiểu Ngoài SGK & NLXH 200 Chữ',
-        actionHeader: 'Nhận Diện Ngữ Liệu & Quét Chữ OCR: Ngữ Văn THPT (Đọc Hiểu Ngoài SGK)',
-        dropText: 'Kéo thả ảnh đề Văn (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF đề thi',
-        dropSubText: '⚡ Tự động bóc tách thành Phần I Đọc Hiểu (4đ) và Phần II Làm Văn NLXH 200 chữ (6đ)',
+        domainBadge: '📖 Ngữ văn • Đọc hiểu & Nghị luận',
+        standardDesc: 'Đọc hiểu & Nghị luận',
+        actionHeader: 'Nhận diện ngữ liệu: Ngữ văn THPT',
+        dropText: 'Kéo thả ảnh đề bài (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động phân tách phần Đọc hiểu và phần Làm văn',
         samples: [
           {
-            title: 'Đề Đọc Hiểu Thơ & NLXH 200 Chữ',
+            title: 'Đọc hiểu thơ & Đoạn văn nghị luận 200 chữ',
             icon: '📖',
-            content: `### I. PHẦN ĐỌC HIỂU (4,0 điểm)\n\n**Ngữ liệu trích dẫn:**\n"Dù ai đi ngược về xuôi\nNhớ ngày Giỗ Tổ mùng mười tháng ba\nKhắp miền truyền mãi câu ca\nNước non vẹn một dải hòa bình tâm."\n\n**Hệ thống câu hỏi định hướng:**\n- **Câu 1:** Xác định thể thơ và phương thức biểu đạt chính.\n- **Câu 2:** Chỉ ra và nêu tác dụng của biện pháp tu từ trong hai câu đầu.\n- **Câu 3:** Rút ra thông điệp sâu sắc nhất về đạo lý "Uống nước nhớ nguồn".\n\n### II. PHẦN LÀM VĂN (6,0 điểm)\n- **Câu 1 (2,0đ):** Viết đoạn văn nghị luận xã hội khoảng 200 chữ về ý thức gìn giữ nguồn cội của thế hệ trẻ hôm nay.`
+            content: `### I. PHẦN ĐỌC HIỂU (4,0 điểm)\n\n**Ngữ liệu trích dẫn:**\n"Dù ai đi ngược về xuôi\nNhớ ngày Giỗ Tổ mùng mười tháng ba\nKhắp miền truyền mãi câu ca\nNước non vẹn một dải hòa bình tâm."\n\n**Câu hỏi định hướng:**\n- **Câu 1:** Xác định thể thơ và phương thức biểu đạt chính.\n- **Câu 2:** Chỉ ra và nêu tác dụng của biện pháp tu từ trong hai câu đầu.\n- **Câu 3:** Rút ra thông điệp về đạo lý "Uống nước nhớ nguồn".\n\n### II. PHẦN LÀM VĂN (6,0 điểm)\n- **Câu 1 (2,0đ):** Viết đoạn văn nghị luận xã hội khoảng 200 chữ về ý thức gìn giữ nguồn cội của thế hệ trẻ hôm nay.`
           },
           {
-            title: 'Đề Đọc Hiểu Tản Văn Hiện Đại Ngoài SGK',
+            title: 'Đọc hiểu văn bản & Nghị luận xã hội',
             icon: '📖',
-            content: `### I. PHẦN ĐỌC HIỂU (4,0 điểm)\n\n**Ngữ liệu trích dẫn:**\n"Hành trình vạn dặm khởi đầu từ một bước chân. Người dám dấn thân và không ngại vấp ngã sẽ luôn nhìn thấy chân trời mới rực rỡ phía trước..."\n\n**Hệ thống câu hỏi:**\n- **Câu 1:** Xác định phong cách ngôn ngữ của văn bản.\n- **Câu 2:** Theo tác giả, điều gì giúp con người nhìn thấy chân trời mới?\n- **Câu 3:** Anh/chị hiểu như thế nào về câu "Hành trình vạn dặm khởi đầu từ một bước chân"?\n\n### II. PHẦN LÀM VĂN (6,0 điểm)\n- **Câu 1 (2,0đ):** Viết đoạn văn nghị luận 200 chữ về tầm quan trọng của lòng dũng cảm khi bắt đầu hành trình mới.`
+            content: `### I. PHẦN ĐỌC HIỂU (4,0 điểm)\n\n**Ngữ liệu trích dẫn:**\n"Hành trình vạn dặm khởi đầu từ một bước chân. Người dám dấn thân và không ngại vấp ngã sẽ luôn nhìn thấy chân trời mới rực rỡ phía trước..."\n\n**Câu hỏi:**\n- **Câu 1:** Xác định phong cách ngôn ngữ của văn bản.\n- **Câu 2:** Theo tác giả, điều gì giúp con người nhìn thấy chân trời mới?\n- **Câu 3:** Anh/chị hiểu như thế nào về câu "Hành trình vạn dặm khởi đầu từ một bước chân"?\n\n### II. PHẦN LÀM VĂN (6,0 điểm)\n- **Câu 1 (2,0đ):** Viết đoạn văn nghị luận 200 chữ về ý nghĩa của lòng dũng cảm khi bắt đầu hành trình mới.`
           }
         ]
       },
       'tieng-anh-thpt': {
-        domainBadge: '🌐 Tiếng Anh • BGD Reading & Grammar B2-C1',
-        standardDesc: 'Reading Comprehension & Cloze Test',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Tiếng Anh THPT (Reading & Grammar)',
-        dropText: 'Kéo thả ảnh đề Tiếng Anh (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động nhận diện bài đọc hiểu, trắc nghiệm phát âm, trọng âm và ngữ pháp',
+        domainBadge: '🌐 Tiếng Anh • Đọc hiểu & Ngữ pháp',
+        standardDesc: 'Reading & Grammar',
+        actionHeader: 'Nhận diện đề bài: Tiếng Anh THPT',
+        dropText: 'Kéo thả ảnh đề bài (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động nhận diện bài đọc hiểu và câu hỏi trắc nghiệm',
         samples: [
           {
-            title: 'Đề Reading Comprehension (Chủ đề AI)',
+            title: 'Bài đọc hiểu (Reading Comprehension)',
             icon: '🌐',
-            content: `Read the following passage and mark the letter A, B, C, or D to indicate the correct answer to each question.\n\n"Artificial Intelligence is rapidly revolutionizing high school education by personalizing study schedules and analyzing learner habits in real-time. Students no longer have to adapt to a single curriculum pace; instead, intelligent tutoring algorithms provide targeted feedback..."\n\n1. What is the primary focus of the passage?\nA. The decline of traditional schools\nB. How AI customizes the learning journey\nC. The drawbacks of modern technology\nD. Costs of building software for schools\n\n2. The word "revolutionizing" in the first paragraph is closest in meaning to:\nA. transforming\nB. discouraging\nC. complicating\nD. measuring`
+            content: `Read the following passage and mark the letter A, B, C, or D to indicate the correct answer to each question.\n\n"Artificial Intelligence is rapidly transforming high school education by personalizing study schedules and analyzing learner habits in real-time. Students no longer have to adapt to a single curriculum pace; instead, intelligent tutoring algorithms provide targeted feedback..."\n\n1. What is the primary focus of the passage?\nA. The decline of traditional schools\nB. How AI customizes the learning journey\nC. The drawbacks of modern technology\nD. Costs of building software for schools\n\n2. The word "transforming" in the first paragraph is closest in meaning to:\nA. changing\nB. discouraging\nC. complicating\nD. measuring`
           },
           {
-            title: 'Đề Ngữ Pháp & Cụm Động Từ (Phrasal Verbs)',
+            title: 'Ngữ pháp & Cụm động từ (Phrasal Verbs)',
             icon: '🌐',
             content: `Mark the letter A, B, C, or D to indicate the correct answer to each question:\n1. Had she known about the exam format earlier, she _______ much better results.\nA. would have achieved\nB. will achieve\nC. achieved\nD. achieves\n\n2. Many teenagers decided to cut down _______ social media usage to focus on the national high school examination.\nA. on\nB. in\nC. with\nD. of`
           }
         ]
       },
       'lich-su-thpt': {
-        domainBadge: '📜 Lịch Sử • Mốc Thời Gian & Lập Luận Kháng Chiến',
-        standardDesc: 'Mốc Lịch Sử & Tư Duy Phản Biện',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Lịch Sử THPT (Sự Kiện & Lập Luận)',
-        dropText: 'Kéo thả ảnh đề Sử (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động trích xuất các mốc sự kiện, bối cảnh lịch sử và câu hỏi phân tích',
+        domainBadge: '📜 Lịch sử • Sự kiện & Bối cảnh',
+        standardDesc: 'Mốc thời gian & Sự kiện',
+        actionHeader: 'Nhận diện đề bài: Lịch sử THPT',
+        dropText: 'Kéo thả ảnh đề bài (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động trích xuất mốc thời gian và câu hỏi lịch sử',
         samples: [
           {
-            title: 'Đề Kháng Chiến Chống Mỹ 1954 - 1975',
+            title: 'Giai đoạn kháng chiến 1954 - 1975',
             icon: '📜',
-            content: `Dựa vào kiến thức Lịch sử Việt Nam giai đoạn 1954 - 1975 (Chương trình GDPT 2018):\n1. Phân tích nguyên nhân thắng lợi của cuộc kháng chiến chống Mỹ, cứu nước.\n2. Đánh giá ý nghĩa lịch sử của chiến thắng ngày 30/4/1975 đối với dân tộc Việt Nam và phong trào cách mạng thế giới.\n3. Rút ra bài học kinh nghiệm về nghệ thuật chiến tranh nhân dân trong công cuộc bảo vệ Tổ quốc hiện nay.`
+            content: `Dựa vào kiến thức Lịch sử Việt Nam giai đoạn 1954 - 1975:\n1. Phân tích nguyên nhân thắng lợi của cuộc kháng chiến chống Mỹ, cứu nước.\n2. Nêu ý nghĩa lịch sử của chiến thắng ngày 30/4/1975 đối với dân tộc Việt Nam.\n3. Rút ra bài học kinh nghiệm về đại đoàn kết toàn dân trong công cuộc bảo vệ Tổ quốc.`
           }
         ]
       },
       'dia-li-thpt': {
-        domainBadge: '🌍 Địa Lí • Phân Tích Biểu Đồ & Atlat Địa Lí',
-        standardDesc: 'Biểu Đồ & Số Liệu Địa Lí',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Địa Lí THPT (Biểu Đồ & Atlat)',
-        dropText: 'Kéo thả ảnh đề Địa (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động nhận diện số liệu thống kê, biểu đồ kinh tế và tham chiếu Atlat',
+        domainBadge: '🌍 Địa lí • Biểu đồ & Số liệu',
+        standardDesc: 'Biểu đồ & Số liệu',
+        actionHeader: 'Nhận diện đề bài: Địa lí THPT',
+        dropText: 'Kéo thả ảnh đề bài (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động trích xuất số liệu thống kê và câu hỏi biểu đồ',
         samples: [
           {
-            title: 'Đề Phân Tích Cơ Cấu GDP Việt Nam',
+            title: 'Phân tích cơ cấu GDP Việt Nam',
             icon: '🌍',
-            content: `Cho bảng số liệu về cơ cấu GDP phân theo ngành kinh tế của nước ta (đơn vị: %):\n- Nông, lâm, thủy sản: 2015: 17.4% | 2020: 14.8% | 2023: 11.9%\n- Công nghiệp và xây dựng: 2015: 33.3% | 2020: 33.7% | 2023: 37.1%\n- Dịch vụ: 2015: 39.7% | 2020: 41.6% | 2023: 42.5%\n1. Nhận xét sự chuyển dịch cơ cấu GDP của nước ta từ 2015 đến 2023.\n2. Giải thích vì sao ngành công nghiệp và dịch vụ ngày càng chiếm tỉ trọng cao.`
+            content: `Cho bảng số liệu về cơ cấu GDP phân theo ngành kinh tế của nước ta (đơn vị: %):\n- Nông, lâm, thủy sản: 2015: 17.4% | 2020: 14.8% | 2023: 11.9%\n- Công nghiệp và xây dựng: 2015: 33.3% | 2020: 33.7% | 2023: 37.1%\n- Dịch vụ: 2015: 39.7% | 2020: 41.6% | 2023: 42.5%\n1. Nhận xét sự chuyển dịch cơ cấu GDP của nước ta từ 2015 đến 2023.\n2. Giải thích vì sao ngành công nghiệp và dịch vụ chiếm tỉ trọng ngày càng cao.`
           }
         ]
       },
       'ktpl-thpt': {
-        domainBadge: '⚖️ KTPL • Tình Huống Pháp Luật & Kinh Tế Thị Trường',
-        standardDesc: 'Tình Huống Pháp Luật & Kinh Tế',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: KTPL THPT (Tình Huống Pháp Luật)',
-        dropText: 'Kéo thả ảnh đề KTPL (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động phân tích tình huống pháp luật, chủ thể vi phạm và điều luật áp dụng',
+        domainBadge: '⚖️ Kinh tế & Pháp luật • Tình huống',
+        standardDesc: 'Tình huống pháp lý & Kinh tế',
+        actionHeader: 'Nhận diện đề bài: Kinh tế & Pháp luật THPT',
+        dropText: 'Kéo thả ảnh đề bài (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động bóc tách tình huống và câu hỏi pháp lý',
         samples: [
           {
-            title: 'Đề Tình Huống Quyền Khiếu Nại & Tố Cáo',
+            title: 'Tình huống: Quyền khiếu nại và tố cáo',
             icon: '⚖️',
-            content: `Tình huống: Anh Bình phát hiện một xưởng sản xuất gần khu dân cư lén lút xả nước thải độc hại chưa qua xử lý ra kênh rạch chung vào ban đêm.\n1. Căn cứ theo Luật Bảo vệ môi trường và Luật Tố cáo, anh Bình có quyền thực hiện hành vi khiếu nại hay tố cáo? Vì sao?\n2. Nêu rõ trình tự và cơ quan có thẩm quyền tiếp nhận phản ánh của anh Bình.`
+            content: `Tình huống: Anh Bình phát hiện một xưởng sản xuất gần khu dân cư lén lút xả nước thải chưa qua xử lý ra kênh rạch chung vào ban đêm.\n1. Căn cứ theo Luật Bảo vệ môi trường và Luật Tố cáo, anh Bình có quyền thực hiện khiếu nại hay tố cáo? Giải thích lý do.\n2. Nêu trình tự và cơ quan có thẩm quyền tiếp nhận phản ánh của anh Bình.`
           }
         ]
       },
       'tin-hoc-thpt': {
-        domainBadge: '💻 Tin Học • Thuật Toán & Mã Nguồn Python',
-        standardDesc: 'Python & Độ Phức Tạp O(n)',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Tin Học THPT (Python & Thuật Toán)',
-        dropText: 'Kéo thả ảnh mã nguồn/đề Tin (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động nhận diện code block Python/C++, độ phức tạp thuật toán $O(n)$',
+        domainBadge: '💻 Tin học • Thuật toán & Mã nguồn',
+        standardDesc: 'Python & C++',
+        actionHeader: 'Nhận diện đề bài: Tin học THPT',
+        dropText: 'Kéo thả ảnh mã nguồn/đề bài (PNG, JPG) • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động nhận diện đoạn mã nguồn và bài toán thuật toán',
         samples: [
           {
-            title: 'Đề Thuật Toán Tìm Kiếm Nhị Phân',
+            title: 'Thuật toán tìm kiếm nhị phân',
             icon: '💻',
-            content: `Cho một dãy số nguyên $A = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]$ đã được sắp xếp tăng dần và giá trị cần tìm $x = 23$.\n1. Viết mã nguồn Python triển khai thuật toán tìm kiếm nhị phân (Binary Search).\n2. Phân tích độ phức tạp thời gian $O(\\log n)$ và số bước lặp tối đa để tìm thấy $x$.\n3. Xử lý trường hợp nếu phần tử $x$ không xuất hiện trong dãy số.`
+            content: `Cho dãy số nguyên đã sắp xếp tăng dần $A = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]$ và giá trị cần tìm $x = 23$.\n1. Viết mã nguồn Python triển khai thuật toán tìm kiếm nhị phân (Binary Search).\n2. Phân tích độ phức tạp thời gian $O(\\log n)$ của thuật toán.\n3. Xử lý trường hợp nếu phần tử $x$ không xuất hiện trong dãy.`
           }
         ]
       },
       'cong-nghe-thpt': {
-        domainBadge: '⚙️ Công Nghệ • Kỹ Thuật Mạch Điện & Nông Nghiệp 4.0',
-        standardDesc: 'Sơ Đồ Kỹ Thuật & Cảm Biến',
-        actionHeader: 'Nhận Diện Đề Thi & Quét Chữ OCR: Công Nghệ THPT (Kỹ Thuật & Mạch Điện)',
-        dropText: 'Kéo thả sơ đồ/ảnh đề Công nghệ • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động nhận diện sơ đồ linh kiện điện tử, vi điều khiển và mô hình thông minh',
+        domainBadge: '⚙️ Công nghệ • Kỹ thuật & Mạch điện',
+        standardDesc: 'Sơ đồ kỹ thuật & Mạch điện',
+        actionHeader: 'Nhận diện đề bài: Công nghệ THPT',
+        dropText: 'Kéo thả sơ đồ hoặc ảnh đề bài • Chụp màn hình rồi nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động nhận diện sơ đồ kỹ thuật và câu hỏi mạch điện',
         samples: [
           {
-            title: 'Đề Mạch Điều Khiển Đèn Cảm Biến Quang',
+            title: 'Mạch điều khiển đèn cảm biến ánh sáng',
             icon: '⚙️',
-            content: `Một hệ thống chiếu sáng thông minh sử dụng cảm biến quang điện trở (LDR) kết hợp với transistor NPN và rơ-le (Relay) để tự động bật đèn khi trời tối.\n1. Giải thích nguyên lý thay đổi điện trở của quang điện trở khi cường độ ánh sáng môi trường giảm.\n2. Phân tích trạng thái dẫn/ngắt của transistor trong mạch khi trời sáng và khi trời tối.`
+            content: `Một hệ thống chiếu sáng sử dụng cảm biến quang điện trở (LDR) kết hợp với transistor NPN và rơ-le (Relay) để bật đèn khi trời tối.\n1. Giải thích nguyên lý thay đổi điện trở của quang điện trở khi cường độ ánh sáng giảm.\n2. Phân tích trạng thái dẫn/ngắt của transistor trong mạch khi trời sáng và khi trời tối.`
           }
         ]
       },
       'giai-chi-tiet': {
-        domainBadge: '🧩 Giải Chi Tiết • Sư Phạm Đa Tầng Socrates',
-        standardDesc: 'Khơi Mở Socrates • Giải Mã Bẫy',
-        actionHeader: 'Nạp Bài Tập Để Phân Tích Lời Giải Đa Tầng Socrates',
-        dropText: 'Kéo thả bài tập cần giải (PNG, JPG) • Nhấn Ctrl + V dán ảnh • Hoặc tải đề cương',
-        dropSubText: '⚡ Tự động phân tích 4 tầng sư phạm: Gợi mở -> Bản chất -> Lời giải chi tiết -> Bẫy phòng thi',
+        domainBadge: '🧩 Giải chi tiết • Gợi mở từng bước',
+        standardDesc: 'Phương pháp Socrates',
+        actionHeader: 'Phân tích bài tập theo phương pháp Socrates',
+        dropText: 'Kéo thả bài tập cần giải (PNG, JPG) • Nhấn Ctrl + V dán ảnh • Hoặc tải file tài liệu',
+        dropSubText: 'Phân tích theo 4 bước: Gợi mở -> Khái niệm -> Lời giải chi tiết -> Lưu ý lỗi sai',
         samples: [
           {
-            title: 'Bài Toán Bẫy Khử Vô Định (Toán 12)',
+            title: 'Bài toán khử dạng vô định (Toán 12)',
             icon: '🧩',
-            content: `Cho hàm số $y = \\frac{x^2 - 1}{x - 1}$. Một học sinh khẳng định đồ thị hàm số có tiệm cận đứng $x = 1$.\n1. Hãy đặt 2 câu hỏi gợi mở Socrates để học sinh tự phát hiện sự mâu thuẫn trong kết luận trên.\n2. Giải thích bản chất phép khử dạng vô định $\\frac{0}{0}$ và kết luận chính xác về đồ thị hàm số.`
+            content: `Cho hàm số $y = \\frac{x^2 - 1}{x - 1}$. Một học sinh khẳng định đồ thị hàm số có tiệm cận đứng $x = 1$.\n1. Đặt 2 câu hỏi gợi mở để học sinh tự nhận ra điểm chưa chính xác trong khẳng định trên.\n2. Giải thích bản chất phép khử dạng vô định $\\frac{0}{0}$ và rút ra kết luận đúng về đồ thị hàm số.`
           }
         ]
       },
       'tao-quiz-bgd': {
-        domainBadge: '🎯 Khảo Thí BGD • Ma Trận Đề Thi 3 Phần QĐ 764',
-        standardDesc: 'Đề Thi 3 Phần Chuẩn BGD',
-        actionHeader: 'Nạp Đề Bài Để Chuyển Hóa Thành Quiz 3 Phần QĐ 764/QĐ-BGDĐT',
-        dropText: 'Kéo thả đề gốc (PNG, JPG) • Nhấn Ctrl + V dán ảnh • Hoặc tải PDF đề thi',
-        dropSubText: '⚡ Tự động tái cấu trúc thành: Phần I Trắc nghiệm 4 chọn 1, Phần II Đúng/Sai 4 ý, Phần III Trả lời ngắn',
+        domainBadge: '🎯 Đề kiểm tra • Cấu trúc Bộ GD&ĐT',
+        standardDesc: 'Cấu trúc 3 phần',
+        actionHeader: 'Tạo đề kiểm tra 3 phần theo định dạng Bộ GD&ĐT',
+        dropText: 'Kéo thả tài liệu bài học (PNG, JPG) • Nhấn Ctrl + V dán ảnh • Hoặc tải file PDF',
+        dropSubText: 'Tái cấu trúc đề: Trắc nghiệm 4 lựa chọn, Đúng/Sai và Trả lời ngắn',
         samples: [
           {
-            title: 'Mẫu Tái Cấu Trúc Đề Toán Lớp 12',
+            title: 'Chuyển hóa bài toán thành đề kiểm tra (Toán 12)',
             icon: '🎯',
-            content: `Chuyển hóa bài toán Khảo sát hàm số $y = x^3 - 3x + 2$ thành đề kiểm tra 3 phần chuẩn Bộ GD&ĐT 2026:\n- Phần I (4 câu trắc nghiệm đơn 0.25đ/câu)\n- Phần II (1 câu đúng/sai 4 ý a,b,c,d barem lũy tiến 0.1 - 0.25 - 0.5 - 1.0đ)\n- Phần III (2 câu trả lời ngắn 0.5đ/câu)`
+            content: `Chuyển hóa nội dung khảo sát hàm số $y = x^3 - 3x + 2$ thành đề kiểm tra 3 phần:\n- Phần I: 4 câu trắc nghiệm nhiều lựa chọn\n- Phần II: 1 câu hỏi đúng/sai gồm 4 ý a, b, c, d\n- Phần III: 2 câu hỏi trả lời ngắn điền số`
           }
         ]
       },
       'slide-thuyet-trinh': {
-        domainBadge: '📊 Slide Marp • Kiến Trúc Trực Quan 16:9',
-        standardDesc: 'Slide Sư Phạm Marp 16:9',
-        actionHeader: 'Nạp Bài Giảng Để Đóng Gói Thành Slide Marp 16:9',
-        dropText: 'Kéo thả tài liệu bài học • Nhấn Ctrl + V dán ảnh tóm tắt • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động phân cảnh 5 slide sư phạm tương tác cao',
+        domainBadge: '📊 Bài trình chiếu • Marp 16:9',
+        standardDesc: 'Slide Marp 16:9',
+        actionHeader: 'Tạo bài trình chiếu Marp 16:9',
+        dropText: 'Kéo thả tài liệu bài học • Nhấn Ctrl + V dán ảnh • Hoặc tải file PDF',
+        dropSubText: 'Tự động tạo khung 5 slide trình chiếu theo cấu trúc sư phạm',
         samples: [
           {
-            title: 'Mẫu Bài Giảng Định Luật Khí Lí Tưởng',
+            title: 'Mẫu bài giảng định luật khí lí tưởng',
             icon: '📊',
-            content: `Chuyển hóa nội dung bài học "Định luật Boyle và Quá trình đẳng nhiệt của khí lí tưởng" thành bộ 5 slide thuyết trình Marp 16:9:\n- Slide 1: Hook câu hỏi thực tế (Tại sao lốp xe căng phồng khi trời nắng?)\n- Slide 2: Bản chất phân tử & Định luật $p \\cdot V = \\text{const}$\n- Slide 3: Đồ thị đường đẳng nhiệt trong hệ tọa độ $(p, V)$\n- Slide 4: Thí nghiệm minh họa & Bẫy đơn vị\n- Slide 5: Tóm tắt 60 giây và bài tập vận dụng nhanh`
+            content: `Chuyển hóa nội dung bài học "Định luật Boyle và quá trình đẳng nhiệt" thành bộ 5 slide trình chiếu Marp 16:9:\n- Slide 1: Câu hỏi gợi mở từ hiện tượng thực tế\n- Slide 2: Khái niệm & Công thức $p \\cdot V = \\text{const}$\n- Slide 3: Đồ thị đường đẳng nhiệt trong hệ tọa độ $(p, V)$\n- Slide 4: Thí nghiệm minh họa và lưu ý đơn vị đo\n- Slide 5: Tóm tắt bài học và bài tập vận dụng ngắn`
           }
         ]
       },
       'tomtat-mindmap': {
-        domainBadge: '🧠 Mindmap Mermaid • Siêu Trí Nhớ Cornell',
-        standardDesc: 'Mermaid Mindmap • Cornell',
-        actionHeader: 'Nạp Nội Dung Để Vẽ Sơ Đồ Tư Duy Mermaid Cornell 60 Giây',
-        dropText: 'Kéo thả đoạn bài học cần tóm tắt • Nhấn Ctrl + V • Hoặc tải PDF',
-        dropSubText: '⚡ Tự động tạo mã Mermaid graph TD và bảng ghi chép Cornell 3 cột',
+        domainBadge: '🧠 Sơ đồ tư duy • Ghi chép Cornell',
+        standardDesc: 'Sơ đồ Mermaid • Cornell',
+        actionHeader: 'Tạo sơ đồ tư duy và ghi chép Cornell',
+        dropText: 'Kéo thả đoạn bài học cần tóm tắt • Nhấn Ctrl + V • Hoặc tải file PDF',
+        dropSubText: 'Tự động tạo mã sơ đồ Mermaid và bảng tóm tắt Cornell',
         samples: [
           {
-            title: 'Tóm Tắt Khái Quát Hóa Học Hữu Cơ 12',
+            title: 'Tóm tắt chương Ester - Lipid (Hóa học 12)',
             icon: '🧠',
-            content: `Tóm tắt toàn bộ chương "Ester - Lipid" Hóa học 12 thành sơ đồ tư duy Mermaid (graph TD) và khung ghi nhớ Cornell 60 giây: Khái niệm -> Phản ứng thủy phân (xà phòng hóa) -> Tính chất vật lý -> Ứng dụng công nghiệp.`
+            content: `Tóm tắt nội dung chương "Ester - Lipid" thành sơ đồ tư duy Mermaid và bảng ghi chép Cornell:\n- Khái niệm và cấu tạo\n- Phản ứng xà phòng hóa\n- Tính chất vật lý\n- Ứng dụng thực tế`
           }
         ]
       },
       'luan-an-nghiencuu': {
-        domainBadge: '🔬 Nghiên Cứu ViSEF • Đề Cương Khoa Học Kỹ Thuật',
-        standardDesc: 'Đề Cương Nghiên Cứu ViSEF',
-        actionHeader: 'Nạp Ý Tưởng Dự Án Khoa Học Kỹ Thuật ViSEF',
-        dropText: 'Kéo thả ý tưởng/dự án khoa học • Nhấn Ctrl + V • Hoặc tải PDF đề cương',
-        dropSubText: '⚡ Tự động chuẩn hóa theo cấu trúc ViSEF / Intel ISEF quốc tế',
+        domainBadge: '🔬 Đề cương nghiên cứu • ViSEF',
+        standardDesc: 'Đề cương nghiên cứu',
+        actionHeader: 'Xây dựng đề cương nghiên cứu khoa học (ViSEF)',
+        dropText: 'Kéo thả ý tưởng/dự án khoa học • Nhấn Ctrl + V • Hoặc tải file đề cương',
+        dropSubText: 'Chuẩn hóa cấu trúc đề cương theo hướng dẫn ViSEF / ISEF',
         samples: [
           {
-            title: 'Đề Cương ViSEF Thiết Bị Giám Sát Nông Nghiệp',
+            title: 'Đề cương thiết bị giám sát nông nghiệp',
             icon: '🔬',
-            content: `Xây dựng đề cương dự án tham dự cuộc thi Nghiên cứu Khoa học Kỹ thuật THPT (ViSEF) cấp Quốc gia:\n- Tên đề tài: "Hệ thống IoT giám sát độ ẩm đất và tự động tưới tiêu năng lượng mặt trời cho nhà màng nông nghiệp".\n- Đặt vấn đề và tính mới của giải pháp.\n- Thiết kế thực nghiệm và phương pháp kiểm chứng dữ liệu.`
+            content: `Xây dựng đề cương dự án tham gia cuộc thi Khoa học Kỹ thuật (ViSEF):\n- Tên đề tài: "Hệ thống IoT giám sát độ ẩm đất và tự động tưới tiêu dùng năng lượng mặt trời".\n- Đặt vấn đề và mục tiêu nghiên cứu.\n- Phương pháp thực nghiệm và thu thập số liệu.`
           }
         ]
       }
@@ -1500,6 +1532,7 @@
         case 'vat-li-thpt': return { formatted: formatPhysicsProblem(rawText), badge: config.domainBadge };
         case 'hoa-hoc-thpt': return { formatted: formatChemistryProblem(rawText), badge: config.domainBadge };
         case 'ngu-van-thpt': return { formatted: formatLiteratureProblem(rawText), badge: config.domainBadge };
+        case 'tieng-anh-thpt': return { formatted: formatEnglishProblem(rawText), badge: config.domainBadge };
         default: return { formatted: rawText.trim(), badge: config.domainBadge };
       }
     }
@@ -1507,77 +1540,77 @@
     const COMPETENCY_TIERS = {
       'nb-th': {
         id: 'nb-th',
-        name: 'Nhận Biết & Thông Hiểu',
-        scoreTarget: 'Điểm 5.0 - 7.0 (Nền Tảng)',
+        name: 'Nhận biết & Thông hiểu',
+        scoreTarget: 'Điểm 5.0 - 7.0 (Cơ bản)',
         badge: 'Cấp độ 1 • Cơ bản',
         color: '#2E7D32',
         bg: '#E8F5E9',
-        description: 'Nắm chắc định nghĩa, công thức SGK chuẩn, giải thích hiện tượng và chống điểm liệt.'
+        description: 'Nắm vững định nghĩa, công thức sách giáo khoa và giải thích hiện tượng cơ bản.'
       },
       'vd': {
         id: 'vd',
-        name: 'Vận Dụng Tiêu Chuẩn',
-        scoreTarget: 'Điểm 7.0 - 8.5 (Chuẩn BGD)',
+        name: 'Vận dụng',
+        scoreTarget: 'Điểm 7.0 - 8.5 (Vận dụng)',
         badge: 'Cấp độ 2 • Vận dụng',
         color: '#1565C0',
         bg: '#E3F2FD',
-        description: 'Vận dụng định luật, giải bài toán phối hợp, xử lý câu Đúng/Sai và Trả lời ngắn.'
+        description: 'Vận dụng công thức và định luật để giải bài toán kết hợp, xử lý câu Đúng/Sai và Trả lời ngắn.'
       },
       'vdc': {
         id: 'vdc',
-        name: 'Vận Dụng Cao - Phân Hóa',
-        scoreTarget: 'Điểm 8.5 - 9.5+ (Phân Loại)',
-        badge: 'Cấp độ 3 • Phân hóa',
+        name: 'Vận dụng cao',
+        scoreTarget: 'Điểm 8.5 - 9.5 (Phân loại)',
+        badge: 'Cấp độ 3 • Phân loại',
         color: '#E65100',
         bg: '#FFF3E0',
-        description: 'Bài toán thực tế, liên môn, đồ thị phức hợp, cực trị Oxyz và bài phân loại thí sinh giỏi.'
+        description: 'Bài toán thực tế, liên môn, đồ thị phức hợp và các bài phân loại.'
       },
       'hsg': {
         id: 'hsg',
-        name: 'Bồi Dưỡng HSG & ĐGNL',
-        scoreTarget: 'Olympic & ĐHQG/ĐHBK (Đỉnh Cao)',
-        badge: 'Cấp độ 4 • Đỉnh cao',
+        name: 'Nâng cao & Học sinh giỏi',
+        scoreTarget: 'Điểm 9.5+ (Nâng cao)',
+        badge: 'Cấp độ 4 • Nâng cao',
         color: '#6A1B9A',
         bg: '#F3E5F5',
-        description: 'Tư duy logic mô hình hóa bậc cao, đề thi ĐGNL ĐHQG/ĐHBK và thi Học sinh giỏi các cấp.'
+        description: 'Tư duy mô hình hóa, các bài toán nâng cao và ôn luyện học sinh giỏi, đánh giá năng lực.'
       }
     };
 
     const USAGE_CONTEXTS = {
       'giai-de': {
         id: 'giai-de',
-        title: 'Giải Đề Chuẩn BGD 2026',
+        title: 'Giải đề kiểm tra',
         icon: 'fa-solid fa-bullseye',
-        tagline: '3 Phần Chuẩn QĐ 764/QĐ-BGDĐT',
-        description: 'Giải chi tiết theo cấu trúc 3 phần: Trắc nghiệm 4 lựa chọn, Đúng/Sai 4 ý lũy tiến và Trả lời ngắn điền số.'
+        tagline: 'Cấu trúc 3 phần theo định dạng mới',
+        description: 'Giải chi tiết theo cấu trúc: Trắc nghiệm 4 lựa chọn, Đúng/Sai và Trả lời ngắn điền số.'
       },
       'socrates': {
         id: 'socrates',
-        title: 'Gia Sư Sư Phạm Socrates',
+        title: 'Gợi mở Socrates',
         icon: 'fa-solid fa-lightbulb',
-        tagline: 'Khơi Mở Tư Duy, Không Lộ Đáp Số',
-        description: 'Dẫn dắt bằng chuỗi 3-4 câu hỏi phản xạ gợi mở, buộc người học tự tư duy tìm ra lời giải.'
+        tagline: 'Hướng dẫn từng bước, không lộ đáp án',
+        description: 'Dẫn dắt bằng các câu hỏi gợi mở, giúp người học tự suy luận tìm ra lời giải.'
       },
       'chua-bay': {
         id: 'chua-bay',
-        title: 'Giải Mã Bẫy Phòng Thi',
+        title: 'Phân tích lỗi sai thường gặp',
         icon: 'fa-solid fa-triangle-exclamation',
-        tagline: '3 Sai Lầm Kinh Điển & Mẹo Né Bẫy',
-        description: 'Mổ xẻ cạm bẫy tâm lý, sai thứ nguyên, quên điều kiện xác định và lỗi suy luận thường gặp.'
+        tagline: 'Chỉ ra lỗi phổ biến và cách khắc phục',
+        description: 'Phân tích nguyên nhân nhầm lẫn, lỗi đổi đơn vị, quên điều kiện xác định và lỗi suy luận.'
       },
       'soan-de': {
         id: 'soan-de',
-        title: 'Soạn Ma Trận & Đề Tương Tự',
+        title: 'Tạo đề tương tự',
         icon: 'fa-solid fa-pen-ruler',
-        tagline: 'Khảo Thí & Đề Kiểm Tra Tương Đương',
-        description: 'Thiết kế 1 đề kiểm tra tương đương cùng cấp độ nhận thức kèm ma trận và hướng dẫn chấm chi tiết.'
+        tagline: 'Đề kiểm tra tương đương kèm ma trận',
+        description: 'Tạo bài tập hoặc đề tương đương cùng mức độ nhận thức, có đáp án và hướng dẫn chấm.'
       },
       'on-cap-toc': {
         id: 'on-cap-toc',
-        title: 'Ôn Cấp Tốc 60s & Mindmap',
+        title: 'Sơ đồ tư duy & Tóm tắt',
         icon: 'fa-solid fa-bolt-lightning',
-        tagline: 'Mermaid Mindmap & 5 Khóa Cốt Lõi',
-        description: 'Tóm lược siêu tốc toàn bộ kiến thức trọng tâm bằng sơ đồ tư duy Mermaid Cornell và bảng công thức 60 giây.'
+        tagline: 'Sơ đồ Mermaid và các ý cốt lõi',
+        description: 'Tóm tắt kiến thức trọng tâm bằng sơ đồ tư duy Mermaid và bảng ghi chép Cornell.'
       }
     };
 
@@ -1971,7 +2004,7 @@
         if (docAttachment.trim()) {
           p += `\n## 📝 7. NỘI DUNG ĐỀ BÀI / NGỮ LIỆU ĐẦU VÀO ĐÃ XÁC NHẬN KIỂM CHỨNG\n`;
           p += `\`\`\`text\n${docAttachment.trim()}\n\`\`\`\n\n`;
-          p += `👉 **LỆNH THỰC THI:** Hãy vận dụng toàn bộ Kiến trúc 7 Trụ Cột trên để phân tích, giải quyết tường minh theo 4 tầng Socrates và thực hiện kiểm chứng CoVe cho đề bài trên:`;
+          p += `👉 **LỆNH THỰC THI BẮT BUỘC:**\n1. **QUY TẮC CHỐNG TRẢ LỜI CỤT NGỦN (ZERO-BARE-WORD POLICY):** Tuyệt đối KHÔNG ĐƯỢC chỉ trả lời 1 từ đơn lẻ hoặc đưa ra đáp án trơ trọi (kể cả với câu hỏi từ vựng ngắn, điền từ hoặc Word Formation). Bắt buộc triển khai đầy đủ 4 tầng sư phạm Socrates.\n2. **CHUẨN CHÍNH TẢ & TỪ ĐIỂN OXFORD (ORTHOGRAPHIC HONESTY):** Mọi từ ngữ tiếng Anh phải được rà soát chính tả từng ký tự 100% theo từ điển Oxford Advanced Learner's Dictionary (OALD). Kiểm tra kỹ các bẫy đổi vị trí ký tự i/e (quy tắc "i before e except after c": achieve -> achievement, KHÔNG viết *acheivement; receive -> receipt) và nhân đôi phụ âm.\n3. **CẤU TRÚC HỌ TỪ VỰNG (WORD FORMATION MATRIX):** Nếu câu hỏi liên quan đến từ vựng hoặc chuyển đổi từ loại, BẮT BUỘC cung cấp bảng đầy đủ các dạng: Động từ (Verb), Danh từ (Noun), Tính từ (Adj), Trạng từ (Adv), Phiên âm IPA Oxford, Cụm Collocations thông dụng và 1 câu ví dụ chuẩn ngữ cảnh GDPT 2018.\n4. Hãy bắt đầu giải quyết đề bài theo trọn vẹn 4 tầng sư phạm:`;
         } else {
           p += `\n## 📝 7. CHẾ ĐỘ KHỞI TẠO ĐỀ BÀI & GIẢNG DẠY TỰ ĐỘNG (AUTONOMOUS PEDAGOGICAL MODE)\n`;
           p += `- **Trạng thái đầu vào:** Người dùng chưa đính kèm đề bài cụ thể.\n`;
@@ -2181,7 +2214,7 @@
                   <h1>EduSkills-VN</h1>
                   <span className="version-tag">v2.0.0</span>
                 </div>
-                <p>🍵 Matcha Mèo Ú • Nhận Diện Đề Toán & Dẫn Chứng SGK Chuẩn</p>
+                <p>Matcha Mèo Ú • Hỗ trợ học tập THPT & Trích xuất đề bài</p>
               </div>
             </div>
 
@@ -2191,25 +2224,25 @@
                 className={`nav-tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
                 onClick={() => setActiveTab('skills')}
               >
-                <i className="fa-solid fa-graduation-cap"></i> 16 Kỹ Năng THPT
+                <i className="fa-solid fa-graduation-cap"></i> Danh sách kỹ năng
               </button>
               <button 
                 className={`nav-tab-btn ${activeTab === 'drive' ? 'active' : ''}`}
                 onClick={() => setActiveTab('drive')}
               >
-                <i className="fa-brands fa-google-drive"></i> Tủ Sách SGK Cloud
+                <i className="fa-brands fa-google-drive"></i> Tủ sách giáo khoa
               </button>
               <button 
                 className={`nav-tab-btn ${activeTab === 'prompt-standard' ? 'active' : ''}`}
                 onClick={() => setActiveTab('prompt-standard')}
               >
-                <i className="fa-solid fa-scroll"></i> Tiêu Chuẩn Prompt Mạnh
+                <i className="fa-solid fa-scroll"></i> Cấu trúc prompt
               </button>
               <button 
                 className="btn-guide-pill"
                 onClick={() => setShowGuideModal(true)}
               >
-                <i className="fa-solid fa-circle-question"></i> Hướng Dẫn Sử Dụng
+                <i className="fa-solid fa-circle-question"></i> Hướng dẫn
               </button>
             </div>
           </header>
@@ -2226,7 +2259,7 @@
                     <input 
                       type="text" 
                       className="search-input-cute" 
-                      placeholder="Tìm môn học (/toan, /hoa, /quiz)..."
+                      placeholder="Tìm môn học hoặc kỹ năng..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -2239,7 +2272,7 @@
                       { id: 'khoa-hoc-tu-nhien', label: 'Tự nhiên' },
                       { id: 'khoa-hoc-xa-hoi', label: 'Xã hội' },
                       { id: 'ngon-ngu-cong-nghe', label: 'Công nghệ' },
-                      { id: 'meta-tools', label: 'Meta-tools' }
+                      { id: 'meta-tools', label: 'Công cụ' }
                     ].map(cat => (
                       <button 
                         key={cat.id} 
@@ -2307,7 +2340,7 @@
                   {/* Action Bar */}
                   <div className="aas-action-bar">
                     <button className="btn-aas btn-primary-aas" onClick={handleDownloadSkillMd}>
-                      <i className="fa-solid fa-download"></i> Lưu về máy (.md)
+                      <i className="fa-solid fa-download"></i> Tải về (.md)
                     </button>
                     <button 
                       className={`btn-aas ${shortlist[selectedSkill.id] ? 'btn-honey-aas' : 'btn-outline-aas'}`}
@@ -2316,17 +2349,17 @@
                         const next = { ...shortlist, [id]: !shortlist[id] };
                         setShortlist(next);
                         try { localStorage.setItem('eduskills_shortlist', JSON.stringify(next)); } catch (e) {}
-                        triggerToast(next[id] ? `Đã thêm @${id} vào Shortlist! 💖` : `Đã bỏ khỏi danh sách.`);
+                        triggerToast(next[id] ? `Đã lưu @${id} vào danh sách.` : `Đã bỏ khỏi danh sách.`);
                       }}
                     >
                       <i className={`fa-${shortlist[selectedSkill.id] ? 'solid' : 'regular'} fa-bookmark`}></i>
-                      {shortlist[selectedSkill.id] ? 'In Shortlist' : 'Add to Shortlist'}
+                      {shortlist[selectedSkill.id] ? 'Đã lưu' : 'Lưu kỹ năng'}
                     </button>
                     <button className="btn-aas btn-outline-aas" onClick={handleCopyPromptPayload}>
-                      <i className="fa-solid fa-clipboard-check"></i> Copy Prompt 5 Khung
+                      <i className="fa-solid fa-clipboard-check"></i> Sao chép prompt
                     </button>
                     <button className="btn-aas btn-outline-aas" onClick={handleCopyFullContent}>
-                      <i className="fa-solid fa-copy"></i> Copy Toàn Bộ File SKILL.md
+                      <i className="fa-solid fa-copy"></i> Sao chép toàn bộ
                     </button>
                   </div>
 
@@ -2343,15 +2376,15 @@
                         {currentPreset.actionHeader}
                       </div>
                       <span className="ocr-paste-badge">
-                        <i className="fa-solid fa-paste"></i> Hỗ trợ phím tắt <strong>Ctrl + V</strong> dán ảnh
+                        <i className="fa-solid fa-paste"></i> Nhấn <strong>Ctrl + V</strong> để dán ảnh chụp màn hình
                       </span>
                     </div>
 
-                    {/* Skill Sync Indicator Bar (Tự động đồng bộ theo skill được chọn ở thanh bên) */}
+                    {/* Skill Sync Indicator Bar */}
                     <div className="skill-sync-banner">
                       <div className="sync-status">
                         <span className="sync-dot"></span>
-                        <span>Đang đồng bộ bóc tách OCR chuyên biệt theo kỹ năng:</span>
+                        <span>Đang xử lý theo kỹ năng:</span>
                         <strong>@{selectedSkill.id} ({selectedSkill.name})</strong>
                       </div>
                       <span className="sync-badge">
@@ -2359,10 +2392,10 @@
                       </span>
                     </div>
 
-                    {/* Quick Demo Buttons cho riêng kỹ năng hiện tại */}
+                    {/* Quick Demo Buttons */}
                     <div className="demo-buttons-bar">
                       <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)' }}>
-                        <i className="fa-solid fa-bolt"></i> Nạp đề mẫu @{selectedSkill.id}:
+                        <i className="fa-solid fa-file-lines"></i> Đề mẫu:
                       </span>
                       {currentPreset.samples.map((sample, idx) => (
                         <button 
@@ -2401,7 +2434,7 @@
                       </p>
                       {isOcrLoading && (
                         <div style={{ marginTop: '10px', color: 'var(--matcha-primary)', fontWeight: 700, fontSize: '0.84rem' }}>
-                          <i className="fa-solid fa-spinner fa-spin"></i> Đang phân tích qua OCR Backend...
+                          <i className="fa-solid fa-spinner fa-spin"></i> Đang nhận diện nội dung...
                         </div>
                       )}
                     </div>
@@ -2412,7 +2445,7 @@
                         <div className="math-verify-header">
                           <div className="math-verify-title">
                             <i className="fa-solid fa-circle-check"></i>
-                            Xác Nhận & Kiểm Chứng Đề Bài
+                            Nội dung nhận diện
                             <span className="badge-tag-aas badge-science" style={{ marginLeft: '8px', fontSize: '0.72rem' }}>
                               {detectedBadge}
                             </span>
@@ -2425,21 +2458,21 @@
                                 onClick={() => {
                                   setImagePreview('');
                                   setUploadedFile(null);
-                                  triggerToast('Đã xóa ảnh chụp màn hình.');
+                                  triggerToast('Đã xóa ảnh.');
                                 }}
                               >
                                 <i className="fa-solid fa-trash"></i> Xóa ảnh
                               </button>
                             )}
                             <button className="btn-verify-math" onClick={applyVerifiedMathToPrompt}>
-                              <i className="fa-solid fa-arrow-down"></i> Đưa Vào Prompt Sư Phạm
+                              <i className="fa-solid fa-arrow-down"></i> Chèn vào prompt
                             </button>
                             <button 
                               className="btn-clear-exercise" 
                               onClick={clearExerciseFromPrompt}
-                              title="Xóa toàn bộ đề bài và gỡ khỏi Prompt"
+                              title="Xóa nội dung"
                             >
-                              <i className="fa-solid fa-broom"></i> Gỡ Khỏi Prompt
+                              <i className="fa-solid fa-broom"></i> Xóa nội dung
                             </button>
                           </div>
                         </div>
@@ -2451,7 +2484,7 @@
                               <p><strong>Nguồn:</strong> {uploadedFile ? uploadedFile.name : 'Ảnh chụp màn hình'}</p>
                               <p><strong>Kích thước:</strong> {uploadedFile ? (uploadedFile.size / 1024).toFixed(1) + ' KB' : 'Clipboard buffer'}</p>
                               <span style={{ color: '#2E7D32', fontWeight: 700 }}>
-                                <i className="fa-solid fa-check-double"></i> OCR Backend đã nhận diện thành công!
+                                <i className="fa-solid fa-check"></i> Đã nhận diện nội dung
                               </span>
                             </div>
                           </div>
@@ -2467,7 +2500,7 @@
                             </span>
                             {ocrInfo.scanDurationMs > 0 && (
                               <span className="badge-tag-aas badge-tech" style={{ fontSize: '0.74rem' }}>
-                                <i className="fa-solid fa-stopwatch"></i> Quét trong: {ocrInfo.scanDurationMs}ms
+                                <i className="fa-solid fa-stopwatch"></i> Thời gian: {ocrInfo.scanDurationMs}ms
                               </span>
                             )}
                           </div>
@@ -2478,26 +2511,26 @@
                           style={{ minHeight: '100px', background: '#F1F8E9', borderColor: '#81C784', lineHeight: 1.6 }}
                           value={extractedMathText}
                           onChange={(e) => setExtractedMathText(e.target.value)}
-                          placeholder="Nội dung bài tập / đề cương sau khi bóc tách..."
+                          placeholder="Nội dung bài tập sau khi nhận diện..."
                         />
                       </div>
                     )}
                   </div>
 
-                  {/* 5-PART MODERN PROMPT BUILDER (docs/Tieuchuanprompt.md) */}
+                  {/* PROMPT BUILDER */}
                   <div className="prompt-builder-card">
                     <div className="builder-header">
                       <div className="builder-title">
                         <i className="fa-solid fa-wand-magic-sparkles" style={{ color: 'var(--matcha-accent)' }}></i>
-                        Bộ Tạo Prompt Sư Phạm 5 Khung (Chuẩn Tieuchuanprompt.md)
+                        Trình tạo prompt học tập
                       </div>
-                      <span className="badge-tag-aas badge-science">Chống Ảo Giác 100%</span>
+                      <span className="badge-tag-aas badge-science">Cấu trúc chuẩn</span>
                     </div>
 
-                    {/* Phân Cấp Bậc Năng Lực Nhận Thức (Competency Tiers) */}
+                    {/* Cấp độ nhận thức */}
                     <div style={{ marginBottom: '16px' }}>
                       <div className="builder-label" style={{ marginBottom: '8px' }}>
-                        <i className="fa-solid fa-layer-group"></i> Phân Cấp Bậc Năng Lực Nhận Thức (Competency Tiers)
+                        <i className="fa-solid fa-layer-group"></i> Cấp độ nhận thức
                       </div>
                       <div className="tier-selector-grid">
                         {Object.values(COMPETENCY_TIERS).map(tier => (
@@ -2507,7 +2540,7 @@
                             onClick={() => {
                               setCompetencyTier(tier.id);
                               setStudentLevel(tier.scoreTarget);
-                              triggerToast(`Đã chuyển sang cấp bậc: ${tier.name}! 🎯`);
+                              triggerToast(`Cấp độ: ${tier.name}`);
                             }}
                           >
                             <div className="tier-header-row">
@@ -2527,10 +2560,10 @@
                       </div>
                     </div>
 
-                    {/* Phân Định Ngữ Cảnh Sư Phạm Khi Sử Dụng (Pedagogical Scenarios) */}
+                    {/* Mục đích yêu cầu */}
                     <div style={{ marginBottom: '16px' }}>
                       <div className="builder-label" style={{ marginBottom: '8px' }}>
-                        <i className="fa-solid fa-chalkboard-user"></i> Ngữ Cảnh Sư Phạm Khi Sử Dụng (Pedagogical Scenarios)
+                        <i className="fa-solid fa-chalkboard-user"></i> Mục đích yêu cầu
                       </div>
                       <div className="context-selector-bar">
                         {Object.values(USAGE_CONTEXTS).map(ctx => (
@@ -2540,7 +2573,7 @@
                             className={`btn-context-pill ${usageContext === ctx.id ? 'active' : ''}`}
                             onClick={() => {
                               setUsageContext(ctx.id);
-                              triggerToast(`Đã chọn ngữ cảnh: ${ctx.title}! 💡`);
+                              triggerToast(`Đã chọn: ${ctx.title}`);
                             }}
                           >
                             <i className={ctx.icon}></i>
@@ -2558,21 +2591,21 @@
                       {/* Component 1: Role */}
                       <div className="builder-field">
                         <label className="builder-label">
-                          <i className="fa-solid fa-user-tie"></i> 1. Role (Vai trò chuyên môn)
+                          <i className="fa-solid fa-user-tie"></i> 1. Vai trò AI (Role)
                         </label>
                         <input 
                           type="text" 
                           className="builder-input" 
                           value={rolePrompt}
                           onChange={(e) => setRolePrompt(e.target.value)}
-                          placeholder="Vai trò định vị cho AI..."
+                          placeholder="Ví dụ: Gia sư môn Toán THPT..."
                         />
                       </div>
 
                       {/* Component 2: Context & Grade */}
                       <div className="builder-field">
                         <label className="builder-label">
-                          <i className="fa-solid fa-bullseye"></i> 2. Context (Khối Lớp & Trình Độ)
+                          <i className="fa-solid fa-bullseye"></i> 2. Bối cảnh & Khối lớp
                         </label>
                         <div style={{ display: 'flex', gap: '8px' }}>
                           <select 
@@ -2590,7 +2623,7 @@
                             className="builder-input" 
                             value={studentLevel}
                             onChange={(e) => setStudentLevel(e.target.value)}
-                            placeholder="Mục tiêu điểm số hoặc trình độ..."
+                            placeholder="Mục tiêu hoặc trình độ người học..."
                           />
                         </div>
                       </div>
@@ -2599,51 +2632,51 @@
                     {/* Context Status Details */}
                     <div className="builder-field" style={{ marginBottom: '14px' }}>
                       <label className="builder-label">
-                        <i className="fa-solid fa-compass"></i> Bối cảnh hiện tại (Đã nắm gì, chưa rõ gì)
+                        <i className="fa-solid fa-compass"></i> Kiến thức hiện tại
                       </label>
                       <input 
                         type="text" 
                         className="builder-input" 
                         value={currentStatus}
                         onChange={(e) => setCurrentStatus(e.target.value)}
-                        placeholder="Nêu rõ lỗ hổng kiến thức để AI hỗ trợ trúng đích..."
+                        placeholder="Mô tả phần kiến thức đã hiểu hoặc vướng mắc cần giải đáp..."
                       />
                     </div>
 
                     {/* Component 3: Task */}
                     <div className="builder-field" style={{ marginBottom: '14px' }}>
                       <label className="builder-label">
-                        <i className="fa-solid fa-list-check"></i> 3. Task (Nhiệm vụ cụ thể)
+                        <i className="fa-solid fa-list-check"></i> 3. Nhiệm vụ cụ thể (Task)
                       </label>
                       <input 
                         type="text" 
                         className="builder-input" 
                         value={taskPrompt}
                         onChange={(e) => setTaskPrompt(e.target.value)}
-                        placeholder="Hành động chính xác cần AI thực hiện..."
+                        placeholder="Yêu cầu cụ thể cần thực hiện..."
                       />
                     </div>
 
                     {/* Component 4: Constraints & Format */}
                     <div className="builder-field" style={{ marginBottom: '16px' }}>
                       <label className="builder-label">
-                        <i className="fa-solid fa-ruler-combined"></i> 4. Constraints & Format (Ràng buộc & Định dạng)
+                        <i className="fa-solid fa-ruler-combined"></i> 4. Ràng buộc & Định dạng
                       </label>
                       <input 
                         type="text" 
                         className="builder-input" 
                         value={constraintsPrompt}
                         onChange={(e) => setConstraintsPrompt(e.target.value)}
-                        placeholder="LaTeX $...$, bảng đối chiếu, IUPAC 100%..."
+                        placeholder="Ví dụ: Dùng LaTeX $...$, lập bảng tóm tắt..."
                       />
                     </div>
 
-                    {/* SPECIFIC TEXTBOOK TARGETING (Lấy đúng cuốn sách cụ thể) */}
+                    {/* SPECIFIC TEXTBOOK TARGETING */}
                     <div className="specific-book-box">
                       <div className="book-box-header">
                         <div className="book-box-title">
                           <i className="fa-solid fa-book-bookmark"></i>
-                          Dẫn Chứng Cuốn Sách Giáo Khoa Cụ Thể (Google Drive Cloud)
+                          Sách giáo khoa tham khảo
                         </div>
                         {currentBookObject && (
                           <a 
@@ -2651,7 +2684,7 @@
                             target="_blank" 
                             style={{ fontSize: '0.8rem', color: '#1B5E20', fontWeight: 700, textDecoration: 'underline' }}
                           >
-                            Mở Thư Mục Chứa Cuốn Này <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                            Mở thư mục Google Drive <i className="fa-solid fa-arrow-up-right-from-square"></i>
                           </a>
                         )}
                       </div>
@@ -2670,12 +2703,12 @@
                             ))}
                           </select>
                           <p style={{ fontSize: '0.78rem', color: '#2E7D32', fontWeight: 600 }}>
-                            <i className="fa-solid fa-circle-info"></i> Hệ thống sẽ ép AI trích xuất định lý và kiểm chứng lời giải trực tiếp từ cuốn sách này.
+                            <i className="fa-solid fa-circle-info"></i> Dẫn nguồn và công thức theo tài liệu SGK đã chọn.
                           </p>
                         </div>
                       ) : (
                         <p style={{ fontSize: '0.84rem', color: '#558B2F' }}>
-                          Sách giáo khoa Lớp {gradeLevel} chuẩn Bộ Giáo Dục: {DRIVE_LINKS_MAP[gradeLevel].url}
+                          Sách giáo khoa Lớp {gradeLevel}: {DRIVE_LINKS_MAP[gradeLevel].url}
                         </p>
                       )}
                     </div>
@@ -2683,7 +2716,7 @@
                     {/* Component 5: Cognitive Prompts Toggles */}
                     <div className="cognitive-toggles-box">
                       <div className="builder-label" style={{ marginBottom: '10px' }}>
-                        <i className="fa-solid fa-brain"></i> 5. Kỹ Thuật Kích Hoạt Tư Duy Phản Biện (Cognitive Prompts)
+                        <i className="fa-solid fa-brain"></i> 5. Phương pháp hướng dẫn
                       </div>
                       <div className="toggle-grid">
                         <label className="toggle-item">
@@ -2692,7 +2725,7 @@
                             checked={useCoT}
                             onChange={(e) => setUseCoT(e.target.checked)}
                           />
-                          <span>Chain-of-Thought (Step-by-step)</span>
+                          <span>Giải từng bước (Chain-of-Thought)</span>
                         </label>
                         <label className="toggle-item">
                           <input 
@@ -2700,7 +2733,7 @@
                             checked={useSocratic}
                             onChange={(e) => setUseSocratic(e.target.checked)}
                           />
-                          <span>Socratic Method (Gợi mở tư duy)</span>
+                          <span>Gợi mở tư duy (Socratic)</span>
                         </label>
                         <label className="toggle-item">
                           <input 
@@ -2708,7 +2741,7 @@
                             checked={useFewShot}
                             onChange={(e) => setUseFewShot(e.target.checked)}
                           />
-                          <span>Few-shot (Kèm ví dụ mẫu)</span>
+                          <span>Kèm ví dụ mẫu (Few-shot)</span>
                         </label>
                         <label className="toggle-item">
                           <input 
@@ -2716,16 +2749,16 @@
                             checked={useActiveRecall}
                             onChange={(e) => setUseActiveRecall(e.target.checked)}
                           />
-                          <span>Active Recall (Câu hỏi tự vấn cuối)</span>
+                          <span>Câu hỏi ôn tập cuối bài (Active Recall)</span>
                         </label>
                       </div>
                     </div>
 
-                    {/* Document-First Attachment (Đề bài hoặc Văn bản) */}
+                    {/* Document-First Attachment */}
                     <div className="builder-field" style={{ marginBottom: '18px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px', flexWrap: 'wrap', gap: '6px' }}>
                         <label className="builder-label" style={{ marginBottom: 0 }}>
-                          <i className="fa-solid fa-file-lines"></i> 5. Đề Bài / Bài Học Đã Bóc Tách (Document-First)
+                          <i className="fa-solid fa-file-lines"></i> 6. Nội dung bài tập hoặc tài liệu
                         </label>
                         {docAttachment.trim() && (
                           <button 
@@ -2733,9 +2766,9 @@
                             className="btn-clear-exercise" 
                             style={{ padding: '4px 10px', fontSize: '0.74rem' }}
                             onClick={clearExerciseFromPrompt}
-                            title="Gỡ đề bài ra khỏi prompt để chỉ dùng Prompt Sư Phạm Thuần"
+                            title="Xóa nội dung"
                           >
-                            <i className="fa-solid fa-broom"></i> Gỡ bài tập khỏi Prompt
+                            <i className="fa-solid fa-broom"></i> Xóa nội dung
                           </button>
                         )}
                       </div>
@@ -2743,11 +2776,11 @@
                         className="builder-textarea" 
                         value={docAttachment}
                         onChange={(e) => setDocAttachment(e.target.value)}
-                        placeholder="Dán nội dung đề bài hoặc bấm 'Đưa Vào Prompt Sư Phạm' từ khu vực tải ảnh ở trên... (Nếu xóa trống, hệ thống tự động sinh ví dụ chuẩn theo SGK và cấp độ nhận thức đã chọn)"
+                        placeholder="Nhập hoặc dán nội dung bài tập tại đây (hoặc tải ảnh ở trên)..."
                       />
                     </div>
 
-                    {/* Live Output Preview with Universal AI Agent Mode Switcher */}
+                    {/* Live Output Preview with Mode Switcher */}
                     <div className="live-payload-section">
                       <div className="payload-header-bar" style={{ flexWrap: 'wrap', gap: '10px' }}>
                         <div className="prompt-mode-bar">
@@ -2756,21 +2789,21 @@
                             className={`btn-prompt-mode ${promptExportMode === 'standard' ? 'active' : ''}`}
                             onClick={() => setPromptExportMode('standard')}
                           >
-                            <i className="fa-solid fa-comments"></i> 💬 Universal Prompt (7 Trụ Cột)
+                            <i className="fa-solid fa-comments"></i> 💬 Prompt tiêu chuẩn
                           </button>
                           <button 
                             type="button"
                             className={`btn-prompt-mode ${promptExportMode === 'system-prompt' ? 'active' : ''}`}
                             onClick={() => setPromptExportMode('system-prompt')}
                           >
-                            <i className="fa-solid fa-robot"></i> 🤖 Universal XML System Prompt
+                            <i className="fa-solid fa-robot"></i> 🤖 System Prompt (XML)
                           </button>
                           <button 
                             type="button"
                             className={`btn-prompt-mode ${promptExportMode === 'agent-cli' ? 'active' : ''}`}
                             onClick={() => setPromptExportMode('agent-cli')}
                           >
-                            <i className="fa-solid fa-terminal"></i> 💻 Universal CLI / API / Local LLM
+                            <i className="fa-solid fa-terminal"></i> 💻 Lệnh CLI
                           </button>
                         </div>
                         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -2779,7 +2812,7 @@
                             style={{ padding: '6px 14px', fontSize: '0.78rem' }}
                             onClick={handleCopyPromptPayload}
                           >
-                            <i className="fa-solid fa-copy"></i> Sao chép {promptExportMode === 'agent-cli' ? 'Lệnh CLI' : promptExportMode === 'system-prompt' ? 'System Prompt' : 'Prompt'}
+                            <i className="fa-solid fa-copy"></i> Sao chép
                           </button>
                         </div>
                       </div>
@@ -2795,10 +2828,10 @@
               <div>
                 <div style={{ marginBottom: '24px' }}>
                   <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.8rem', color: 'var(--matcha-dark)' }}>
-                    📚 Tủ Sách SGK Điện Tử (Google Drive Cloud Storage)
+                    📚 Tủ sách giáo khoa tham khảo
                   </h2>
                   <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
-                    Kho tài liệu SGK chuẩn mới có dung lượng hơn 2.03GB, được số hóa và phân luồng trên Google Drive nhằm tối ưu tốc độ và không làm phình kho mã nguồn Git.
+                    Tài liệu sách giáo khoa và chuyên đề học tập các môn THPT lưu trữ trên Google Drive.
                   </p>
                 </div>
 
@@ -2849,7 +2882,7 @@
                             className="btn-aas btn-primary-aas" 
                             style={{ flex: 1, justifyContent: 'center' }}
                           >
-                            <i className="fa-solid fa-arrow-up-right-from-square"></i> Mở Drive Lớp {grade}
+                            <i className="fa-solid fa-arrow-up-right-from-square"></i> Mở Google Drive Lớp {grade}
                           </a>
                           <button 
                             className="btn-aas btn-outline-aas"
@@ -2868,12 +2901,12 @@
               </div>
             )}
 
-            {/* VIEW 3: TIÊU CHUẨN PROMPT MẠNH (docs/Tieuchuanprompt.md) */}
+            {/* VIEW 3: CẤU TRÚC PROMPT */}
             {activeTab === 'prompt-standard' && (
               <div className="standard-doc-card">
                 <div style={{ borderBottom: '2px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
                   <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.8rem', color: 'var(--matcha-dark)', marginBottom: '8px' }}>
-                    📜 Bộ Tiêu Chuẩn Prompt Mạnh Trong Học Tập (Modern Prompt Engineering)
+                    📜 Cấu trúc prompt học tập
                   </h2>
                   <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
                     Trích xuất từ tài liệu <code>docs/Tieuchuanprompt.md</code> của dự án EduSkills-VN.
@@ -2882,23 +2915,23 @@
 
                 <div style={{ fontSize: '0.92rem', lineHeight: '1.7', color: 'var(--text-main)' }}>
                   <p style={{ marginBottom: '16px' }}>
-                    Một prompt mạnh trong học tập hiện nay không phải là câu lệnh dài dòng, mà là câu lệnh có <strong>cấu trúc chặt chẽ</strong>, <strong>giảm thiểu ảo giác (hallucination)</strong> và <strong>buộc AI phải kích hoạt tư duy phản biện thay vì chỉ đưa ra câu trả lời có sẵn</strong>.
+                    Prompt học tập hiệu quả cần cấu trúc rõ ràng, định hướng vai trò, bối cảnh và yêu cầu cụ thể để mô hình đưa ra giải thích chi tiết, chính xác.
                   </p>
 
                   <h3 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.2rem', color: 'var(--matcha-primary)', margin: '20px 0 10px 0' }}>
-                    1. Khung 5 Thành Phần Cốt Lõi (Core Framework)
+                    Khung thành phần cốt lõi
                   </h3>
                   <ul style={{ paddingLeft: '24px', marginBottom: '20px' }}>
-                    <li style={{ marginBottom: '8px' }}><strong>Role (Vai trò chuyên môn):</strong> Định vị góc nhìn và trình độ chuyên môn cho AI (ví dụ: Gia sư Feynman, Giám khảo chấm thi, Chuyên gia IUPAC).</li>
-                    <li style={{ marginBottom: '8px' }}><strong>Context (Bối cảnh & Trình độ):</strong> Nêu rõ cấp độ kiến thức của người học, mục tiêu cụ thể (ôn thi 8+, hiểu bản chất, nghiên cứu ViSEF) và những gì đã nắm vững.</li>
-                    <li style={{ marginBottom: '8px' }}><strong>Task (Nhiệm vụ cụ thể):</strong> Hành động chính xác cần thực hiện. Tránh các câu chung chung như "giải thích X", thay vào đó dùng "phân tích cơ chế hoạt động của X, so sánh với Y và chỉ ra 3 lỗi sai phổ biến".</li>
-                    <li style={{ marginBottom: '8px' }}><strong>Constraints & Format (Ràng buộc & Định dạng):</strong> Giới hạn độ dài, phong cách hành văn, bảng so sánh, công thức LaTeX ($...$), code có chú thích.</li>
-                    <li style={{ marginBottom: '8px' }}><strong>Cognitive Prompts (Kỹ thuật kích hoạt tư duy):</strong>
+                    <li style={{ marginBottom: '8px' }}><strong>Vai trò (Role):</strong> Định vị góc nhìn và năng lực chuyên môn cho AI (ví dụ: Gia sư môn Toán, Giám khảo chấm thi).</li>
+                    <li style={{ marginBottom: '8px' }}><strong>Bối cảnh (Context):</strong> Nêu rõ trình độ hiện tại của người học, mục tiêu cụ thể và nội dung đã nắm vững.</li>
+                    <li style={{ marginBottom: '8px' }}><strong>Nhiệm vụ (Task):</strong> Yêu cầu cụ thể cần thực hiện (ví dụ: phân tích cơ chế, so sánh và chỉ ra các lỗi sai thường gặp).</li>
+                    <li style={{ marginBottom: '8px' }}><strong>Ràng buộc & Định dạng (Constraints):</strong> Giới hạn định dạng, sử dụng LaTeX ($...$), bảng tóm tắt, trích dẫn tài liệu.</li>
+                    <li style={{ marginBottom: '8px' }}><strong>Phương pháp gợi mở:</strong>
                       <ul style={{ paddingLeft: '20px', marginTop: '6px' }}>
-                        <li><em>Chain-of-Thought:</em> Giải thích từng bước (step-by-step) trước khi kết luận.</li>
-                        <li><em>Socratic Method:</em> Đặt câu hỏi gợi mở để người học tự tư duy thay vì đưa ngay đáp án.</li>
-                        <li><em>Few-shot:</em> Cung cấp 1-2 ví dụ mẫu chuẩn mực.</li>
-                        <li><em>Active Recall:</em> Đặt câu hỏi kiểm tra tư duy ở cuối phản hồi.</li>
+                        <li><em>Chain-of-Thought:</em> Giải thích từng bước trước khi kết luận.</li>
+                        <li><em>Socratic Method:</em> Đặt câu hỏi gợi mở để người học tự tư duy.</li>
+                        <li><em>Few-shot:</em> Kèm ví dụ mẫu cụ thể.</li>
+                        <li><em>Active Recall:</em> Đặt câu hỏi ôn tập cuối bài.</li>
                       </ul>
                     </li>
                   </ul>
@@ -2916,20 +2949,20 @@
                 </button>
 
                 <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.6rem', color: 'var(--matcha-dark)', marginBottom: '8px' }}>
-                  📖 Hướng Dẫn Sử Dụng EduSkills-VN 5 Bước
+                  📖 Hướng dẫn sử dụng
                 </h2>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', marginBottom: '24px' }}>
-                  Biến AI thông thường thành Gia sư Sư phạm chuẩn Bộ Giáo dục & Đào tạo chỉ trong 60 giây!
+                  Quy trình 5 bước để tạo prompt học tập có cấu trúc:
                 </p>
 
                 <div className="guide-step-card">
                   <div className="guide-step-num">1</div>
                   <div>
                     <h4 style={{ fontWeight: 800, color: 'var(--matcha-dark)', marginBottom: '4px' }}>
-                      Bước 1: Chọn Kỹ Năng & Khối Lớp Học Tập
+                      Bước 1: Chọn môn học và khối lớp
                     </h4>
                     <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)' }}>
-                      Chọn môn học ở danh mục bên trái (ví dụ: <code>toan-thpt</code>, <code>hoa-hoc-thpt</code> hoặc <code>giai-chi-tiet</code>). Sau đó chọn khối Lớp 10, 11 hoặc 12.
+                      Chọn môn học ở danh sách bên trái và khối lớp tương ứng (Lớp 10, 11 hoặc 12).
                     </p>
                   </div>
                 </div>
@@ -2938,10 +2971,10 @@
                   <div className="guide-step-num">2</div>
                   <div>
                     <h4 style={{ fontWeight: 800, color: 'var(--matcha-dark)', marginBottom: '4px' }}>
-                      Bước 2: Tải Lên Ảnh Đề Bài Hoặc Kéo Thả Đề Cương
+                      Bước 2: Tải lên đề bài hoặc tài liệu
                     </h4>
                     <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)' }}>
-                      Chụp ảnh trang bài tập từ điện thoại hoặc kéo thả file đề cương vào khu vực Dropzone. Hệ thống tự động bóc tách và định dạng công thức toán học thành LaTeX chuẩn ($...$).
+                      Tải tệp ảnh, tài liệu PDF hoặc nhấn Ctrl + V để dán ảnh chụp màn hình trực tiếp.
                     </p>
                   </div>
                 </div>
@@ -2950,10 +2983,10 @@
                   <div className="guide-step-num">3</div>
                   <div>
                     <h4 style={{ fontWeight: 800, color: 'var(--matcha-dark)', marginBottom: '4px' }}>
-                      Bước 3: Xác Nhận & Chọn Cuốn Sách Giáo Khoa Cụ Thể
+                      Bước 3: Chọn tài liệu tham khảo
                     </h4>
                     <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)' }}>
-                      Hệ thống tự động liên kết đến đúng cuốn SGK tương ứng trên Google Drive (ví dụ: <em>SGK Toán 12 Tập 1</em>). Bạn bấm nút <strong>"Đưa Vào Prompt Sư Phạm"</strong> để bảo chứng lời giải.
+                      Chọn sách giáo khoa tham chiếu tương ứng và nhấn "Chèn vào prompt".
                     </p>
                   </div>
                 </div>
@@ -2962,10 +2995,10 @@
                   <div className="guide-step-num">4</div>
                   <div>
                     <h4 style={{ fontWeight: 800, color: 'var(--matcha-dark)', marginBottom: '4px' }}>
-                      Bước 4: Bật Các Kỹ Thuật Kích Hoạt Tư Duy Phản Biện
+                      Bước 4: Chọn phương pháp hướng dẫn
                     </h4>
                     <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)' }}>
-                      Chọn <em>Chain-of-Thought</em> (giải từng bước), <em>Socratic Method</em> (gợi mở tư duy không lộ đáp số ngay) và <em>Active Recall</em> để AI kiểm tra độ hiểu sâu của bạn.
+                      Tùy chọn giải từng bước, gợi mở tư duy hoặc câu hỏi ôn tập cuối bài.
                     </p>
                   </div>
                 </div>
@@ -2974,10 +3007,10 @@
                   <div className="guide-step-num">5</div>
                   <div>
                     <h4 style={{ fontWeight: 800, color: 'var(--matcha-dark)', marginBottom: '4px' }}>
-                      Bước 5: Sao Chép Prompt & Dán Vào AI Của Bạn
+                      Bước 5: Sao chép câu lệnh và gửi cho AI
                     </h4>
                     <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)' }}>
-                      Bấm nút <strong>"Sao chép Prompt"</strong> hoặc <strong>"Lưu về máy (.md)"</strong> và dán vào Google Gemini, Claude hoặc ChatGPT. AI sẽ giải bài theo chuẩn 4 tầng Socrates không bị ảo giác!
+                      Bấm nút "Sao chép" và dán câu lệnh vào mô hình AI bạn đang sử dụng.
                     </p>
                   </div>
                 </div>
@@ -2991,7 +3024,7 @@
                       loadDemoMath();
                     }}
                   >
-                    <i className="fa-solid fa-play"></i> Dùng Thử Ngay Với Đề Toán Mẫu
+                    <i className="fa-solid fa-play"></i> Thử với đề mẫu
                   </button>
                 </div>
               </div>
@@ -3000,9 +3033,9 @@
 
           {/* Footer */}
           <footer className="footer-cute">
-            <p>🐾 EduSkills-VN v2.0.0 • Chủ nhiệm dự án: <strong>Nguyễn Duy Quang</strong> (📞 0795277227 | ✉️ poiairo4628@gmail.com)</p>
+            <p>🐾 EduSkills-VN v2.0.0 • Tác giả: <strong>Nguyễn Duy Quang</strong> (Email: poiairo4628@gmail.com | ĐT: 0795277227)</p>
             <p style={{ marginTop: '4px', fontSize: '0.76rem', color: 'var(--text-light)' }}>
-              Hệ thống Kỹ Nghệ Prompt Sư Phạm chuẩn GDPT 2018 & Định dạng Đề thi BGD 2026-2027.
+              Hệ thống hỗ trợ học tập và tạo câu lệnh có cấu trúc theo chương trình THPT.
             </p>
           </footer>
 

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-21T05:07:23.436Z",
+  "timestamp": "2026-10-21T23:12:30.941Z",
   "standard": "Universal Agentic Skill Specification (UASS v2.0)",
   "totalScanned": 16,
   "validCount": 16,
@@ -178,7 +178,7 @@
       "file": "skills/ngon-ngu-cong-nghe/tieng-anh-thpt/SKILL.md",
       "name": "tieng-anh-thpt",
       "version": "2.0.0",
-      "contentLength": 17517,
+      "contentLength": 21574,
       "hasUniversalPrompt": true,
       "hasTrapMatrix": true,
       "hasCoVe": true,

@@ -93,68 +93,68 @@ const COMPETENCY_TIERS = {
   },
   'vd': {
     id: 'vd',
-    name: 'Vận Dụng Tiêu Chuẩn',
-    scoreTarget: 'Điểm 7.0 - 8.5 (Chuẩn Khảo Thí BGD)',
+    name: 'Vận dụng',
+    scoreTarget: 'Điểm 7.0 - 8.5 (Vận dụng)',
     badge: 'Cấp độ 2 • Vận dụng',
     color: '#1565C0',
     bg: '#E3F2FD',
-    description: 'Kết nối kiến thức liên bài, giải bài toán biến đổi đa bước, xử lý thành thạo câu Đúng/Sai 4 ý lũy tiến và Trả lời ngắn.'
+    description: 'Vận dụng công thức và định luật để giải bài toán kết hợp, xử lý câu Đúng/Sai và Trả lời ngắn.'
   },
   'vdc': {
     id: 'vdc',
-    name: 'Vận Dụng Cao - Phân Hóa',
-    scoreTarget: 'Điểm 8.5 - 9.5+ (Phân Loại Tuyển Sinh)',
-    badge: 'Cấp độ 3 • Phân hóa',
+    name: 'Vận dụng cao',
+    scoreTarget: 'Điểm 8.5 - 9.5 (Phân loại)',
+    badge: 'Cấp độ 3 • Phân loại',
     color: '#E65100',
     bg: '#FFF3E0',
-    description: 'Mô hình hóa bài toán tối ưu thực tiễn, tích hợp liên môn, đồ thị phức hợp và làm chủ các câu hỏi chốt điểm 9–10.'
+    description: 'Bài toán thực tế, liên môn, đồ thị phức hợp và các bài phân loại.'
   },
   'hsg': {
     id: 'hsg',
-    name: 'Bồi Dưỡng HSG & ĐGNL',
-    scoreTarget: 'Olympic, HSG Tỉnh/Quốc Gia & ĐGNL HSA/APT/TSA',
-    badge: 'Cấp độ 4 • Đỉnh cao',
+    name: 'Nâng cao & Học sinh giỏi',
+    scoreTarget: 'Điểm 9.5+ (Nâng cao)',
+    badge: 'Cấp độ 4 • Nâng cao',
     color: '#6A1B9A',
     bg: '#F3E5F5',
-    description: 'Tư duy nguyên lý gốc bậc cao, tổng quát hóa bài toán, chứng minh chặt chẽ và phản biện đa chiều.'
+    description: 'Tư duy mô hình hóa, các bài toán nâng cao và ôn luyện học sinh giỏi, đánh giá năng lực.'
   }
 };
 
 const USAGE_CONTEXTS = {
   'giai-de': {
     id: 'giai-de',
-    title: 'Giải Đề Chuẩn BGD 2026',
+    title: 'Giải đề kiểm tra',
     icon: 'fa-solid fa-bullseye',
-    tagline: '3 Phần Chuẩn QĐ 764/QĐ-BGDĐT',
-    description: 'Giải chi tiết theo cấu trúc 3 phần: Trắc nghiệm 4 lựa chọn, Đúng/Sai 4 ý lũy tiến (0.1 - 0.25 - 0.5 - 1.0đ) và Trả lời ngắn điền số.'
+    tagline: 'Cấu trúc 3 phần theo định dạng mới',
+    description: 'Giải chi tiết theo cấu trúc: Trắc nghiệm 4 lựa chọn, Đúng/Sai và Trả lời ngắn điền số.'
   },
   'socrates': {
     id: 'socrates',
-    title: 'Gia Sư Sư Phạm Socrates',
+    title: 'Gợi mở Socrates',
     icon: 'fa-solid fa-lightbulb',
-    tagline: 'Khơi Mở Tư Duy, Không Lộ Đáp Số Thô',
-    description: 'Dẫn dắt bằng chuỗi câu hỏi phản xạ định hướng từng bước, giúp người học tự phát hiện quy luật trước khi đối chiếu lời giải.'
+    tagline: 'Hướng dẫn từng bước, không lộ đáp án',
+    description: 'Dẫn dắt bằng các câu hỏi gợi mở, giúp người học tự suy luận tìm ra lời giải.'
   },
   'chua-bay': {
     id: 'chua-bay',
-    title: 'Giải Mã Bẫy Phòng Thi',
+    title: 'Phân tích lỗi sai thường gặp',
     icon: 'fa-solid fa-triangle-exclamation',
-    tagline: 'Ma Trận Sai Lầm Kinh Điển & Cơ Chế Hóa Giải',
-    description: 'Mổ xẻ cơ chế gài bẫy của các phương án nhiễu (distractors): sai thứ nguyên, quên điều kiện biên, nhầm dấu và ngụy biện logic.'
+    tagline: 'Chỉ ra lỗi phổ biến và cách khắc phục',
+    description: 'Phân tích nguyên nhân nhầm lẫn, lỗi đổi đơn vị, quên điều kiện xác định và lỗi suy luận.'
   },
   'soan-de': {
     id: 'soan-de',
-    title: 'Soạn Ma Trận & Đề Tương Đương',
+    title: 'Tạo đề tương tự',
     icon: 'fa-solid fa-pen-ruler',
-    tagline: 'Thiết Kế Đề Thi & Distractor Engineering',
-    description: 'Thiết kế đề kiểm tra đẳng cấu (isomorphic) cùng ma trận năng lực kèm bảng đáp án, barem điểm lũy tiến và giải thích phương án nhiễu.'
+    tagline: 'Đề kiểm tra tương đương kèm ma trận',
+    description: 'Tạo bài tập hoặc đề tương đương cùng mức độ nhận thức, có đáp án và hướng dẫn chấm.'
   },
   'on-cap-toc': {
     id: 'on-cap-toc',
-    title: 'Ôn Cấp Tốc 60s & Mindmap',
+    title: 'Sơ đồ tư duy & Tóm tắt',
     icon: 'fa-solid fa-bolt-lightning',
-    tagline: 'Mermaid Mindmap, Cornell Cheatsheet & Active Recall',
-    description: 'Cô đọng toàn bộ kiến thức trọng tâm thành Sơ đồ tư duy Mermaid.js, Bảng Cornell Cheatsheet 60 giây và Câu hỏi tự vấn Active Recall.'
+    tagline: 'Sơ đồ Mermaid và các ý cốt lõi',
+    description: 'Tóm tắt kiến thức trọng tâm bằng sơ đồ tư duy Mermaid và bảng ghi chép Cornell.'
   }
 };
 
@@ -314,15 +314,16 @@ const SKILL_DEEP_PROFILES = {
 
   'tieng-anh-thpt': {
     title: 'Kiến trúc sư Ngôn ngữ học Ứng dụng & Khảo thí Tiếng Anh THPT (CEFR B2-C1)',
-    domainBadge: '🌐 Tiếng Anh • Syntactic Parsing, Collocations & Discourse Analysis',
-    epistemology: 'Kết hợp Phân tích Cú pháp Cấu trúc (Syntactic Parsing), Ngữ nghĩa học Kết hợp từ (Collocations & Phrasal Verbs), Ngữ âm chuẩn IPA Oxford và Phân tích Liên kết Diễn ngôn (Discourse Cohesion & Paraphrasing).',
+    domainBadge: '🌐 Tiếng Anh • Syntactic Parsing, Word Formation, IPA & Spelling Rules',
+    epistemology: 'Vận hành trên 4 trụ cột ngôn ngữ học: Cú pháp học Cấu trúc (Syntactic Parsing), Ngữ nghĩa học & Kết hợp từ (Collocations & Phrasal Verbs), Ngữ âm học chuẩn IPA Oxford và Phân tích Liên kết Diễn ngôn (Discourse Cohesion). TUYỆT ĐỐI CẤM trả lời cụt ngủn 1 từ đơn lẻ. Mọi câu hỏi từ vựng hay chuyển đổi từ loại bắt buộc triển khai trọn vẹn Bảng họ từ (Word Family: Verb/Noun/Adj/Adv), Phiên âm IPA Oxford, Quy tắc chính tả (Spelling Rules chống bẫy đảo ký tự i/e hay nhân đôi phụ âm), Collocations và câu ví dụ hoàn chỉnh.',
     methodologySteps: [
-      'Bước 1 (Giải Phẫu Cú Pháp Câu): Tách Mệnh đề chính (Main Clause) và Mệnh đề phụ/Rút gọn phân từ để xác định chính xác từ loại hoặc dạng động từ cần điền.',
-      'Bước 2 (Phân Tích Liên Kết Diễn Ngôn): Với bài sắp xếp hội thoại/thư/đoạn văn, tìm Topic Sentence và bắt cặp theo đại từ quy chiếu (it, they, this, such) cùng từ nối (First, However, Therefore).',
-      'Bước 3 (Đối Chiếu Bằng Chứng & Paraphrase): Với bài Đọc hiểu, trích dẫn nguyên văn câu bằng chứng (Evidence Span) và chỉ rõ cặp từ đồng nghĩa/cấu trúc tương đương.',
-      'Bước 4 (Loại Trừ Phương Án Nhiễu): Giải thích tường minh lý do loại bỏ từng phương án A, B, C, D (sai ngữ pháp, sai Collocation hay bẫy Not Given).'
+      'Bước 1 (Giải Phẫu Cú Pháp & Từ Loại): Tách Mệnh đề chính (Main Clause) và Mệnh đề phụ/Rút gọn phân từ để xác định chính xác từ loại (Noun, Verb, Adj, Adv) hoặc dạng động từ cần điền.',
+      'Bước 2 (Kiểm Tra Chính Tả & Họ Từ Vựng - Word Formation): Đối chiếu chính tả từng chữ cái theo Oxford/Cambridge (quy tắc "i before e except after c": achieve -> achievement, receive -> receipt; maintain -> maintenance; pronounce -> pronunciation). Không bao giờ trả lời 1 từ trơ trọi.',
+      'Bước 3 (Phân Tích Diễn Ngôn & Paraphrase): Với bài sắp xếp hội thoại/thư/đoạn văn, tìm Topic Sentence và bắt cặp đại từ quy chiếu; với bài Đọc hiểu, trích dẫn nguyên văn Evidence Span và phân tích Paraphrasing.',
+      'Bước 4 (Loại Trừ Phương Án Nhiễu & Mở Rộng Collocations): Giải thích tường minh lý do loại bỏ từng phương án A, B, C, D (sai ngữ pháp, sai Collocation, sai chính tả hay bẫy Not Given).'
     ],
     traps: [
+      'Bẫy Chính tả & Biến thể Từ loại (Orthographic & Word Formation Trap): Nhầm thứ tự nguyên âm (quy tắc "i before e except after c" trong achieve/achievement, tuyệt đối KHÔNG viết *acheivement; receive/receipt; believe); nhầm đuôi biến đổi gốc từ (maintain -> maintenance chứ không phải maintainance; pronounce -> pronunciation; separate chứ không phải seperate; environment có chữ n; accommodate có 2 chữ c và 2 chữ m).',
       'Bẫy Chủ ngữ giả khi Rút gọn Mệnh đề (Dangling Participle): Dùng V-ing/V3 ở đầu câu nhưng không kiểm tra chủ ngữ đứng sau dấu phẩy thực hiện (V-ing) hay chịu tác động (V3/ed) của hành động.',
       'Bẫy Cặp Tính từ Đồng gốc dễ nhầm: Nhầm lẫn giữa economic (thuộc kinh tế) vs. economical (tiết kiệm); considerate (chu đáo) vs. considerable (đáng kể); historic vs. historical.',
       'Bẫy Trật tự Tính từ & Cụm danh từ: Sắp xếp sai thứ tự OSASCOMP (Opinion - Size - Age - Shape - Color - Origin - Material - Purpose + Noun).',
@@ -330,16 +331,18 @@ const SKILL_DEEP_PROFILES = {
       'Bẫy Đại từ Quan hệ sau dấu phẩy: Chọn "that" sau dấu phẩy hoặc dùng "what" làm đại từ quan hệ thay cho cả mệnh đề phía trước (đúng phải là ", which + V_số_ít").'
     ],
     coveChecklist: [
+      'Chính tả của toàn bộ từ vựng tiếng Anh đã được rà soát từng ký tự theo từ điển Oxford/Cambridge chưa? Tuyệt đối không để xảy ra lỗi sai chính tả (ví dụ: achievement, không bao giờ là acheivement)?',
+      'Đã tuân thủ nguyên tắc Zero-Bare-Word (tuyệt đối không trả lời cụt ngủn 1 từ), cung cấp đầy đủ Bảng họ từ (Word Family Matrix), phiên âm IPA và câu ví dụ ngữ cảnh chưa?',
       'Phiên âm IPA và vị trí dấu trọng âm đã chuẩn xác 100% theo từ điển Oxford / Cambridge chưa?',
       'Sự hòa hợp giữa Chủ ngữ chính (trước giới từ) và Động từ chia thì đã được kiểm tra chưa?',
       'Trong câu hỏi Đọc hiểu, đã trích dẫn chính xác câu bằng chứng trong bài đọc để chứng minh đáp án chưa?',
       'Trong bài Sắp xếp đoạn văn (a-b-c-d-e), mạch liên kết đại từ quy chiếu và từ nối giữa các câu liền kề đã hợp lý chưa?'
     ],
     fewShot: {
-      input: 'Plastic waste is discharged into the ocean, ______ poses a severe threat to marine life. (A. that / B. which / C. what / D. who)',
-      output: '- **Tầng 1 (Gợi mở Socrates):** Phía trước chỗ trống có dấu phẩy `,` và phía sau là động từ số ít `poses`. Đại từ nào thay thế cho cả mệnh đề đứng trước?\n- **Tầng 2 (Cú pháp):** Mệnh đề quan hệ nối tiếp quy chiếu toàn bộ sự việc phía trước bắt buộc dùng `, which + V_số_ít`.\n- **Tầng 3 (Giải chi tiết & Loại trừ):** Chọn **B (`which`)**. Loại A vì `that` không đứng sau dấu phẩy; loại C vì `what` không phải đại từ quan hệ nối mệnh đề; loại D vì `who` chỉ người.\n- **Tầng 4 (Kiểm chứng CoVe):** Collocation mở rộng: `pose a threat/risk/challenge to sth` (gây ra mối đe dọa cho cái gì).'
+      input: 'Cho dạng đúng của từ trong ngoặc để hoàn thành câu: "Winning the prestigious national scholarship was a remarkable (ACHIEVE) for her academic career."',
+      output: '- **Tầng 1 (Gợi mở Socrates):** Vị trí chỗ trống đứng sau mạo từ "a", tính từ "remarkable" và bổ nghĩa cho giới từ "for". Vị trí này cần từ loại nào? Động từ "achieve" biến đổi sang danh từ như thế nào và chú ý quy tắc chính tả gì?\n- **Tầng 2 (Bản chất Ngôn ngữ & Cấu trúc Họ từ):**\n  * *Quy tắc ngữ pháp:* Sau `a + Adjective` bắt buộc là một `Danh từ đếm được số ít (Singular Countable Noun)`.\n  * *Bảng họ từ (Word Family Matrix):*\n    - Động từ (Verb): `achieve` /əˈtʃiːv/ (đạt được, hoàn thành nhờ nỗ lực).\n    - Danh từ (Noun): **`achievement`** /əˈtʃiːvmənt/ (thành tựu, sự đạt được); `achiever` /əˈtʃiːvər/ (người thành công, người phấn đấu).\n    - Tính từ (Adjective): `achievable` /əˈtʃiːvəbl/ (có thể đạt được); `unachievable` (không thể đạt được).\n- **Tầng 3 (Lời giải chi tiết & Quy tắc chính tả vàng):**\n  * **Đáp án đúng:** **`achievement`**.\n  * **Quy tắc chính tả (Spelling Rule - Tránh bẫy phòng thi):** Áp dụng quy tắc kinh điển *"i before e except after c"* (chữ `i` đứng trước chữ `e`, trừ khi đứng sau chữ `c`). Động từ gốc là `a-c-h-i-e-v-e` thêm hậu tố danh từ `-ment` $\\to$ **`achievement`** (TUYỆT ĐỐI KHÔNG VIẾT NHẦM THÀNH `*acheivement`).\n  * **Phiên âm quốc tế IPA (Oxford OALD):** `/əˈtʃiːvmənt/` (trọng âm rơi vào âm tiết thứ 2, nguyên âm giữa là /iː/ dài).\n- **Tầng 4 (Collocations & Tự kiểm chứng CoVe):**\n  * *Cụm từ cố định đắt giá (Collocations):* `a remarkable/great/crowning achievement` (thành tựu đáng nể/vĩ đại), `a sense of achievement` (cảm giác thành tựu, tự hào khi đạt được điều gì).\n  * *Kiểm chứng CoVe:* Câu hoàn chỉnh: *"Winning the prestigious national scholarship was a remarkable achievement for her academic career."* $\\to$ Chuẩn ngữ pháp, chuẩn ngữ nghĩa và chính xác 100% chính tả.'
     },
-    sampleProblem: `Read the following passage and mark the letter A, B, C, or D to indicate the correct option.\n"Artificial Intelligence is rapidly transforming modern education by providing personalized learning paths, (1) ______ helps students progress at their own pace. However, educators must help learners (2) ______ critical thinking skills rather than relying blindly on automated answers."\n1. A. that   B. which   C. what   D. who\n2. A. build up   B. put off   C. turn down   D. give in`
+    sampleProblem: `Read the following passage and mark the letter A, B, C, or D to indicate the correct option.\n"Artificial Intelligence is rapidly transforming modern education by providing personalized learning paths, (1) ______ helps students progress at their own pace. Learners who make consistent efforts will experience a tremendous sense of (2) ______."\n1. A. that   B. which   C. what   D. who\n2. A. achieve   B. achievement   C. achievable   D. acheivement`
   },
 
   'lich-su-thpt': {
@@ -828,6 +831,70 @@ function formatInformaticsCode(rawText) {
   return text;
 }
 
+// ============================================================================
+// 4B. TỪ ĐIỂN BẪY LỖI CHÍNH TẢ TIẾNG ANH & BỘ PARSER HỌC THUẬT (WORD FORMATION)
+// ============================================================================
+const COMMON_ENGLISH_SPELLING_CORRECTIONS = [
+  { wrong: /\bacheive\b/gi, right: 'achieve', rule: 'i before e except after c' },
+  { wrong: /\bacheivement\b/gi, right: 'achievement', rule: 'achieve + ment -> achievement (i trước e)' },
+  { wrong: /\bacheivements\b/gi, right: 'achievements', rule: 'achieve + ments -> achievements' },
+  { wrong: /\bacheived\b/gi, right: 'achieved', rule: 'achieve + d -> achieved' },
+  { wrong: /\bacheiving\b/gi, right: 'achieving', rule: 'achieve + ing -> achieving' },
+  { wrong: /\bacheiver\b/gi, right: 'achiever', rule: 'achieve + r -> achiever' },
+  { wrong: /\bacheivers\b/gi, right: 'achievers', rule: 'achieve + rs -> achievers' },
+  { wrong: /\brecieve\b/gi, right: 'receive', rule: 'i before e except after c (sau c dùng ei)' },
+  { wrong: /\brecieving\b/gi, right: 'receiving', rule: 'receiving' },
+  { wrong: /\brecieved\b/gi, right: 'received', rule: 'received' },
+  { wrong: /\breciept\b/gi, right: 'receipt', rule: 'receipt' },
+  { wrong: /\bseperate\b/gi, right: 'separate', rule: 'sep-a-rate (không phải sep-e-rate)' },
+  { wrong: /\bseperately\b/gi, right: 'separately', rule: 'separately' },
+  { wrong: /\bseperation\b/gi, right: 'separation', rule: 'separation' },
+  { wrong: /\boccurance\b/gi, right: 'occurrence', rule: 'occurrence (nhân đôi c và r)' },
+  { wrong: /\boccured\b/gi, right: 'occurred', rule: 'occurred (nhân đôi r)' },
+  { wrong: /\boccuring\b/gi, right: 'occurring', rule: 'occurring (nhân đôi r)' },
+  { wrong: /\bmaintainance\b/gi, right: 'maintenance', rule: 'maintain -> maintenance (đổi ai thành e)' },
+  { wrong: /\bpronounciation\b/gi, right: 'pronunciation', rule: 'pronounce -> pronunciation (bỏ o)' },
+  { wrong: /\benviroment\b/gi, right: 'environment', rule: 'environment (có âm n giữa)' },
+  { wrong: /\benviromental\b/gi, right: 'environmental', rule: 'environmental' },
+  { wrong: /\baccomodate\b/gi, right: 'accommodate', rule: 'accommodate (2 chữ c, 2 chữ m)' },
+  { wrong: /\baccomodation\b/gi, right: 'accommodation', rule: 'accommodation' },
+  { wrong: /\bembarass\b/gi, right: 'embarrass', rule: 'embarrass (2 chữ r, 2 chữ s)' },
+  { wrong: /\bdefinately\b/gi, right: 'definitely', rule: 'definitely (gốc finite)' },
+  { wrong: /\bsuccessfull\b/gi, right: 'successful', rule: 'successful (hậu tố -ful chỉ có 1 chữ l)' },
+  { wrong: /\bindependant\b/gi, right: 'independent', rule: 'independent (đuôi -ent)' },
+  { wrong: /\bpriviledge\b/gi, right: 'privilege', rule: 'privilege (không có d)' },
+  { wrong: /\bexistance\b/gi, right: 'existence', rule: 'existence (đuôi -ence)' },
+  { wrong: /\bcalender\b/gi, right: 'calendar', rule: 'calendar (đuôi -ar)' },
+  { wrong: /\bneccessary\b/gi, right: 'necessary', rule: 'necessary (1 chữ c, 2 chữ s)' },
+  { wrong: /\boppurtunity\b/gi, right: 'opportunity', rule: 'opportunity (o-p-p-o-r)' }
+];
+
+/**
+ * 7. Tiếng Anh: Chuẩn hóa ngữ liệu học thuật, sửa bẫy lỗi chính tả phổ biến (Spelling Traps)
+ * và mở rộng các truy vấn từ vựng ngắn (Word Formation Scaffolding)
+ */
+function formatEnglishAcademic(rawText) {
+  if (!rawText) return '';
+  let text = rawText.trim();
+
+  // 1. Tự động rà soát và sửa các lỗi chính tả kinh điển trong đề thi THPT (Spelling Traps)
+  COMMON_ENGLISH_SPELLING_CORRECTIONS.forEach(entry => {
+    text = text.replace(entry.wrong, entry.right);
+  });
+
+  // 2. Định dạng phương án trắc nghiệm A, B, C, D ở đầu dòng
+  text = text.replace(/(^|\n)\s*([A-D])[\.\)]\s+/g, '$1**$2.** ');
+
+  // 3. Nếu là câu hỏi cực ngắn hoặc chỉ chứa 1-5 từ (ví dụ hỏi từ vựng, từ loại "achieve", "danh từ của achieve")
+  // Bổ sung chỉ thị sư phạm bắt buộc triển khai cấu trúc Word Formation 4 chiều, cấm trả lời 1 từ cụt lủn.
+  const isShortWordQuery = text.split(/\s+/).length <= 6 && !text.includes('**A.**') && !text.includes('\n');
+  if (isShortWordQuery) {
+    text += `\n\n[CHỈ THỊ SƯ PHẠM BẮT BUỘC]: Câu hỏi này yêu cầu giải thích từ vựng/biến thể từ loại (Word Formation). AI TUYỆT ĐỐI KHÔNG ĐƯỢC chỉ trả lời 1 từ đơn lẻ. Bắt buộc cung cấp:\n1. Bảng họ từ (Word Family Matrix: Verb - Noun - Adj - Adv).\n2. Phiên âm quốc tế IPA Oxford chuẩn xác (kèm vị trí dấu trọng âm).\n3. Quy tắc chính tả (Spelling Rules) chống nhầm lẫn âm/chữ cái (ví dụ: "i before e except after c").\n4. Cụm từ cố định (Collocations) và 1 câu ví dụ thực tế chuẩn SGK Global Success.`;
+  }
+
+  return text;
+}
+
 /**
  * Xử lý đa năng theo kỹ năng/môn học chuyên biệt (16 kỹ năng chuẩn BGD 2026)
  */
@@ -849,6 +916,8 @@ function processTextBySubject(rawText, subject) {
       return { formattedText: formatLiteratureReading(rawText), domainBadge: badge };
     case 'tin-hoc-thpt':
       return { formattedText: formatInformaticsCode(rawText), domainBadge: badge };
+    case 'tieng-anh-thpt':
+      return { formattedText: formatEnglishAcademic(rawText), domainBadge: badge };
     default:
       return { formattedText: (rawText || '').trim(), domainBadge: badge };
   }
@@ -1104,7 +1173,7 @@ function generateIntentDrivenPrompt({
   if (verifiedContent && verifiedContent.trim()) {
     p += `## 📝 7. NỘI DUNG ĐỀ BÀI / NGỮ LIỆU ĐẦU VÀO ĐÃ XÁC NHẬN KIỂM CHỨNG\n`;
     p += `\`\`\`text\n${verifiedContent.trim()}\n\`\`\`\n\n`;
-    p += `👉 **LỆNH THỰC THI:** Hãy vận dụng toàn bộ Kiến trúc 7 Trụ Cột trên để phân tích, giải quyết tường minh theo 4 tầng Socrates và thực hiện kiểm chứng CoVe cho đề bài trên:`;
+    p += `👉 **LỆNH THỰC THI BẮT BUỘC:**\n1. **QUY TẮC CHỐNG TRẢ LỜI CỤT NGỦN (ZERO-BARE-WORD POLICY):** Tuyệt đối KHÔNG ĐƯỢC chỉ trả lời 1 từ đơn lẻ hoặc đưa ra đáp án trơ trọi (kể cả với câu hỏi từ vựng ngắn, điền từ hoặc chuyển đổi từ loại Word Formation). Bắt buộc triển khai đầy đủ 4 tầng sư phạm Socrates.\n2. **CHUẨN CHÍNH TẢ & TỪ ĐIỂN OXFORD (ORTHOGRAPHIC HONESTY):** Mọi từ ngữ tiếng Anh phải được rà soát chính tả từng ký tự 100% theo từ điển Oxford Advanced Learner's Dictionary (OALD). Kiểm tra kỹ các bẫy đổi vị trí ký tự i/e (quy tắc "i before e except after c": achieve -> achievement, KHÔNG viết *acheivement; receive -> receipt) và nhân đôi phụ âm.\n3. **CẤU TRÚC HỌ TỪ VỰNG (WORD FORMATION MATRIX):** Nếu câu hỏi liên quan đến từ vựng hoặc chuyển đổi từ loại, BẮT BUỘC cung cấp bảng đầy đủ các dạng: Động từ (Verb), Danh từ (Noun), Tính từ (Adj), Trạng từ (Adv), Phiên âm IPA Oxford, Cụm Collocations thông dụng và 1 câu ví dụ chuẩn ngữ cảnh GDPT 2018.\n4. Hãy bắt đầu giải quyết đề bài theo trọn vẹn 4 tầng sư phạm:`;
   } else {
     p += `## 📝 7. CHẾ ĐỘ KHỞI TẠO ĐỀ BÀI & GIẢNG DẠY TỰ ĐỘNG (AUTONOMOUS PEDAGOGICAL MODE)\n`;
     p += `- **Trạng thái đầu vào:** Người dùng chưa đính kèm bài tập cụ thể (chế độ Khởi tạo & Dạy học chủ động).\n`;
@@ -1126,6 +1195,8 @@ module.exports = {
   formatLiteratureReading,
   formatBiologyToGenetics,
   formatInformaticsCode,
+  formatEnglishAcademic,
+  COMMON_ENGLISH_SPELLING_CORRECTIONS,
   processTextBySubject,
   getDefaultSampleProblem,
   generateIntentDrivenPrompt,

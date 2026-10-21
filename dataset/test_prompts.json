@@ -58,5 +58,11 @@
     "subject": "ngu-van-thpt",
     "question": "Hãy hướng dẫn lập dàn ý ngắn gọn và viết một đoạn văn nghị luận xã hội (khoảng 200 chữ) trình bày suy nghĩ về vai trò của tư duy phản biện trước sự bùng nổ của Trí tuệ nhân tạo (AI) đối với học sinh THPT hiện nay.",
     "expected_rules": "1. Hướng dẫn cấu trúc lập luận 4 bước (Giải thích -> Bàn luận/Chứng minh -> Phản biện/Mở rộng -> Bài học nhận thức & hành động) trước khi viết đoạn văn hoàn chỉnh. 2. Đoạn văn nghị luận xã hội 200 chữ BẮT BUỘC được trình bày thành 1 đoạn văn duy nhất (không xuống dòng ngắt đoạn giữa chừng), đảm bảo dung lượng khoảng 180-230 chữ. 3. Văn phong giàu sức thuyết phục, có dẫn chứng thực tế và tư duy phản biện hai chiều, không sáo rỗng."
+  },
+  {
+    "id": 11,
+    "subject": "tieng-anh-thpt",
+    "question": "Cho dạng đúng của từ trong ngoặc để hoàn thành câu: \"Winning the prestigious scholarship was a remarkable (ACHIEVE) for her academic career.\" Hãy hướng dẫn em giải chi tiết câu này.",
+    "expected_rules": "1. TUYỆT ĐỐI CẤM chỉ trả lời một từ trơ trọi 'achievement'. 2. Bắt buộc cung cấp Bảng họ từ vựng đầy đủ (Word Family: Verb achieve, Noun achievement/achiever, Adj achievable/unachievable). 3. Nhấn mạnh quy tắc chính tả 'i before e except after c' để chống bẫy viết sai thành *acheivement. 4. Phiên âm IPA Oxford chuẩn xác /əˈtʃiːvmənt/ và cụm Collocations đi kèm (sense of achievement, remarkable achievement)."
   }
 ]
