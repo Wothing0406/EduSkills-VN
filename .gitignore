@@ -30,3 +30,8 @@ eng.traineddata
 vie.traineddata
 # my-video
 my-video/
+
+# Temporary analysis & debug frames
+*.png
+analysis/
+scratch/
