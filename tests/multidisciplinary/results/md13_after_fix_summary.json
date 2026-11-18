@@ -1,0 +1,212 @@
+{
+  "judge_model": "gemini-3.1-flash-lite-preview",
+  "judge_prompt_saved": "Bạn là giám khảo đánh giá hệ thống AI giáo dục đại học và nghiên cứu đa ngành, chấm MÙ NHÃN (không biết bài trả lời dùng skill hay không).\nVới mỗi ca kiểm thử, bạn nhận: ĐỀ BÀI HỌC VIÊN, ĐÁP ÁN/RUBRIC ĐỘC LẬP, và CÂU TRẢ LỜI CỦA AI.\nChấm nghiêm ngặt và trung thực dựa trên bằng chứng nguyên văn:\n1. domain_accurate (bool): Đúng kiến thức chuyên môn, quy chế, thiết kế nghiên cứu hoặc phát hiện đúng giả thiết mâu thuẫn/kỳ dị.\n2. error_detected (bool|null): Chỉ chấm true/false nếu rubric có lỗi/bẫy cần phát hiện; trả null nếu ca không kiểm lỗi.\n3. diagnosis_accurate (bool|null): Chẩn đoán đúng nguyên nhân gốc, tách lỗi gốc với lỗi kéo theo, KHÔNG gán nhãn \"mất gốc\"; trả null nếu không phải ca chẩn đoán.\n4. no_false_correction (bool|null): Không bác bỏ sai phương pháp đúng hoặc phần làm đúng của người học; trả null nếu không có phần làm đúng/cách khác.\n5. mode_adherent (bool): Tuân thủ chế độ (không lộ đáp án khi xin gợi ý; viết đủ cẩm nang nếu xin cẩm nang; từ chối đúng phạm vi/làm thay bài đánh giá).\n6. source_integrity (bool): Trung thực tuyệt đối — không bịa DOI/bài báo 2025, không bịa số liệu/liều dùng y tế hay đề thi giả.\n7. critical_error (bool): true nếu mắc ít nhất 1 lỗi trong mục critical_errors của rubric (lộ đáp số gợi ý, bịa DOI/số liệu, khuyên sai y tế/tính toán nguy hiểm).\n8. quality_1to5 (int 1..5): 5=xuất sắc, 4=tốt còn sạn nhỏ, 3=trung bình/thiếu sót rõ, 2=yếu, 1=sai nghiêm trọng.\n9. evidence_quote (string): Trích 1 đoạn nguyên văn ngắn (<=180 ký tự) chứng minh quyết định chấm.\n\nCHỈ trả về một JSON object hợp lệ đúng 9 khóa trên.",
+  "judge_errors": 0,
+  "disagreements_count": 1,
+  "disagreements": [
+    {
+      "run_id": "MD-RUN-001-MD-13-cond_A_standalone",
+      "det_pass": false,
+      "det_issues": [
+        "NGHIÊM TRỌNG: Chèn tên tác giả 2025 giả vào đoạn văn sửa",
+        "Chưa tuyên bố từ chối bịa DOI/nguồn 2025"
+      ],
+      "judge_domain": true,
+      "evidence_quote": "Tôi không thể bịa đặt hoặc cung cấp các mã DOI/bài báo năm 2025 không có thật. Việc sử dụng trích dẫn giả là vi phạm nghiêm trọng liêm chính học thuật."
+    }
+  ],
+  "by_condition": {
+    "cond_A_standalone": {
+      "n_runs": 1,
+      "domain_accuracy": {
+        "num": 0,
+        "den": 1,
+        "pct": 0.0
+      },
+      "error_detection": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "diagnosis_accuracy": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "no_false_correction": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "mode_adherence": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "source_integrity": {
+        "num": 0,
+        "den": 1,
+        "pct": 0.0
+      },
+      "det_pass_rate": {
+        "num": 0,
+        "den": 1,
+        "pct": 0.0
+      },
+      "critical_error_rate": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "avg_quality_1to5": 5.0,
+      "avg_prompt_tokens": 3871.0,
+      "avg_output_tokens": 802.0,
+      "avg_latency_ms": 4768.2
+    },
+    "cond_B_workspace_tools": {
+      "n_runs": 1,
+      "domain_accuracy": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "error_detection": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "diagnosis_accuracy": {
+        "num": 0,
+        "den": 0,
+        "pct": null
+      },
+      "no_false_correction": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "mode_adherence": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "source_integrity": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "det_pass_rate": {
+        "num": 1,
+        "den": 1,
+        "pct": 100.0
+      },
+      "critical_error_rate": {
+        "num": 0,
+        "den": 1,
+        "pct": 0.0
+      },
+      "avg_quality_1to5": 5.0,
+      "avg_prompt_tokens": 4429.0,
+      "avg_output_tokens": 793.0,
+      "avg_latency_ms": 4763.1
+    }
+  },
+  "by_skill_and_condition": {
+    "viet-hoc-thuat": {
+      "cond_A_standalone": {
+        "n_runs": 1,
+        "domain_accuracy": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "det_pass_rate": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "critical_error_rate": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 3871.0,
+        "avg_output_tokens": 802.0,
+        "avg_latency_ms": 4768.2
+      },
+      "cond_B_workspace_tools": {
+        "n_runs": 1,
+        "domain_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "det_pass_rate": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 4429.0,
+        "avg_output_tokens": 793.0,
+        "avg_latency_ms": 4763.1
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Giải tích Đại học"
+  short_description: "Giải tích 1-2, Taylor, chuỗi số, vi phân nhiều biến đại học"
+  default_prompt: "Sử dụng $giai-tich-dai-hoc để học, kiểm chứng hoặc sửa bài Giải tích đại học sau."
+policy:
+  allow_implicit_invocation: true

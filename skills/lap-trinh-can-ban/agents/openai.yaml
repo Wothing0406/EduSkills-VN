@@ -1,0 +1,6 @@
+interface:
+  display_name: "Lập trình Căn bản"
+  short_description: "Thuật toán nhập môn, cấu trúc dữ liệu cơ bản, Big-O & debug"
+  default_prompt: "Sử dụng $lap-trinh-can-ban để giải thích, debug hoặc kiểm thử đoạn code/thuật toán sau."
+policy:
+  allow_implicit_invocation: true

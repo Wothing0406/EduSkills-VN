@@ -1,0 +1,6 @@
+interface:
+  display_name: "Phương pháp Nghiên cứu"
+  short_description: "Quy trình 14 bước và 10 loại nghiên cứu đa ngành có đối chứng"
+  default_prompt: "Sử dụng $phuong-phap-nghien-cuu để thiết kế đề cương, chọn phương pháp hoặc phản biện nguồn và dữ liệu."
+policy:
+  allow_implicit_invocation: true

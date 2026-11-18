@@ -1,6 +1,6 @@
 {
   "name": "eduskills-vn",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Bộ não Universal Agentic AI Skills (100% Vendor-Agnostic) chuẩn GDPT 2018 & QĐ 764/QĐ-BGDĐT",
   "main": "server.js",
   "type": "commonjs",

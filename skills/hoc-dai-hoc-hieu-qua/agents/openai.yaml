@@ -1,0 +1,6 @@
+interface:
+  display_name: "Học Đại học Hiệu quả"
+  short_description: "Quản lý tín chỉ, giải mã syllabus, Cornell và Active Recall"
+  default_prompt: "Sử dụng $hoc-dai-hoc-hieu-qua để lập kế hoạch học phần tín chỉ và đọc hiểu giáo trình đại học."
+policy:
+  allow_implicit_invocation: true

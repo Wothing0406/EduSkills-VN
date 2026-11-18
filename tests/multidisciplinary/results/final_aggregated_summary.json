@@ -1,0 +1,1525 @@
+{
+  "ai_judge_only_subset": {
+    "baseline_no_skill": {
+      "total_runs_in_condition": 16,
+      "resolved_runs": 8,
+      "ai_judged_runs": 8,
+      "manually_audited_runs": 0,
+      "det_pass": {
+        "num": 15,
+        "den": 16,
+        "pct": 93.8
+      },
+      "domain_accuracy": {
+        "num": 7,
+        "den": 8,
+        "pct": 87.5
+      },
+      "error_detection": {
+        "num": 4,
+        "den": 4,
+        "pct": 100.0
+      },
+      "diagnosis_accuracy": {
+        "num": 4,
+        "den": 4,
+        "pct": 100.0
+      },
+      "no_false_correction": {
+        "num": 5,
+        "den": 5,
+        "pct": 100.0
+      },
+      "mode_adherence": {
+        "num": 7,
+        "den": 8,
+        "pct": 87.5
+      },
+      "source_integrity": {
+        "num": 7,
+        "den": 8,
+        "pct": 87.5
+      },
+      "critical_error_rate": {
+        "num": 1,
+        "den": 8,
+        "pct": 12.5
+      },
+      "avg_quality_1to5": 4.5,
+      "avg_prompt_tokens": 116.5,
+      "avg_output_tokens": 812.9,
+      "avg_latency_ms": 31025.7
+    },
+    "cond_A_standalone": {
+      "total_runs_in_condition": 16,
+      "resolved_runs": 11,
+      "ai_judged_runs": 11,
+      "manually_audited_runs": 0,
+      "det_pass": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "domain_accuracy": {
+        "num": 11,
+        "den": 11,
+        "pct": 100.0
+      },
+      "error_detection": {
+        "num": 5,
+        "den": 6,
+        "pct": 83.3
+      },
+      "diagnosis_accuracy": {
+        "num": 6,
+        "den": 6,
+        "pct": 100.0
+      },
+      "no_false_correction": {
+        "num": 7,
+        "den": 7,
+        "pct": 100.0
+      },
+      "mode_adherence": {
+        "num": 11,
+        "den": 11,
+        "pct": 100.0
+      },
+      "source_integrity": {
+        "num": 11,
+        "den": 11,
+        "pct": 100.0
+      },
+      "critical_error_rate": {
+        "num": 0,
+        "den": 11,
+        "pct": 0.0
+      },
+      "avg_quality_1to5": 5.0,
+      "avg_prompt_tokens": 3960.6,
+      "avg_output_tokens": 892.7,
+      "avg_latency_ms": 12298.7
+    },
+    "cond_B_workspace_tools": {
+      "total_runs_in_condition": 16,
+      "resolved_runs": 12,
+      "ai_judged_runs": 12,
+      "manually_audited_runs": 0,
+      "det_pass": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "domain_accuracy": {
+        "num": 12,
+        "den": 12,
+        "pct": 100.0
+      },
+      "error_detection": {
+        "num": 5,
+        "den": 7,
+        "pct": 71.4
+      },
+      "diagnosis_accuracy": {
+        "num": 7,
+        "den": 7,
+        "pct": 100.0
+      },
+      "no_false_correction": {
+        "num": 8,
+        "den": 8,
+        "pct": 100.0
+      },
+      "mode_adherence": {
+        "num": 12,
+        "den": 12,
+        "pct": 100.0
+      },
+      "source_integrity": {
+        "num": 12,
+        "den": 12,
+        "pct": 100.0
+      },
+      "critical_error_rate": {
+        "num": 0,
+        "den": 12,
+        "pct": 0.0
+      },
+      "avg_quality_1to5": 5.0,
+      "avg_prompt_tokens": 5079.2,
+      "avg_output_tokens": 831.5,
+      "avg_latency_ms": 16008.3
+    }
+  },
+  "hybrid_ai_plus_manual_full_48": {
+    "baseline_no_skill": {
+      "total_runs_in_condition": 16,
+      "resolved_runs": 16,
+      "ai_judged_runs": 8,
+      "manually_audited_runs": 8,
+      "det_pass": {
+        "num": 15,
+        "den": 16,
+        "pct": 93.8
+      },
+      "domain_accuracy": {
+        "num": 14,
+        "den": 16,
+        "pct": 87.5
+      },
+      "error_detection": {
+        "num": 11,
+        "den": 11,
+        "pct": 100.0
+      },
+      "diagnosis_accuracy": {
+        "num": 7,
+        "den": 7,
+        "pct": 100.0
+      },
+      "no_false_correction": {
+        "num": 7,
+        "den": 7,
+        "pct": 100.0
+      },
+      "mode_adherence": {
+        "num": 14,
+        "den": 16,
+        "pct": 87.5
+      },
+      "source_integrity": {
+        "num": 15,
+        "den": 16,
+        "pct": 93.8
+      },
+      "critical_error_rate": {
+        "num": 1,
+        "den": 16,
+        "pct": 6.2
+      },
+      "avg_quality_1to5": 4.56,
+      "avg_prompt_tokens": 116.5,
+      "avg_output_tokens": 812.9,
+      "avg_latency_ms": 31025.7
+    },
+    "cond_A_standalone": {
+      "total_runs_in_condition": 16,
+      "resolved_runs": 16,
+      "ai_judged_runs": 11,
+      "manually_audited_runs": 5,
+      "det_pass": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "domain_accuracy": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "error_detection": {
+        "num": 10,
+        "den": 11,
+        "pct": 90.9
+      },
+      "diagnosis_accuracy": {
+        "num": 8,
+        "den": 8,
+        "pct": 100.0
+      },
+      "no_false_correction": {
+        "num": 9,
+        "den": 9,
+        "pct": 100.0
+      },
+      "mode_adherence": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "source_integrity": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "critical_error_rate": {
+        "num": 0,
+        "den": 16,
+        "pct": 0.0
+      },
+      "avg_quality_1to5": 5.0,
+      "avg_prompt_tokens": 3960.6,
+      "avg_output_tokens": 892.7,
+      "avg_latency_ms": 12298.7
+    },
+    "cond_B_workspace_tools": {
+      "total_runs_in_condition": 16,
+      "resolved_runs": 16,
+      "ai_judged_runs": 12,
+      "manually_audited_runs": 4,
+      "det_pass": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "domain_accuracy": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "error_detection": {
+        "num": 9,
+        "den": 11,
+        "pct": 81.8
+      },
+      "diagnosis_accuracy": {
+        "num": 8,
+        "den": 8,
+        "pct": 100.0
+      },
+      "no_false_correction": {
+        "num": 8,
+        "den": 8,
+        "pct": 100.0
+      },
+      "mode_adherence": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "source_integrity": {
+        "num": 16,
+        "den": 16,
+        "pct": 100.0
+      },
+      "critical_error_rate": {
+        "num": 0,
+        "den": 16,
+        "pct": 0.0
+      },
+      "avg_quality_1to5": 5.0,
+      "avg_prompt_tokens": 5079.2,
+      "avg_output_tokens": 831.5,
+      "avg_latency_ms": 16008.3
+    }
+  },
+  "by_skill_full": {
+    "chuyen-tiep-dai-hoc": {
+      "baseline_no_skill": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 1,
+          "den": 2,
+          "pct": 50.0
+        },
+        "error_detection": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 1,
+          "den": 2,
+          "pct": 50.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 4.0,
+        "avg_prompt_tokens": 107.0,
+        "avg_output_tokens": 636.5,
+        "avg_latency_ms": 78541.9
+      },
+      "cond_A_standalone": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 4752.0,
+        "avg_output_tokens": 613.0,
+        "avg_latency_ms": 3397.7
+      },
+      "cond_B_workspace_tools": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 7195.5,
+        "avg_output_tokens": 576.0,
+        "avg_latency_ms": 4993.9
+      }
+    },
+    "dai-so-tuyen-tinh": {
+      "baseline_no_skill": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 120.0,
+        "avg_output_tokens": 702.0,
+        "avg_latency_ms": 9931.0
+      },
+      "cond_A_standalone": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 3869.0,
+        "avg_output_tokens": 805.0,
+        "avg_latency_ms": 4530.2
+      },
+      "cond_B_workspace_tools": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 4701.0,
+        "avg_output_tokens": 785.5,
+        "avg_latency_ms": 45583.7
+      }
+    },
+    "giai-tich-dai-hoc": {
+      "baseline_no_skill": {
+        "total_runs_in_condition": 3,
+        "resolved_runs": 3,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 3,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 101.0,
+        "avg_output_tokens": 772.3,
+        "avg_latency_ms": 20016.6
+      },
+      "cond_A_standalone": {
+        "total_runs_in_condition": 3,
+        "resolved_runs": 3,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 2,
+        "det_pass": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 3,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 3981.0,
+        "avg_output_tokens": 959.0,
+        "avg_latency_ms": 15654.7
+      },
+      "cond_B_workspace_tools": {
+        "total_runs_in_condition": 3,
+        "resolved_runs": 3,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 3,
+          "den": 3,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 3,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 5243.0,
+        "avg_output_tokens": 907.3,
+        "avg_latency_ms": 19039.5
+      }
+    },
+    "hoc-dai-hoc-hieu-qua": {
+      "baseline_no_skill": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 91.5,
+        "avg_output_tokens": 922.0,
+        "avg_latency_ms": 30966.4
+      },
+      "cond_A_standalone": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "diagnosis_accuracy": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "no_false_correction": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 3436.5,
+        "avg_output_tokens": 927.5,
+        "avg_latency_ms": 39628.9
+      },
+      "cond_B_workspace_tools": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 4196.5,
+        "avg_output_tokens": 807.0,
+        "avg_latency_ms": 5653.8
+      }
+    },
+    "lap-trinh-can-ban": {
+      "baseline_no_skill": {
+        "total_runs_in_condition": 1,
+        "resolved_runs": 1,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 186.0,
+        "avg_output_tokens": 836.0,
+        "avg_latency_ms": 8327.9
+      },
+      "cond_A_standalone": {
+        "total_runs_in_condition": 1,
+        "resolved_runs": 1,
+        "ai_judged_runs": 0,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 3554.0,
+        "avg_output_tokens": 884.0,
+        "avg_latency_ms": 5099.0
+      },
+      "cond_B_workspace_tools": {
+        "total_runs_in_condition": 1,
+        "resolved_runs": 1,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 1,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 4233.0,
+        "avg_output_tokens": 783.0,
+        "avg_latency_ms": 4326.4
+      }
+    },
+    "phuong-phap-nghien-cuu": {
+      "baseline_no_skill": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 0,
+        "manually_audited_runs": 2,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "no_false_correction": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 4.5,
+        "avg_prompt_tokens": 115.0,
+        "avg_output_tokens": 991.0,
+        "avg_latency_ms": 53099.8
+      },
+      "cond_A_standalone": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 2,
+          "pct": 50.0
+        },
+        "diagnosis_accuracy": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 4174.0,
+        "avg_output_tokens": 1056.0,
+        "avg_latency_ms": 6249.1
+      },
+      "cond_B_workspace_tools": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 0,
+        "manually_audited_runs": 2,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "no_false_correction": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 5340.5,
+        "avg_output_tokens": 1003.0,
+        "avg_latency_ms": 13092.0
+      }
+    },
+    "viet-hoc-thuat": {
+      "baseline_no_skill": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 1,
+          "den": 2,
+          "pct": 50.0
+        },
+        "domain_accuracy": {
+          "num": 1,
+          "den": 2,
+          "pct": 50.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 1,
+          "den": 2,
+          "pct": 50.0
+        },
+        "source_integrity": {
+          "num": 1,
+          "den": 2,
+          "pct": 50.0
+        },
+        "critical_error_rate": {
+          "num": 1,
+          "den": 2,
+          "pct": 50.0
+        },
+        "avg_quality_1to5": 3.0,
+        "avg_prompt_tokens": 108.0,
+        "avg_output_tokens": 795.5,
+        "avg_latency_ms": 32607.7
+      },
+      "cond_A_standalone": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 3830.0,
+        "avg_output_tokens": 928.0,
+        "avg_latency_ms": 8068.0
+      },
+      "cond_B_workspace_tools": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 4392.0,
+        "avg_output_tokens": 898.0,
+        "avg_latency_ms": 8515.9
+      }
+    },
+    "xac-suat-thong-ke": {
+      "baseline_no_skill": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 0,
+          "den": 0,
+          "pct": null
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 146.0,
+        "avg_output_tokens": 879.5,
+        "avg_latency_ms": 8869.5
+      },
+      "cond_A_standalone": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 2,
+        "manually_audited_runs": 0,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 3875.0,
+        "avg_output_tokens": 931.5,
+        "avg_latency_ms": 10484.2
+      },
+      "cond_B_workspace_tools": {
+        "total_runs_in_condition": 2,
+        "resolved_runs": 2,
+        "ai_judged_runs": 1,
+        "manually_audited_runs": 1,
+        "det_pass": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "domain_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "error_detection": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "diagnosis_accuracy": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "no_false_correction": {
+          "num": 1,
+          "den": 1,
+          "pct": 100.0
+        },
+        "mode_adherence": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "source_integrity": {
+          "num": 2,
+          "den": 2,
+          "pct": 100.0
+        },
+        "critical_error_rate": {
+          "num": 0,
+          "den": 2,
+          "pct": 0.0
+        },
+        "avg_quality_1to5": 5.0,
+        "avg_prompt_tokens": 4827.5,
+        "avg_output_tokens": 830.0,
+        "avg_latency_ms": 19504.4
+      }
+    }
+  },
+  "round1_note": "Round 1 (before fixing negative priming in viet-hoc-thuat) had 1 real failure on MD-RUN-029-MD-13-cond_A_standalone (inserted illustrative author names '(Nguyen & Tran, 2025; Smith et al., 2025)'), making cond_A Round 1 det_pass = 15/16 (93.8%) and Post-Fix = 16/16 (100.0%)."
+}

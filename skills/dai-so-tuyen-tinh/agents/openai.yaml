@@ -1,0 +1,6 @@
+interface:
+  display_name: "Đại số Tuyến tính"
+  short_description: "Ma trận, khử Gauss, không gian vector, trị riêng và chéo hóa"
+  default_prompt: "Sử dụng $dai-so-tuyen-tinh để giải thích, kiểm chứng hoặc sửa bài Đại số tuyến tính sau."
+policy:
+  allow_implicit_invocation: true

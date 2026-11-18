@@ -1,8 +1,10 @@
 {
-  "timestamp": "2026-11-18T14:51:05.070Z",
-  "standard": "Universal Agentic Skill Specification (UASS v2.0)",
+  "timestamp": "2026-11-18T15:52:28.424Z",
+  "standard": "Universal Agentic Skill Specification (UASS v2.0 + Multidisciplinary Stage 1)",
   "totalScanned": 16,
   "validCount": 16,
+  "multidisciplinaryScanned": 10,
+  "multidisciplinaryValidCount": 10,
   "errorCount": 0,
   "warningCount": 0,
   "details": [
@@ -213,6 +215,138 @@
       "isValid": true,
       "issues": [],
       "warnings": []
+    }
+  ],
+  "multidisciplinaryDetails": [
+    {
+      "file": "skills/chuyen-tiep-dai-hoc/SKILL.md",
+      "name": "chuyen-tiep-dai-hoc",
+      "version": "1.0.0",
+      "category": "chuyen-tiep-hoc-thuat",
+      "contentLength": 20353,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/dai-so-tuyen-tinh/SKILL.md",
+      "name": "dai-so-tuyen-tinh",
+      "version": "1.0.0",
+      "category": "nen-tang-dai-hoc",
+      "contentLength": 12846,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/giai-tich-dai-hoc/SKILL.md",
+      "name": "giai-tich-dai-hoc",
+      "version": "1.0.0",
+      "category": "nen-tang-dai-hoc",
+      "contentLength": 13775,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/hoc-dai-hoc-hieu-qua/SKILL.md",
+      "name": "hoc-dai-hoc-hieu-qua",
+      "version": "1.0.0",
+      "category": "chuyen-tiep-hoc-thuat",
+      "contentLength": 12623,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/lap-trinh-can-ban/SKILL.md",
+      "name": "lap-trinh-can-ban",
+      "version": "1.0.0",
+      "category": "nen-tang-dai-hoc",
+      "contentLength": 11833,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/phuong-phap-nghien-cuu/SKILL.md",
+      "name": "phuong-phap-nghien-cuu",
+      "version": "1.0.0",
+      "category": "nghien-cuu-da-nganh",
+      "contentLength": 16599,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/tu-van-huong-nghiep-tuyen-sinh/SKILL.md",
+      "name": "tu-van-huong-nghiep-tuyen-sinh",
+      "version": "1.0.0",
+      "category": "chuyen-tiep-hoc-thuat",
+      "contentLength": 13981,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/tu-van-tam-ly-hoc-duong/SKILL.md",
+      "name": "tu-van-tam-ly-hoc-duong",
+      "version": "1.0.0",
+      "category": "chuyen-tiep-hoc-thuat",
+      "contentLength": 14447,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/viet-hoc-thuat/SKILL.md",
+      "name": "viet-hoc-thuat",
+      "version": "1.0.0",
+      "category": "chuyen-tiep-hoc-thuat",
+      "contentLength": 13479,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
+    },
+    {
+      "file": "skills/xac-suat-thong-ke/SKILL.md",
+      "name": "xac-suat-thong-ke",
+      "version": "1.0.0",
+      "category": "nen-tang-dai-hoc",
+      "contentLength": 13124,
+      "hasOpenAiYaml": true,
+      "hasReferences": true,
+      "hasTrapMatrix": true,
+      "hasAll14Sections": true,
+      "isValid": true,
+      "issues": []
     }
   ]
 }

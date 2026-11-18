@@ -1,0 +1,6 @@
+interface:
+  display_name: "Chuyển tiếp THPT–Đại học"
+  short_description: "Chẩn đoán lỗ hổng và lập lộ trình chuyển tiếp THPT lên đại học"
+  default_prompt: "Sử dụng $chuyen-tiep-dai-hoc để chẩn đoán kiến thức đầu vào và lập lộ trình bù cho học phần sắp học."
+policy:
+  allow_implicit_invocation: true

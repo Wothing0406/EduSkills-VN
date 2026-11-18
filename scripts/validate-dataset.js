@@ -20,6 +20,25 @@ const VALID_CATEGORIES = [
   'meta-tools'
 ];
 
+const UNIVERSITY_STAGE1_CATEGORIES = [
+  'chuyen-tiep-hoc-thuat',
+  'nen-tang-dai-hoc',
+  'nghien-cuu-da-nganh'
+];
+
+const UNIVERSITY_STAGE1_SKILLS = [
+  'chuyen-tiep-dai-hoc',
+  'hoc-dai-hoc-hieu-qua',
+  'giai-tich-dai-hoc',
+  'dai-so-tuyen-tinh',
+  'xac-suat-thong-ke',
+  'lap-trinh-can-ban',
+  'viet-hoc-thuat',
+  'phuong-phap-nghien-cuu',
+  'tu-van-huong-nghiep-tuyen-sinh',
+  'tu-van-tam-ly-hoc-duong'
+];
+
 const MIN_SKILL_CONTENT_LENGTH = 3500; // Chặn đứng các file stub sơ sài
 
 // Parser cho YAML Frontmatter (Zero external dependency)
@@ -116,21 +135,94 @@ function runValidation(silent = false) {
     console.log('=============================================================\n');
   }
 
-  const files = scanSkills(SKILLS_DIR);
+  const allFiles = scanSkills(SKILLS_DIR);
+  const files = allFiles.filter(f => !UNIVERSITY_STAGE1_SKILLS.includes(path.basename(path.dirname(f))));
+  const uniFiles = allFiles.filter(f => UNIVERSITY_STAGE1_SKILLS.includes(path.basename(path.dirname(f))));
+
   if (!silent) {
-    console.log(`📁 Tìm thấy ${files.length} file SKILL.md trong thư mục skills/\n`);
+    console.log(`📁 Tìm thấy ${files.length} SKILL.md THPT + ${uniFiles.length} SKILL.md Đại học/Nghiên cứu (Giai đoạn 1) trong skills/\n`);
   }
 
   const catalog = [];
   const report = {
     timestamp: new Date().toISOString(),
-    standard: 'Universal Agentic Skill Specification (UASS v2.0)',
+    standard: 'Universal Agentic Skill Specification (UASS v2.0 + Multidisciplinary Stage 1)',
     totalScanned: files.length,
     validCount: 0,
+    multidisciplinaryScanned: uniFiles.length,
+    multidisciplinaryValidCount: 0,
     errorCount: 0,
     warningCount: 0,
-    details: []
+    details: [],
+    multidisciplinaryDetails: []
   };
+
+  uniFiles.forEach(file => {
+    const skillDir = path.dirname(file);
+    const relPath = path.relative(path.join(__dirname, '..'), file).replace(/\\/g, '/');
+    const content = fs.readFileSync(file, 'utf-8');
+    const { meta } = parseFrontmatter(content);
+    const metadataDict = (meta.metadata && typeof meta.metadata === 'object') ? meta.metadata : {};
+    const resolvedCategory = meta.category || metadataDict.category || '';
+    const resolvedVersion = meta.version || metadataDict.version || '1.0.0';
+
+    const refsDir = path.join(skillDir, 'references');
+    let refsContent = '';
+    if (fs.existsSync(refsDir)) {
+      fs.readdirSync(refsDir).forEach(rf => {
+        const rp = path.join(refsDir, rf);
+        if (fs.statSync(rp).isFile() && rf.toLowerCase().endsWith('.md')) {
+          refsContent += '\n' + fs.readFileSync(rp, 'utf-8');
+        }
+      });
+    }
+    const combinedContent = content + refsContent;
+    const combinedLength = combinedContent.length;
+    const issues = [];
+    if (!meta.name) issues.push('Thiếu trường "name"');
+    if (!meta.description) issues.push('Thiếu trường "description"');
+    if (!UNIVERSITY_STAGE1_CATEGORIES.includes(resolvedCategory)) {
+      issues.push(`Category "${resolvedCategory}" không thuộc nhóm đa ngành GĐ1`);
+    }
+    if (combinedLength < 5000) {
+      issues.push(`Nội dung quá ngắn (${combinedLength} < 5000)`);
+    }
+    const hasOpenAiYaml = fs.existsSync(path.join(skillDir, 'agents', 'openai.yaml'));
+    const hasReferences = fs.existsSync(refsDir) && fs.readdirSync(refsDir).length > 0;
+    const hasTrapMatrix = /\|\s*Dấu hiệu\s*\|\s*Cách hiểu sai\s*\|/i.test(content);
+    const hasAll14Sections = Array.from({ length: 14 }, (_, i) => i + 1).every(n => new RegExp(`^##\\s+${n}\\.\\s+\\S+`, 'm').test(content));
+    if (!hasOpenAiYaml) issues.push('Thiếu agents/openai.yaml');
+    if (!hasReferences) issues.push('Thiếu references/');
+    if (!hasTrapMatrix) issues.push('Thiếu ma trận lỗi 6 cột');
+    if (!hasAll14Sections) issues.push('Thiếu đủ 14 mục chuẩn đa ngành');
+
+    const isValid = issues.length === 0;
+    if (isValid) {
+      report.multidisciplinaryValidCount++;
+      if (!silent) {
+        console.log(`  ✅ [ĐẠT CHUẨN ĐH GĐ1] ${meta.name.padEnd(22)} | ${String(combinedLength).padStart(5)} chars | ${resolvedCategory}`);
+      }
+    } else {
+      report.errorCount++;
+      if (!silent) {
+        console.log(`  ❌ [LỖI ĐH] ${relPath}`);
+        issues.forEach(err => console.log(`      - ${err}`));
+      }
+    }
+    report.multidisciplinaryDetails.push({
+      file: relPath,
+      name: meta.name || 'UNKNOWN',
+      version: resolvedVersion,
+      category: resolvedCategory,
+      contentLength: combinedLength,
+      hasOpenAiYaml,
+      hasReferences,
+      hasTrapMatrix,
+      hasAll14Sections,
+      isValid,
+      issues
+    });
+  });
 
   files.forEach(file => {
     const skillDir = path.dirname(file);

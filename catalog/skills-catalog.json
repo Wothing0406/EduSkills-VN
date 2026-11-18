@@ -1,0 +1,863 @@
+{
+  "catalog_version": "1.0.0",
+  "updated_at": "2026-11-18",
+  "independence_note": "Catalog cấp dự án chỉ dùng để điều phối, tra cứu lộ trình và kiểm toán; không phải phụ thuộc bắt buộc khi cài riêng bất kỳ skill nào bằng npx skills add.",
+  "architecture_layers": [
+    { "id": "THPT", "name": "Nền tảng THPT (Lớp 10–12)", "implemented_count": 16, "planned_count": 0 },
+    { "id": "Lop-A", "name": "Lớp A — Năng lực học thuật chung, Chuyển tiếp & Tư vấn", "implemented_count": 6, "planned_count": 4 },
+    { "id": "Lop-B", "name": "Lớp B — Kiến thức nền đại học", "implemented_count": 4, "planned_count": 4 },
+    { "id": "Lop-C", "name": "Lớp C — Nhóm ngành (14 nhóm ngành lộ trình)", "implemented_count": 0, "planned_count": 14 },
+    { "id": "Lop-D", "name": "Lớp D — Chuyên ngành & Học phần sâu (chỉ mở khi đủ 6 điều kiện)", "implemented_count": 0, "planned_count": 5 }
+  ],
+  "skills": [
+    {
+      "name": "toan-thpt",
+      "domain_group": "THPT / Khoa học Tự nhiên",
+      "level": "THPT Lớp 10–12 (GDPT 2018)",
+      "prerequisites": ["Toán THCS"],
+      "learning_outcomes": [
+        "Tính toán chính xác đạo hàm, nguyên hàm, tích phân, Oxyz và xác suất có điều kiện.",
+        "Kiểm chứng điều kiện xác định và dấu ngặt hàm phân thức.",
+        "Phân tích lỗi sai bài làm không lộ đáp số ở chế độ gợi ý."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "giai-tich-dai-hoc", "dai-so-tuyen-tinh", "xac-suat-thong-ke"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "SGK thống nhất KNTT 2026–2027 & cấu trúc đề tốt nghiệp 22 câu Toán THPT",
+          "url_or_doi": "QĐ 3588/QĐ-BGDĐT (2025) & QĐ 764/QĐ-BGDĐT (08/03/2024)",
+          "author_or_org": "Bộ Giáo dục và Đào tạo Việt Nam",
+          "year": 2025,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Toán THPT 10–12 Việt Nam",
+          "limitations": "Link Drive SGK chi tiết trong web hub là tham chiếu tác giả chưa kiểm tra từng PDF tự động",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 3,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "vat-li-thpt",
+      "domain_group": "THPT / Khoa học Tự nhiên",
+      "level": "THPT Lớp 10–12 (GDPT 2018)",
+      "prerequisites": ["Toán & KHTN THCS"],
+      "learning_outcomes": [
+        "Tính toán chuẩn đơn vị SI cho Cơ, Nhiệt, Khí lí tưởng, Điện–Từ và Hạt nhân.",
+        "Kiểm tra quy đổi Kelvin và phương trình trạng thái pV/T."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "vat-li-dai-cuong"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Cấu trúc đề thi Vật lí QĐ 764 (40 câu) & SGK GDPT 2018",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024) & QĐ 3588/QĐ-BGDĐT (2025)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2025,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Vật lí 10–12",
+          "limitations": "Chưa test lại trên model Pro trả phí",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 2,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "hoa-hoc-thpt",
+      "domain_group": "THPT / Khoa học Tự nhiên",
+      "level": "THPT Lớp 10–12 (GDPT 2018)",
+      "prerequisites": ["KHTN THCS"],
+      "learning_outcomes": [
+        "Áp dụng danh pháp IUPAC 2018 và điều kiện chuẩn 24.79 L/mol (25°C, 1 bar).",
+        "Giải thích phản ứng ester phenol 1:2, carbohydrate, amine–peptide và bảo toàn e."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "hoa-hoc-dai-cuong"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Chuẩn IUPAC tiếng Anh & QĐ 764 (40 câu Hóa) / QĐ 3588",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024) & QĐ 3588/QĐ-BGDĐT (2025)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2025,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Hóa học 10–12",
+          "limitations": "REG-01 @canvas còn thiếu JS nút showHint/resetQuiz trên flash-lite",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 7,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "sinh-hoc-thpt",
+      "domain_group": "THPT / Khoa học Tự nhiên",
+      "level": "THPT Lớp 10–12 (GDPT 2018)",
+      "prerequisites": ["KHTN THCS"],
+      "learning_outcomes": [
+        "Phân biện ngụy biện phả hệ NST X và tính xác suất có điều kiện trong di truyền quần thể."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "sinh-hoc-dai-cuong"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Chuẩn GDPT 2018 Sinh học 10–12 & QĐ 764",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2024,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Sinh học 10–12",
+          "limitations": "Chưa test trực tiếp trên nhóm học sinh thật",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 2,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "ngu-van-thpt",
+      "domain_group": "THPT / Khoa học Xã hội & Nhân văn",
+      "level": "THPT Lớp 10–12 (GDPT 2018)",
+      "prerequisites": ["Ngữ văn THCS"],
+      "learning_outcomes": [
+        "Phân tích đọc hiểu ngữ liệu ngoài SGK và lập dàn ý đoạn 200 chữ / bài 600 chữ.",
+        "Từ chối bịa ngữ liệu văn bản khi học sinh không cung cấp."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "viet-hoc-thuat"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Quy định cấu trúc thi Ngữ văn 2025 dùng ngữ liệu ngoài SGK",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2024,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Ngữ văn 10–12",
+          "limitations": "Đánh giá trên ngữ liệu mô phỏng",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 2,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "lich-su-thpt",
+      "domain_group": "THPT / Khoa học Xã hội",
+      "level": "THPT Lớp 10–12 (GDPT 2018)",
+      "prerequisites": ["Lịch sử THCS"],
+      "learning_outcomes": [
+        "So sánh bối cảnh, mốc chuyển thế chiến lược và tư liệu lịch sử 10–12 chuẩn xác."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "phuong-phap-nghien-cuu"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Chương trình Lịch sử GDPT 2018 & cấu trúc 28 câu không Phần III QĐ 764",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2024,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Lịch sử 10–12",
+          "limitations": "Cần kiểm chứng bổ sung khi Bộ cập nhật chuyên đề mới",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 2,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "dia-li-thpt",
+      "domain_group": "THPT / Khoa học Xã hội",
+      "level": "THPT Lớp 10–12 (GDPT 2018)",
+      "prerequisites": ["Địa lí THCS"],
+      "learning_outcomes": [
+        "Tính toán năng suất/cơ cấu đúng đơn vị và cập nhật địa giới 34 đơn vị cấp tỉnh."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "xac-suat-thong-ke"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Sắp xếp cả nước còn 34 đơn vị hành chính cấp tỉnh (28 tỉnh, 6 TP)",
+          "url_or_doi": "Nghị quyết 202/2025/QH15 (12/06/2025)",
+          "author_or_org": "Quốc hội Việt Nam",
+          "year": 2025,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Địa lí kinh tế–xã hội Việt Nam",
+          "limitations": "Số liệu địa giới phụ thuộc thời gian nếu tiếp tục điều chỉnh",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 1,
+      "revalidate_by": "2027-01-01"
+    },
+    {
+      "name": "ktpl-thpt",
+      "domain_group": "THPT / Khoa học Xã hội",
+      "level": "THPT Lớp 10–12 (GDPT 2018)",
+      "prerequisites": ["GDCD THCS"],
+      "learning_outcomes": [
+        "Phân tích tình huống pháp luật, chủ quyền biển đảo UNCLOS và mô hình chính quyền 2 cấp."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "kinh-te-hoc-co-ban"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Sửa đổi Điều 110, 111 Hiến pháp 2013: tổ chức chính quyền địa phương 2 cấp, kết thúc cấp huyện từ 01/07/2025",
+          "url_or_doi": "Nghị quyết 203/2025/QH15 (16/06/2025)",
+          "author_or_org": "Quốc hội Việt Nam",
+          "year": 2025,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "GDKT&PL 10–12 Việt Nam",
+          "limitations": "Cần rà lại nếu có văn bản hướng dẫn thi hành mới",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 2,
+      "revalidate_by": "2027-01-01"
+    },
+    {
+      "name": "tieng-anh-thpt",
+      "domain_group": "THPT / Ngôn ngữ & Công nghệ",
+      "level": "THPT Lớp 10–12 (CEFR B1–C1)",
+      "prerequisites": ["Tiếng Anh THCS"],
+      "learning_outcomes": [
+        "Phát hiện lỗi chính tả, word formation, cấu trúc đọc hiểu và gợi ý không lộ đáp án."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "viet-hoc-thuat"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Định dạng đề thi Tiếng Anh QĐ 764 (40 câu) & GDPT 2018",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2024,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Tiếng Anh 10–12",
+          "limitations": "Không thay thế chuẩn IELTS/TOEFL quốc tế",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 1,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "tin-hoc-thpt",
+      "domain_group": "THPT / Ngôn ngữ & Công nghệ",
+      "level": "THPT Lớp 10–12 (KHMT & THƯD)",
+      "prerequisites": ["Tin học THCS"],
+      "learning_outcomes": [
+        "Triển khai thuật toán Python cơ bản, truy vấn SQL GROUP BY/HAVING và phản biện tìm kiếm nhị phân."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "lap-trinh-can-ban"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Cấu trúc đề thi Tin học 30 câu (24 chung + chọn 4/6 riêng 2 định hướng)",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2024,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Tin học 10–12",
+          "limitations": "TC-12 T2 cần tiếp tục giám sát trên model nhẹ",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 2,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "cong-nghe-thpt",
+      "domain_group": "THPT / Ngôn ngữ & Công nghệ",
+      "level": "THPT Lớp 10–12 (Công nghiệp & Nông nghiệp)",
+      "prerequisites": ["KHTN & Công nghệ THCS"],
+      "learning_outcomes": [
+        "Tính toán thông số điện 3 pha (sao/tam giác) và phân tích hệ thống Biofloc/RAS."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "ky-thuat-nen-tang"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Công nghệ 10–12 GDPT 2018 & QĐ 764",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2024,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Công nghệ 10–12",
+          "limitations": "Không thay thế hướng dẫn an toàn thi công điện lưới thực tế",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 1,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "giai-chi-tiet",
+      "domain_group": "THPT / Meta-Tools",
+      "level": "THPT Lớp 10–12",
+      "prerequisites": ["Kiến thức nền môn THPT"],
+      "learning_outcomes": [
+        "Chẩn đoán bước sai đầu tiên và giao bài biến thể không lộ đáp số ở chế độ gợi ý."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Quy chuẩn sư phạm dự án & kiểm chứng đối thoại 2 lượt",
+          "url_or_doi": "tests/eval/test-cases.json (TC-14)",
+          "author_or_org": "EduSkills-VN",
+          "year": 2026,
+          "accessed_date": "2026-11-18",
+          "source_type": "Tài liệu kiểm thử nội bộ",
+          "scope": "Sửa bài THPT",
+          "limitations": "Đo trên mô phỏng API",
+          "verification_status": "verified_internal"
+        }
+      ],
+      "tests_executed": 1,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "tao-quiz-bgd",
+      "domain_group": "THPT / Meta-Tools",
+      "level": "THPT Lớp 10–12",
+      "prerequisites": ["Kiến thức môn THPT"],
+      "learning_outcomes": [
+        "Thiết kế đề kiểm tra tách đáp án đúng chuẩn từng môn theo QĐ 764 hoặc mục tiêu giữa kỳ."
+      ],
+      "related_skills": ["hoc-dai-hoc-hieu-qua"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Phân biệt đề môn có/không Phần III theo QĐ 764",
+          "url_or_doi": "QĐ 764/QĐ-BGDĐT (2024)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2024,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Ra đề THPT",
+          "limitations": "Cần cập nhật nếu BGD thay đổi ma trận đề minh họa",
+          "verification_status": "verified_policy"
+        }
+      ],
+      "tests_executed": 1,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "tomtat-mindmap",
+      "domain_group": "THPT / Meta-Tools",
+      "level": "THPT Lớp 10–12",
+      "prerequisites": ["Bài học THPT"],
+      "learning_outcomes": [
+        "Thiết kế sơ đồ tư duy Mermaid hợp lệ và bảng Cornell kèm Active Recall."
+      ],
+      "related_skills": ["hoc-dai-hoc-hieu-qua"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Chuẩn cú pháp Mermaid mindmap & trung thực không giả lập SVG",
+          "url_or_doi": "tests/eval/test-cases.json (TC-16)",
+          "author_or_org": "EduSkills-VN",
+          "year": 2026,
+          "accessed_date": "2026-11-18",
+          "source_type": "Tài liệu kiểm thử nội bộ",
+          "scope": "Tóm tắt bài học",
+          "limitations": "Không xuất trực tiếp file ảnh vector trong chat thuần",
+          "verification_status": "verified_internal"
+        }
+      ],
+      "tests_executed": 1,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "slide-thuyet-trinh",
+      "domain_group": "THPT / Meta-Tools",
+      "level": "THPT Lớp 10–12",
+      "prerequisites": ["Nội dung bài thuyết trình"],
+      "learning_outcomes": [
+        "Thiết kế bộ slide Marp 16:9 tuân thủ Rule of Six và trung thực về xuất PDF/PPTX."
+      ],
+      "related_skills": ["viet-hoc-thuat", "do-an-dai-hoc"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Chuẩn Markdown Marp & trung thực năng lực xuất file",
+          "url_or_doi": "tests/eval/test-cases.json (TC-17)",
+          "author_or_org": "EduSkills-VN",
+          "year": 2026,
+          "accessed_date": "2026-11-18",
+          "source_type": "Tài liệu kiểm thử nội bộ",
+          "scope": "Thiết kế slide bài học",
+          "limitations": "Chat thuần chỉ tạo mã Marp/HTML",
+          "verification_status": "verified_internal"
+        }
+      ],
+      "tests_executed": 1,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "luan-an-nghiencuu",
+      "domain_group": "THPT / Meta-Tools Nghiên cứu KHKT",
+      "level": "THPT Lớp 10–12 (ViSEF/ISEF)",
+      "prerequisites": ["Kiến thức KHTN/KT/XH THPT"],
+      "learning_outcomes": [
+        "Thiết kế đề cương nghiên cứu KHKT học sinh và bảo vệ liêm chính số liệu/trích dẫn."
+      ],
+      "related_skills": ["phuong-phap-nghien-cuu", "viet-hoc-thuat"],
+      "status": "released",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Quy chế cuộc thi KHKT cấp quốc gia học sinh THCS & THPT (16 lĩnh vực, nhật ký >= 1 lần/tháng, 100đ/20 tiêu chí)",
+          "url_or_doi": "Thông tư 84/2026/TT-BGDĐT (30/09/2026)",
+          "author_or_org": "Bộ GDĐT Việt Nam",
+          "year": 2026,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Nghiên cứu KHKT THPT Việt Nam",
+          "limitations": "Áp dụng cho ViSEF, mở rộng sang đại học cần dùng phuong-phap-nghien-cuu",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 1,
+      "revalidate_by": "2027-06-01"
+    },
+
+    {
+      "name": "chuyen-tiep-dai-hoc",
+      "domain_group": "Lớp A — Năng lực học thuật chung & Cầu chuyển tiếp",
+      "level": "Chuyển tiếp THPT → Đại học Năm 1",
+      "prerequisites": ["Kiến thức THPT theo môn liên quan (GDPT 2018)"],
+      "learning_outcomes": [
+        "Phân tích đề cương đại học và ánh xạ về đúng mắt xích THPT tiên quyết.",
+        "Kiểm chứng lỗ hổng bằng mini-probe và bằng chứng bài làm cụ thể, không gán nhãn mất gốc.",
+        "Thiết kế lộ trình bù phẫu thuật và kiểm tra chuyển giao trước khi học nội dung đại học."
+      ],
+      "related_skills": ["toan-thpt", "tin-hoc-thpt", "hoc-dai-hoc-hieu-qua", "giai-tich-dai-hoc", "dai-so-tuyen-tinh", "xac-suat-thong-ke", "lap-trinh-can-ban"],
+      "status": "behavior-tested",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Quy chế đào tạo trình độ đại học hệ tín chỉ tại Việt Nam",
+          "url_or_doi": "Thông tư 08/2021/TT-BGDĐT (18/03/2021, hiệu lực 03/05/2021)",
+          "author_or_org": "Bộ Giáo dục và Đào tạo Việt Nam",
+          "year": 2021,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Đào tạo đại học Việt Nam",
+          "limitations": "Trường tự chủ có quy định chi tiết thêm trong Sổ tay sinh viên",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 6,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "hoc-dai-hoc-hieu-qua",
+      "domain_group": "Lớp A — Năng lực học thuật chung",
+      "level": "Đại học Năm 1–4",
+      "prerequisites": ["chuyen-tiep-dai-hoc"],
+      "learning_outcomes": [
+        "Phân tích đề cương học phần (syllabus) thành bảng CLO, trọng số và lịch tự học theo tín chỉ.",
+        "Thiết kế hệ thống đọc giáo trình SQ3R + ghi chép Cornell + Active Recall/Spaced Repetition.",
+        "Phản biện ảo giác năng lực và xác định ranh giới sử dụng AI trung thực."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "viet-hoc-thuat", "phuong-phap-nghien-cuu"],
+      "status": "behavior-tested",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Cấu trúc điểm thành phần, thi trực tuyến <=50%, học lại và xét tốt nghiệp theo tín chỉ",
+          "url_or_doi": "Thông tư 08/2021/TT-BGDĐT (Điều 3, 9, 10, 11, 13, 14)",
+          "author_or_org": "Bộ Giáo dục và Đào tạo Việt Nam",
+          "year": 2021,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Đào tạo tín chỉ bậc đại học Việt Nam",
+          "limitations": "Mỗi trường có thể ban hành thang điểm phụ riêng",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 6,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "giai-tich-dai-hoc",
+      "domain_group": "Lớp B — Kiến thức nền đại học",
+      "level": "Đại học Đại cương (Calculus I–II / Nhiều biến)",
+      "prerequisites": ["toan-thpt", "chuyen-tiep-dai-hoc"],
+      "learning_outcomes": [
+        "Giải thích và kiểm chứng điều kiện áp dụng định lý giới hạn, L'Hôpital, Taylor, tích phân suy rộng, chuỗi và Hessian/Lagrange kèm phản ví dụ.",
+        "Tính toán chính xác giới hạn vô định, khai triển Maclaurin, tích phân suy rộng, đạo hàm riêng và cực trị có điều kiện.",
+        "Phân tích bước sai đầu tiên trong bài giải tích mà không lộ đáp số khi người học xin gợi ý."
+      ],
+      "related_skills": ["toan-thpt", "chuyen-tiep-dai-hoc", "dai-so-tuyen-tinh", "xac-suat-thong-ke"],
+      "status": "behavior-tested",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Khung nội dung Calculus Vol. 1–3, định nghĩa giới hạn, L'Hôpital, Taylor, chuỗi & nhiều biến",
+          "url_or_doi": "https://openstax.org/details/books/calculus-volume-1",
+          "author_or_org": "Gilbert Strang & Edwin Herman (OpenStax / Rice University)",
+          "year": 2016,
+          "accessed_date": "2026-11-18",
+          "source_type": "Giáo trình học thuật chuẩn mở",
+          "scope": "Giải tích 1–2–3 đại học",
+          "limitations": "Thứ tự chương có thể xê dịch theo từng trường đại học",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 9,
+      "revalidate_by": "2028-01-01"
+    },
+    {
+      "name": "dai-so-tuyen-tinh",
+      "domain_group": "Lớp B — Kiến thức nền đại học",
+      "level": "Đại học Đại cương (Linear Algebra)",
+      "prerequisites": ["toan-thpt", "chuyen-tiep-dai-hoc"],
+      "learning_outcomes": [
+        "Tính toán khử Gauss–Jordan, định thức, ma trận nghịch đảo, cơ sở không gian con và trị riêng–vector riêng.",
+        "Chứng minh tính độc lập tuyến tính, định lý hạng–số không và điều kiện chéo hóa.",
+        "Kiểm chứng ngược nghiệm hệ, vết–định thức và công nhận cách giải khác hợp lệ như Cramer."
+      ],
+      "related_skills": ["toan-thpt", "chuyen-tiep-dai-hoc", "giai-tich-dai-hoc", "xac-suat-thong-ke"],
+      "status": "behavior-tested",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "4 không gian con cơ bản, RREF, định lý khả nghịch & chéo hóa",
+          "url_or_doi": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+          "author_or_org": "Gilbert Strang (MIT OpenCourseWare 18.06)",
+          "year": 2010,
+          "accessed_date": "2026-11-18",
+          "source_type": "Giáo trình / Học liệu đại học chuẩn mở",
+          "scope": "Đại số tuyến tính đại học",
+          "limitations": "Bản chất toán học ổn định theo thời gian",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 6,
+      "revalidate_by": "2028-01-01"
+    },
+    {
+      "name": "xac-suat-thong-ke",
+      "domain_group": "Lớp B — Kiến thức nền đại học",
+      "level": "Đại học Đại cương (Probability & Statistics)",
+      "prerequisites": ["toan-thpt", "chuyen-tiep-dai-hoc", "giai-tich-dai-hoc"],
+      "learning_outcomes": [
+        "Tính toán xác suất có điều kiện/Bayes, phân phối rời rạc–liên tục, khoảng tin cậy và kiểm định z/t/chi-square.",
+        "Phản biện đúng ý nghĩa p-value, phân biệt tương quan với nhân quả và phát hiện nghịch lý Simpson.",
+        "Kiểm chứng dữ liệu có giá trị thiếu và tách dữ liệu quan sát khỏi dữ liệu minh họa/mô phỏng."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "giai-tich-dai-hoc", "phuong-phap-nghien-cuu"],
+      "status": "behavior-tested",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Khung phân phối xác suất, CLT, khoảng tin cậy, kiểm định giả thuyết & hồi quy OLS",
+          "url_or_doi": "https://openstax.org/details/books/introductory-statistics",
+          "author_or_org": "Barbara Illowsky & Susan Dean (OpenStax / Rice University)",
+          "year": 2013,
+          "accessed_date": "2026-11-18",
+          "source_type": "Giáo trình học thuật chuẩn mở",
+          "scope": "Xác suất thống kê nhập môn đại học",
+          "limitations": "Không thay thế phần mềm thống kê chuyên sâu cho bảng tra phân vị lẻ",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 6,
+      "revalidate_by": "2028-01-01"
+    },
+    {
+      "name": "lap-trinh-can-ban",
+      "domain_group": "Lớp B — Kiến thức nền đại học",
+      "level": "Đại học Đại cương (CS1 — Python / C++)",
+      "prerequisites": ["tin-hoc-thpt", "chuyen-tiep-dai-hoc"],
+      "learning_outcomes": [
+        "Triển khai hàm, đệ quy an toàn và giải thuật cơ bản trên list/string/dict.",
+        "Phân tích độ phức tạp thời gian–bộ nhớ Big-O kể cả chi phí ẩn bên trong vòng lặp.",
+        "Kiểm chứng chương trình bằng Trace Table và tối thiểu 4 nhóm test biên."
+      ],
+      "related_skills": ["tin-hoc-thpt", "chuyen-tiep-dai-hoc"],
+      "status": "behavior-tested",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Khung giáo trình lập trình Python đại học, kiểm soát luồng, cấu trúc dữ liệu cơ bản & kiểm thử",
+          "url_or_doi": "https://openstax.org/details/books/introduction-python-programming",
+          "author_or_org": "Udayan Das et al. (OpenStax / Rice University)",
+          "year": 2024,
+          "accessed_date": "2026-11-18",
+          "source_type": "Giáo trình học thuật chuẩn mở",
+          "scope": "Lập trình căn bản đại học (Python/CS1)",
+          "limitations": "Khi không có trình biên dịch thực tế chỉ phân tích qua trace tay",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 3,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "viet-hoc-thuat",
+      "domain_group": "Lớp A — Năng lực học thuật chung",
+      "level": "Đại học & Nghiên cứu nhập môn",
+      "prerequisites": ["ngu-van-thpt", "chuyen-tiep-dai-hoc"],
+      "learning_outcomes": [
+        "Thiết kế cấu trúc bài báo cáo IMRaD, luận điểm học thuật và tổng quan tài liệu.",
+        "Triển khai đoạn văn Claim–Evidence–Warrant với ngôn ngữ thận trọng khoa học và paraphrase hợp lệ.",
+        "Kiểm chứng và định dạng trích dẫn APA 7 / IEEE với kỷ luật Zero Fake-Citation/DOI."
+      ],
+      "related_skills": ["ngu-van-thpt", "hoc-dai-hoc-hieu-qua", "phuong-phap-nghien-cuu"],
+      "status": "behavior-tested",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Quy tắc trích dẫn in-text APA 7th Edition (1, 2, 3+ tác giả & trích nguyên văn kèm số trang)",
+          "url_or_doi": "https://apastyle.apa.org/",
+          "author_or_org": "American Psychological Association (APA Style 7th ed.)",
+          "year": 2020,
+          "accessed_date": "2026-11-18",
+          "source_type": "Hướng dẫn chuyên môn chính thức",
+          "scope": "Trích dẫn học thuật APA 7",
+          "limitations": "Tạp chí/trường có thể dùng biến thể IEEE hoặc chuẩn riêng",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 10,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "phuong-phap-nghien-cuu",
+      "domain_group": "Lớp A — Năng lực nghiên cứu đa ngành",
+      "level": "Đại học & Nghiên cứu đa ngành",
+      "prerequisites": ["chuyen-tiep-dai-hoc", "viet-hoc-thuat", "xac-suat-thong-ke"],
+      "learning_outcomes": [
+        "Thiết kế đề cương 14 bước chọn đúng trong 10 loại nghiên cứu phù hợp đặc thù ngành (không ép khuôn tự nhiên sang kỹ thuật/nhân văn).",
+        "Phân tích sai lệch, giới hạn bằng chứng, điều kiện dữ liệu tái lập và cảnh báo lĩnh vực rủi ro cao.",
+        "Kiểm chứng nguồn theo 7 bậc ưu tiên và 9 trường truy vết, không bịa DOI hay số liệu."
+      ],
+      "related_skills": ["luan-an-nghiencuu", "viet-hoc-thuat", "xac-suat-thong-ke"],
+      "status": "behavior-tested",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Phân loại 3 thiết kế nghiên cứu hỗn hợp (Convergent, Explanatory Sequential, Exploratory Sequential) & sơ đồ quy trình",
+          "url_or_doi": "Research Design: Qualitative, Quantitative, and Mixed Methods Approaches (Creswell & Creswell)",
+          "author_or_org": "John W. Creswell & J. David Creswell",
+          "year": 2018,
+          "accessed_date": "2026-11-18",
+          "source_type": "Giáo trình học thuật kinh điển",
+          "scope": "Thiết kế nghiên cứu định lượng, định tính & hỗn hợp",
+          "limitations": "Không chứa fulltext PDF mở trực tuyến; đối chiếu khung phân loại khái niệm",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 6,
+      "revalidate_by": "2027-06-01"
+    },
+    {
+      "name": "tu-van-huong-nghiep-tuyen-sinh",
+      "domain_group": "Lớp A — Hướng nghiệp & Tuyển sinh THPT",
+      "level": "THPT Lớp 10–12 → Chuyển tiếp Đại học",
+      "prerequisites": ["toan-thpt", "ngu-van-thpt", "ktpl-thpt"],
+      "learning_outcomes": [
+        "Phân tích hồ sơ hướng nghiệp theo 4 trục (Holland RIASEC, năng lực môn học, thị trường nghề, tài chính).",
+        "Thiết kế danh sách tối đa 15 nguyện vọng chia 3 tầng tuân thủ Thông tư 06/2026/TT-BGDĐT (Sư phạm NV 01–05, ngưỡng sàn 15,00đ).",
+        "Kiểm chứng và từ chối bịa điểm chuẩn/chỉ tiêu khi chưa có đề án trường chính thức."
+      ],
+      "related_skills": ["chuyen-tiep-dai-hoc", "tu-van-tam-ly-hoc-duong", "hoc-dai-hoc-hieu-qua"],
+      "status": "structurally-valid",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Giới hạn tối đa 15 nguyện vọng, Sư phạm xét NV 01–05, Quân đội/Công an NV 1, ngưỡng đầu vào từ 15,00đ/3 môn",
+          "url_or_doi": "Thông tư 06/2026/TT-BGDĐT (Quy chế tuyển sinh đại học)",
+          "author_or_org": "Bộ Giáo dục và Đào tạo Việt Nam",
+          "year": 2026,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Tuyển sinh đại học Việt Nam 2026",
+          "limitations": "Đề án tuyển sinh & điểm chuẩn từng trường phải tra cứu theo năm tuyển sinh",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 0,
+      "revalidate_by": "2027-03-01"
+    },
+    {
+      "name": "tu-van-tam-ly-hoc-duong",
+      "domain_group": "Lớp A — Tham vấn Học đường (Lĩnh vực Rủi ro Cao)",
+      "level": "THPT & Sinh viên Chuyển tiếp",
+      "prerequisites": ["Không yêu cầu môn học; sàng lọc an toàn tâm lý trước"],
+      "learning_outcomes": [
+        "Giải thích và thực hành lắng nghe phản chiếu OARS/Validation, tránh tích cực độc hại.",
+        "Thiết kế 1 bước tự chăm sóc/giải quyết vấn đề khả thi 24–48h và không chẩn đoán bệnh lý DSM-5/ICD-11.",
+        "Kích hoạt chuyển tuyến khẩn cấp 111 / 115 / 113 và Phòng Tư vấn Học đường (TT 18/2025) khi có Red-Flag tự hại/bạo hành."
+      ],
+      "related_skills": ["tu-van-huong-nghiep-tuyen-sinh", "chuyen-tiep-dai-hoc", "hoc-dai-hoc-hieu-qua"],
+      "status": "structurally-valid",
+      "skill_folder_created": true,
+      "verified_sources": [
+        {
+          "supported_claim": "Hướng dẫn công tác tư vấn học đường và công tác xã hội trong trường học (kế thừa TT 31/2017/TT-BGDĐT)",
+          "url_or_doi": "Thông tư 18/2025/TT-BGDĐT (15/09/2025, hiệu lực 31/10/2025)",
+          "author_or_org": "Bộ Giáo dục và Đào tạo Việt Nam",
+          "year": 2025,
+          "accessed_date": "2026-11-18",
+          "source_type": "Văn bản pháp lý chính thức",
+          "scope": "Công tác tư vấn học đường Việt Nam",
+          "limitations": "AI chỉ hỗ trợ bước đầu, không thay thế chuyên viên tâm lý hay bác sĩ lâm sàng",
+          "verification_status": "verified_web_official"
+        }
+      ],
+      "tests_executed": 0,
+      "revalidate_by": "2027-03-01"
+    },
+
+    {
+      "name": "vat-li-dai-cuong",
+      "domain_group": "Lớp B — Giai đoạn 2 (Lộ trình)",
+      "level": "Đại học Đại cương",
+      "prerequisites": ["vat-li-thpt", "giai-tich-dai-hoc"],
+      "learning_outcomes": ["Tính toán và mô hình hóa cơ học–điện từ–quang lượng tử dùng vi tích phân (dự kiến)."],
+      "related_skills": ["vat-li-thpt", "giai-tich-dai-hoc"],
+      "status": "planned",
+      "skill_folder_created": false,
+      "verified_sources": [],
+      "tests_executed": 0,
+      "revalidate_by": "TBD-on-Stage-2"
+    },
+    {
+      "name": "hoa-hoc-dai-cuong",
+      "domain_group": "Lớp B — Giai đoạn 2 (Lộ trình)",
+      "level": "Đại học Đại cương",
+      "prerequisites": ["hoa-hoc-thpt", "giai-tich-dai-hoc"],
+      "learning_outcomes": ["Phân tích nhiệt động lực học Gibbs, động hóa học và cân bằng pha/dung dịch (dự kiến)."],
+      "related_skills": ["hoa-hoc-thpt"],
+      "status": "planned",
+      "skill_folder_created": false,
+      "verified_sources": [],
+      "tests_executed": 0,
+      "revalidate_by": "TBD-on-Stage-2"
+    },
+    {
+      "name": "sinh-hoc-dai-cuong",
+      "domain_group": "Lớp B — Giai đoạn 2 (Lộ trình)",
+      "level": "Đại học Đại cương",
+      "prerequisites": ["sinh-hoc-thpt"],
+      "learning_outcomes": ["Giải thích sinh học phân tử, sinh hóa chuyển hóa và di truyền học định lượng (dự kiến)."],
+      "related_skills": ["sinh-hoc-thpt"],
+      "status": "planned",
+      "skill_folder_created": false,
+      "verified_sources": [],
+      "tests_executed": 0,
+      "revalidate_by": "TBD-on-Stage-2"
+    },
+    {
+      "name": "kinh-te-hoc-co-ban",
+      "domain_group": "Lớp B — Giai đoạn 2 (Lộ trình)",
+      "level": "Đại học Đại cương",
+      "prerequisites": ["ktpl-thpt", "giai-tich-dai-hoc"],
+      "learning_outcomes": ["Phân tích cung–cầu, tối ưu hữu dụng–chi phí và chỉ số kinh tế vĩ mô cơ bản (dự kiến)."],
+      "related_skills": ["ktpl-thpt", "giai-tich-dai-hoc", "xac-suat-thong-ke"],
+      "status": "planned",
+      "skill_folder_created": false,
+      "verified_sources": [],
+      "tests_executed": 0,
+      "revalidate_by": "TBD-on-Stage-2"
+    },
+    {
+      "name": "doc-phan-bien-paper",
+      "domain_group": "Lớp A — Giai đoạn 2 (Lộ trình)",
+      "level": "Đại học & Nghiên cứu",
+      "prerequisites": ["viet-hoc-thuat", "phuong-phap-nghien-cuu"],
+      "learning_outcomes": ["Phản biện phương pháp, cỡ mẫu, sai lệch và giới hạn của bài báo khoa học (dự kiến)."],
+      "related_skills": ["phuong-phap-nghien-cuu", "viet-hoc-thuat"],
+      "status": "planned",
+      "skill_folder_created": false,
+      "verified_sources": [],
+      "tests_executed": 0,
+      "revalidate_by": "TBD-on-Stage-2"
+    },
+    {
+      "name": "phan-tich-du-lieu",
+      "domain_group": "Lớp A — Giai đoạn 2 (Lộ trình)",
+      "level": "Đại học & Nghiên cứu",
+      "prerequisites": ["xac-suat-thong-ke", "lap-trinh-can-ban"],
+      "learning_outcomes": ["Triển khai làm sạch dữ liệu tái lập, EDA và kiểm định đa biến bằng Python/R (dự kiến)."],
+      "related_skills": ["xac-suat-thong-ke", "lap-trinh-can-ban"],
+      "status": "planned",
+      "skill_folder_created": false,
+      "verified_sources": [],
+      "tests_executed": 0,
+      "revalidate_by": "TBD-on-Stage-2"
+    },
+    {
+      "name": "thiet-ke-thi-nghiem",
+      "domain_group": "Lớp A — Giai đoạn 2 (Lộ trình)",
+      "level": "Đại học & Nghiên cứu",
+      "prerequisites": ["phuong-phap-nghien-cuu", "xac-suat-thong-ke"],
+      "learning_outcomes": ["Thiết kế DOE/ngẫu nhiên hóa phân tầng, cỡ mẫu power analysis và kiểm soát sai số (dự kiến)."],
+      "related_skills": ["phuong-phap-nghien-cuu", "xac-suat-thong-ke"],
+      "status": "planned",
+      "skill_folder_created": false,
+      "verified_sources": [],
+      "tests_executed": 0,
+      "revalidate_by": "TBD-on-Stage-2"
+    },
+    {
+      "name": "do-an-dai-hoc",
+      "domain_group": "Lớp A — Giai đoạn 2 (Lộ trình)",
+      "level": "Đại học Năm 3–4",
+      "prerequisites": ["hoc-dai-hoc-hieu-qua", "viet-hoc-thuat", "phuong-phap-nghien-cuu"],
+      "learning_outcomes": ["Lập kế hoạch, viết báo cáo kỹ thuật/khóa luận và bảo vệ đồ án tốt nghiệp (dự kiến)."],
+      "related_skills": ["viet-hoc-thuat", "phuong-phap-nghien-cuu", "slide-thuyet-trinh"],
+      "status": "planned",
+      "skill_folder_created": false,
+      "verified_sources": [],
+      "tests_executed": 0,
+      "revalidate_by": "TBD-on-Stage-2"
+    }
+  ],
+  "planned_layer_c_clusters": [
+    "cntt-nen-tang",
+    "ky-thuat-nen-tang",
+    "toan-va-khoa-hoc-du-lieu-nen-tang",
+    "khoa-hoc-tu-nhien-nen-tang",
+    "khoa-hoc-su-song-nen-tang",
+    "kinh-te-nen-tang",
+    "khoa-hoc-xa-hoi-nen-tang",
+    "ngon-ngu-nhan-van-nen-tang",
+    "luat-chinh-sach-cong-nen-tang",
+    "giao-duc-su-pham-nen-tang",
+    "kien-truc-thiet-ke-nghe-thuat-nen-tang",
+    "nong-lam-ngu-nghiep-nen-tang",
+    "moi-truong-phat-trien-ben-vung-nen-tang",
+    "y-duoc-suc-khoe-nen-tang"
+  ]
+}

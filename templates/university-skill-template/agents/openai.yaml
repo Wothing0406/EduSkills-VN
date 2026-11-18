@@ -1,0 +1,6 @@
+interface:
+  display_name: "University Skill Template"
+  short_description: "Khung mẫu skill đại học 14 mục dùng chung đa môi trường"
+  default_prompt: "Sử dụng $university-skill-template làm khung khởi tạo cho skill đại học mới."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Viết Học thuật Đại học"
+  short_description: "IMRaD, lập luận, trích dẫn APA/IEEE và liêm chính học thuật"
+  default_prompt: "Sử dụng $viet-hoc-thuat để góp ý cấu trúc, chuẩn hóa văn phong và kiểm tra trích dẫn cho bài viết sau."
+policy:
+  allow_implicit_invocation: true

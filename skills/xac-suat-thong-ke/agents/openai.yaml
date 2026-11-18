@@ -1,0 +1,6 @@
+interface:
+  display_name: "Xác suất & Thống kê"
+  short_description: "Xác suất, phân phối, ước lượng, kiểm định giả thuyết & hồi quy"
+  default_prompt: "Sử dụng $xac-suat-thong-ke để giải thích, tính toán hoặc phản biện phân tích thống kê sau."
+policy:
+  allow_implicit_invocation: true

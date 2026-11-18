@@ -568,6 +568,74 @@ async function main() {
         await new Promise((resolve) => server.close(() => resolve()));
     }
 
+    // =========================================================================
+    // SUITE 6: KIẾN TRÚC ĐA NGÀNH GIAI ĐOẠN 1 & TƯ VẤN HỌC SINH, CATALOG & TIÊN QUYẾT
+    // =========================================================================
+    console.log('\n🎓 [SUITE 6] Kiểm định Mở rộng Đa ngành Giai đoạn 1 & 2 Skills Tư vấn (10 Skills + Catalog & Prerequisite Graph)...');
+
+    runTest('Suite 6', 'Đủ 10/10 skills ĐH/NCKH & Tư vấn hợp lệ cấu trúc 14 mục, >= 5,000 ký tự, có references/ & agents/openai.yaml', () => {
+        assert.strictEqual(report.multidisciplinaryScanned, 10, `Kỳ vọng 10 skills đa ngành & tư vấn, nhận ${report.multidisciplinaryScanned}`);
+        assert.strictEqual(report.multidisciplinaryValidCount, 10, `Kỳ vọng 10/10 hợp lệ, nhận ${report.multidisciplinaryValidCount}`);
+        for (const item of report.multidisciplinaryDetails) {
+            assert.strictEqual(item.isValid, true, `${item.name}: ${item.issues.join('; ')}`);
+            assert.strictEqual(item.hasAll14Sections, true, `${item.name} thiếu đủ 14 mục`);
+            assert.strictEqual(item.hasOpenAiYaml, true, `${item.name} thiếu agents/openai.yaml`);
+            assert.strictEqual(item.hasReferences, true, `${item.name} thiếu references/`);
+            assert.strictEqual(item.hasTrapMatrix, true, `${item.name} thiếu ma trận lỗi 6 cột`);
+        }
+    });
+
+    runTest('Suite 6', '2 Skills Tư vấn (Hướng nghiệp TT 06/2026 & Tâm lý TT 18/2025) đáp ứng đủ quy tắc an toàn rủi ro cao', () => {
+        const psyPath = path.join(__dirname, '..', 'skills', 'tu-van-tam-ly-hoc-duong', 'SKILL.md');
+        const psyText = fs.readFileSync(psyPath, 'utf-8');
+        assert.ok(psyText.includes('111') && psyText.includes('115') && psyText.includes('113'), 'Thiếu số khẩn cấp 111/115/113');
+        assert.ok(psyText.includes('18/2025/TT-BGDĐT'), 'Thiếu tham chiếu Thông tư 18/2025/TT-BGDĐT');
+        assert.ok(/không.*chẩn đoán|cấm.*chẩn đoán/i.test(psyText), 'Thiếu quy tắc cấm chẩn đoán bệnh lý');
+
+        const careerPath = path.join(__dirname, '..', 'skills', 'tu-van-huong-nghiep-tuyen-sinh', 'SKILL.md');
+        const careerText = fs.readFileSync(careerPath, 'utf-8');
+        assert.ok(careerText.includes('15 nguyện vọng') && careerText.includes('06/2026/TT-BGDĐT'), 'Thiếu quy định 15 nguyện vọng TT 06/2026');
+        assert.ok(careerText.includes('RIASEC'), 'Thiếu khung Holland RIASEC');
+    });
+
+    runTest('Suite 6', 'Catalog đa ngành phủ 16 THPT + 10 ĐH/Tư vấn thật, GĐ2 chỉ ở trạng thái planned (không có thư mục rỗng trong skills/)', () => {
+        const catPath = path.join(__dirname, '..', 'catalog', 'skills-catalog.json');
+        assert.ok(fs.existsSync(catPath), 'Thiếu catalog/skills-catalog.json');
+        const cat = JSON.parse(fs.readFileSync(catPath, 'utf-8'));
+        const skillsDir = path.join(__dirname, '..', 'skills');
+        const realFolders = fs.readdirSync(skillsDir).filter(d => fs.statSync(path.join(skillsDir, d)).isDirectory());
+        assert.strictEqual(realFolders.length, 26, `Kỳ vọng đúng 26 thư mục skill thật trong skills/, nhận ${realFolders.length}`);
+
+        const implementedInCat = cat.skills.filter(s => s.skill_folder_created === true);
+        const plannedInCat = cat.skills.filter(s => s.skill_folder_created === false);
+        assert.strictEqual(implementedInCat.length, 26);
+        assert.ok(plannedInCat.length >= 8, 'Catalog phải ghi rõ lộ trình planned GĐ2');
+        for (const s of implementedInCat) {
+            assert.ok(fs.existsSync(path.join(skillsDir, s.name, 'SKILL.md')), `Thiếu SKILL.md cho ${s.name}`);
+            assert.notStrictEqual(s.status, 'expert-reviewed', `Không được tự gắn expert-reviewed cho ${s.name} khi chưa có chuyên gia thật`);
+            assert.ok(Array.isArray(s.learning_outcomes) && s.learning_outcomes.length > 0, `${s.name} thiếu learning_outcomes`);
+            assert.ok(Array.isArray(s.verified_sources) && s.verified_sources.length > 0, `${s.name} thiếu verified_sources`);
+        }
+        for (const p of plannedInCat) {
+            assert.strictEqual(p.status, 'planned');
+            assert.ok(!fs.existsSync(path.join(skillsDir, p.name)), `Cấm tạo thư mục rỗng/stub trong skills/ cho ${p.name}`);
+        }
+    });
+
+    runTest('Suite 6', 'Đồ thị tiên quyết liên kết hợp lệ THPT -> chuyen-tiep-dai-hoc -> Giai đoạn 1 & Templates tách ngoài skills/', () => {
+        const graphPath = path.join(__dirname, '..', 'catalog', 'prerequisite-graph.json');
+        assert.ok(fs.existsSync(graphPath), 'Thiếu catalog/prerequisite-graph.json');
+        const graph = JSON.parse(fs.readFileSync(graphPath, 'utf-8'));
+        const nodeIds = new Set(graph.nodes.map(n => n.id));
+        for (const e of graph.edges) {
+            assert.ok(nodeIds.has(e.from), `Edge from '${e.from}' không tồn tại trong nodes`);
+            assert.ok(nodeIds.has(e.to), `Edge to '${e.to}' không tồn tại trong nodes`);
+        }
+        assert.ok(graph.edges.some(e => e.from === 'toan-thpt' && e.to === 'chuyen-tiep-dai-hoc'));
+        assert.ok(graph.edges.some(e => e.from === 'chuyen-tiep-dai-hoc' && e.to === 'giai-tich-dai-hoc'));
+        assert.ok(fs.existsSync(path.join(__dirname, '..', 'templates', 'university-skill-template', 'SKILL.md')));
+    });
+
     console.log('\n================================================================================');
     console.log(`🏁 KẾT QUẢ KIỂM THỬ TỔNG HỢP: ${passedTests} PASSED | ${failedTests} FAILED`);
     console.log('================================================================================');

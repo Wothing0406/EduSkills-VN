@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tư vấn Hướng nghiệp & Tuyển sinh"
+  short_description: "Hướng nghiệp RIASEC và xếp 15 nguyện vọng chuẩn TT 06/2026"
+  default_prompt: "Sử dụng $tu-van-huong-nghiep-tuyen-sinh để định hướng ngành học và kiểm tra danh sách nguyện vọng đại học."
+policy:
+  allow_implicit_invocation: true

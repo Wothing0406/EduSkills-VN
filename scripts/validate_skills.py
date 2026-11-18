@@ -24,7 +24,7 @@ from typing import List, Tuple
 
 import yaml
 
-EXPECTED_SKILLS = sorted(
+EXPECTED_THPT_SKILLS = sorted(
     [
         "cong-nghe-thpt",
         "dia-li-thpt",
@@ -44,6 +44,25 @@ EXPECTED_SKILLS = sorted(
         "vat-li-thpt",
     ]
 )
+
+EXPECTED_UNIVERSITY_STAGE1_SKILLS = sorted(
+    [
+        "chuyen-tiep-dai-hoc",
+        "dai-so-tuyen-tinh",
+        "giai-tich-dai-hoc",
+        "hoc-dai-hoc-hieu-qua",
+        "lap-trinh-can-ban",
+        "phuong-phap-nghien-cuu",
+        "tu-van-huong-nghiep-tuyen-sinh",
+        "tu-van-tam-ly-hoc-duong",
+        "viet-hoc-thuat",
+        "xac-suat-thong-ke",
+    ]
+)
+
+EXPECTED_SKILLS = sorted(EXPECTED_THPT_SKILLS + EXPECTED_UNIVERSITY_STAGE1_SKILLS)
+THPT_SET = set(EXPECTED_THPT_SKILLS)
+UNI_STAGE1_SET = set(EXPECTED_UNIVERSITY_STAGE1_SKILLS)
 
 ALLOWED_FRONTMATTER_KEYS = {"name", "description", "license", "allowed-tools", "metadata"}
 MAX_NAME_LENGTH = 64
@@ -286,20 +305,37 @@ def validate_single_skill(skill_dir: Path) -> Tuple[str | None, List[str]]:
         errors.append(f"{skill_md}: Phần nội dung hướng dẫn đang trống")
     else:
         prose_body = strip_code_fences(body)
-        for sec_num in range(1, 11):
-            if not re.search(rf"^##\s+{sec_num}\.\s+\S+", prose_body, re.MULTILINE):
-                errors.append(
-                    f"{skill_md}: Thiếu mục bắt buộc '## {sec_num}. ...' theo chuẩn 10 phần dùng chung"
-                )
         low_body = prose_body.lower()
-        for req_label, pat in [
-            ("phân loại Loại A (cẩm nang/ôn tập nhiều chương)", r"loại a\b"),
-            ("phân loại Loại B (chẩn đoán/gợi mở)", r"loại b\b"),
-            ("phân loại Loại C (giải đầy đủ/phản biện)", r"loại c\b"),
-            ("phân loại Loại D (@canvas/học liệu tương tác)", r"loại d\b.*canvas|@canvas"),
-        ]:
-            if not re.search(pat, low_body):
-                errors.append(f"{skill_md}: Thiếu quy chuẩn {req_label}")
+        effective_name = name if isinstance(name, str) and name else skill_dir.name
+        if effective_name in UNI_STAGE1_SET:
+            for sec_num in range(1, 15):
+                if not re.search(rf"^##\s+{sec_num}\.\s+\S+", prose_body, re.MULTILINE):
+                    errors.append(
+                        f"{skill_md}: Thiếu mục bắt buộc '## {sec_num}. ...' theo chuẩn 14 phần đa ngành"
+                    )
+            for req_label, pat in [
+                ("bản đồ tiên quyết rút gọn", r"tiên quyết"),
+                ("chuẩn đầu ra bằng động từ quan sát được", r"giải thích|phân tích|tính toán|chứng minh|thiết kế|triển khai|kiểm chứng|so sánh|phản biện|tái lập"),
+                ("ma trận lỗi 6 cột", r"\|\s*dấu hiệu\s*\|\s*cách hiểu sai\s*\|\s*nguyên nhân\s*\|\s*quy tắc đúng\s*\|"),
+                ("chế độ hoạt động không có công cụ (standalone)", r"không có công cụ"),
+                ("chế độ tận dụng công cụ khi có (workspace)", r"tận dụng công cụ"),
+            ]:
+                if not re.search(pat, low_body):
+                    errors.append(f"{skill_md}: Thiếu quy chuẩn {req_label}")
+        else:
+            for sec_num in range(1, 11):
+                if not re.search(rf"^##\s+{sec_num}\.\s+\S+", prose_body, re.MULTILINE):
+                    errors.append(
+                        f"{skill_md}: Thiếu mục bắt buộc '## {sec_num}. ...' theo chuẩn 10 phần dùng chung"
+                    )
+            for req_label, pat in [
+                ("phân loại Loại A (cẩm nang/ôn tập nhiều chương)", r"loại a\b"),
+                ("phân loại Loại B (chẩn đoán/gợi mở)", r"loại b\b"),
+                ("phân loại Loại C (giải đầy đủ/phản biện)", r"loại c\b"),
+                ("phân loại Loại D (@canvas/học liệu tương tác)", r"loại d\b.*canvas|@canvas"),
+            ]:
+                if not re.search(pat, low_body):
+                    errors.append(f"{skill_md}: Thiếu quy chuẩn {req_label}")
 
     for sub in skill_dir.rglob("*"):
         if sub.is_dir() and not any(sub.iterdir()):

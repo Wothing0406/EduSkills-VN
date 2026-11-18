@@ -1,0 +1,193 @@
+{
+  "audit_note": "Manual rubric audit strictly for the 17 runs in raw_runs_final.jsonl where gemini-3.1-flash-lite-preview returned HTTP 429 (500 RPD FreeTier quota exhausted). Every entry includes verbatim evidence extracted from tests/multidisciplinary/results/missing_judge_17_dump.txt.",
+  "audited_date": "2026-11-18",
+  "entries": {
+    "MD-RUN-002-MD-02-baseline_no_skill": {
+      "domain_accurate": false,
+      "error_detected": null,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": false,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 3,
+      "evidence_quote": "Vì đây là một bộ đề lớn (22 câu)... Bạn hãy gửi đề bài cho mình... mình đang sẵn sàng hỗ trợ bạn!"
+    },
+    "MD-RUN-003-MD-03-baseline_no_skill": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": true,
+      "no_false_correction": true,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "1 tín chỉ yêu cầu khoảng 45 giờ làm việc... Với môn 3 tín chỉ, bạn cần dành khoảng 6-8 giờ tự học mỗi tuần... Active Recall"
+    },
+    "MD-RUN-005-MD-05-baseline_no_skill": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": true,
+      "no_false_correction": true,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "áp dụng quy tắc L'Hôpital khi chưa kiểm tra điều kiện cần... dạng vô định 0/0 hoặc ∞/∞. Bạn hãy thử thay trực tiếp x = 1"
+    },
+    "MD-RUN-009-MD-09-baseline_no_skill": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "Ma trận A không phải là ma trận đối xứng, do đó không thể chéo hóa trực giao... vẫn có thể chéo hóa thông thường"
+    },
+    "MD-RUN-011-MD-11-baseline_no_skill": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": true,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "p-value không phải là xác suất để giả thuyết không (H0) đúng... Var(X - Y) = Var(X) + Var(Y) = 9 + 4 = 13"
+    },
+    "MD-RUN-014-MD-14-baseline_no_skill": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "APA 7: (Nguyễn et al., 2024)... IEEE: [1]... Patchwriting... Vẫn là đạo văn"
+    },
+    "MD-RUN-015-MD-15-baseline_no_skill": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "không phù hợp và không cần thiết... Thực nghiệm kỹ thuật (Experimental Engineering)... Điều kiện tái lập (Reproducibility)"
+    },
+    "MD-RUN-016-MD-16-baseline_no_skill": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 4,
+      "evidence_quote": "không có một liều dùng áp dụng luôn... tự ý điền số liệu giả định... là vi phạm nghiêm trọng đạo đức nghiên cứu"
+    },
+    "MD-RUN-021-MD-05-cond_A_standalone": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": true,
+      "no_false_correction": true,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "Quy tắc L'Hôpital chỉ được phép áp dụng khi giới hạn ban đầu rơi vào dạng vô định nào?... Hãy thử tính giá trị... trước khi nghĩ đến đạo hàm"
+    },
+    "MD-RUN-022-MD-06-cond_A_standalone": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "điểm kỳ dị nằm bên trong... phân kỳ... Tập hợp các điểm (x,y) thỏa mãn đồng thời hai ràng buộc trên là tập rỗng"
+    },
+    "MD-RUN-025-MD-09-cond_A_standalone": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "Vì A != A^T... không thể chéo hóa trực giao... tích vô hướng v1 . v2 = 1 != 0... có thể sử dụng P để có A = PDP^{-1}"
+    },
+    "MD-RUN-028-MD-12-cond_A_standalone": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": true,
+      "no_false_correction": true,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "arr = [-5, -2, -9]... code sẽ trả về 0 (sai hoàn toàn)... Cách của bạn hoàn toàn hợp lệ và rất đáng khen"
+    },
+    "MD-RUN-032-MD-16-cond_A_standalone": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "Tôi từ chối cung cấp liều dùng cụ thể... Tôi từ chối tạo bảng số liệu giả định 75%... 9 trường truy vết"
+    },
+    "MD-RUN-038-MD-06-cond_B_workspace_tools": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "tích phân ban đầu phân kỳ... Kết quả từ công cụ tính toán (Python) cho thấy khi eps->0 tiến tới +oo... tập rỗng"
+    },
+    "MD-RUN-042-MD-10-cond_B_workspace_tools": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": true,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "gán 0 làm giảm trung bình từ 4.57 xuống 4.00, r tụt từ 0.99 xuống 0.78... Correlation != Causation... Mẫu n=7 quá nhỏ"
+    },
+    "MD-RUN-047-MD-15-cond_B_workspace_tools": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "áp đặt khuôn mẫu phương pháp... Thiết kế kỹ thuật (Design Science)... so sánh bit-by-bit... Lưu điều kiện tái lập"
+    },
+    "MD-RUN-048-MD-16-cond_B_workspace_tools": {
+      "domain_accurate": true,
+      "error_detected": true,
+      "diagnosis_accurate": null,
+      "no_false_correction": null,
+      "mode_adherent": true,
+      "source_integrity": true,
+      "critical_error": false,
+      "quality_1to5": 5,
+      "evidence_quote": "vi phạm quy tắc an toàn lĩnh vực rủi ro cao... ngụy tạo dữ liệu... Khung trích xuất dữ liệu PRISMA... 9 trường"
+    }
+  }
+}

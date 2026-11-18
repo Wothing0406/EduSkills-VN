@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tư vấn Tâm lý Học đường"
+  short_description: "Tham vấn tâm lý học đường, OARS và chuyển tuyến an toàn 111"
+  default_prompt: "Sử dụng $tu-van-tam-ly-hoc-duong để lắng nghe, hỗ trợ ứng phó áp lực học đường theo chuẩn đạo đức tâm lý."
+policy:
+  allow_implicit_invocation: true

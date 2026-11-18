@@ -1,9 +1,13 @@
-# THPT Agent Skills (EduSkills-VN)
+# THPT & Hệ Thống Kỹ Năng Giáo Dục Đa Ngành (EduSkills-VN)
 
-Bộ **16 Agent Skills** đóng vai trò **gia sư thích ứng và trợ lý học liệu** cho học sinh, giáo viên bậc **THPT lớp 10–12** tại Việt Nam theo Chương trình GDPT 2018 và cấu trúc đề thi Quyết định **764/QĐ-BGDĐT** (08/03/2024). Trọng tâm của bộ skills là hỗ trợ học sinh phát hiện lỗi trong bài làm, bổ sung kiến thức thiếu, rèn phản biện lập luận và phát triển khả năng tự giải quyết vấn đề xuyên suốt cả 2 học kì; đồng thời cài đặt trực tiếp vào mọi dự án bằng `npx skills add`.
+Hệ thống gồm **26 Agent Skills tự chứa hoạt động thật** (cài được từng skill hoặc toàn bộ bằng `npx skills add` và dùng độc lập ngay bằng cách dán `SKILL.md` vào chatbot):
+- **16 skills THPT (`v2.4.0`):** Gia sư thích ứng & trợ lý học liệu cho học sinh, giáo viên lớp 10–12 (GDPT 2018 & QĐ 764/QĐ-BGDĐT).
+- **8 skills Đại học & Nghiên cứu đa ngành — Giai đoạn 1 (`v1.0.0`, trạng thái `behavior-tested`):** Hỗ trợ chuyển tiếp THPT $\to$ Đại học, học đại cương, viết học thuật và phương pháp nghiên cứu.
+- **2 skills Tư vấn học sinh (`v1.0.0`, trạng thái `structurally-valid`):** Hướng nghiệp–xếp 15 nguyện vọng (`TT 06/2026/TT-BGDĐT`) và tham vấn tâm lý học đường chuẩn đạo đức/an toàn khẩn cấp `111` (`TT 18/2025/TT-BGDĐT`). *(Kiến trúc 4 lớp mở rộng có Catalog & Bản đồ tiên quyết cho các giai đoạn sau ở trạng thái `planned`, không tạo thư mục rỗng và không tuyên bố bao phủ mọi ngành trước khi kiểm chứng.)*
 
-> **Báo cáo kiểm chứng cho người dùng (Không dùng Skill vs Có dùng Skill):**
-> Xem báo cáo tổng hợp dễ đọc kèm trích dẫn đối chứng nguyên văn và hướng dẫn tự test trong 3 phút tại [`docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md`](docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md) (mở trực tiếp trên GitHub hoặc nhấn `Ctrl + Shift + V` trong VS Code / Antigravity / Cursor).
+> **Báo cáo kiểm chứng & Mở rộng mới nhất:**
+> - **Báo cáo THPT (Không dùng Skill vs Có dùng Skill):** [`docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md`](docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md)
+> - **Báo cáo Mở rộng Đa ngành Giai đoạn 1:** [`docs/12_BAO_CAO_MO_RONG_DA_NGANH_GIAI_DOAN_1.md`](docs/12_BAO_CAO_MO_RONG_DA_NGANH_GIAI_DOAN_1.md) • [Catalog đa ngành](catalog/CATALOG.md) • [Bản đồ tiên quyết](catalog/PREREQUISITE_MAP.md)
 
 ---
 
@@ -71,6 +75,20 @@ Trước khi tái cấu trúc lên phiên bản hiện tại, dự án đã th�
 | `slide-thuyet-trinh` | Thiết kế dàn ý và mã nguồn slide Marp Markdown 16:9 (Rule of Six + Speaker Notes) | *"Chuyển báo cáo năng lượng mặt trời này thành bộ 6 slide Marp 16:9 ít chữ kèm lời nói."* |
 | `luan-an-nghiencuu` | Cố vấn nghiên cứu KHKT THPT chuẩn ViSEF (Thông tư 84/2026/TT-BGDĐT): giả thuyết, đối chứng, phản biện | *"Giúp em đặt giả thuyết $H_0/H_1$ và thiết kế lô đối chứng cho đề tài than sinh học vỏ trấu."* |
 
+### Chuyển tiếp, Đại cương & Nghiên cứu Đa ngành (Giai đoạn 1 — 8 Skills)
+| Skill | Lớp & Phạm vi chính | Ví dụ yêu cầu thực tế |
+| :--- | :--- | :--- |
+| `chuyen-tiep-dai-hoc` | **Lớp A (Cầu nối):** Ánh xạ syllabus ĐH $\to$ mắt xích THPT, chẩn đoán bằng bằng chứng (không gán nhãn mất gốc), lộ trình bù & transfer check | *"Em vướng tích phân $\sin^2 x$ trước khi vào Giải tích 1, có phải mất gốc cả THPT không?"* |
+| `hoc-dai-hoc-hieu-qua` | **Lớp A:** Giải mã syllabus & CLO, tải tín chỉ (`TT 08/2021`), SQ3R/Cornell/Active Recall & liêm chính AI | *"Lập lịch tự học chuẩn tín chỉ cho Giải tích 1 (3 TC) thay thế cách học dồn slide."* |
+| `giai-tich-dai-hoc` | **Lớp B:** Giới hạn $\varepsilon\text{-}\delta$, L'Hôpital, Taylor, tích phân suy rộng, chuỗi, đạo hàm riêng, Hessian/Lagrange | *"Gợi ý lỗi điều kiện L'Hôpital ở $\lim_{x\to 1}\frac{x^2+1}{x+1}$ không lộ đáp số."* |
+| `dai-so-tuyen-tinh` | **Lớp B:** Khử Gauss–Jordan, định thức, $\text{Col}/\text{Null}$, trị riêng–chéo hóa trực giao, công nhận Cramer/Gauss | *"Dùng Cramer có được công nhận? Và vì sao không lấy cột RREF làm $\text{Col}(A)$?"* |
+| `xac-suat-thong-ke` | **Lớp B:** Bayes, biến ngẫu nhiên, CLT, $Z/t/\chi^2$, phản biện $p$-value & nhân quả, dữ liệu thiếu (`NA`) tái lập | *"Phản biện việc gán `NA = 0` và kết luận nhân quả từ khảo sát 8 sinh viên."* |
+| `lap-trinh-can-ban` | **Lớp B:** CS1 Python/C++, đệ quy an toàn, Big-$O$, Trace Table, kiểm thử 4 nhóm biên & công nhận đa giải thuật | *"Tìm bug biên mảng âm ở `second_max` và đánh giá giải thuật 2 con trỏ."* |
+| `viet-hoc-thuat` | **Lớp A:** IMRaD, `Claim–Evidence–Warrant`, văn phong hedging, APA 7 vs IEEE, chống patchwriting & Zero Fake-DOI | *"Chỉnh đoạn văn khẩu ngữ thành học thuật chuẩn không bịa nguồn hay DOI năm 2025."* |
+| `phuong-phap-nghien-cuu` | **Lớp A:** Quy trình 14 bước, chọn đúng 10 loại nghiên cứu đặc thù ngành, 7 bậc nguồn/9 trường truy vết & an toàn y sinh | *"Tư vấn thiết kế khóa luận nén ảnh lossless CNTT (không ép khảo sát Likert bác sĩ)."* |
+| `tu-van-huong-nghiep-tuyen-sinh` | **Lớp A:** Hướng nghiệp 4 trục (RIASEC), xếp $\le 15$ nguyện vọng 3 tầng (`TT 06/2026/TT-BGDĐT`), chống bịa điểm chuẩn | *"Em 24,5đ đặt trường an toàn lên NV 1 và Sư phạm ở NV 7 có bị loại không?"* |
+| `tu-van-tam-ly-hoc-duong` | **Lớp A (Rủi ro cao):** Lắng nghe OARS/Validation, cấm chẩn đoán DSM-5, chuyển tuyến khẩn cấp `111`/`115`/`113` (`TT 18/2025`) | *"Em tụt điểm thi thử và bị so sánh khiến tủi thân quá, có phải em bị trầm cảm?"* |
+
 ---
 
 ## Cấu trúc thư mục
@@ -83,23 +101,30 @@ skillsGeminiTHPT/
 │   └── rules/
 │       └── thpt-pedagogy.md    # Workspace rule về ngôn từ và sư phạm THPT
 ├── LICENSE
-├── skills/
-│   ├── toan-thpt/
-│   │   ├── SKILL.md            # Phạm vi, 6 chế độ thích ứng, chẩn đoán 8 bước, gợi mở 5 mức
-│   │   ├── agents/openai.yaml  # Metadata giao diện (display_name, short_description, $skill)
-│   │   └── references/         # Chương trình 2 kì, quy tắc 7 phần, cấu trúc QĐ 764 & ví dụ
-│   └── ... (15 skills còn lại, mỗi skill tự chứa hoàn toàn)
+├── skills/                     # 24 skills tự chứa (16 THPT + 8 Đại học & Nghiên cứu Giai đoạn 1)
+│   ├── toan-thpt/ ...          # (16 skills THPT chuẩn 10 mục + Loại A/B/C/D)
+│   └── chuyen-tiep-dai-hoc/ .. # (8 skills Giai đoạn 1 chuẩn 14 mục dùng chung chatbot/workspace)
+├── catalog/
+│   ├── skills-catalog.json     # Catalog 4 lớp (16 THPT + 8 GĐ1 + lộ trình planned)
+│   ├── CATALOG.md              # Bảng tổng hợp năng lực, nguồn đã xác minh & trạng thái
+│   ├── prerequisite-graph.json # Đồ thị tiên quyết cấp dự án
+│   └── PREREQUISITE_MAP.md     # Sơ đồ Mermaid chuỗi chuyển tiếp THPT -> ĐH
+├── templates/
+│   └── university-skill-template/  # Khung khởi tạo 14 mục (nằm ngoài skills/ để không nhiễu CLI)
 ├── scripts/
-│   ├── validate_skills.py      # Kiểm định cấu trúc 10 mục, frontmatter, liên kết, công cụ & metadata
-│   ├── run_gemini_eval.py      # Script chạy thực nghiệm Gemini API (truyền key qua biến môi trường)
-│   ├── score_gemini_eval.py    # Bộ chấm điểm xác định + giám khảo AI mù nhãn
-│   └── ...                     # Script hỗ trợ dataset/web cục bộ (tùy chọn)
+│   ├── validate_skills.py      # Kiểm định toàn bộ 24 skills, frontmatter, liên kết & metadata
+│   ├── validate-dataset.js     # Kiểm định dataset THPT & Giai đoạn 1
+│   ├── run_multidisciplinary_eval.py / score_multidisciplinary_eval.py / aggregate_multidisciplinary_results.py
+│   └── run_gemini_eval.py / score_gemini_eval.py
 ├── docs/
-│   ├── 08_USER_GUIDE_HUONG_DAN_SU_DUNG.md
-│   └── 09_BAO_CAO_KIEM_CHUNG_SKILLS.md  # Báo cáo tổng hợp & so sánh Không dùng Skill vs Có dùng Skill
+│   ├── 09_BAO_CAO_KIEM_CHUNG_SKILLS.md              # So sánh THPT Không dùng Skill vs Có dùng Skill
+│   ├── 10_KIEM_TOAN_BAO_TON_THPT.md                 # Kiểm toán bảo toàn & bảng hồi quy năng lực THPT
+│   ├── 11_QUY_TRINH_PHAT_TRIEN_SKILL_MOI.md         # Quy trình 12 bước & vòng đời trạng thái
+│   └── 12_BAO_CAO_MO_RONG_DA_NGANH_GIAI_DOAN_1.md   # Báo cáo thực nghiệm 48 lượt đa ngành GĐ1
 └── tests/
-    ├── eval/                   # Bộ 24 ca kiểm thử (18 Core + 6 Holdout), kết quả & báo cáo thực nghiệm
-    └── scenarios/              # 12 tình huống sư phạm cốt lõi, holdout set, so sánh cũ/mới & 48 ca môn học
+    ├── eval/                   # Bộ 24 ca + 7 ca hồi quy THPT trên Gemini API
+    ├── multidisciplinary/      # Bộ 16 ca đa ngành MD-01..16 (3 điều kiện tách biệt), rubric & dữ liệu gốc
+    └── scenarios/              # Tình huống sư phạm & holdout set THPT
 ```
 
 ---
@@ -134,7 +159,7 @@ npx skills add "Wothing0406/EduSkills-VN" --list
 
 ### 2. Cài theo dự án (Project-level) cho Codex
 
-- **Cài toàn bộ 16 skills** (chọn đúng `--agent codex`, không dùng `--all` nếu chỉ muốn cài cho Codex):
+- **Cài toàn bộ 26 skills** (`16` THPT + `8` ĐH/NCKH GĐ1 + `2` Tư vấn học sinh — chọn đúng `--agent codex`, không dùng `--all` nếu chỉ muốn cài cho Codex):
   ```bash
   npx skills add "<SOURCE_PATH>" --skill "*" --agent codex --copy --yes
   ```
@@ -143,9 +168,9 @@ npx skills add "Wothing0406/EduSkills-VN" --list
   npx skills add "Wothing0406/EduSkills-VN" --skill "*" --agent codex --copy --yes
   ```
 
-- **Cài riêng một skill** (ví dụ `toan-thpt`, kèm sẵn toàn bộ `references/` và `agents/openai.yaml` tự chứa):
+- **Cài riêng một skill** (ví dụ `giai-tich-dai-hoc` hoặc `toan-thpt`, kèm sẵn toàn bộ `references/` và `agents/openai.yaml` tự chứa):
   ```bash
-  npx skills add "<SOURCE_PATH>" --skill toan-thpt --agent codex --copy --yes
+  npx skills add "<SOURCE_PATH>" --skill giai-tich-dai-hoc --agent codex --copy --yes
   ```
   Hoặc từ GitHub:
   ```bash
@@ -176,15 +201,21 @@ npx skills add "Wothing0406/EduSkills-VN" --list
 ## Quy tắc Workspace & Kiểm định chất lượng bộ Skills
 
 - **Quy tắc sư phạm & bảo trì repo:** Xem [AGENTS.md](AGENTS.md) và quy tắc workspace tại [.agent/rules/thpt-pedagogy.md](.agent/rules/thpt-pedagogy.md).
-- **Kiểm tra cấu trúc & tính tự chứa của 16 skills:**
+- **Kiểm tra cấu trúc & tính tự chứa của 26 skills:**
   ```bash
   python scripts/validate_skills.py
   ```
-- **Kiểm thử dataset, Web Hub & REST API:**
+- **Kiểm thử dataset, Catalog đa ngành, Bản đồ tiên quyết, Web Hub & REST API:**
   ```bash
   npm test
   ```
-- **Báo cáo kiểm chứng & hướng dẫn đọc cho người dùng:** [docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md](docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md) (so sánh **Không dùng Skill vs Có dùng Skill**, bản copy-paste vs bản cài đặt, kèm hướng dẫn tự test 3 phút)
+- **Báo cáo kiểm chứng THPT (Không dùng Skill vs Có dùng Skill):** [docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md](docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md)
+- **Kiểm toán mở rộng đa ngành & Giai đoạn 1 (`tests/multidisciplinary/`):**
+  - Kiểm toán bảo toàn THPT & bảng hồi quy năng lực: [docs/10_KIEM_TOAN_BAO_TON_THPT.md](docs/10_KIEM_TOAN_BAO_TON_THPT.md)
+  - Quy trình phát triển skill mới 12 bước & quy tắc nguồn: [docs/11_QUY_TRINH_PHAT_TRIEN_SKILL_MOI.md](docs/11_QUY_TRINH_PHAT_TRIEN_SKILL_MOI.md)
+  - Báo cáo thực nghiệm 48 lượt đa ngành Giai đoạn 1: [docs/12_BAO_CAO_MO_RONG_DA_NGANH_GIAI_DOAN_1.md](docs/12_BAO_CAO_MO_RONG_DA_NGANH_GIAI_DOAN_1.md)
+  - Catalog & Bản đồ tiên quyết: [catalog/CATALOG.md](catalog/CATALOG.md) • [catalog/PREREQUISITE_MAP.md](catalog/PREREQUISITE_MAP.md)
+  - Bộ test đa ngành & tổng hợp số liệu: [tests/multidisciplinary/test-cases.json](tests/multidisciplinary/test-cases.json) • [tests/multidisciplinary/rubric.md](tests/multidisciplinary/rubric.md) • `python scripts/aggregate_multidisciplinary_results.py`
 - **Đánh giá thực nghiệm trên Gemini API (`tests/eval/`):**
   - Kế hoạch & tiêu chí khóa trước: [tests/eval/eval-plan.md](tests/eval/eval-plan.md)
   - Bộ 24 tình huống kiểm thử (18 Core + 6 Holdout): [tests/eval/test-cases.json](tests/eval/test-cases.json)
