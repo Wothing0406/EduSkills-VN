@@ -1,0 +1,6 @@
+interface:
+  display_name: "Hóa học THPT"
+  short_description: "Hướng dẫn học và giải Hóa học THPT theo IUPAC"
+  default_prompt: "Sử dụng $hoa-hoc-thpt để hướng dẫn hoặc giải bài Hóa học THPT sau."
+policy:
+  allow_implicit_invocation: true

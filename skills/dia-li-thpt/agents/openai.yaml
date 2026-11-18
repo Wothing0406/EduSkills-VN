@@ -1,0 +1,6 @@
+interface:
+  display_name: "Địa lí THPT"
+  short_description: "Hướng dẫn học, tính số liệu và Địa lí THPT"
+  default_prompt: "Sử dụng $dia-li-thpt để hướng dẫn hoặc giải bài Địa lí THPT sau."
+policy:
+  allow_implicit_invocation: true

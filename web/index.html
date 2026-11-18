@@ -2140,7 +2140,7 @@
           cli += `  }' | jq -r ".prompt"\n\n`;
 
           cli += `# 2. Chạy trên Local LLM (Ollama / Llama.cpp / vLLM) hoàn toàn độc lập:\n`;
-          cli += `ollama run qwen2.5:14b "$(cat skills/${selectedSkill.category || 'khoa-hoc-tu-nhien'}/${selectedSkillId}/SKILL.md)\n\nGiải bài toán sau (Lớp ${gradeLevel} - ${tierObj.name}): ${problemPayload.replace(/"/g, '\\"')}"\n\n`;
+          cli += `ollama run qwen2.5:14b "$(cat skills/${selectedSkillId}/SKILL.md)\n\nGiải bài toán sau (Lớp ${gradeLevel} - ${tierObj.name}): ${problemPayload.replace(/"/g, '\\"')}"\n\n`;
 
           cli += `# 3. Chuẩn OpenAI-Compatible Chat Completions API (vLLM / LM Studio / OpenRouter / DeepSeek / GPT):\n`;
           cli += `curl -s -X POST "http://localhost:11434/v1/chat/completions" \\\n`;

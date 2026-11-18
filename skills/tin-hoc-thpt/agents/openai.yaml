@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tin học THPT"
+  short_description: "Hướng dẫn Python, SQL, HTML/CSS và Tin học THPT"
+  default_prompt: "Sử dụng $tin-hoc-thpt để phân tích code hoặc giải bài Tin học THPT sau."
+policy:
+  allow_implicit_invocation: true

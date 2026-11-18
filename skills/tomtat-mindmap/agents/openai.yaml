@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tóm tắt & Mindmap THPT"
+  short_description: "Tạo sơ đồ tư duy Mermaid và bảng ôn tập THPT"
+  default_prompt: "Sử dụng $tomtat-mindmap để tóm tắt và vẽ sơ đồ cho nội dung sau."
+policy:
+  allow_implicit_invocation: true

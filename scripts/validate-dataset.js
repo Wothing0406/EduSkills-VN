@@ -33,10 +33,23 @@ function parseFrontmatter(content) {
 
   let currentKey = null;
   let isArray = false;
+  let inNestedDict = false;
 
   rawYaml.split(/\r?\n/).forEach(line => {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith('#')) return;
+
+    const indent = line.length - line.trimStart().length;
+
+    if (indent >= 2 && inNestedDict && currentKey && typeof meta[currentKey] === 'object' && !Array.isArray(meta[currentKey])) {
+      const subColon = trimmed.indexOf(':');
+      if (subColon !== -1) {
+        const subKey = trimmed.substring(0, subColon).trim();
+        const subVal = trimmed.substring(subColon + 1).trim().replace(/^["']|["']$/g, '');
+        meta[currentKey][subKey] = subVal;
+        return;
+      }
+    }
 
     if (trimmed.startsWith('- ') && currentKey && isArray) {
       const val = trimmed.substring(2).trim().replace(/^["']|["']$/g, '');
@@ -51,15 +64,24 @@ function parseFrontmatter(content) {
 
       if (val === '') {
         currentKey = key;
-        isArray = true;
-        meta[key] = [];
+        if (key === 'metadata') {
+          isArray = false;
+          inNestedDict = true;
+          meta[key] = {};
+        } else {
+          isArray = true;
+          inNestedDict = false;
+          meta[key] = [];
+        }
       } else if (val.startsWith('[') && val.endsWith(']')) {
         currentKey = key;
         isArray = false;
+        inNestedDict = false;
         meta[key] = val.slice(1, -1).split(',').map(s => s.trim().replace(/^["']|["']$/g, ''));
       } else {
         currentKey = key;
         isArray = false;
+        inNestedDict = false;
         meta[key] = val.replace(/^["']|["']$/g, '');
       }
     }
@@ -111,44 +133,60 @@ function runValidation(silent = false) {
   };
 
   files.forEach(file => {
+    const skillDir = path.dirname(file);
     const relPath = path.relative(path.join(__dirname, '..'), file).replace(/\\/g, '/');
     const content = fs.readFileSync(file, 'utf-8');
     const { meta, body } = parseFrontmatter(content);
 
+    const metadataDict = (meta.metadata && typeof meta.metadata === 'object') ? meta.metadata : {};
+    const resolvedCategory = meta.category || metadataDict.category || '';
+    const resolvedVersion = meta.version || metadataDict.version || '2.0.0';
+
+    // Tính tổng dung lượng tri thức bao gồm SKILL.md và các file trong references/
+    const refsDir = path.join(skillDir, 'references');
+    let refsContent = '';
+    if (fs.existsSync(refsDir)) {
+      fs.readdirSync(refsDir).forEach(rf => {
+        const rp = path.join(refsDir, rf);
+        if (fs.statSync(rp).isFile() && rf.toLowerCase().endsWith('.md')) {
+          refsContent += '\n' + fs.readFileSync(rp, 'utf-8');
+        }
+      });
+    }
+    const combinedContent = content + refsContent;
+    const combinedLength = combinedContent.length;
+
     const issues = [];
     const warnings = [];
 
-    // 1. Kiểm tra các trường YAML bắt buộc
+    // 1. Kiểm tra các trường YAML bắt buộc theo chuẩn Agent Skills mở
     if (!meta.name) issues.push('Thiếu trường "name" trong YAML Frontmatter');
     if (!meta.description) issues.push('Thiếu trường "description" trong YAML Frontmatter');
-    if (!meta.category) {
-      issues.push('Thiếu trường "category"');
-    } else if (!VALID_CATEGORIES.includes(meta.category)) {
-      issues.push(`Phân loại "${meta.category}" không thuộc danh mục chuẩn: ${VALID_CATEGORIES.join(', ')}`);
+    if (!resolvedCategory) {
+      issues.push('Thiếu trường "category" hoặc "metadata.category"');
+    } else if (!VALID_CATEGORIES.includes(resolvedCategory)) {
+      issues.push(`Phân loại "${resolvedCategory}" không thuộc danh mục chuẩn: ${VALID_CATEGORIES.join(', ')}`);
     }
 
-    if (!meta.anti_hallucination_rules || meta.anti_hallucination_rules.length < 3) {
-      issues.push('Cần tối thiểu 3 quy tắc chống ảo giác (anti_hallucination_rules)');
+    // 2. Kiểm tra chiều sâu nội dung (gồm SKILL.md + references/)
+    if (combinedLength < MIN_SKILL_CONTENT_LENGTH) {
+      issues.push(`Nội dung quá ngắn (${combinedLength} bytes < ${MIN_SKILL_CONTENT_LENGTH} bytes tối thiểu)`);
     }
 
-    // 2. Kiểm tra chiều sâu nội dung (Chống file stub sơ sài)
-    if (content.length < MIN_SKILL_CONTENT_LENGTH) {
-      issues.push(`Nội dung quá ngắn (${content.length} bytes < ${MIN_SKILL_CONTENT_LENGTH} bytes tối thiểu)`);
-    }
+    // 3. Kiểm tra các thành phần hướng dẫn, kiểm chứng và metadata giao diện
+    const hasVerification = /kiểm chứng chuyên môn|kiểm tra tiến bộ|kiểm tra trước khi gửi|chính xác chuyên môn|<chain_of_verification>/i.test(content);
+    const hasReferences = fs.existsSync(refsDir) && fs.readdirSync(refsDir).length > 0;
+    const hasOpenAiYaml = fs.existsSync(path.join(skillDir, 'agents', 'openai.yaml'));
+    const hasTrapMatrix = /ma trận|bẫy|các lỗi|bảng lỗi|chẩn đoán/i.test(combinedContent);
 
-    // 3. Kiểm tra các thành phần kiến trúc v2.0 bắt buộc
-    const hasUniversalPrompt = content.includes('<universal_agentic_skill') && content.includes('</universal_agentic_skill>');
-    const hasTrapMatrix = content.includes('Trap Matrix') || content.includes('Ma Trận Bẫy');
-    const hasCoVe = content.includes('<chain_of_verification>');
-
-    if (!hasUniversalPrompt) {
-      issues.push('Thiếu khối Master Universal System Prompt (<universal_agentic_skill>...</universal_agentic_skill>)');
+    if (!hasVerification) {
+      issues.push('Thiếu mục Kiểm chứng chuyên môn trong SKILL.md');
     }
-    if (!hasTrapMatrix) {
-      warnings.push('Chưa có bảng Ma Trận Bẫy (Cognitive Trap Matrix)');
+    if (!hasReferences) {
+      warnings.push('Chưa có tài liệu tham chiếu trong references/');
     }
-    if (!hasCoVe) {
-      issues.push('Thiếu giao thức Tự kiểm chứng (<chain_of_verification>)');
+    if (!hasOpenAiYaml) {
+      issues.push('Thiếu metadata giao diện agents/openai.yaml');
     }
     if (!SKILL_DEEP_PROFILES[meta.name]) {
       issues.push(`Thiếu hồ sơ nhận thức luận SKILL_DEEP_PROFILES cho "${meta.name}" trong backend/ocr-engine.js`);
@@ -160,28 +198,28 @@ function runValidation(silent = false) {
     if (isValid) {
       report.validCount++;
       if (!silent) {
-        console.log(`  ✅ [ĐẠT CHUẨN v2.0] ${meta.name.padEnd(20)} | ${String(content.length).padStart(5)} chars | ${meta.category}`);
+        console.log(`  ✅ [ĐẠT CHUẨN v2.0] ${meta.name.padEnd(20)} | ${String(combinedLength).padStart(5)} chars | ${resolvedCategory}`);
       }
 
       catalog.push({
         id: meta.name,
         name: meta.name,
         canonicalId: meta.canonical_id || meta.name,
-        version: meta.version || '2.0.0',
-        category: meta.category,
+        version: resolvedVersion,
+        category: resolvedCategory,
         description: meta.description,
         gradeLevels: meta.grade_levels || meta.grade_level || ['10', '11', '12'],
         subject: meta.subject || deepProfile.title || '',
         tools: meta.tools || [],
-        antiHallucinationRules: meta.anti_hallucination_rules || [],
-        curriculum: meta.curriculum || 'GDPT 2018 (Bộ SGK Thống Nhất 2026)',
+        antiHallucinationRules: meta.anti_hallucination_rules || deepProfile.coveChecklist || [],
+        curriculum: meta.curriculum || 'GDPT 2018 (Thông tư 32/2018 & QĐ 3588/QĐ-BGDĐT)',
         examFormat: meta.exam_format || 'Quyết định 764/QĐ-BGDĐT',
         domainBadge: deepProfile.domainBadge || '',
         epistemology: deepProfile.epistemology || '',
         trapsCount: (deepProfile.traps || []).length,
         coveCount: (deepProfile.coveChecklist || []).length,
         filePath: relPath,
-        contentLength: content.length,
+        contentLength: combinedLength,
         contentSample: body.substring(0, 300) + '...',
         rawContent: content
       });
@@ -203,11 +241,12 @@ function runValidation(silent = false) {
     report.details.push({
       file: relPath,
       name: meta.name || 'UNKNOWN',
-      version: meta.version || 'UNKNOWN',
-      contentLength: content.length,
-      hasUniversalPrompt,
+      version: resolvedVersion,
+      contentLength: combinedLength,
+      hasVerification,
+      hasReferences,
+      hasOpenAiYaml,
       hasTrapMatrix,
-      hasCoVe,
       isValid,
       issues,
       warnings

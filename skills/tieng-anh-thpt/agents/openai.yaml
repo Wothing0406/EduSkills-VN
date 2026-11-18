@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tiếng Anh THPT"
+  short_description: "Hướng dẫn ngữ pháp, từ vựng, đọc hiểu Tiếng Anh"
+  default_prompt: "Sử dụng $tieng-anh-thpt để hướng dẫn hoặc giải bài Tiếng Anh THPT sau."
+policy:
+  allow_implicit_invocation: true

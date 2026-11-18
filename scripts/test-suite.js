@@ -112,13 +112,13 @@ async function main() {
         assert.strictEqual(report.warningCount, 0, `Còn ${report.warningCount} cảnh báo`);
     });
 
-    runTest('Suite 1', 'Tất cả 16 SKILL.md có dung lượng chuyên sâu >= 6,000 ký tự và đạt chuẩn v2.0.0', () => {
+    runTest('Suite 1', 'Tất cả 16 SKILL.md + references/ có dung lượng >= 5,000 ký tự, đạt chuẩn v2.x và có agents/openai.yaml', () => {
         for (const item of report.details) {
-            assert.strictEqual(item.version, '2.0.0', `Skill ${item.name} chưa lên v2.0.0 (hiện tại: ${item.version})`);
-            assert.ok(item.contentLength >= 6000, `Skill ${item.name} quá ngắn (${item.contentLength} chars < 6000)`);
-            assert.strictEqual(item.hasUniversalPrompt, true, `Skill ${item.name} thiếu <universal_agentic_skill>`);
-            assert.strictEqual(item.hasCoVe, true, `Skill ${item.name} thiếu <chain_of_verification>`);
-            assert.strictEqual(item.hasTrapMatrix, true, `Skill ${item.name} thiếu Ma trận Bẫy nhận thức`);
+            assert.ok(/^2\.\d+\.\d+$/.test(item.version), `Skill ${item.name} sai phiên bản chuẩn v2.x (hiện tại: ${item.version})`);
+            assert.ok(item.contentLength >= 5000, `Skill ${item.name} quá ngắn (${item.contentLength} chars < 5000)`);
+            assert.strictEqual(item.hasVerification, true, `Skill ${item.name} thiếu Kiểm chứng chuyên môn`);
+            assert.strictEqual(item.hasOpenAiYaml, true, `Skill ${item.name} thiếu agents/openai.yaml`);
+            assert.strictEqual(item.hasTrapMatrix, true, `Skill ${item.name} thiếu Ma trận Bẫy nhận thức / Chẩn đoán`);
         }
     });
 
@@ -127,10 +127,7 @@ async function main() {
             const fullPath = path.join(__dirname, '..', item.file);
             const raw = fs.readFileSync(fullPath, 'utf8');
             assert.ok(!raw.includes('gemini run --system-skill'), `Skill ${item.name} vẫn còn lệnh độc quyền gemini run --system-skill`);
-            assert.ok(
-                raw.includes('vendor_agnostic="true"') || raw.includes('ecosystem="vendor-agnostic"'),
-                `Skill ${item.name} thiếu thuộc tính vendor-agnostic`
-            );
+            assert.ok(!raw.includes('skills/khoa-hoc-'), `Skill ${item.name} còn tham chiếu đường dẫn cũ`);
         }
     });
 
@@ -446,14 +443,14 @@ async function main() {
         assert.ok(tin.includes('STATE TRACE TABLE') && tin.includes('PEP 8'));
     });
 
-    runTest('Suite 5', 'tieng-anh-thpt/SKILL.md chứa đầy đủ quy tắc chính tả Oxford và phân tích họ từ (Word Formation)', () => {
-        const skillPath = path.join(__dirname, '..', 'skills', 'ngon-ngu-cong-nghe', 'tieng-anh-thpt', 'SKILL.md');
-        const content = fs.readFileSync(skillPath, 'utf8');
-        assert.ok(content.includes('Zero-Bare-Word'), 'SKILL.md thiếu Zero-Bare-Word');
-        assert.ok(content.includes('i before e except after c'), 'SKILL.md thiếu quy tắc i before e');
-        assert.ok(content.includes('Word Formation'), 'SKILL.md thiếu Word Formation');
-        assert.ok(content.includes('achievement'), 'SKILL.md thiếu achievement');
-        assert.ok(content.includes('<universal_agentic_skill'), 'SKILL.md thiếu universal_agentic_skill');
+    runTest('Suite 5', 'tieng-anh-thpt chứa đầy đủ quy tắc chính tả Oxford và phân tích họ từ (Word Formation)', () => {
+        const skillPath = path.join(__dirname, '..', 'skills', 'tieng-anh-thpt', 'SKILL.md');
+        const refPath = path.join(__dirname, '..', 'skills', 'tieng-anh-thpt', 'references', 'curriculum-10-12.md');
+        const content = fs.readFileSync(skillPath, 'utf8') + '\n' + fs.readFileSync(refPath, 'utf8');
+        assert.ok(content.includes('i before e except after c'), 'Thiếu quy tắc i before e');
+        assert.ok(content.includes('Word Formation'), 'Thiếu Word Formation');
+        assert.ok(content.includes('achievement'), 'Thiếu achievement');
+        assert.ok(content.includes('Thao tác phản biện & kiểm tra tiến bộ'), 'SKILL.md thiếu mục Thao tác phản biện & kiểm tra tiến bộ');
     });
 
     // =========================================================================

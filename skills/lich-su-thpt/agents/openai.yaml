@@ -1,0 +1,6 @@
+interface:
+  display_name: "Lịch sử THPT"
+  short_description: "Hướng dẫn học và phân tích Lịch sử THPT lớp 10–12"
+  default_prompt: "Sử dụng $lich-su-thpt để phân tích hoặc giải câu hỏi Lịch sử THPT sau."
+policy:
+  allow_implicit_invocation: true

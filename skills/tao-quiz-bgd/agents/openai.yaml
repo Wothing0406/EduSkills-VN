@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tạo đề thi chuẩn BGD"
+  short_description: "Thiết kế đề kiểm tra THPT chuẩn QĐ 764/QĐ-BGDĐT"
+  default_prompt: "Sử dụng $tao-quiz-bgd để thiết kế đề kiểm tra hoặc câu hỏi luyện tập sau."
+policy:
+  allow_implicit_invocation: true

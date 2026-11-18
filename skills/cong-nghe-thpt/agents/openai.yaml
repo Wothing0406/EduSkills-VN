@@ -1,0 +1,6 @@
+interface:
+  display_name: "Công nghệ THPT"
+  short_description: "Hướng dẫn Công nghệ Công nghiệp và Nông nghiệp THPT"
+  default_prompt: "Sử dụng $cong-nghe-thpt để hướng dẫn hoặc giải bài Công nghệ THPT sau."
+policy:
+  allow_implicit_invocation: true

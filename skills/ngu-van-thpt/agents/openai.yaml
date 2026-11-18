@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ngữ văn THPT"
+  short_description: "Hướng dẫn đọc hiểu, viết và sửa bài Ngữ văn THPT"
+  default_prompt: "Sử dụng $ngu-van-thpt để hướng dẫn hoặc chấm bài Ngữ văn THPT sau."
+policy:
+  allow_implicit_invocation: true

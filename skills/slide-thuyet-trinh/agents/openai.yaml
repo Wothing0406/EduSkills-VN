@@ -1,0 +1,6 @@
+interface:
+  display_name: "Slide thuyết trình THPT"
+  short_description: "Soạn slide Marp 16:9 và kịch bản thuyết trình"
+  default_prompt: "Sử dụng $slide-thuyet-trinh để thiết kế bộ slide cho nội dung sau."
+policy:
+  allow_implicit_invocation: true

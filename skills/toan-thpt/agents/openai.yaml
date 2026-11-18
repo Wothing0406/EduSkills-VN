@@ -1,0 +1,6 @@
+interface:
+  display_name: "Toán THPT"
+  short_description: "Hướng dẫn học và giải bài Toán THPT lớp 10–12"
+  default_prompt: "Sử dụng $toan-thpt để hướng dẫn hoặc kiểm tra bài Toán THPT sau."
+policy:
+  allow_implicit_invocation: true

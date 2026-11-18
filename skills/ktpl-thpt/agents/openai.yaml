@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kinh tế & Pháp luật THPT"
+  short_description: "Hướng dẫn học và phân tích tình huống KTPL THPT"
+  default_prompt: "Sử dụng $ktpl-thpt để phân tích tình huống hoặc câu hỏi KTPL THPT sau."
+policy:
+  allow_implicit_invocation: true

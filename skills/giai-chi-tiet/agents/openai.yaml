@@ -1,0 +1,6 @@
+interface:
+  display_name: "Giải chi tiết THPT"
+  short_description: "Hướng dẫn giải chi tiết, gợi ý và chấm bài THPT"
+  default_prompt: "Sử dụng $giai-chi-tiet để hướng dẫn từng bước hoặc chấm bài sau."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Nghiên cứu KHKT THPT"
+  short_description: "Cố vấn đề tài nghiên cứu KHKT THPT (ViSEF)"
+  default_prompt: "Sử dụng $luan-an-nghiencuu để cố vấn ý tưởng hoặc đề cương nghiên cứu KHKT sau."
+policy:
+  allow_implicit_invocation: true

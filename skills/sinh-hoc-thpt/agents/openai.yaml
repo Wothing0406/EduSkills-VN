@@ -1,0 +1,6 @@
+interface:
+  display_name: "Sinh học THPT"
+  short_description: "Hướng dẫn học và giải Sinh học THPT lớp 10–12"
+  default_prompt: "Sử dụng $sinh-hoc-thpt để giải thích hoặc hướng dẫn bài Sinh học THPT sau."
+policy:
+  allow_implicit_invocation: true
