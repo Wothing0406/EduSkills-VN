@@ -2,6 +2,9 @@
 
 Bộ **16 Agent Skills** đóng vai trò **gia sư thích ứng và trợ lý học liệu** cho học sinh, giáo viên bậc **THPT lớp 10–12** tại Việt Nam theo Chương trình GDPT 2018 và cấu trúc đề thi Quyết định **764/QĐ-BGDĐT** (08/03/2024). Trọng tâm của bộ skills là hỗ trợ học sinh phát hiện lỗi trong bài làm, bổ sung kiến thức thiếu, rèn phản biện lập luận và phát triển khả năng tự giải quyết vấn đề xuyên suốt cả 2 học kì; đồng thời cài đặt trực tiếp vào mọi dự án bằng `npx skills add`.
 
+> **Báo cáo kiểm chứng cho người dùng (Không dùng Skill vs Có dùng Skill):**
+> Xem báo cáo tổng hợp dễ đọc kèm trích dẫn đối chứng nguyên văn và hướng dẫn tự test trong 3 phút tại [`docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md`](docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md) (mở trực tiếp trên GitHub hoặc nhấn `Ctrl + Shift + V` trong VS Code / Antigravity / Cursor).
+
 ---
 
 ## Báo cáo Nghiên cứu & Cơ sở Tái cấu trúc
@@ -91,6 +94,9 @@ skillsGeminiTHPT/
 │   ├── run_gemini_eval.py      # Script chạy thực nghiệm Gemini API (truyền key qua biến môi trường)
 │   ├── score_gemini_eval.py    # Bộ chấm điểm xác định + giám khảo AI mù nhãn
 │   └── ...                     # Script hỗ trợ dataset/web cục bộ (tùy chọn)
+├── docs/
+│   ├── 08_USER_GUIDE_HUONG_DAN_SU_DUNG.md
+│   └── 09_BAO_CAO_KIEM_CHUNG_SKILLS.md  # Báo cáo tổng hợp & so sánh Không dùng Skill vs Có dùng Skill
 └── tests/
     ├── eval/                   # Bộ 24 ca kiểm thử (18 Core + 6 Holdout), kết quả & báo cáo thực nghiệm
     └── scenarios/              # 12 tình huống sư phạm cốt lõi, holdout set, so sánh cũ/mới & 48 ca môn học
@@ -178,6 +184,7 @@ npx skills add "Wothing0406/EduSkills-VN" --list
   ```bash
   npm test
   ```
+- **Báo cáo kiểm chứng & hướng dẫn đọc cho người dùng:** [docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md](docs/09_BAO_CAO_KIEM_CHUNG_SKILLS.md) (so sánh **Không dùng Skill vs Có dùng Skill**, bản copy-paste vs bản cài đặt, kèm hướng dẫn tự test 3 phút)
 - **Đánh giá thực nghiệm trên Gemini API (`tests/eval/`):**
   - Kế hoạch & tiêu chí khóa trước: [tests/eval/eval-plan.md](tests/eval/eval-plan.md)
   - Bộ 24 tình huống kiểm thử (18 Core + 6 Holdout): [tests/eval/test-cases.json](tests/eval/test-cases.json)
