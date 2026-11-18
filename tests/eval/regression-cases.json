@@ -1,0 +1,95 @@
+{
+  "suite_name": "EduSkills-VN v2.4.0 Functional & Pedagogical Regression Suite",
+  "target_model": "gemini-3.1-flash-lite",
+  "cases": [
+    {
+      "id": "REG-01",
+      "skill": "hoa-hoc-thpt",
+      "request_type": "Type_A_D_StudyHandbook_Canvas",
+      "standalone_supported": true,
+      "student_input": "@hoa-hoc-thpt giúp tôi ôn tập chương trình 12 từ chương 1 đến chương 3 để ôn tập giữa kì @canvas",
+      "checks": {
+        "must_cover_all": ["Ester", "Carbohydrate", ["Amine", "Aniline", "Amino acid", "Peptide"]],
+        "must_not_expand_beyond_scope": ["Polymer", "Pin điện"],
+        "must_have_sections": ["Bản đồ", "Bảng phân biệt", "Ma trận bẫy", "Tự kiểm tra", "Đáp án"],
+        "no_premature_blocking_question": true,
+        "canvas_real_and_honest": true
+      }
+    },
+    {
+      "id": "REG-02",
+      "skill": "hoa-hoc-thpt",
+      "request_type": "Type_A_ComparisonTable",
+      "standalone_supported": true,
+      "student_input": "Trong phạm vi Hóa học 12 từ Chương 1 đến Chương 3 (Ester - Lipid, Carbohydrate, Hợp chất chứa Nitrogen), hãy tạo bảng phân biệt những điểm dễ nhầm trong ba chương này.",
+      "checks": {
+        "must_compare_pairs": [
+          [["phenyl", "ester"], ["phenol", "ester"]],
+          [["glucose", "fructose"]],
+          [["sucrose", "maltose"], ["saccharose", "maltose"]],
+          [["aniline", "amine"], ["aniline", "alkylamine"]],
+          [["dipeptide", "tripeptide"]]
+        ]
+      }
+    },
+    {
+      "id": "REG-03",
+      "skill": "hoa-hoc-thpt",
+      "request_type": "Type_A_SelfTest_HiddenAnswers",
+      "standalone_supported": true,
+      "student_input": "Tạo bài tự kiểm tra Hóa học 12 Chương 1 đến Chương 3 (ôn tập giữa kì), để tôi làm trước rồi mới xem đáp án.",
+      "checks": {
+        "must_cover_all": ["Ester", "Carbohydrate", ["Amine", "Aniline", "Amino acid", "Peptide"]],
+        "answers_must_be_separated_below_questions": true,
+        "must_explain_why_distractors_plausible": true,
+        "must_not_force_28_qd764": true
+      }
+    },
+    {
+      "id": "REG-04",
+      "skill": "hoa-hoc-thpt",
+      "request_type": "Type_B_ErrorDiagnosis_HintOnly",
+      "standalone_supported": true,
+      "student_input": "Cho 0,1 mol phenyl acetate (CH3COOC6H5) tác dụng với 0,25 mol NaOH dư đun nóng. Em tính n_NaOH phản ứng = 0,1 mol nên m chất rắn khan = 0,1*82 + 0,15*40 = 14,2 g. Em làm sai câu này ở đâu? Chỉ gợi ý.",
+      "checks": {
+        "leak_forbidden_patterns": ["21.8", "21,8"],
+        "must_not_solve_full": true,
+        "must_mention_phenol_concept": true
+      }
+    },
+    {
+      "id": "REG-05",
+      "skill": "hoa-hoc-thpt",
+      "request_type": "Type_C_FullExplanation_Distractors",
+      "standalone_supported": true,
+      "student_input": "Giải thích đầy đủ vì sao từng phương án đúng hoặc sai: Phát biểu nào sau đây ĐÚNG? A. Cả glucose và fructose đều làm mất màu nước bromine. B. Thủy phân hoàn toàn sucrose thu được hai monosaccharide đồng phân C6H12O6. C. Aniline (C6H5NH2) làm quỳ tím hóa xanh rõ rệt. D. Dipeptide Gly-Ala có phản ứng màu biuret với Cu(OH)2 tạo phức màu tím.",
+      "checks": {
+        "must_identify_correct": "B",
+        "must_explain_options": ["A", "B", "C", "D"],
+        "must_explain_why_distractors_plausible": true
+      }
+    },
+    {
+      "id": "REG-06",
+      "skill": "toan-thpt",
+      "request_type": "Type_A_StudyHandbook_MultiChapter",
+      "standalone_supported": true,
+      "student_input": "@toan-thpt giúp tôi ôn tập Toán 12 từ chương 1 đến chương 3 (ứng dụng đạo hàm, tọa độ vectơ Oxyz, số đặc trưng đo mức độ phân tán mẫu ghép nhóm) để ôn giữa kì.",
+      "checks": {
+        "must_cover_all": ["đạo hàm", ["vectơ", "vector"], "phân tán"],
+        "must_have_sections": ["Bản đồ", "Bảng phân biệt", "Ma trận bẫy", "Đáp án"]
+      }
+    },
+    {
+      "id": "REG-07",
+      "skill": "lich-su-thpt",
+      "request_type": "Type_A_StudyHandbook_MultiTopic",
+      "standalone_supported": true,
+      "student_input": "@lich-su-thpt tổng hợp kiến thức trọng tâm Lịch sử 12 HK1 (Thế giới trong và sau Chiến tranh lạnh; ASEAN; Cách mạng tháng Tám 1945 và kháng chiến 1945–1975) kèm bảng phân biệt dễ nhầm và 4 câu tự kiểm tra tách riêng đáp án.",
+      "checks": {
+        "must_cover_all": ["Chiến tranh lạnh", "ASEAN", "1945"],
+        "must_have_sections": ["Bảng phân biệt", "Đáp án"]
+      }
+    }
+  ]
+}

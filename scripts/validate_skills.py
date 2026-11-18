@@ -291,6 +291,15 @@ def validate_single_skill(skill_dir: Path) -> Tuple[str | None, List[str]]:
                 errors.append(
                     f"{skill_md}: Thiếu mục bắt buộc '## {sec_num}. ...' theo chuẩn 10 phần dùng chung"
                 )
+        low_body = prose_body.lower()
+        for req_label, pat in [
+            ("phân loại Loại A (cẩm nang/ôn tập nhiều chương)", r"loại a\b"),
+            ("phân loại Loại B (chẩn đoán/gợi mở)", r"loại b\b"),
+            ("phân loại Loại C (giải đầy đủ/phản biện)", r"loại c\b"),
+            ("phân loại Loại D (@canvas/học liệu tương tác)", r"loại d\b.*canvas|@canvas"),
+        ]:
+            if not re.search(pat, low_body):
+                errors.append(f"{skill_md}: Thiếu quy chuẩn {req_label}")
 
     for sub in skill_dir.rglob("*"):
         if sub.is_dir() and not any(sub.iterdir()):

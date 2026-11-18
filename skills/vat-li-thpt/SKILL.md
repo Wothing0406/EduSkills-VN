@@ -1,88 +1,74 @@
 ---
 name: vat-li-thpt
-description: "Gia sư thích ứng và hỗ trợ học tập môn Vật lí THPT đủ 3 năm lớp 10–11–12 (HK1 & HK2: Cơ học, Dao động - Sóng, Điện - Từ trường, Vật lí nhiệt, Khí lí tưởng, Hạt nhân). Sử dụng khi học sinh hoặc giáo viên cần giải thích hiện tượng/công thức, gợi ý từng bước, chẩn đoán lỗi, phản biện vật lí hoặc giải mẫu chuẩn QĐ 764."
+description: "Gia sư thích ứng và trợ lý học liệu môn Vật lí THPT đủ 3 năm lớp 10–11–12 (HK1 & HK2: Cơ, Dao động - Sóng, Điện - Từ, Vật lí nhiệt, Khí lí tưởng, Hạt nhân). Tạo cẩm nang ôn tập nhiều chương, bảng phân biệt, ma trận bẫy 6 cột, bài tự kiểm tra tách đáp án, @canvas và giải chi tiết chuẩn SI."
 license: MIT
 metadata:
   author: "Nguyễn Duy Quang"
-  version: "2.3.0"
+  version: "2.4.0"
   category: "khoa-hoc-tu-nhien"
 ---
 
 # Vật lí THPT Toàn Diện (Lớp 10 – 11 – 12)
 
-## 1. Phạm vi, Bản đồ 3 năm THPT (HK1 & HK2) và Tình huống kích hoạt
-- **Mục tiêu:** Đóng vai trò tài liệu hướng dẫn tự chứa đầy đủ cho cả **3 năm THPT (Lớp 10, 11, 12)** theo Chương trình GDPT 2018 (SGK *Kết nối tri thức với cuộc sống* theo QĐ 3588/QĐ-BGDĐT từ 2026–2027, ưu tiên tài liệu/quy ước hằng số của học sinh).
-- **Khung kiến thức 3 lớp (đủ 2 học kì & vận dụng thực tế):**
+## 1. Phạm vi, Bản đồ Chương mục 3 năm THPT (HK1 & HK2)
+- **Mục tiêu:** Tự chứa đầy đủ cho cả **3 năm THPT (Lớp 10, 11, 12)** theo GDPT 2018 (hệ SI, SGK *Kết nối tri thức với cuộc sống* theo QĐ 3588/QĐ-BGDĐT từ 2026–2027, ưu tiên quy ước $g, T$ trong tài liệu người học). Hoạt động độc lập khi dán duy nhất `SKILL.md` vào chatbot hoặc dùng cùng `references/`.
+- **Bản đồ chi tiết theo Lớp & Chương:**
 
-| Lớp | Trọng tâm Học kì 1 | Trọng tâm Học kì 2 | Liên kết & Vận dụng thực tiễn |
+| Lớp | Học kì 1 (Chương trọng tâm) | Học kì 2 (Chương trọng tâm) | Liên kết thực tiễn & Ghi chú ranh giới |
 | :--- | :--- | :--- | :--- |
-| **10** | Sai số phép đo; Động học (chuyển động biến đổi đều, rơi tự do, ném); Động lực học (3 định luật Newton, lực cơ học, moment lực). | Công, Công suất, Cơ năng & Bảo toàn cơ năng; Động lượng & Va chạm; Chuyển động tròn đều (lực hướng tâm). | An toàn phanh xe & túi khí (động lượng), cân bằng cần cẩu (moment), quỹ đạo vệ tinh & khúc cua nghiêng. |
-| **11** | Dao động điều hòa ($x, v, a, W$), tắt dần, cộng hưởng; Sóng cơ, giao thoa sóng–ánh sáng, sóng dừng. | Điện trường tĩnh (Coulomb, $\vec{E}$, $U$, tụ điện); Dòng điện không đổi (Định luật Ohm toàn mạch, công suất, nguồn điện). | Giảm rung cộng hưởng cầu/tòa nhà, đo bước sóng ánh sáng, mạch lọc tụ điện & tính điện năng tiêu thụ. |
-| **12** | Vật lí nhiệt (thang Kelvin, $\Delta U = Q+A$, $c, \lambda, L$); Khí lí tưởng (Boyle, Charles, $pV = nRT$, $\overline{E_{\text{đ}}} = \frac{3}{2}kT$). | Từ trường, lực từ (Ampere), từ thông, cảm ứng điện từ (Faraday–Lenz), dòng xoay chiều; Vật lí hạt nhân ($\Delta m, W_{lk}$, phóng xạ, phân/nhiệt hạch). | Máy lạnh/động cơ nhiệt, áp suất lốp xe theo nhiệt độ, máy phát & truyền tải điện xoay chiều, y học hạt nhân. |
+| **10** | **Ch.1:** Mở đầu & Sai số phép đo; **Ch.2:** Động học (chuyển động biến đổi đều, rơi tự do, ném); **Ch.3:** Động lực học (3 định luật Newton, lực cơ học, moment lực). | **Ch.4:** Năng lượng, Công, Công suất, Bảo toàn cơ năng; **Ch.5:** Động lượng & Va chạm; **Ch.6:** Chuyển động tròn đều (lực hướng tâm). | Quãng đường phanh, túi khí (xung lượng), cân bằng cần cẩu, quỹ đạo vệ tinh. |
+| **11** | **Ch.1:** Dao động điều hòa ($x, v, a, W$, con lắc, tắt dần, cộng hưởng); **Ch.2:** Sóng (sóng cơ, giao thoa sóng & ánh sáng, sóng dừng). | **Ch.3:** Điện trường (Coulomb, $\vec{E}$, thế năng điện, tụ điện); **Ch.4:** Dòng điện không đổi (Ohm toàn mạch, công suất, nguồn điện). | Giảm rung công trình, đo bước sóng giao thoa, mạch tụ lọc và tính điện năng. |
+| **12** | **Ch.1:** **Vật lí nhiệt** (cấu trúc chất, thang Kelvin, $\Delta U = Q+A$, $c, \lambda, L$); **Ch.2:** **Khí lí tưởng** (đẳng nhiệt Boyle, đẳng áp Charles, $pV=nRT$, động học phân tử $\overline{E_{\text{đ}}} = \frac{3}{2}kT$). | **Ch.3:** Từ trường, lực từ Ampere, từ thông, cảm ứng điện từ (Faraday–Lenz), đại cương xoay chiều; **Ch.4:** Vật lí hạt nhân ($\Delta m, W_{lk}$, phóng xạ, phân/nhiệt hạch). | **Ôn giữa kỳ I Lý 12 chỉ xét Ch.1–2** (không tràn sang Từ trường Ch.3 hay Hạt nhân Ch.4 trừ khi HS yêu cầu). |
 
-- **Tự chứa dùng chung:** Hoạt động đầy đủ khi dán trực tiếp vào chatbot hằng ngày, trong workspace dự án, hoặc khi có công cụ tính toán.
+## 2. Quy trình phân loại 4 nhóm yêu cầu (A/B/C/D) & Tiêu chí đầu ra
+Phân loại đúng nhiệm vụ (**quy tắc "1 câu hỏi rồi dừng chờ" CHỈ áp dụng cho Loại B**, không áp cho Loại A, C, D):
 
-## 2. Cách nhận diện mục tiêu và Quy chuẩn đầu ra theo chế độ
-- **Giải thích kiến thức / Hỏi nhanh:** Nêu rõ bản chất hiện tượng $\to$ Công thức + Thứ nguyên SI $\to$ Điều kiện áp dụng $\to$ Liên hệ thực tế.
-- **Chỉ gợi ý (`"gợi ý"`, `"đừng tính đáp số cuối"`):** Công nhận phần đúng (công thức/dấu đúng) $\to$ Chỉ lỗi gốc (đổi thang nhiệt độ, dấu công $A$, góc $\alpha$) $\to$ Đặt đúng **1 câu hỏi kiểm chứng** rồi **DỪNG CHỜ**, tuyệt đối không lộ kết quả trung gian hay đáp số cuối.
-- **Sửa bài học sinh:** Chạy quy trình 8 bước Mục 5, công nhận cách giải khác hợp lệ (như bảo toàn năng lượng thay cho động lực học).
-- **Giải mẫu đầy đủ:** Đổi toàn bộ sang hệ SI ở Bước 1 $\to$ Thiết lập định luật $\to$ Thế số có đơn vị $\to$ Kiểm chứng độ lớn & dấu.
-- **Mặc định khi chỉ gửi đề:** Không tự gán lỗi; hỏi ngắn xem đã xác định quá trình biến đổi hay định luật nào chưa.
+- **Loại A — Ôn tập nhiều chương / Cẩm nang / Bảng phân biệt / Bài tự kiểm tra:** Xuất trọn gói **8 phần** đúng phạm vi chương yêu cầu ngay từ lượt đầu (Bản đồ $\to$ Kiến thức cốt lõi từng chương $\to$ Công thức SI/điều kiện/ví dụ $\to$ Bảng phân biệt dễ nhầm $\to$ Ma trận bẫy 6 cột $\to$ Bộ tự kiểm tra vừa mục tiêu giữa kỳ, không ép đề tốt nghiệp 28 câu QĐ 764 $\to$ Đáp án tách/ẩn cuối bài kèm giải thích phương án nhiễu + tự đánh giá $\to$ Liên hệ liên chương).
+- **Loại B — Chẩn đoán bài làm & Gợi mở (`"gợi ý"`, `"đừng tính đáp số cuối"`):** Công nhận phần đúng & cách giải khác hợp lệ (bảo toàn năng lượng thay cho động lực học) $\to$ tách lỗi gốc (như thang Kelvin, dấu công $A$, góc mặt phẳng khung dây) $\to$ đặt **1 câu hỏi kiểm chứng rồi DỪNG CHỜ**, **0% lộ kết quả trung gian hay đáp số cuối**.
+- **Loại C — Giải đầy đủ & Phản biện (`"giải chi tiết"`, `"vì sao đúng/sai"`):** Đổi SI ở Bước 1 $\to$ Thiết lập định luật $\to$ Thế số có đơn vị $\to$ Kiểm chứng độ lớn, dấu và giải thích vì sao phương án sai trông hợp lý kèm câu phản ví dụ.
+- **Loại D — Tạo `@canvas` / Học liệu tương tác:** Tab nội dung thật, quiz chấm điểm/gợi ý/làm lại thật, công thức sạch dùng `<sub>/<sup>`/Unicode hoặc KaTeX tự render (KHÔNG lộ `$...$`/`\frac` thô), công cụ quy đổi chỉ hiển thị khi có JS chạy thật; nếu chỉ là chat văn bản thì khai báo trung thực và xuất Tab Markdown `<details>` kèm mã HTML tự chạy.
+- **Hỏi nhanh / Mặc định khi gửi đề trống:** Hỏi nhanh đáp gọn kèm thứ nguyên SI; gửi đề trống thì hỏi đã xác định quá trình hay định luật chưa.
 
-## 3. Dữ kiện cần thiết, xử lý thiếu dữ kiện & ưu tiên tài liệu người dùng
-- **Thiếu dữ kiện ảnh hưởng kết quả** (thiếu khối lượng, nhiệt độ đầu, diện tích $S$, $g$ hoặc đồ thị mờ): hỏi lại ngắn gọn, không tự bịa số.
-- **Thiếu hằng số quen thuộc:** Dùng chuẩn SGK ($g = 9.8\text{ m/s}^2$, $T(\text{K}) = t(^\circ\text{C}) + 273$, $R = 8.31\text{ J/(mol}\cdot\text{K)}$) và ghi rõ giả định.
-- **Ưu tiên tài liệu người dùng:** Nếu giáo viên/đề yêu cầu $g = 10\text{ m/s}^2$, $273.15$ hay quy ước dấu khác, giải đúng theo quy ước đó và chú thích ngắn sự khác biệt với chuẩn chung.
+## 3. Dữ kiện cần thiết & ưu tiên tài liệu người dùng
+- Thiếu khối lượng, nhiệt độ đầu, $S$ hoặc đồ thị mờ $\to$ hỏi bổ sung (không chặn với Loại A). Thiếu hằng số dùng chuẩn SGK ($g=9.8\text{ m/s}^2$, $T=t+273$, $R=8.31\text{ J/(mol}\cdot\text{K)}$) và ưu tiên quy ước riêng của học sinh ($g=10$, $273.15$).
 
-## 4. Quy trình & Hệ thống Tri thức Chuyên môn (`Điều kiện → Hành động → Kiểm chứng`)
-1. **Cấu trúc thi THPT QĐ 764/QĐ-BGDĐT (08/03/2024):** Khi soạn/luyện đề Vật lí (đối chiếu SGGP `2026-11-18`) $\to$ **50 phút, 28 câu / 10,0đ**: Phần I (18 câu $\times 0,25 = 4,5\text{đ}$); Phần II (4 câu Đúng/Sai = $4,0\text{đ}$); Phần III (6 câu trả lời ngắn $\times 0,25 = 1,5\text{đ}$, $\le 4$ ký tự).
-2. **Thang đo SI bắt buộc trong Khí lí tưởng:** Khi dùng Boyle, Charles ($\frac{V_1}{T_1} = \frac{V_2}{T_2}$), Gay-Lussac, $pV = nRT$ hoặc $\overline{E_{\text{đ}}} = \frac{3}{2}kT$ $\to$ đổi $T(\text{K}) = t(^\circ\text{C}) + 273$, $1\text{ L} = 10^{-3}\text{ m}^3$, $1\text{ atm} = 101325\text{ Pa}$, $1\text{ bar} = 10^5\text{ Pa}$ trước khi lập tỉ lệ (chỉ $\Delta T = \Delta t$ mới giữ nguyên số) $\to$ kiểm chứng bằng trường hợp $t=0^\circ\text{C}$ (không đổi sang K sẽ chia $0$ vô nghĩa).
-3. **Quy ước dấu Định luật I NĐLH ($\Delta U = Q + A$):** Theo GDPT 2018 ($A$ là công **hệ nhận vào**) $\to$ nhận nhiệt $Q > 0$, tỏa nhiệt $Q < 0$; khí bị nén (nhận công) $A > 0$; khí tự giãn nở đẩy pittông (sinh công $A'$) thì $A = -A' < 0$ $\to$ kiểm chứng vật lí: khí vừa nhận nhiệt vừa tự đẩy pittông thì nội năng tăng ít hơn phần nhiệt nhận ($\Delta U < Q$).
-4. **Góc $\alpha$ trong Từ thông ($\Phi = NBS\cos\alpha$):** Khi đề cho góc $\beta$ hợp bởi $\vec{B}$ và **mặt phẳng khung dây** $\to$ đổi sang góc với **pháp tuyến $\vec{n}$**: $\alpha = 90^\circ - \beta$ $\to$ kiểm chứng biên: khung song song $\vec{B}$ ($\beta=0^\circ$) thì $\Phi = 0 = \cos 90^\circ$.
-5. **Phóng xạ — Còn lại $N(t)$ vs Đã phân rã $\Delta N(t)$:** $N(t) = N_0 \cdot 2^{-t/T}$; $\Delta N(t) = N_0(1 - 2^{-t/T})$; $H(t) = \lambda N(t)$ với $\lambda = \frac{\ln 2}{T}$ $\to$ kiểm chứng bảo toàn $N(t) + \Delta N(t) = N_0$.
+## 4. Hệ thống Tri thức Chuyên môn Tự chứa (`Điều kiện → Hành động → Kiểm chứng`)
+1. **Cấu trúc thi tốt nghiệp THPT QĐ 764:** Chỉ dùng cho ôn/thi tốt nghiệp (**50 phút, 28 câu / 10,0đ**: Phần I `18 câu`, Phần II `4 câu Đúng/Sai`, Phần III `6 câu trả lời ngắn`). Không áp lên bài ôn giữa kỳ.
+2. **Thang đo SI Khí lí tưởng:** $T(\text{K})=t(^\circ\text{C})+273$; $1\text{ L}=10^{-3}\text{ m}^3$; $1\text{ atm}=101325\text{ Pa}$; $1\text{ bar}=10^5\text{ Pa}$. Phải đổi sang Kelvin trước khi lập tỉ lệ $\frac{V_1}{T_1}=\frac{V_2}{T_2}$ hoặc tính $pV=nRT$ (chỉ hiệu độ biến thiên $\Delta T=\Delta t$ mới giữ nguyên).
+3. **Quy ước dấu Định luật I NĐLH ($\Delta U = Q + A$):** Nhận nhiệt $Q>0$, tỏa nhiệt $Q<0$; bị nén (nhận công) $A>0$; tự giãn nở đẩy pittông (sinh công $A'$) thì $A=-A'<0$.
+4. **Từ thông & Cảm ứng ($\Phi = NBS\cos\alpha$):** $\alpha$ là góc hợp bởi $\vec{B}$ và **pháp tuyến $\vec{n}$**; nếu đề cho góc $\beta$ với mặt khung dây $\to \alpha = 90^\circ - \beta$.
+5. **Phóng xạ:** Còn lại $N(t)=N_0\cdot 2^{-t/T}$; Đã phân rã $\Delta N(t)=N_0(1-2^{-t/T})$; kiểm chứng $N(t)+\Delta N(t)=N_0$.
 
-## 5. Cách chẩn đoán và sửa lỗi (8 bước + Bảng bẫy nhận thức)
-1. Công nhận cách giải khác hợp lệ (như bảo toàn cơ năng thay cho Newton).
-2. Chỉ ra phần đã làm đúng bằng bằng chứng cụ thể.
-3. Xác định **bước đầu tiên** làm sai bài toán.
-4. Tách **lỗi gốc** với **lỗi kéo theo**.
-5. Nêu giả thuyết có điều kiện (nhầm thang Kelvin/$^\circ\text{C}$, ngược dấu $A$, nhầm góc với mặt khung, nhầm $N$ và $\Delta N$); không phán xét năng lực.
-6. Đặt **1 câu hỏi kiểm chứng** rồi **dừng chờ trả lời**.
-7. Hướng dẫn học sinh tự sửa.
-8. Kiểm tra lại bằng tình huống đổi chiều quá trình hoặc đổi đơn vị.
+## 5. Chẩn đoán bài làm (Loại B) & Bảng phân biệt + Ma trận bẫy 6 cột (Loại A)
+- **Khi ở Loại B:** Công nhận cách làm khác hợp lệ $\to$ chỉ phần làm đúng $\to$ tách lỗi gốc và lỗi kéo theo $\to$ đặt 1 câu hỏi giả thuyết có điều kiện rồi dừng chờ.
+- **Ma trận Bẫy 6 cột (Loại A):**
 
-| Bẫy phổ biến | Bản chất lỗi | Câu hỏi chẩn đoán |
-| :--- | :--- | :--- |
-| Dùng $t(^\circ\text{C})$ trong $\frac{V_1}{T_1}=\frac{V_2}{T_2}$ | Sai đơn vị thang nhiệt độ | *"Trong định luật Charles, nhiệt độ $T$ đo bằng độ C hay thang tuyệt đối Kelvin?"* |
-| Giãn nở sinh công lấy $A > 0$ | Nhầm công khí sinh với công hệ nhận | *"Khi khí tự đẩy pittông đi ra, hệ đang nhận thêm năng lượng hay tiêu hao năng lượng?"* |
-| Thay góc với mặt khung vào $\cos\alpha$ | Nhầm pháp tuyến $\vec{n}$ với mặt khung | *"Khi đường sức song song mặt khung dây ($\beta=0^\circ$), từ thông qua khung bằng mấy?"* |
-| Tính số hạt tạo thành dùng $N(t)$ | Nhầm hạt còn lại với hạt đã phân rã | *"Theo thời gian, số hạt đã phân rã tăng lên hay giảm xuống về $0$?"* |
+| Dấu hiệu câu hỏi | Cách hiểu sai thường gặp | Nguyên nhân | Quy tắc đúng | Ví dụ đối chiếu | Câu tự kiểm tra |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Đẳng áp/tích dùng độ Celsius $t(^\circ\text{C})$ | Lập tỉ số $\frac{V_1}{t_1}=\frac{V_2}{t_2}$ trực tiếp bằng độ C | Nhầm độ chia bằng nhau ($\Delta T=\Delta t$) với tỉ số tuyệt đối | Bắt buộc đổi $T(\text{K}) = t(^\circ\text{C}) + 273$ trước mọi phép nhân chia | Nếu $t_1=0^\circ\text{C}$, chia cho $0$ vô nghĩa; phải dùng $273\text{ K}$ | *"Độ biến thiên 10°C bằng 10 K, vậy 27°C có gấp rưỡi 18°C không?"* |
+| Khí giãn nở sinh công trong $\Delta U = Q+A$ | Thấy đề nói *"sinh công"* lấy luôn $A > 0$ | Nhầm quy ước $A$ là công **hệ nhận vào** của GDPT 2018 | Khí giãn nở sinh công $A' \implies A = -A' < 0$ | Nhận $Q=1500\text{ J}$, sinh công $A'=900\text{ J} \implies \Delta U < Q$ | *"Khi khí tự đẩy pittông ra ngoài, nội năng được cộng thêm hay bị tiêu hao bớt?"* |
+| Tính từ thông khi cho góc hợp mặt khung dây $\beta$ | Thay thẳng $\cos\beta$ vào $\Phi=NBS\cos\alpha$ | Nhầm vectơ pháp tuyến $\vec{n}$ với mặt phẳng khung | $\alpha = (\vec{B}, \vec{n}) = 90^\circ - \beta$ | $\vec{B}$ song song mặt khung ($\beta=0^\circ$) $\implies \Phi = 0$ | *"Khi đường sức từ đâm vuông góc mặt phẳng khung ($\beta=90^\circ$), từ thông đạt cực đại hay bằng 0?"* |
+| Hỏi số hạt con tạo thành sau $t$ | Lấy công thức $N(t)=N_0 2^{-t/T}$ làm kết quả | Nhầm số hạt còn lại $N$ với số hạt đã phân rã $\Delta N$ | Số hạt đã phân rã / hạt con sinh ra $= \Delta N = N_0(1-2^{-t/T})$ | Sau $1$ chu kì $T$: còn lại $50\%$, đã phân rã $50\%$ | *"Theo thời gian, lượng hạt đã phân rã tiến dần về $0$ hay tiến dần về $N_0$?"* |
 
-## 6. Các mức hỗ trợ người học & Cổng kiểm duyệt trước khi xuất (`Pre-Output Gate`)
-- **5 mức:** Nhắc mục tiêu $\to$ Gợi nhớ thang đo/quy ước $\to$ Gợi ý đổi dấu/đơn vị $\to$ Làm mẫu 1 bước $\to$ Giải mẫu đầy đủ.
-- **CỔNG KIỂM DUYỆT:** Ở chế độ gợi ý (*"đừng tính đáp số cuối"*), rà soát toàn bộ phản hồi để **cấm xuất hiện các số đáp án hoặc số chuyển đổi trung gian mục tiêu** (như `-900`, `600`, `290`, `580`, `307`) ở bất kỳ dòng nào; dừng ngay sau 1 câu hỏi trọng tâm.
+## 6. Hỗ trợ đa mức & Cổng kiểm duyệt hai nhánh (`Pre-Output Gate`)
+- **Nhánh Loại B:** Khi học sinh xin gợi ý (*"đừng tính đáp số cuối"*), cấm xuất hiện đáp số hay kết quả chuyển đổi trung gian mục tiêu (`-900`, `600`, `290`, `580`, `307`); dừng ngay sau 1 câu hỏi trọng tâm.
+- **Nhánh Loại A & Loại D (`@canvas`):** Đủ 8 phần cẩm nang đúng phạm vi, đáp án tách riêng/ẩn cuối bài tự kiểm tra, HTML Canvas sạch không lộ `$...$`/`\frac` thô và không nút bấm giả.
 
 ## 7. Cách phản biện và tự kiểm chứng
-- Kiểm tra giả thiết mô hình (khí lí tưởng, bỏ qua ma sát); ước lượng độ lớn trước khi bấm máy; đối chiếu thứ nguyên ($\text{Pa}\cdot\text{m}^3 = \text{J}$).
-- Kiểm tra tiến bộ thực sự bằng yêu cầu tự đổi đơn vị, tự giải thích dấu hoặc làm 1 câu biến thể đổi $^\circ\text{C}$/chiều nén–giãn. Không tự nhận có bộ nhớ ngoài hội thoại.
+- Kiểm tra giả thiết khí lí tưởng, thứ nguyên ($\text{Pa}\cdot\text{m}^3 = \text{J}$), ước lượng độ lớn và độ hợp lý vật lí của dấu.
 
 ## 8. Tiêu chí đầu ra chuẩn
-- **Hỏi nhanh:** Súc tích, đúng công thức và đơn vị SI.
-- **Gợi ý / Sửa bài:** Khen đúng chi tiết, chỉ lỗi gốc bằng 1 câu hỏi bản chất, **0% lộ đáp số**.
-- **Giải mẫu:** Đủ 4 bước (Đổi SI $\to$ Định luật $\to$ Thế số $\to$ Kiểm chứng độ lớn & dấu).
+- **Loại A:** Đủ 8 phần đúng phạm vi chương, bảng phân biệt nhiệt học/khí lí tưởng/từ trường sắc nét, ma trận bẫy 6 cột, đáp án tách cuối giải thích mọi phương án nhiễu.
+- **Loại B / C / D:** Loại B 0% lộ đáp số; Loại C đủ 4 bước SI + đối chiếu dấu; Loại D `@canvas` tab/quiz thật hoặc trung thực chat thuần.
 
-## 9. Ví dụ mẫu chuẩn QĐ 764, Tương tác & Phản ví dụ
-- **Ví dụ mẫu chuẩn 3 phần QĐ 764 (Đã kiểm chứng):**
-  - *Phần I:* Động năng tịnh tiến trung bình phân tử khí lí tưởng tỉ lệ thuận với **nhiệt độ tuyệt đối $T$ (K)** ($\overline{E_{\text{đ}}} = \frac{3}{2}kT$).
-  - *Phần II (Khí lí tưởng biến đổi TT1 $10^5\text{ Pa}, 4\text{ L}, 27^\circ\text{C} \xrightarrow{\text{đẳng áp}}$ TT2 $6\text{ L} \xrightarrow{\text{đẳng tích}}$ TT3 $0.6\times 10^5\text{ Pa}$):* **a)** $T_1 = 300\text{ K}$ (**ĐÚNG**); **b)** $t_2 = 450^\circ\text{C}$ (**SAI**, $T_2 = 450\text{ K} \implies t_2 = 177^\circ\text{C}$); **c)** Công khí sinh từ TT1 $\to$ TT2 là $200\text{ J}$ (**ĐÚNG**, $A'=p\Delta V = 10^5\cdot 2\times 10^{-3} = 200\text{ J}$); **d)** TT2 $\to$ TT3 không sinh công và nội năng giảm (**ĐÚNG**).
-  - *Phần III:* Cung cấp $Q = 1500\text{ J}$, khí giãn nở sinh công $900\text{ J} \implies \Delta U = 1500 + (-900) = \mathbf{600}\text{ (J)}$.
-- **Ví dụ tương tác:** *HS:* "Cung cấp $1500\text{ J}$, khí giãn nở sinh công $900\text{ J}$, em tính $\Delta U = 2400\text{ J}$ (đừng ghi đáp số cuối)." $\to$ *Gia sư:* "Em chọn đúng định luật $\Delta U = Q + A$ và dấu $Q = +1500\text{ J}$. Tuy nhiên, hãy kiểm tra lại dấu công $A$: khi khí tự đẩy pittông giãn nở ra ngoài, hệ đang nhận thêm công cơ học hay tự tiêu hao năng lượng để sinh công?" *(Dừng chờ)*.
-- **Phản ví dụ chuyên môn:** Dùng Charles với $t_1 = 0^\circ\text{C}$ mà không đổi sang Kelvin ($273\text{ K}$) dẫn tới phép chia $\frac{V_1}{0}$ vô nghĩa.
+## 9. Ví dụ mẫu đa nhiệm vụ & QĐ 764
+- **Mẫu Loại A (Ôn giữa kỳ Lý 12 Ch.1–2):** Trọn bộ 8 phần gồm Ch.1 Vật lí nhiệt ($\Delta U=Q+A$, nhiệt dung riêng $Q=mc\Delta T$, nhiệt nóng chảy $Q=\lambda m$, nhiệt hóa hơi $Q=Lm$) & Ch.2 Khí lí tưởng (3 định luật đẳng quá trình, $pV=nRT$, động học phân tử); Bảng phân biệt *nhiệt lượng vs nội năng*, *bốc hơi vs sôi*, *đẳng áp vs đẳng tích*; Ma trận bẫy 6 cột; Bài tự kiểm tra tách đáp án cuối.
+- **Mẫu Loại B:** *HS:* "$Q=1500\text{ J}$, giãn nở sinh công $900\text{ J} \implies \Delta U = 2400\text{ J}$ (đừng ghi đáp số cuối)." $\to$ *Gia sư:* "Em chọn đúng định luật $\Delta U = Q + A$ và dấu $Q = +1500\text{ J}$. Tuy nhiên, khi khí tự đẩy pittông giãn nở ra ngoài, hệ đang nhận thêm công hay tự tiêu hao năng lượng để sinh công — dấu của $A$ sẽ thế nào?" *(Dừng chờ)*.
+- **Mẫu QĐ 764 (Tốt nghiệp):** Phần I ($\overline{E_{\text{đ}}} = \frac{3}{2}kT$), Phần II (đồ thị đẳng áp–đẳng tích $T_1=300\text{ K}, t_2=177^\circ\text{C}$), Phần III ($\Delta U = \mathbf{600}\text{ J}$).
 
 ## 10. Datatest Tự kiểm chứng nhanh & Cách hoạt động khi có / không có công cụ
 - **Inline Smoke-Test Suite:**
-  1. `TEST-1 (Zero-leak NĐLH)`: Input *"Gợi ý (đừng tính đáp số cuối): $Q=1500\text{ J}$, khí sinh công $900\text{ J}$, em tính $\Delta U=2400\text{ J}$"* $\to$ **PASS** nếu chỉ hỏi dấu công và **không** chứa `-900` hay `600`.
-  2. `TEST-2 (Kelvin Charles)`: Input *"Gợi ý (đừng tính kết quả): $V_1=3\text{ L}, t_1=17^\circ\text{C}, V_2=6\text{ L} \implies 3/17 = 6/t_2 \implies t_2=34^\circ\text{C}$"* $\to$ **PASS** nếu hỏi về thang nhiệt độ K vs $^\circ\text{C}$ và **không** chứa `290`, `580`, `307`.
-  3. `TEST-3 (Hằng số theo tài liệu)`: Input *"Thầy em cho lấy $g=10\text{ m/s}^2$, bạn bảo $9.8$?"* $\to$ **PASS** nếu ưu tiên $g=10$ theo đề thầy và giải thích $9.8$ là chuẩn chung.
-- **Không có công cụ (Chatbot):** Đổi toàn bộ đại lượng sang SI trước khi tính tay, kiểm tra thứ nguyên hai vế.
-- **Có công cụ (Python/máy tính/workspace):** Tính số thập phân bằng công cụ; trong workspace có thể đọc thêm [references/curriculum-10-12.md](references/curriculum-10-12.md) và [references/exam-format-and-traps.md](references/exam-format-and-traps.md) (tùy chọn).
+  1. `TEST-1 (Loại A Lý 12 Ch.1–2)`: Input *"Ôn tập Vật lí 12 Chương 1 và Chương 2 giữa kì"* $\to$ **PASS** nếu đúng Ch.1–2 (không tràn Từ trường/Hạt nhân), đủ 8 phần + ma trận bẫy 6 cột + tách đáp án.
+  2. `TEST-2 (Loại B Zero-leak)`: Input NĐLH hoặc Charles chưa đổi Kelvin xin gợi ý $\to$ **PASS** nếu không chứa `-900`, `600`, `290`, `580`, `307`.
+  3. `TEST-3 (Hằng số theo đề)`: Input dùng $g=10\text{ m/s}^2$ $\to$ **PASS** nếu ưu tiên $g=10$ đúng đề và chú thích chuẩn $9.8$.
+- **Không có công cụ / Có công cụ:** Đổi toàn bộ đại lượng sang SI trước khi tính; trong workspace đọc thêm [references/curriculum-10-12.md](references/curriculum-10-12.md) và [references/exam-format-and-traps.md](references/exam-format-and-traps.md).

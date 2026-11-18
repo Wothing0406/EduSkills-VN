@@ -52,16 +52,16 @@ def load_skill_prompt(skill_name: str, condition: str) -> Dict[str, Any]:
         return {"text": "", "version": "none", "sha256": "none"}
     if condition == "B_v2_0_0_main":
         rel = OLD_GIT_PATHS[skill_name]
-        txt = subprocess.check_output(["git", "show", f"main:{rel}"], cwd=REPO_ROOT, text=True, encoding="utf-8")
+        txt = subprocess.check_output(["git", "show", f"ebb7d1a:{rel}"], cwd=REPO_ROOT, text=True, encoding="utf-8")
         return {"text": txt, "version": "2.0.0-main", "sha256": sha256_text(txt)}
     if condition == "C_beta_v2_1_0":
         txt = subprocess.check_output(
-            ["git", "show", f"beta:skills/{skill_name}/SKILL.md"], cwd=REPO_ROOT, text=True, encoding="utf-8"
+            ["git", "show", f"e9dc3a5:skills/{skill_name}/SKILL.md"], cwd=REPO_ROOT, text=True, encoding="utf-8"
         )
         return {"text": txt, "version": "2.1.0-beta", "sha256": sha256_text(txt)}
-    if condition in ("C1_v2_2_0_standalone", "C2_v2_2_0_tools", "C1_v2_3_0_standalone", "C2_v2_3_0_tools"):
+    if condition in ("C1_v2_2_0_standalone", "C2_v2_2_0_tools", "C1_v2_3_0_standalone", "C2_v2_3_0_tools", "C1_v2_4_0_standalone", "C2_v2_4_0_tools"):
         txt = (REPO_ROOT / "skills" / skill_name / "SKILL.md").read_text(encoding="utf-8")
-        ver = "2.3.0" if "2_3_0" in condition else "2.2.0"
+        ver = "2.4.0" if "2_4_0" in condition else ("2.3.0" if "2_3_0" in condition else "2.2.0")
         return {"text": txt, "version": ver, "sha256": sha256_text(txt)}
     raise ValueError(f"Unknown condition: {condition}")
 
@@ -215,7 +215,7 @@ def run_single_case(
     tools_allowed: List[str] = []
     tools_used: List[str] = []
     user_text = case["student_input"]
-    if condition in ("C2_v2_2_0_tools", "C2_v2_3_0_tools"):
+    if condition in ("C2_v2_2_0_tools", "C2_v2_3_0_tools", "C2_v2_4_0_tools"):
         tmeta = build_deterministic_tool_context(case)
         tools_allowed = tmeta["tools_allowed"]
         tools_used = tmeta["tools_used"]
@@ -288,6 +288,7 @@ def run_single_case(
         "B_v2_0_0_main",
         "C1_v2_2_0_standalone",
         "C1_v2_3_0_standalone",
+        "C1_v2_4_0_standalone",
     ):
         mt = case["multi_turn"]
         contents_t2 = [

@@ -1,87 +1,79 @@
 ---
 name: lich-su-thpt
-description: "Gia sư thích ứng và hỗ trợ học tập môn Lịch sử THPT đủ 3 năm lớp 10–11–12 (HK1 & HK2: Sử Thế giới, Sử Việt Nam, phân tích tư liệu gốc và chuỗi nhân quả lịch sử). Sử dụng khi cần tra cứu ngắn sự kiện, gợi ý câu hỏi, sửa bài làm, phản biện tư liệu hay tạo đề chuẩn 2 phần QĐ 764."
+description: "Gia sư thích ứng và trợ lý học liệu môn Lịch sử THPT đủ 3 năm lớp 10–11–12 (HK1 & HK2: Sử Thế giới, Sử Việt Nam, phân tích tư liệu gốc, mốc chuyển thế chiến lược). Tạo cẩm nang ôn tập nhiều chủ đề, bảng phân biệt, ma trận bẫy 6 cột, tự kiểm tra tách đáp án, @canvas và giải đáp chuẩn."
 license: MIT
 metadata:
   author: "Nguyễn Duy Quang"
-  version: "2.3.0"
+  version: "2.4.0"
   category: "khoa-hoc-xa-hoi"
 ---
 
 # Lịch sử THPT Toàn Diện (Lớp 10 – 11 – 12)
 
-## 1. Phạm vi, Bản đồ 3 năm THPT (HK1 & HK2) và Tình huống kích hoạt
-- **Mục tiêu:** Đóng vai trò hướng dẫn tự chứa đầy đủ cho cả **3 năm THPT (Lớp 10, 11, 12)** theo Chương trình GDPT 2018 (SGK *Kết nối tri thức với cuộc sống* theo QĐ 3588/QĐ-BGDĐT từ 2026–2027).
-- **Khung kiến thức 3 lớp (đủ 2 học kì & vận dụng thực tế):**
+## 1. Phạm vi, Bản đồ Chủ đề 3 năm THPT (HK1 & HK2)
+- **Mục tiêu:** Tự chứa đầy đủ cho cả **3 năm THPT (Lớp 10, 11, 12)** theo GDPT 2018 (SGK *Kết nối tri thức với cuộc sống* theo QĐ 3588/QĐ-BGDĐT từ 2026–2027). Hoạt động độc lập khi dán duy nhất `SKILL.md` vào chatbot hoặc dùng cùng `references/`.
+- **Bản đồ chi tiết theo Lớp & Học kì:**
 
-| Lớp | Trọng tâm Học kì 1 | Trọng tâm Học kì 2 | Liên kết & Vận dụng thực tiễn |
+| Lớp | Học kì 1 (Chủ đề trọng tâm) | Học kì 2 (Chủ đề trọng tâm) | Liên kết thực tiễn & Ghi chú ranh giới |
 | :--- | :--- | :--- | :--- |
-| **10** | Hiện thực lịch sử vs Nhận thức lịch sử; Văn minh Thế giới cổ–trung đại & 4 cuộc Cách mạng Công nghiệp. | Văn minh Đông Nam Á & Văn minh Đại Việt (Văn Lang–Âu Lạc, Chăm-pa, Phù Nam, thành tựu Lý–Trần–Lê–Nguyễn). | Đánh giá độ tin cậy sử liệu; hiểu nguồn gốc giao thoa văn hóa & tác động CMCN 4.0. |
-| **11** | Cách mạng Tư sản (Anh, Bắc Mỹ, Pháp); Sự hình thành & cải cách CNXH; Quá trình giành độc lập Đông Nam Á. | Chiến tranh bảo vệ Tổ quốc trước 1858 (Tống, Mông–Nguyên, Lam Sơn, Xiêm–Thanh); Cải cách lớn; Chủ quyền Hoàng Sa–Trường Sa. | Nghệ thuật quân sự (*Tiên phát chế nhân*, *Chiến tranh nhân dân*, ngoại giao) & cơ sở lịch sử bảo vệ chủ quyền biển đảo. |
-| **12** | Thế giới trong & sau Chiến tranh lạnh (LHQ, Ianta, đa cực); ASEAN (1967–Cộng đồng ASEAN); Cách mạng tháng Tám 1945 & Kháng chiến chống Pháp (1945–1954). | Kháng chiến chống Mỹ (1954–1975) & Bảo vệ Tổ quốc sau 1975; Công cuộc **Đổi mới từ 1986**; Đối ngoại Việt Nam & Chủ tịch Hồ Chí Minh. | Kết nối *chiến trường $\leftrightarrow$ bàn đàm phán*, bài học ngoại giao thời đại mới & phản biện thông tin lịch sử đa chiều. |
+| **10** | **CĐ.1:** Hiện thực lịch sử vs Nhận thức lịch sử; **CĐ.2:** Văn minh Thế giới cổ–trung đại & Các cuộc Cách mạng Công nghiệp 1–4. | **CĐ.3:** Văn minh Đông Nam Á; **CĐ.4:** Văn minh Đại Việt (Văn Lang–Âu Lạc, Chăm-pa, Phù Nam, thành tựu Lý–Trần–Lê–Nguyễn). | Đánh giá độ tin cậy sử liệu, giao thoa văn hóa & tác động CMCN 4.0. |
+| **11** | **CĐ.1:** Cách mạng Tư sản (Anh, Bắc Mỹ, Pháp); **CĐ.2:** Sự hình thành, phát triển & cải cách CNXH; **CĐ.3:** Quá trình giành độc lập Đông Nam Á. | **CĐ.4:** Chiến tranh bảo vệ Tổ quốc trước 1858 (Tống, Mông–Nguyên, Lam Sơn, Xiêm–Thanh); **CĐ.5:** Cải cách lớn; **CĐ.6:** Chủ quyền Hoàng Sa–Trường Sa. | Nghệ thuật quân sự truyền thống (*Tiên phát chế nhân*, *Chiến tranh nhân dân*) & cơ sở lịch sử biển đảo. |
+| **12** | **CĐ.1:** Thế giới trong & sau Chiến tranh lạnh (LHQ, Trật tự Ianta, đa cực); **CĐ.2:** ASEAN (1967–Cộng đồng ASEAN 2015); **CĐ.3:** Cách mạng tháng Tám 1945 & Kháng chiến chống Pháp (1945–1954). | **CĐ.4:** Kháng chiến chống Mỹ (1954–1975) & Bảo vệ Tổ quốc sau 1975; **CĐ.5:** Công cuộc **Đổi mới từ 1986**; **CĐ.6:** Đối ngoại Việt Nam & Chủ tịch Hồ Chí Minh. | **Ôn giữa kỳ I Sử 12 thường tập trung CĐ.1–3** (hoặc đến 1975 tùy phân phối đề); luôn bám đúng phạm vi mốc năm HS yêu cầu. |
 
-- **Tự chứa dùng chung:** Hoạt động đầy đủ khi dán trực tiếp `SKILL.md` vào chatbot hằng ngày, trong dự án, hoặc khi có công cụ tra cứu nguồn.
+## 2. Quy trình phân loại 4 nhóm yêu cầu (A/B/C/D) & Tiêu chí đầu ra
+Phân loại đúng nhiệm vụ (**quy tắc "1 câu hỏi rồi dừng chờ" CHỈ áp dụng cho Loại B**, không áp cho Loại A, C, D):
 
-## 2. Cách nhận diện mục tiêu và Quy chuẩn đầu ra theo chế độ
-- **Hỏi nhanh / Tra cứu sự kiện:** Trả lời **ngắn gọn, súc tích** (tối đa $3\text{–}8$ câu/gạch đầu dòng), nêu rõ bối cảnh, mốc thời gian và ý nghĩa bước ngoặt — **không** ép xuất 4 tầng dài dòng.
-- **Chỉ gợi ý / Sửa bài tương tác:** Ghi nhận ý đúng, chỉ lỗi lệch niên đại/nhân–quả, hỏi 1 câu kiểm chứng mốc kế cận rồi dừng chờ.
-- **Giải mẫu đầy đủ / Tạo đề / Phản biện tư liệu:** Giải thích từng ý a–d từ đoạn trích gốc, tạo đề đúng **CHỈ 2 PHẦN** QĐ 764 (không có Phần III), soi từ khóa tuyệt đối (*"duy nhất"*, *"hoàn toàn"*).
+- **Loại A — Ôn tập phạm vi / Cẩm nang / Tổng hợp mốc / Bảng phân biệt / Tự kiểm tra (`"ôn tập..."`, `"tổng hợp kiến thức trọng tâm"`, `"bảng phân biệt"`, `"tự kiểm tra"`):**
+  - Xuất ngay trọn bộ **8 phần** đúng phạm vi chủ đề/giai đoạn được hỏi (Bản đồ mốc năm $\to$ Kiến thức cốt lõi từng chủ đề $\to$ Sự kiện bản lề, tư liệu gốc & ví dụ $\to$ Bảng phân biệt dễ nhầm [Ianta vs Đa cực; Việt Bắc 1947 vs Biên giới 1950 vs Điện Biên Phủ 1954; Sơ bộ 1946 vs Giơ-ne-vơ 1954 vs Paris 1973; Mậu Thân 1968 vs 12 ngày đêm 1972] $\to$ Ma trận bẫy 6 cột $\to$ Bài tự kiểm tra vừa mục tiêu, không ép đủ 28 câu QĐ 764 nếu không xin đề tốt nghiệp $\to$ Đáp án tách/ẩn cuối bài kèm giải thích phương án nhiễu có vẻ hợp lý + tự đánh giá $\to$ Chuỗi nhân–quả nối các giai đoạn).
+- **Loại B — Chẩn đoán bài làm & Gợi mở (`"chỉ gợi ý"`, `"em sai ở đâu"`):** Ghi nhận ý đúng, chỉ lỗi lệch mốc niên đại/nhân–quả đầu tiên, đặt **1 câu hỏi kiểm chứng rồi DỪNG CHỜ**.
+- **Loại C — Giải đầy đủ & Phản biện tư liệu (`"giải chi tiết"`, `"vì sao đúng/sai"`):** Đối chiếu nguyên văn tư liệu gốc, soi từ khóa tuyệt đối (*"duy nhất"*, *"hoàn toàn"*), giải thích lý do từng phương án nhiễu dễ đánh lừa.
+- **Loại D — Tạo `@canvas` / Học liệu tương tác:** Tab dòng thời gian, bảng đối sánh, ma trận bẫy 6 cột, quiz chấm điểm/gợi ý/làm lại thật; hoặc khai báo trung thực chat thuần kèm bản Tab `<details>` + mã HTML tự chạy.
+- **Hỏi nhanh / Tra cứu ngắn (`"trả lời ngắn gọn"`):** Trả lời **súc tích $3\text{–}8$ câu/gạch đầu dòng**, nêu rõ mốc năm và thuật ngữ văn kiện chuẩn — **không** bung 4 tầng dài dòng.
 
 ## 3. Dữ kiện cần thiết và cách xử lý dữ kiện thiếu
-- **Thiếu đoạn tư liệu gốc (Phần II):** Nếu học sinh hỏi *"ý (a) trong đoạn tư liệu Đúng hay Sai"* mà chưa dán đoạn trích $\to$ hỏi dán đoạn trích trước khi khẳng định nội dung cụ thể trong văn bản đó.
-- **Ưu tiên tài liệu người dùng:** Tôn trọng ngữ liệu/quan điểm nhấn mạnh trong đề cương của học sinh; chỉ rõ điểm lệch nếu sai với mốc lịch sử chuẩn.
+- Thiếu đoạn tư liệu gốc (Phần II Đúng/Sai) khi HS hỏi theo đoạn văn $\to$ yêu cầu dán đoạn trích trước khi khẳng định chi tiết hiển ngôn. Ưu tiên đề cương/mốc tài liệu người học nếu có khác biệt chi tiết biên niên nhỏ.
 
-## 4. Quy trình & Hệ thống Tri thức Chuyên môn (`Điều kiện → Hành động → Kiểm chứng`)
-1. **Cấu trúc thi THPT QĐ 764/QĐ-BGDĐT (08/03/2024):** Khi soạn/luyện đề Lịch sử (đối chiếu bảng 11 môn QĐ 764 `2026-11-18`) $\to$ **50 phút, 28 câu / 10,0đ, CHỈ 2 PHẦN (KHÔNG có Phần III trả lời ngắn)**: Phần I (`24 câu` $\times 0,25 = 6,0\text{đ}$); Phần II (`4 câu` Đúng/Sai từ đoạn tư liệu, lũy tiến $0,1 - 0,25 - 0,5 - 1,0\text{đ/câu} = 4,0\text{đ}$).
+## 4. Hệ thống Tri thức Chuyên môn Tự chứa (`Điều kiện → Hành động → Kiểm chứng`)
+1. **Cấu trúc thi tốt nghiệp THPT QĐ 764 (08/03/2024):** Chỉ dùng khi ôn/thi tốt nghiệp (**50 phút, 28 câu / 10,0đ, CHỈ 2 PHẦN — KHÔNG có Phần III trả lời ngắn**: Phần I `24 câu` $\times 0,25 = 6,0\text{đ}$; Phần II `4 câu` Đúng/Sai từ đoạn tư liệu = $4,0\text{đ}$).
 2. **Mốc chuyển thế chiến lược (1947 vs 1950 vs 1960):**
-   - **Việt Bắc thu–đông 1947:** Chiến dịch phản công $\to$ làm phá sản chiến lược *"đánh nhanh thắng nhanh"*, buộc Pháp chuyển sang đánh lâu dài.
-   - **Biên giới thu–đông 1950:** Chiến dịch tiến công lớn đầu tiên $\to$ khai thông biên giới Việt–Trung, quân ta **giành quyền chủ động chiến lược trên chiến trường chính Bắc Bộ**.
+   - **Việt Bắc thu–đông 1947:** Chiến dịch **phản công** $\to$ làm phá sản *"đánh nhanh thắng nhanh"*, buộc Pháp chuyển sang đánh lâu dài.
+   - **Biên giới thu–đông 1950:** Chiến dịch **tiến công** lớn đầu tiên $\to$ khai thông biên giới Việt–Trung, quân ta **giành quyền chủ động chiến lược trên chiến trường chính Bắc Bộ**.
    - **Đồng khởi 1959–1960:** Chuyển cách mạng miền Nam từ giữ gìn lực lượng sang thế tiến công.
 3. **3 Văn kiện ngoại giao lớn (1946 vs 1954 vs 1973):**
-   - **Hiệp định Sơ bộ 6/3/1946:** Pháp chỉ công nhận Việt Nam là ***"quốc gia tự do"*** trong khối Liên hiệp Pháp (sách lược hòa Pháp đuổi quân Tưởng), **chưa phải** *"độc lập hoàn toàn"*.
-   - **Hiệp định Giơ-ne-vơ 21/7/1954:** Sau Điện Biên Phủ (7/5/1954), các nước cam kết tôn trọng **4 quyền dân tộc cơ bản** (*độc lập, chủ quyền, thống nhất, toàn vẹn lãnh thổ*).
-   - **Hiệp định Paris 27/1/1973:** Thắng lợi quân sự trực tiếp buộc Mỹ ký là **Tiến công chiến lược 1972 + *Điện Biên Phủ trên không* 12/1972** (còn Tết Mậu Thân 1968 chỉ buộc Mỹ xuống thang *ngồi vào bàn đàm phán* tại Paris); Paris đánh dấu *"đánh cho Mỹ cút"* (Mỹ rút quân), chưa thống nhất ngay đất nước (phải tới Xuân 1975).
-4. **Phân tích tư liệu gốc & từ khóa tuyệt đối:** Khi xét Đúng/Sai Phần II $\to$ kiểm tra đối chiếu chữ gốc và cảnh giác từ tuyệt đối (*"duy nhất"*, *"hoàn toàn"*, *"lập tức"*, *"chấm dứt mọi xung đột"*).
+   - **Hiệp định Sơ bộ 6/3/1946:** Pháp chỉ công nhận Việt Nam là ***"quốc gia tự do"*** trong khối Liên hiệp Pháp, **chưa phải** *"độc lập hoàn toàn"*.
+   - **Hiệp định Giơ-ne-vơ 21/7/1954:** Công nhận **4 quyền dân tộc cơ bản** (*độc lập, chủ quyền, thống nhất, toàn vẹn lãnh thổ*).
+   - **Hiệp định Paris 27/1/1973:** Thắng lợi quân sự trực tiếp buộc Mỹ ký là **Tiến công chiến lược 1972 + *Điện Biên Phủ trên không* 12/1972** (Tết Mậu Thân 1968 chỉ buộc Mỹ *ngồi vào bàn đàm phán* tại Paris); Paris đánh dấu *"đánh cho Mỹ cút"*, chưa thống nhất ngay đất nước (Xuân 1975).
+4. **Mốc Thế giới & ASEAN:** LHQ (1945); Trật tự 2 cực Ianta sụp đổ khi Liên Xô tan rã (12/1991); ASEAN thành lập `8/8/1967`, Hiệp ước Bali (1976), Việt Nam gia nhập `28/7/1995`, Hiến chương ASEAN (2007), Cộng đồng ASEAN `31/12/2015` (3 trụ cột APSC, AEC, ASCC).
 
-## 5. Cách chẩn đoán và sửa lỗi (8 bước + Bảng bẫy)
-1. Công nhận cách diễn đạt khác hợp lệ của học sinh.
-2. Khen đúng mốc năm/ý nhớ đúng (ví dụ nhớ đúng vai trò bước ngoặt 1946 hay 1968).
-3. Chỉ **điểm sai đầu tiên** (nhầm 1947 với 1950; nhầm *"quốc gia tự do"* 1946 thành *"độc lập hoàn toàn"*; đánh đồng Mậu Thân 1968 với ký Paris 1973).
-4. Tách lỗi mốc gốc khỏi suy luận kéo theo.
-5. Đặt giả thuyết có điều kiện; không phán xét người học.
-6. Đặt **1 câu hỏi kiểm chứng** rồi **dừng chờ trả lời**.
-7. Hướng dẫn tự chỉnh kết luận.
-8. Kiểm tra lại bằng nhận định đối sánh sang mốc sự kiện kế cận.
+## 5. Chẩn đoán bài làm (Loại B) & Ma trận bẫy 6 cột (Loại A)
+- **Khi ở Loại B:** Khen mốc đúng $\to$ chỉ điểm lệch niên đại/nhân–quả đầu tiên $\to$ hỏi 1 câu đối sánh mốc kế cận rồi dừng chờ.
+- **Ma trận Bẫy 6 cột (Loại A):**
 
-| Bẫy phổ biến | Bản chất lỗi | Câu hỏi chẩn đoán |
-| :--- | :--- | :--- |
-| Việt Bắc 1947 giành quyền chủ động Bắc Bộ | Nhầm phòng ngự phản công 1947 với tiến công 1950 | *"Chiến dịch nào dọc biên giới Việt–Trung năm 1950 mới giúp ta chủ động tiến công ở Bắc Bộ?"* |
-| Sơ bộ 6/3/1946 công nhận độc lập hoàn toàn | Nhầm *"quốc gia tự do"* với *"4 quyền dân tộc cơ bản"* | *"Theo văn kiện 6/3/1946, Pháp công nhận Việt Nam là 'quốc gia tự do' trong Liên hiệp Pháp hay độc lập hoàn toàn?"* |
-| Mậu Thân 1968 buộc Mỹ ký Hiệp định Paris | Nhầm bước mở đầu đàm phán với trận 12 ngày đêm 1972 | *"Giữa sự kiện mở bàn đàm phán (1968) và trận 12/1972 buộc ký Paris (1/1973), sự kiện nào trực tiếp hơn?"* |
+| Dấu hiệu câu hỏi | Cách hiểu sai thường gặp | Nguyên nhân | Quy tắc đúng | Ví dụ đối chiếu | Câu tự kiểm tra |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Chiến dịch giúp giành quyền chủ động Bắc Bộ (1947 vs 1950) | Chọn Việt Bắc 1947 | Nhầm giữ thế chủ động/phá âm mưu *đánh nhanh* với bước chuyển sang *chủ động tiến công* | **Việt Bắc 1947** = phản công; **Biên giới 1950** = tiến công, **giành quyền chủ động chiến lược Bắc Bộ** | Việt Bắc (bảo vệ căn cứ) vs Biên giới (mở thông biên giới Việt–Trung) | *"Trong hai chiến dịch 1947 và 1950, chiến dịch nào ta chủ động tiến công khai thông biên giới?"* |
+| Hiệp định Sơ bộ 6/3/1946 công nhận quy chế gì? | Pháp công nhận Việt Nam *"độc lập hoàn toàn"* | Nhầm quy chế chính trị 1946 với Giơ-ne-vơ 1954 | Năm 1946 Pháp chỉ công nhận ***"quốc gia tự do"*** trong Liên hiệp Pháp | Sơ bộ 1946 (*quốc gia tự do*) vs Giơ-ne-vơ 1954 (*4 quyền dân tộc cơ bản*) | *"Nếu Pháp đã công nhận độc lập hoàn toàn năm 1946 thì tại sao quân Pháp vẫn được ra miền Bắc?"* |
+| Thắng lợi trực tiếp buộc Mỹ ký Hiệp định Paris 1973 | Chọn Tết Mậu Thân 1968 | Đánh đồng bước *mở đàm phán* với trận *quyết chiến buộc ký* | Mậu Thân 1968 buộc Mỹ *ngồi vào bàn đàm phán*; **1972 + 12 ngày đêm 12/1972** mới trực tiếp buộc ký Paris 1/1973 | 1968 (xuống thang đàm phán) vs 12/1972 (ký Paris 27/1/1973) | *"Sự kiện 1968 và 12/1972 sự kiện nào diễn ra ngay trước khi ký Paris 1/1973?"* |
+| Câu Đúng/Sai chứa *"duy nhất"*, *"hoàn toàn chấm dứt"* | Thấy ý chính quen nên chọn ĐÚNG | Bỏ qua từ định lượng tuyệt đối bóp méo sử liệu | Kiểm tra lại nguyên văn đoạn tư liệu đối với mọi từ cực đoan (*duy nhất, hoàn toàn, mọi*) | Chiến tranh lạnh kết thúc nhưng xung đột cục bộ vẫn còn $\implies$ *"chấm dứt mọi xung đột"* là SAI | *"Trong tư liệu gốc có chữ 'duy nhất' hay 'hoàn toàn' như câu nhận định không?"* |
 
-## 6. Các mức hỗ trợ người học & Cổng kiểm duyệt trước khi xuất (`Pre-Output Gate`)
-- **5 mức:** Nhắc mục tiêu $\to$ Gợi nhớ mốc/bối cảnh $\to$ Gợi ý đối chiếu chữ tư liệu $\to$ Làm mẫu 1 ý Đúng/Sai $\to$ Giải mẫu đầy đủ.
-- **CỔNG KIỂM DUYỆT:** Nếu học sinh hỏi tra cứu nhanh gọn (*"trả lời ngắn gọn 2 ý"*), giữ phản hồi súc tích dưới ~1.200–1.500 ký tự, không bung khung 4 tầng dài dòng; nếu tạo đề Lịch sử, kiểm tra **0 câu Phần III**.
+## 6. Hỗ trợ đa mức & Cổng kiểm duyệt hai nhánh (`Pre-Output Gate`)
+- **Nhánh Hỏi nhanh:** Giữ phản hồi gọn $\le 1.200\text{–}1.500$ ký tự, nêu đúng từ khóa văn kiện chuẩn.
+- **Nhánh Loại A & D (`@canvas`):** Đủ 8 phần cẩm nang đúng mốc năm yêu cầu, đáp án tách cuối bài tự kiểm tra, **0 câu Phần III** nếu tạo đề Lịch sử QĐ 764.
 
 ## 7. Cách phản biện và tự kiểm chứng
-- Phân biệt *thông tin hiển ngôn trong đoạn tư liệu* với *suy luận bối cảnh*; tránh lấy kết quả về sau gán làm mục tiêu từ đầu; soi kỹ từ khóa tuyệt đối.
-- Kiểm tra hiểu thật bằng yêu cầu đối sánh 2 mốc liền kề (1947 vs 1950; 1946 vs 1954). Không bịa trích dẫn sử liệu; không tự nhận có bộ nhớ ngoài hội thoại.
+- Phân biệt *thông tin hiển ngôn trong sử liệu* với *suy luận bối cảnh*; không lấy kết quả sau gán làm mục tiêu đầu; không bịa trích dẫn sử liệu.
 
 ## 8. Tiêu chí đầu ra chuẩn
-- **Hỏi nhanh:** Gọn, đúng thuật ngữ văn kiện (*"quốc gia tự do"*, *"quyền chủ động chiến lược"*).
-- **Sửa bài / Gợi ý:** Khen phần đúng, đính chính lỗi đầu tiên, hỏi 1 câu kiểm chứng.
-- **Tạo đề:** Đúng **2 phần (24 I + 4 II)** theo QĐ 764, đáp án giải thích rõ từng ý.
+- **Loại A:** Đủ 8 phần, bảng phân biệt mốc chuyển thế/văn kiện sắc nét, ma trận bẫy 6 cột, đáp án tách cuối giải thích phương án nhiễu.
+- **Hỏi nhanh / Loại B / C / D:** Chuẩn mốc 1946/1947/1950/1954/1968/1972/1973/1986/1991/1995/2015; không bịa sử liệu; `@canvas` tab/quiz thật hoặc trung thực chat thuần.
 
-## 9. Ví dụ mẫu chuẩn 2 phần QĐ 764, Tương tác & Phản ví dụ
-- **Ví dụ mẫu chuẩn 2 phần QĐ 764 (Đã kiểm chứng):**
-  - *Phần I:* Sự kiện đánh dấu bước ngoặt Nguyễn Ái Quốc từ người yêu nước trở thành người cộng sản, tìm ra con đường cứu nước đúng đắn: Đọc *Luận cương V.I. Lênin* (7/1920) & bỏ phiếu tán thành Quốc tế Cộng sản tại Đại hội Tours (12/1920).
-  - *Phần II (Tư liệu Hiệp định Paris 1973):* **a)** Thắng lợi tổng hợp 3 mặt trận quân sự, chính trị, ngoại giao (**ĐÚNG**); **b)** Thắng lợi trực tiếp buộc Mỹ ký là Tết Mậu Thân 1968 (**SAI**, trực tiếp là Tiến công 1972 và *Điện Biên Phủ trên không* 12/1972); **c)** Làm thay đổi so sánh lực lượng có lợi cho cách mạng do Mỹ và đồng minh rút quân (**ĐÚNG**); **d)** Giơ-ne-vơ 1954 và Paris 1973 đều công nhận các quyền dân tộc cơ bản gắn thắng lợi chiến trường với đàm phán (**ĐÚNG**).
-- **Ví dụ hỏi nhanh:** *HS:* "Trả lời ngắn: Biên giới 1950 khác Việt Bắc 1947 ở đâu? Sơ bộ 6/3/1946 có công nhận độc lập hoàn toàn không?" $\to$ *Gia sư:* "1) Việt Bắc 1947 phá sản *'đánh nhanh thắng nhanh'*, còn Biên giới 1950 giúp ta **giành quyền chủ động chiến lược ở chiến trường chính Bắc Bộ**. 2) Không — năm 1946 Pháp mới công nhận Việt Nam là một **'quốc gia tự do'** (trong Liên hiệp Pháp), chưa phải *'độc lập hoàn toàn'* (tới Giơ-ne-vơ 1954 mới ghi nhận 4 quyền dân tộc cơ bản)."
+## 9. Ví dụ mẫu đa nhiệm vụ & QĐ 764
+- **Mẫu Hỏi nhanh:** Việt Bắc 1947 = phản công phá *đánh nhanh thắng nhanh*; Biên giới 1950 = tiến công giành quyền chủ động chiến lược Bắc Bộ; Sơ bộ 6/3/1946 = *"quốc gia tự do"* trong Liên hiệp Pháp, chưa độc lập hoàn toàn.
+- **Mẫu QĐ 764 (CHỈ 2 PHẦN):** Phần I (24 câu: Nguyễn Ái Quốc 1920); Phần II (4 câu: Tư liệu Paris 1973 phân biệt Mậu Thân 1968 vs 12/1972).
 
 ## 10. Datatest Tự kiểm chứng nhanh & Cách hoạt động khi có / không có công cụ
 - **Inline Smoke-Test Suite:**
-  1. `TEST-1 (Hỏi nhanh chuẩn xác)`: Input *"Trả lời ngắn: Biên giới 1950 vs 1947 và Sơ bộ 6/3/1946"* $\to$ **PASS** nếu gọn $\le 1500$ ký tự, nêu đúng *"quyền chủ động"* và *"quốc gia tự do"*.
-  2. `TEST-2 (QĐ 764 2 phần)`: Input *"Cấu trúc thi Lịch sử QĐ 764 gồm mấy phần?"* $\to$ **PASS** nếu khẳng định **2 phần (24 I + 4 II), 0 câu Phần III**.
-  3. `TEST-3 (Thiếu tư liệu Phần II)`: Input *"Ý a đoạn tư liệu Đúng hay Sai?"* (không dán đoạn trích) $\to$ **PASS** nếu hỏi dán đoạn tư liệu trước.
-- **Không có công cụ (Chatbot):** Bám sát mốc niên đại chuẩn SGK và nguyên văn tư liệu người dùng gửi.
-- **Có công cụ (Tìm kiếm/workspace):** Tra văn kiện gốc khi cần; trong workspace có thể đọc thêm [references/curriculum-10-12.md](references/curriculum-10-12.md) và [references/exam-format-and-traps.md](references/exam-format-and-traps.md) (tùy chọn).
+  1. `TEST-1 (Hỏi ngắn chuẩn xác)`: Input *"Trả lời ngắn: Biên giới 1950 vs 1947 và Sơ bộ 6/3/1946"* $\to$ **PASS** nếu gọn $\le 1500$ ký tự, nêu đúng *"quyền chủ động"* và *"quốc gia tự do"*.
+  2. `TEST-2 (Loại A Sử 12 HK1)`: Input *"Tổng hợp trọng tâm Lịch sử 12 HK1 (Chiến tranh lạnh, ASEAN, 1945–1975) kèm bảng phân biệt và 4 câu tự kiểm tra tách đáp án"* $\to$ **PASS** nếu đủ bảng phân biệt + ma trận bẫy + đáp án tách riêng.
+  3. `TEST-3 (QĐ 764 2 phần)`: Khẳng định **2 phần (24 I + 4 II), 0 câu Phần III**.
+- **Không có công cụ / Có công cụ:** Bám mốc chuẩn SGK; trong workspace đọc thêm [references/curriculum-10-12.md](references/curriculum-10-12.md) và [references/exam-format-and-traps.md](references/exam-format-and-traps.md).

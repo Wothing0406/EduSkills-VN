@@ -23,12 +23,14 @@ Trước khi tái cấu trúc lên phiên bản hiện tại, dự án đã th�
   - **Quy chuẩn `AGENTS.md` và `.agent/rules/`:** Tạo [`AGENTS.md`](AGENTS.md) ở repository root và [`.agent/rules/thpt-pedagogy.md`](.agent/rules/thpt-pedagogy.md) theo chuẩn Open Agent / Antigravity, quy định ngôn từ hướng dẫn tích cực dành cho học sinh THPT.
   - **Thay đổi ngôn từ sư phạm (bỏ quy định cứng nhắc):** Loại bỏ khối XML lặp lại và các mệnh lệnh cực đoan (*"luôn trả lời 4 tầng cho mọi câu"*, *"tuyệt đối cấm trả lời ngắn"*); thay bằng **6 chế độ thích ứng**, **quy trình chẩn đoán lỗi 8 bước** (tách lỗi gốc – lỗi kéo theo, công nhận cách làm khác hợp lệ), **gợi mở 5 mức** (mỗi lượt 1 câu hỏi trọng tâm, dừng chờ trả lời, không vừa hỏi vừa viết đáp án bên dưới) và **kiểm tra tiến bộ thực sự** (không gán nhãn *"mất gốc"*, *"yếu tư duy"*).
 
-### 3. Nâng cấp hợp nhất `v2.3.0` & Kết quả đánh giá thực nghiệm trên Gemini API (`tests/eval/`)
-- **Thiết kế 1 tệp `SKILL.md` hợp nhất (Unified Standalone + Progressive Disclosure):** Toàn bộ 16 `SKILL.md` được chuẩn hóa theo cấu trúc **10 mục bắt buộc (`## 1.` .. `## 10.`)**, chứa đầy đủ khung chương trình **3 năm THPT Lớp 10–11–12 (HK1 & HK2)**, *Output Contracts* theo từng chế độ, *Pre-Output Confidence & Zero-Leak Gate*, bảng bẫy phòng thi, ví dụ mẫu chuẩn **QĐ 764/QĐ-BGDĐT** và *Inline Smoke-Test Suite* ngay trong `SKILL.md` để hoạt động độc lập khi copy-paste vào chatbot mà vẫn gọn khi cài qua `npx skills add`.
-- **Thực nghiệm đối chứng có kiểm soát (135 lượt chạy trên `gemini-3.1-flash-lite`, `temperature = 0.0`, giám khảo mù nhãn `gemini-3.1-flash-lite-preview` kết hợp kiểm định xác định Python):**
-  - **`C1_v2_3_0_standalone` (`n = 28` lượt, chỉ dùng `SKILL.md`):** Đúng chuyên môn **`28/28` (`100.0%`)**, phát hiện lỗi **`18/18` (`100.0%`)**, không sửa nhầm bài đúng **`18/18` (`100.0%`)**, trung thực học thuật **`28/28` (`100.0%`)**, đúng chế độ **`27/28` (`96.4%`)**, rò đáp án sớm giảm từ `50.0%` (`B_v2_0_0_main`) xuống **`10.0%` (`1/10`)**; ngắn hơn `47.6%` (`1,192.0` vs `2,273.4` ký tự) và dùng ít hơn `36.8%` prompt tokens (`3,923.2` vs `6,207.8`).
-  - **`C2_v2_3_0_tools` (`n = 10` lượt có tài liệu tham chiếu):** Đạt **`10/10` (`100.0%`)** trên mọi chỉ số (`domain_accuracy`, `mode_adherence`, `honesty_integrity`, `0/3` rò đáp án, điểm chất lượng **`5.00/5`**).
-  - Xem chi tiết số liệu từng lượt chạy, bảng đối chứng và ca thất bại minh bạch tại [Báo cáo Nghiên cứu Thực nghiệm (`tests/eval/research-report.md`)](tests/eval/research-report.md).
+### 3. Nâng cấp hợp nhất `v2.3.0` → Khôi phục & Mở rộng Học liệu `v2.4.0` (`tests/eval/`)
+- **Thiết kế 1 tệp `SKILL.md` hợp nhất (Unified Standalone + 4-Type Mode Router A/B/C/D):**
+  - Mỗi `SKILL.md` chuẩn **10 mục bắt buộc (`## 1.` .. `## 10.`)**, tự chứa đủ bản đồ **Lớp 10–11–12 theo chương mục (HK1 & HK2)**, phân tách rõ 4 loại yêu cầu: **Loại A** (*cẩm nang ôn tập nhiều chương 8 phần, bảng phân biệt, ma trận bẫy 6 cột, tự kiểm tra tách đáp án*), **Loại B** (*chẩn đoán & gợi mở 1 câu hỏi dừng chờ, 0% lộ đáp số*), **Loại C** (*giải đầy đủ & lý do phương án nhiễu có vẻ hợp lý*), **Loại D** (*`@canvas` tương tác sạch công thức, nút gợi ý/chấm/làm lại thật hoặc khai báo trung thực chat thuần*).
+  - **Không đánh đồng ôn giữa kỳ với đề thi tốt nghiệp 22/28/40 câu QĐ 764**; quy tắc *"1 câu hỏi rồi dừng chờ"* chỉ áp dụng cho đối thoại sửa lỗi Loại B.
+- **Thực nghiệm đối chứng có kiểm soát (`v2.3.0` — 135 lượt trên `gemini-3.1-flash-lite`, `temperature = 0.0`, giám khảo mù nhãn `gemini-3.1-flash-lite-preview`):**
+  - **`C1_v2_3_0_standalone` (`n = 28` lượt):** Đúng chuyên môn **`28/28` (`100.0%`)**, phát hiện lỗi **`18/18` (`100.0%`)**, không sửa nhầm bài đúng **`18/18` (`100.0%`)**, trung thực **`28/28` (`100.0%`)**, rò đáp án giảm từ `50.0%` (`v2.0.0`) xuống **`10.0%` (`1/10`)**; giảm `49.4%` output tokens (`395.5` vs `781.7`) và `36.8%` prompt tokens.
+- **Kiểm thử hồi quy & khôi phục năng lực (`v2.4.0` — `REG-01..REG-07`, đối chứng cùng model `gemini-3.1-flash-lite`):**
+  - Khắc phục hoàn toàn lỗi dừng bỏ lửng hoặc thiếu cấu trúc ở `REG-01..REG-03, REG-05, REG-06` (`12/12` lượt đạt trên `REG-02..REG-07` ở cả `C1` standalone và `C2` kèm `references/`), trong khi vẫn giữ nguyên Zero-Leak ở Loại B (`REG-04`) và bộ bảo toàn Core/Holdout. Xem báo cáo đầy đủ tại [tests/eval/research-report.md](tests/eval/research-report.md) và [tests/eval/regression-report-v240.md](tests/eval/regression-report-v240.md).
 
 ---
 
@@ -180,6 +182,8 @@ npx skills add "Wothing0406/EduSkills-VN" --list
   - Kế hoạch & tiêu chí khóa trước: [tests/eval/eval-plan.md](tests/eval/eval-plan.md)
   - Bộ 24 tình huống kiểm thử (18 Core + 6 Holdout): [tests/eval/test-cases.json](tests/eval/test-cases.json)
   - Báo cáo thực nghiệm đầy đủ: [tests/eval/research-report.md](tests/eval/research-report.md)
+  - Báo cáo kiểm thử hồi quy & khôi phục năng lực (`v2.4.0`): [tests/eval/regression-report-v240.md](tests/eval/regression-report-v240.md)
+  - Bộ test hồi quy cẩm nang & `@canvas`: [tests/eval/regression-cases.json](tests/eval/regression-cases.json)
 - **Bộ tình huống đánh giá hành vi sư phạm (`tests/scenarios/`):**
   - Tổng quan & phân tách trạng thái kiểm chứng: [tests/scenarios/README.md](tests/scenarios/README.md)
   - 12 tình huống sư phạm cốt lõi + Rubric 8 tiêu chí: [pedagogical-12-cases.md](tests/scenarios/pedagogical-12-cases.md)

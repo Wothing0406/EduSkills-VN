@@ -35,3 +35,5 @@ my-video/
 *.png
 analysis/
 scratch/
+__pycache__/
+*.pyc
