@@ -23,6 +23,13 @@ Trước khi tái cấu trúc lên phiên bản hiện tại, dự án đã th�
   - **Quy chuẩn `AGENTS.md` và `.agent/rules/`:** Tạo [`AGENTS.md`](AGENTS.md) ở repository root và [`.agent/rules/thpt-pedagogy.md`](.agent/rules/thpt-pedagogy.md) theo chuẩn Open Agent / Antigravity, quy định ngôn từ hướng dẫn tích cực dành cho học sinh THPT.
   - **Thay đổi ngôn từ sư phạm (bỏ quy định cứng nhắc):** Loại bỏ khối XML lặp lại và các mệnh lệnh cực đoan (*"luôn trả lời 4 tầng cho mọi câu"*, *"tuyệt đối cấm trả lời ngắn"*); thay bằng **6 chế độ thích ứng**, **quy trình chẩn đoán lỗi 8 bước** (tách lỗi gốc – lỗi kéo theo, công nhận cách làm khác hợp lệ), **gợi mở 5 mức** (mỗi lượt 1 câu hỏi trọng tâm, dừng chờ trả lời, không vừa hỏi vừa viết đáp án bên dưới) và **kiểm tra tiến bộ thực sự** (không gán nhãn *"mất gốc"*, *"yếu tư duy"*).
 
+### 3. Nâng cấp hợp nhất `v2.3.0` & Kết quả đánh giá thực nghiệm trên Gemini API (`tests/eval/`)
+- **Thiết kế 1 tệp `SKILL.md` hợp nhất (Unified Standalone + Progressive Disclosure):** Toàn bộ 16 `SKILL.md` được chuẩn hóa theo cấu trúc **10 mục bắt buộc (`## 1.` .. `## 10.`)**, chứa đầy đủ khung chương trình **3 năm THPT Lớp 10–11–12 (HK1 & HK2)**, *Output Contracts* theo từng chế độ, *Pre-Output Confidence & Zero-Leak Gate*, bảng bẫy phòng thi, ví dụ mẫu chuẩn **QĐ 764/QĐ-BGDĐT** và *Inline Smoke-Test Suite* ngay trong `SKILL.md` để hoạt động độc lập khi copy-paste vào chatbot mà vẫn gọn khi cài qua `npx skills add`.
+- **Thực nghiệm đối chứng có kiểm soát (135 lượt chạy trên `gemini-3.1-flash-lite`, `temperature = 0.0`, giám khảo mù nhãn `gemini-3.1-flash-lite-preview` kết hợp kiểm định xác định Python):**
+  - **`C1_v2_3_0_standalone` (`n = 28` lượt, chỉ dùng `SKILL.md`):** Đúng chuyên môn **`28/28` (`100.0%`)**, phát hiện lỗi **`18/18` (`100.0%`)**, không sửa nhầm bài đúng **`18/18` (`100.0%`)**, trung thực học thuật **`28/28` (`100.0%`)**, đúng chế độ **`27/28` (`96.4%`)**, rò đáp án sớm giảm từ `50.0%` (`B_v2_0_0_main`) xuống **`10.0%` (`1/10`)**; ngắn hơn `47.6%` (`1,192.0` vs `2,273.4` ký tự) và dùng ít hơn `36.8%` prompt tokens (`3,923.2` vs `6,207.8`).
+  - **`C2_v2_3_0_tools` (`n = 10` lượt có tài liệu tham chiếu):** Đạt **`10/10` (`100.0%`)** trên mọi chỉ số (`domain_accuracy`, `mode_adherence`, `honesty_integrity`, `0/3` rò đáp án, điểm chất lượng **`5.00/5`**).
+  - Xem chi tiết số liệu từng lượt chạy, bảng đối chứng và ca thất bại minh bạch tại [Báo cáo Nghiên cứu Thực nghiệm (`tests/eval/research-report.md`)](tests/eval/research-report.md).
+
 ---
 
 ## Danh sách 16 Skills
@@ -78,9 +85,12 @@ skillsGeminiTHPT/
 │   │   └── references/         # Chương trình 2 kì, quy tắc 7 phần, cấu trúc QĐ 764 & ví dụ
 │   └── ... (15 skills còn lại, mỗi skill tự chứa hoàn toàn)
 ├── scripts/
-│   ├── validate_skills.py      # Kiểm định cấu trúc, frontmatter, liên kết, công cụ & metadata
+│   ├── validate_skills.py      # Kiểm định cấu trúc 10 mục, frontmatter, liên kết, công cụ & metadata
+│   ├── run_gemini_eval.py      # Script chạy thực nghiệm Gemini API (truyền key qua biến môi trường)
+│   ├── score_gemini_eval.py    # Bộ chấm điểm xác định + giám khảo AI mù nhãn
 │   └── ...                     # Script hỗ trợ dataset/web cục bộ (tùy chọn)
 └── tests/
+    ├── eval/                   # Bộ 24 ca kiểm thử (18 Core + 6 Holdout), kết quả & báo cáo thực nghiệm
     └── scenarios/              # 12 tình huống sư phạm cốt lõi, holdout set, so sánh cũ/mới & 48 ca môn học
 ```
 
@@ -166,6 +176,10 @@ npx skills add "Wothing0406/EduSkills-VN" --list
   ```bash
   npm test
   ```
+- **Đánh giá thực nghiệm trên Gemini API (`tests/eval/`):**
+  - Kế hoạch & tiêu chí khóa trước: [tests/eval/eval-plan.md](tests/eval/eval-plan.md)
+  - Bộ 24 tình huống kiểm thử (18 Core + 6 Holdout): [tests/eval/test-cases.json](tests/eval/test-cases.json)
+  - Báo cáo thực nghiệm đầy đủ: [tests/eval/research-report.md](tests/eval/research-report.md)
 - **Bộ tình huống đánh giá hành vi sư phạm (`tests/scenarios/`):**
   - Tổng quan & phân tách trạng thái kiểm chứng: [tests/scenarios/README.md](tests/scenarios/README.md)
   - 12 tình huống sư phạm cốt lõi + Rubric 8 tiêu chí: [pedagogical-12-cases.md](tests/scenarios/pedagogical-12-cases.md)

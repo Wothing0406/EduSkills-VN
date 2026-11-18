@@ -450,7 +450,7 @@ async function main() {
         assert.ok(content.includes('i before e except after c'), 'Thiếu quy tắc i before e');
         assert.ok(content.includes('Word Formation'), 'Thiếu Word Formation');
         assert.ok(content.includes('achievement'), 'Thiếu achievement');
-        assert.ok(content.includes('Thao tác phản biện & kiểm tra tiến bộ'), 'SKILL.md thiếu mục Thao tác phản biện & kiểm tra tiến bộ');
+        assert.ok(/Thao tác phản biện & kiểm tra tiến bộ|Cách phản biện và tự kiểm chứng/.test(content), 'SKILL.md thiếu mục phản biện và kiểm chứng');
     });
 
     // =========================================================================

@@ -284,6 +284,13 @@ def validate_single_skill(skill_dir: Path) -> Tuple[str | None, List[str]]:
 
     if not body.strip():
         errors.append(f"{skill_md}: Phần nội dung hướng dẫn đang trống")
+    else:
+        prose_body = strip_code_fences(body)
+        for sec_num in range(1, 11):
+            if not re.search(rf"^##\s+{sec_num}\.\s+\S+", prose_body, re.MULTILINE):
+                errors.append(
+                    f"{skill_md}: Thiếu mục bắt buộc '## {sec_num}. ...' theo chuẩn 10 phần dùng chung"
+                )
 
     for sub in skill_dir.rglob("*"):
         if sub.is_dir() and not any(sub.iterdir()):

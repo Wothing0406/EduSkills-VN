@@ -174,7 +174,7 @@ function runValidation(silent = false) {
     }
 
     // 3. Kiểm tra các thành phần hướng dẫn, kiểm chứng và metadata giao diện
-    const hasVerification = /kiểm chứng chuyên môn|kiểm tra tiến bộ|kiểm tra trước khi gửi|chính xác chuyên môn|<chain_of_verification>/i.test(content);
+    const hasVerification = /kiểm chứng chuyên môn|kiểm tra tiến bộ|kiểm tra trước khi gửi|chính xác chuyên môn|tự kiểm chứng|kiểm tra mức hiểu|<chain_of_verification>/i.test(content);
     const hasReferences = fs.existsSync(refsDir) && fs.readdirSync(refsDir).length > 0;
     const hasOpenAiYaml = fs.existsSync(path.join(skillDir, 'agents', 'openai.yaml'));
     const hasTrapMatrix = /ma trận|bẫy|các lỗi|bảng lỗi|chẩn đoán/i.test(combinedContent);
